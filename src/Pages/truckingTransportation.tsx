@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin } from 'lucide-react';
+import SuccessModal from '@/Components/successModal';
 
 interface CoverageData {
   type: string;
@@ -27,6 +28,11 @@ const TruckingTransportationPage = () => {
     dotNumber: '',
     fleetSize: ''
   });
+
+  // Modal state management
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -120,9 +126,35 @@ const TruckingTransportationPage = () => {
 
   const selectedCoverage = coverageTypes.find(coverage => coverage.typeCode === selectedType) || coverageTypes[0];
 
-  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
+  const handleFormSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log('Form submitted:', formData);
+    
+    setIsSubmitting(false);
+    
+    // Show success modal with confetti
+    setShowSuccessModal(true);
+    setShowConfetti(true);
+
+    // Reset form
+    setFormData({
+      companyName: '',
+      contactName: '',
+      email: '',
+      phone: '',
+      dotNumber: '',
+      fleetSize: ''
+    });
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setShowConfetti(false);
   };
 
   const handleTypeSelection = (typeCode: string) => {
@@ -385,7 +417,7 @@ const TruckingTransportationPage = () => {
                               </div>
                               <h4 className="text-sm font-semibold text-gray-900 mb-1">Email Us</h4>
                               <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">
-                                quotes@moxieriskpartnerscom
+                                quotes@moxieriskpartners.com
                               </a>
                               <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                             </div>
@@ -519,11 +551,12 @@ const TruckingTransportationPage = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   suppressHydrationWarning={true}
                 >
-                  Get My Quote Now
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
+                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
                 </button>
 
                 {/* Trust Elements */}
@@ -541,6 +574,13 @@ const TruckingTransportationPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        showConfetti={showConfetti}
+      />
     </div>
   );
 };

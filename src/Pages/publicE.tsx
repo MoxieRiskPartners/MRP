@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Building, AlertCircle, FileText, Award, Target } from 'lucide-react';
+import SuccessModal from '@/Components/successModal';
 
 interface ServiceData {
   type: string;
@@ -57,6 +58,11 @@ const PublicEntityPage = () => {
     entityType: '',
     annualBudget: ''
   });
+
+  // Modal state management
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -156,9 +162,35 @@ const PublicEntityPage = () => {
     })));
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log('Public entity form submitted:', formData);
+    
+    setIsSubmitting(false);
+    
+    // Show success modal with confetti
+    setShowSuccessModal(true);
+    setShowConfetti(true);
+
+    // Reset form
+    setFormData({
+      entityName: '',
+      contactName: '',
+      email: '',
+      phone: '',
+      entityType: '',
+      annualBudget: ''
+    });
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setShowConfetti(false);
   };
 
   const handleTypeSelection = (typeCode: string) => {
@@ -322,7 +354,7 @@ const PublicEntityPage = () => {
               Integrated risk management and emergency planning services designed for public sector success.
             </p>
             {/* Underline bar */}
-            <div className="w-96 h-2 bg-gray-900 rounded-full"></div>
+ 
           </div>
 
           {/* Service Type Buttons */}
@@ -440,7 +472,7 @@ const PublicEntityPage = () => {
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
               Specialized insurance and risk management for every type of government and public organization
             </p>
-            <div className="w-96 h-2 bg-gray-900 rounded-full"></div>
+            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -609,6 +641,19 @@ const PublicEntityPage = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
                       placeholder="email@entity.gov"
                       value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone *</label>
+                    <input
+                      type="tel"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                      placeholder="(555) 123-4567"
+                      value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
                     />
                   </div>
@@ -658,10 +703,11 @@ const PublicEntityPage = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
-                  Get My Quote Now
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
+                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
                 </button>
 
                 {/* Trust Elements */}
@@ -679,6 +725,13 @@ const PublicEntityPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        showConfetti={showConfetti}
+      />
     </div>
   );
 };

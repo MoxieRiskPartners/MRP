@@ -257,14 +257,14 @@ const Footer: React.FC = () => {
             {/* Legal Links */}
             <div className="flex flex-wrap justify-center md:justify-end items-center space-x-6 text-sm">
               <a 
-                href="/privacy" 
+                href="/privacy-policy" 
                 className="text-gray-300 hover:text-orange-400 transition-colors"
                 onClick={handleLinkClick}
               >
                 Privacy Policy
               </a>
               <a 
-                href="/terms" 
+                href="/terms-service" 
                 className="text-gray-300 hover:text-orange-400 transition-colors"
                 onClick={handleLinkClick}
               >

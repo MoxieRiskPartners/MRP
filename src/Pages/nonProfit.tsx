@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Building, Heart, FileText, Award, Target, Globe } from 'lucide-react';
+import SuccessModal from '@/Components/successModal';
 
 interface ServiceData {
   type: string;
@@ -56,6 +57,11 @@ const NonProfitPage = () => {
     organizationType: '',
     annualBudget: ''
   });
+
+  // Modal state management
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -153,9 +159,35 @@ const NonProfitPage = () => {
     })));
   };
 
-  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
+  const handleFormSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
     console.log('Nonprofit form submitted:', formData);
+    
+    setIsSubmitting(false);
+    
+    // Show success modal with confetti
+    setShowSuccessModal(true);
+    setShowConfetti(true);
+
+    // Reset form
+    setFormData({
+      organizationName: '',
+      contactName: '',
+      email: '',
+      phone: '',
+      organizationType: '',
+      annualBudget: ''
+    });
+  };
+
+  const handleCloseModal = () => {
+    setShowSuccessModal(false);
+    setShowConfetti(false);
   };
 
   const handleTypeSelection = (typeCode: string) => {
@@ -243,7 +275,7 @@ const NonProfitPage = () => {
               Integrated risk management and business advisory services designed for nonprofit success.
             </p>
             {/* Underline bar */}
-            <div className="w-96 h-2 bg-gray-900 rounded-full"></div>
+            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
           {/* Service Type Buttons */}
@@ -361,7 +393,7 @@ const NonProfitPage = () => {
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
               Specialized insurance and risk management for every type of nonprofit organization
             </p>
-            <div className="w-96 h-2 bg-gray-900 rounded-full"></div>
+            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -600,11 +632,12 @@ const NonProfitPage = () => {
                 {/* Submit Button */}
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   suppressHydrationWarning
                 >
-                  Get My Quote Now
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
+                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
                 </button>
 
                 {/* Trust Elements */}
@@ -622,6 +655,13 @@ const NonProfitPage = () => {
           </div>
         </div>
       </section>
+
+      {/* Success Modal */}
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        showConfetti={showConfetti}
+      />
     </div>
   );
 };
