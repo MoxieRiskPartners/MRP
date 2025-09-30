@@ -537,7 +537,7 @@ const FAQPage = () => {
       </section>
 
       {/* Contact CTA Section */}
-      <section className="py-20 bg--50">
+    <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 lg:p-12 border border-orange-200 shadow-lg">
             <div className="text-center space-y-6">
