@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Phone, Mail, HelpCircle, Users, Factory, HardHat, Building, Heart, FileText, Gavel } from 'lucide-react';
+import { CheckCircle, ArrowRight, Shield, Phone, Mail, HelpCircle, Users, Factory, HardHat, Building, Heart, FileText, Gavel, Truck } from 'lucide-react';
 
 interface FAQItem {
   question: string;
@@ -45,6 +45,140 @@ const FAQPage = () => {
       isOpen: false,
       category: "claims"
     },
+
+    // Trucking - Commercial Auto Liability FAQs
+{
+  question: "What is the minimum liability coverage required for commercial trucks?",
+  answer: "FMCSA requires $750,000 minimum liability for interstate operations with general freight. Hazmat carriers need $5 million. Many shippers require $1 million minimum.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Does commercial auto liability cover my own vehicle damage?",
+  answer: "No, liability insurance only covers damage to others. You need physical damage coverage (comprehensive and collision) to protect your own vehicles.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Can I use personal auto insurance for business vehicles?",
+  answer: "No, personal auto policies exclude commercial use. Business vehicles require commercial auto liability insurance to comply with regulations and ensure coverage.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What factors affect commercial liability insurance costs?",
+  answer: "Key factors include driving records, vehicle types, coverage limits, business type, operating radius, cargo hauled, and claims history.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "How quickly can I get a certificate of insurance?",
+  answer: "We provide instant certificates of insurance once your policy is bound. This is essential for DOT compliance and meeting shipper requirements.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Do I need different coverage for different states?",
+  answer: "Coverage follows your vehicles across state lines, but you must meet the highest requirements of all states where you operate. We ensure multi-state compliance.",
+  isOpen: false,
+  category: "trucking"
+},
+
+// Trucking - Owner Operator FAQs
+{
+  question: "Do I need my own insurance if I'm leased to a carrier?",
+  answer: "Yes, motor carrier policies typically only cover liability when under dispatch. You need your own physical damage, non-trucking use, and other coverages to fill the gaps when you're not hauling their freight.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What's the minimum liability coverage required for owner operators?",
+  answer: "FMCSA requires $750,000 minimum for general freight interstate operations. Many brokers and shippers require $1 million. Hazmat and other specialized cargo types require higher limits up to $5 million.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Can I get monthly payment terms for my insurance?",
+  answer: "Yes, we offer flexible payment options including monthly billing to help manage your cash flow. Down payment requirements vary by coverage type and your qualifications.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "How quickly can I get owner operator coverage?",
+  answer: "With proper documentation, we can often provide same-day coverage and instant certificates. DOT filings are submitted immediately upon binding your policy.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What's the difference between own authority and leased operators?",
+  answer: "Own authority operators run under their own DOT numbers and need full primary liability coverage. Leased operators work under a carrier's authority but still need physical damage and non-trucking use coverage for protection gaps.",
+  isOpen: false,
+  category: "trucking"
+},
+
+// Trucking - Motor Truck Cargo FAQs
+{
+  question: "Is cargo insurance required for truckers?",
+  answer: "While not federally required, most shippers and brokers require truckers to carry cargo insurance to protect their freight. It's essential for securing contracts and protecting your business.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What's the difference between cargo insurance and freight insurance?",
+  answer: "Motor truck cargo insurance and freight insurance refer to the same coverage - protection for goods being transported. The terms are used interchangeably in the trucking industry.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "How much cargo insurance coverage do I need?",
+  answer: "Coverage limits typically range from $5,000 to $250,000 depending on the value of freight you haul. Many shippers require minimum limits of $100,000 to $250,000.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Does cargo insurance cover refrigerated freight?",
+  answer: "Standard cargo insurance may have limited coverage for refrigerated goods. Refrigeration breakdown coverage is available as an optional enhancement for temperature-sensitive cargo.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What happens if cargo is damaged during loading?",
+  answer: "Motor truck cargo insurance typically covers damage that occurs during loading and unloading operations, as well as while goods are in transit between pickup and delivery.",
+  isOpen: false,
+  category: "trucking"
+},
+
+// Trucking - Fleet Insurance FAQs
+{
+  question: "What is considered a commercial fleet?",
+  answer: "A commercial fleet typically consists of 2 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "How much can I save with fleet insurance?",
+  answer: "Fleet insurance savings typically range from 15-25% compared to individual policies. The more vehicles you have, the greater your potential savings due to volume discounts and simplified administration.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Can I mix different vehicle types in my fleet policy?",
+  answer: "Yes, fleet policies can accommodate mixed vehicle types including trucks, vans, trailers, and passenger vehicles. We customize coverage based on each vehicle's specific use and risk profile.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "What happens if I add or remove vehicles from my fleet?",
+  answer: "Fleet policies offer flexibility to add or remove vehicles throughout the policy term. We provide automatic coverage for newly acquired vehicles and can adjust your policy as your fleet size changes.",
+  isOpen: false,
+  category: "trucking"
+},
+{
+  question: "Do all vehicles need the same coverage limits?",
+  answer: "No, fleet policies can be customized with different coverage limits for different vehicle types or uses. For example, cargo vehicles might need higher liability limits than passenger vehicles.",
+  isOpen: false,
+  category: "trucking"
+},
 
     // Construction FAQs
     {
@@ -237,6 +371,7 @@ const FAQPage = () => {
   const categories = [
     { id: 'all', name: 'All Questions', icon: HelpCircle },
     { id: 'claims', name: 'Claims', icon: Shield },
+      { id: 'trucking', name: 'Trucking', icon: Truck },
     { id: 'construction', name: 'Construction', icon: HardHat },
     { id: 'manufacturing', name: 'Manufacturing', icon: Factory },
     { id: 'workers-comp', name: 'Workers Comp', icon: Users },

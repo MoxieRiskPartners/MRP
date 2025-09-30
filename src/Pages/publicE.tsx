@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Building, AlertCircle, FileText, Award, Target } from 'lucide-react';
-import SuccessModal from '@/Components/successModal';
+import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Building, AlertCircle, FileText, Award, Target, X } from 'lucide-react';
 
 interface ServiceData {
   type: string;
@@ -18,6 +17,174 @@ interface FAQItem {
   answer: string;
   isOpen: boolean;
 }
+
+// SuccessModal Component (inline to avoid import issues)
+interface SuccessModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  showConfetti: boolean;
+}
+
+const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, showConfetti }) => {
+  const [confettiPieces, setConfettiPieces] = useState<Array<{
+    id: number;
+    left: number;
+    animationDelay: number;
+    backgroundColor: string;
+  }>>([]);
+
+  useEffect(() => {
+    if (isOpen && showConfetti) {
+      const colors = ['#f97316', '#dc2626', '#ea580c', '#f59e0b', '#fbbf24'];
+      const pieces = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        left: Math.random() * 100,
+        animationDelay: Math.random() * 0.5,
+        backgroundColor: colors[Math.floor(Math.random() * colors.length)]
+      }));
+      setConfettiPieces(pieces);
+
+      const timer = setTimeout(() => {
+        setConfettiPieces([]);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isOpen, showConfetti]);
+
+  if (!isOpen) return null;
+
+  return (
+    <>
+      <div 
+        className="fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300"
+        onClick={onClose}
+      />
+
+      {showConfetti && confettiPieces.length > 0 && (
+        <div className="fixed inset-0 pointer-events-none z-[60] overflow-hidden">
+          {confettiPieces.map((piece) => (
+            <div
+              key={piece.id}
+              className="absolute w-2 h-2 opacity-0"
+              style={{
+                left: `${piece.left}%`,
+                top: '-10px',
+                backgroundColor: piece.backgroundColor,
+                animation: `confetti-fall 3s ease-out forwards`,
+                animationDelay: `${piece.animationDelay}s`,
+              }}
+            />
+          ))}
+        </div>
+      )}
+
+      <div className="fixed inset-0 z-[70] flex items-center justify-center p-4">
+        <div 
+          className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-modal-appear"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+            aria-label="Close modal"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full flex items-center justify-center animate-bounce-once">
+              <CheckCircle className="w-12 h-12 text-white" />
+            </div>
+          </div>
+
+          <div className="text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Quote Request Received!
+            </h3>
+            <p className="text-lg text-gray-600 mb-6">
+              Thank you for your interest in our public entity insurance solutions. 
+              One of our specialized agents will contact you within 24 hours.
+            </p>
+            
+            <div className="bg-gray-50 rounded-xl p-6 mb-6 text-left">
+              <h4 className="font-semibold text-gray-900 mb-3">What happens next?</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li className="flex items-start">
+                  <span className="font-bold text-orange-600 mr-2">1.</span>
+                  <span>We'll review your entity's specific needs</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold text-orange-600 mr-2">2.</span>
+                  <span>Our expert will contact you to discuss coverage options</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="font-bold text-orange-600 mr-2">3.</span>
+                  <span>You'll receive a comprehensive quote tailored to your organization</span>
+                </li>
+              </ul>
+            </div>
+
+            <button
+              onClick={onClose}
+              className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105"
+            >
+              Got It, Thanks!
+            </button>
+
+            <p className="text-xs text-gray-500 mt-4">
+              Need immediate assistance? Call us at{' '}
+              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold">
+                (800) 669-4301
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <style jsx>{`
+        @keyframes confetti-fall {
+          0% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+          }
+        }
+
+        @keyframes modal-appear {
+          0% {
+            opacity: 0;
+            transform: scale(0.9) translateY(-20px);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+          }
+        }
+
+        @keyframes bounce-once {
+          0%, 100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.1);
+          }
+        }
+
+        .animate-modal-appear {
+          animation: modal-appear 0.3s ease-out forwards;
+        }
+
+        .animate-bounce-once {
+          animation: bounce-once 0.6s ease-in-out;
+        }
+      `}</style>
+    </>
+  );
+};
 
 const PublicEntityPage = () => {
   const [selectedType, setSelectedType] = useState('succession-planning');
@@ -201,12 +368,10 @@ const PublicEntityPage = () => {
   if (!mounted) {
     return (
       <div className="min-h-screen bg-white">
-        {/* Hero Section - Side by Side Layout */}
         <section ref={heroRef} className="bg-white py-12 lg:py-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               
-              {/* Left Side - Hero Image */}
               <div className="transform transition-all duration-1000">
                 <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                   <img 
@@ -218,7 +383,6 @@ const PublicEntityPage = () => {
                 </div>
               </div>
 
-              {/* Right Side - Content */}
               <div className="transform transition-all duration-1000 delay-300">
                 <div className="space-y-8">
                   <div>
@@ -235,7 +399,6 @@ const PublicEntityPage = () => {
                     </p>
                   </div>
 
-                  {/* Features */}
                   <div className="space-y-4">
                     {[
                       'Government-Focused Coverage',
@@ -249,7 +412,6 @@ const PublicEntityPage = () => {
                     ))}
                   </div>
 
-                  {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                       Get Your Quote
@@ -281,7 +443,6 @@ const PublicEntityPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
-            {/* Left Side - Hero Image */}
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
@@ -293,7 +454,6 @@ const PublicEntityPage = () => {
               </div>
             </div>
 
-            {/* Right Side - Content */}
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
               <div className="space-y-8">
                 <div>
@@ -310,7 +470,6 @@ const PublicEntityPage = () => {
                   </p>
                 </div>
 
-                {/* Features */}
                 <div className="space-y-4">
                   {[
                     'Government-Focused Coverage',
@@ -324,7 +483,6 @@ const PublicEntityPage = () => {
                   ))}
                 </div>
 
-                {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                     Get Your Quote
@@ -345,7 +503,6 @@ const PublicEntityPage = () => {
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          {/* Section Header - Left Aligned */}
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
               Specialized Services
@@ -353,11 +510,8 @@ const PublicEntityPage = () => {
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
               Integrated risk management and emergency planning services designed for public sector success.
             </p>
-            {/* Underline bar */}
- 
           </div>
 
-          {/* Service Type Buttons */}
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
             {serviceTypes.map((service) => {
               const IconComponent = service.icon;
@@ -386,7 +540,6 @@ const PublicEntityPage = () => {
                     </h3>
                   </div>
                   
-                  {/* Selected Indicator */}
                   {selectedType === service.typeCode && (
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center">
                       <CheckCircle className="w-4 h-4 text-white" />
@@ -397,10 +550,8 @@ const PublicEntityPage = () => {
             })}
           </div>
 
-          {/* Service Details Panel */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
             
-            {/* Service Header */}
             <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-orange-100">
               <div className="mb-4 lg:mb-0">
                 <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
@@ -409,12 +560,10 @@ const PublicEntityPage = () => {
               </div>
             </div>
 
-            {/* Service Description */}
             <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-4xl">
               {selectedService.description}
             </p>
 
-            {/* Features Grid */}
             <div className="grid md:grid-cols-3 gap-6">
               {selectedService.features.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-3 p-4 bg-orange-50 rounded-lg border border-orange-200">
@@ -472,7 +621,6 @@ const PublicEntityPage = () => {
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
               Specialized insurance and risk management for every type of government and public organization
             </p>
-            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -540,7 +688,6 @@ const PublicEntityPage = () => {
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             
-            {/* Left Side - CTA Content */}
             <div className="space-y-8">
               <div>
                 <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
@@ -556,10 +703,8 @@ const PublicEntityPage = () => {
                 </p>
               </div>
 
-              {/* Contact Information Grid */}
               <div className="grid md:grid-cols-1 gap-6">
             
-                {/* Phone */}
                 <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-6 h-6 text-white" />
@@ -571,7 +716,6 @@ const PublicEntityPage = () => {
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
-                {/* Email */}
                 <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-violet-50 rounded-xl border border-purple-200">
                   <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-violet-500 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Mail className="w-6 h-6 text-white" />
@@ -586,7 +730,6 @@ const PublicEntityPage = () => {
               </div>
             </div>
 
-            {/* Right Side - Quote Form */}
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
               
               <div className="text-center mb-6">
@@ -599,7 +742,6 @@ const PublicEntityPage = () => {
 
               <form onSubmit={handleFormSubmit} className="space-y-4">
                 
-                {/* Entity Name */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Entity Name *
@@ -614,7 +756,6 @@ const PublicEntityPage = () => {
                   />
                 </div>
 
-                {/* Contact Name */}
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
                     Contact Name *
@@ -629,7 +770,6 @@ const PublicEntityPage = () => {
                   />
                 </div>
 
-                {/* Email and Phone Row */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -659,7 +799,6 @@ const PublicEntityPage = () => {
                   </div>
                 </div>
 
-                {/* Entity Type and Annual Budget Row */}
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -700,7 +839,6 @@ const PublicEntityPage = () => {
                   </div>
                 </div>
 
-                {/* Submit Button */}
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -710,7 +848,6 @@ const PublicEntityPage = () => {
                   {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
                 </button>
 
-                {/* Trust Elements */}
                 <div className="text-center mt-4 space-y-2">
                   <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
                     <CheckCircle className="w-4 h-4 text-green-500" />

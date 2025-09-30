@@ -430,21 +430,21 @@ const ClaimsPage = () => {
               </div>
 
               {/* Live Chat */}
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
+              {/* <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
                     <MessageCircle className="w-6 h-6 text-white" />
                   </div>
-                  <div className="flex-1">
+                  {/* <div className="flex-1">
                     <h4 className="text-lg font-semibold text-gray-900 mb-2">Live Chat Support</h4>
                     <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
                       Start Live Chat
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </button>
                     <p className="text-sm text-gray-500 mt-2">Real-time assistance online</p>
-                  </div>
-                </div>
-              </div>
+                  </div> */}
+                {/* </div>
+              </div>  */}
 
               {/* Email */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">

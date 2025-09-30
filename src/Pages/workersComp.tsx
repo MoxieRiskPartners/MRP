@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, HardHat, Factory, Truck, Heart, Building, FileText } from 'lucide-react';
+import SuccessModal from '../Components/successModal';
+
 
 interface CoverageData {
   type: string;
@@ -22,7 +24,19 @@ interface FAQItem {
 const WorkersCompPage = () => {
   const [selectedType, setSelectedType] = useState('manufacturing');
   const [isVisible, setIsVisible] = useState(false);
-  const [faqItems, setFaqItems] = useState<FAQItem[]>([
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+const [showConfetti, setShowConfetti] = useState(false);
+const [isSubmitting, setIsSubmitting] = useState(false);
+
+
+  const [faqItems, setFaqItems] = useState
+  
+  
+  
+  
+  
+  
+  <FAQItem[]>([
     {
       question: "Is workers' compensation insurance required for my business?",
       answer: "Workers' compensation requirements vary by state, but most states require coverage if you have employees. Some states have different thresholds (like 3+ employees), and certain industries have specific requirements. Independent contractors typically aren't covered, but misclassification can result in penalties. We help ensure you meet your state's specific requirements.",
@@ -195,14 +209,36 @@ const WorkersCompPage = () => {
     })));
   };
 
-  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    console.log('Workers comp form submitted:', formData);
-  };
+const handleFormSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsSubmitting(true);
+
+  await new Promise(resolve => setTimeout(resolve, 1000));
+  
+  console.log('Workers comp form submitted:', formData);
+  
+  setIsSubmitting(false);
+  setShowSuccessModal(true);
+  setShowConfetti(true);  // ADD THIS LINE
+
+  setFormData({
+    companyName: '',
+    contactName: '',
+    email: '',
+    phone: '',
+    industryType: '',
+    employeeCount: ''
+  });
+};
 
   const handleTypeSelection = (typeCode: string) => {
     setSelectedType(typeCode);
   };
+
+const handleCloseModal = () => {
+  setShowSuccessModal(false);
+  setShowConfetti(false);
+};
 
   return (
     <div className="min-h-screen bg-white">
@@ -259,7 +295,7 @@ const WorkersCompPage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                     Get Your Quote
-                    <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  
                   </button>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
@@ -380,7 +416,7 @@ const WorkersCompPage = () => {
         </div>
       </section>
 
-      {/* Coverage Details Section */}
+    {/* Coverage Details Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -391,21 +427,20 @@ const WorkersCompPage = () => {
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
               Comprehensive protection for workplace injuries and occupational illnesses
             </p>
-
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl">
             {coverageDetails.map((detail) => {
               const IconComponent = detail.icon;
               return (
-                <div key={detail.title} className="text-center p-8 bg-gray-50 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-6">
+                <div key={detail.title} className="p-6 bg-gray-50 rounded-2xl border border-gray-200 hover:shadow-xl transition-all duration-300 hover:border-orange-300 aspect-square flex flex-col justify-center">
+                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-lg font-bold text-gray-900 mb-3 text-center">
                     {detail.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-600 leading-relaxed text-sm text-left">
                     {detail.description}
                   </p>
                 </div>
@@ -414,6 +449,7 @@ const WorkersCompPage = () => {
           </div>
         </div>
       </section>
+
 
       {/* Claims Process Section */}
       <section className="py-20 bg-gray-50">
@@ -726,14 +762,15 @@ const WorkersCompPage = () => {
                 </div>
 
                 {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
-                  suppressHydrationWarning
-                >
-                  Get My Quote Now
-                  <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                </button>
+  <button
+  type="submit"
+  disabled={isSubmitting}
+  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+  suppressHydrationWarning
+>
+  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
+  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
+</button>
 
                 {/* Trust Elements */}
                 <div className="text-center mt-4 space-y-2">
@@ -750,6 +787,11 @@ const WorkersCompPage = () => {
           </div>
         </div>
       </section>
+      <SuccessModal 
+        isOpen={showSuccessModal}
+        onClose={handleCloseModal}
+        showConfetti={showConfetti}
+      />
     </div>
   );
 };
