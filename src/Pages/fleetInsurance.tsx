@@ -34,8 +34,8 @@ const FleetInsurance = () => {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "What is considered a commercial fleet?",
-      answer: "A commercial fleet typically consists of 2 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business.",
-      isOpen: false
+      answer: "A commercial fleet typically consists of 10 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business. Anything under 10 units is considered non-fleet in the underwriting world",
+       isOpen: false
     },
     {
       question: "How much can I save with fleet insurance?",
@@ -300,7 +300,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* Fleet Pricing Tiers */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
@@ -358,7 +358,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Coverage Options */}
       <section className="py-20 bg-white">

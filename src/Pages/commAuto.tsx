@@ -155,7 +155,7 @@ const CommAutoLiability = () => {
     { 
       name: "Hazmat Transport", 
       description: "Carriers transporting hazardous materials and regulated substances", 
-      minCoverage: "$5,000,000 required",
+      minCoverage: "$1,000,000 - $5,000,000 required",
       riskLevel: "high"
     }
   ];
@@ -186,7 +186,7 @@ const CommAutoLiability = () => {
       isCore: true
     },
     {
-      title: "Uninsured Motorist Coverage",
+      title: "Uninsured/Underinsured Motorist Coverage",
       description: "Protection when accidents involve drivers with insufficient or no liability insurance coverage.",
       features: [
         "Bodily injury from uninsured drivers",
@@ -317,42 +317,46 @@ const CommAutoLiability = () => {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Essential Protection for Commercial Vehicle Operations
-            </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Commercial auto liability insurance is the foundation of your business vehicle protection, providing crucial coverage when accidents occur and legal claims arise.
-            </p>
-          </div>
+    {/* Policy Review Section */}
+<section className="py-20 bg-gray-50">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div className="mb-16">
+      <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+        Is Your Coverage Optimized for Your Business?
+      </h2>
+      <p className="text-xl text-gray-600 max-w-4xl mb-6">
+        Many carriers operate with inadequate liability coverage or gaps in protection that can significantly increase premiums and expose their business to unnecessary risk. Our consultative approach ensures your policy is tailored to your specific operations, helping you maintain compliance while controlling costs.
+      </p>
+    </div>
+    
+    <div className="bg-white rounded-xl p-8 border-2 border-orange-200 mb-8 max-w-4xl">
+      <h3 className="text-2xl font-bold text-gray-900 mb-6">Common Coverage Issues We Address:</h3>
+      <ul className="space-y-4">
+        <li className="flex items-start space-x-3">
+          <AlertCircle className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
+          <span className="text-gray-700">Insufficient liability limits leading to higher premiums at renewal</span>
+        </li>
+        <li className="flex items-start space-x-3">
+          <AlertCircle className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" />
+          <span className="text-gray-700">Coverage gaps that leave your business exposed to claims</span>
+        </li>
+        <li className="flex items-start space-x-3">
+          {/* <AlertCircle className="w-5 h-5 text-orange-600 mt-1 flex-shrink-0" /> */}
+          {/* <span className="text-gray-700">Non-compliance issues that can result in fines and operational delays</span> */}
+        </li>
+      </ul>
+    </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {liabilityBenefits.map((benefit) => {
-              const IconComponent = benefit.icon;
-              return (
-                <div key={benefit.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300 flex flex-col">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-6">
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed mb-4 flex-grow">
-                    {benefit.description}
-                  </p>
-                  <div className="inline-block bg-orange-50 text-orange-600 px-4 py-2 rounded-full font-bold text-sm">
-                    {benefit.stat}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
+    <a 
+      href="tel:+18006694301"
+      className="inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+    >
+      Schedule Your Policy Review
+      <ArrowRight className="ml-2 w-5 h-5" />
+    </a>
+  </div>
+</section>
       {/* Business Types Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -466,7 +470,8 @@ const CommAutoLiability = () => {
             <div className="bg-gradient-to-br from-red-50 to-pink-50 rounded-xl p-6 border border-red-200">
               <h3 className="text-lg font-bold text-gray-900 mb-2">Hazardous Materials</h3>
               <p className="text-gray-600 text-sm mb-4">Carriers transporting hazmat require significantly higher liability limits.</p>
-              <div className="text-2xl font-bold text-red-600">$5,000,000 required</div>
+              <div className="text-2xl font-bold text-red-600">$1,000,000 -</div>
+<div className="text-xl font-bold text-red-600">$5,000,000</div>
             </div>
             <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 border border-blue-200">
               <h3 className="text-lg font-bold text-gray-900 mb-2">State Minimums</h3>
@@ -662,10 +667,11 @@ const CommAutoLiability = () => {
                       onChange={(e) => setFormData({...formData,fleetSize: e.target.value})}
                     >
                       <option value="">Select Size</option>
-                      <option value="1">1 Vehicle</option>
-                      <option value="2-5">2-5 Vehicles</option>
-                      <option value="6-25">6-25 Vehicles</option>
-                      <option value="26+">26+ Vehicles</option>
+                     <option value="1-10">1-10 Units</option>
+<option value="11-25">11-25 Units</option>
+<option value="25-50">25-50 Units</option>
+<option value="50-100">50-100 Units</option>
+<option value="100+">100+ Units</option>
                     </select>
                   </div>
 

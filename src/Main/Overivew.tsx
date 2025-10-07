@@ -3,11 +3,57 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 
+interface CargoType {
+  id: string;
+  title: string;
+  image: string;
+  href: string;
+}
+
+const CARGO_TYPES_DATA: CargoType[] = [
+  {
+    id: 'dry-van',
+    title: "Dry Van",
+    image: "/images/dryvan.png",
+    href: "/motor-truck-cargo?type=dry-van",
+  },
+  {
+    id: 'flatbed',
+    title: "Flatbed",
+    image: "/images/flatbed.png",
+    href: "/motor-truck-cargo?type=flatbed",
+  },
+  {
+    id: 'refrigerated',
+    title: "Refrigerated",
+    image: "/images/refrigerated.png",
+    href: "/motor-truck-cargo?type=refrigerated",
+  },
+  {
+    id: 'hazmat',
+    title: "Hazmat",
+    image: "/images/hazmat.png",
+    href: "/motor-truck-cargo?type=hazmat",
+  },
+  {
+    id: 'auto-hauler',
+    title: "Auto Hauler",
+    image: "/images/autoHauler.png",
+    href: "/motor-truck-cargo?type=auto-hauler",
+  },
+  {
+    id: 'dump-truck',
+    title: "Dump Truck",
+    image: "/images/dumptruck.png",
+    href: "/motor-truck-cargo?type=dump-truck",
+  }
+];
+
 interface Industry {
   id: string;
   title: string;
   description: string;
-  image: string; // Changed from 'any' to 'string'
+  image: string;
   href: string;
   badge: string;
 }
@@ -17,40 +63,40 @@ const INDUSTRIES_DATA: Industry[] = [
     id: 'trucking',
     title: "Trucking & Transportation",
     description: "Comprehensive fleet insurance with DOT compliance support, cargo protection, and specialized coverage for owner-operators and commercial fleets.",
-    image: "/images/Trucking2.png", // Updated to use public path
-    href: "/trucking-transportation", // Match your app directory structure
+    image: "/images/Trucking2.png",
+    href: "/trucking-transportation",
     badge: "Most Popular",
   },
   {
     id: 'construction',
     title: "Construction & Contracting", 
     description: "Specialized protection for contractors, builders, and construction professionals with general liability, workers' comp, and project-specific coverage.",
-    image: "/images/construct.png", // Updated to use public path
-    href: "/construction-insurance", // Match your app directory structure
+    image: "/images/construct.png",
+    href: "/construction-insurance",
     badge: "Essential",
   },
   {
     id: 'manufacturing',
     title: "Manufacturing & Production",
     description: "Product liability, equipment breakdown, and operational coverage for manufacturers across all industries from food processing to electronics.",
-    image: "/images/Manufact.png", // Updated to use public path
-    href: "/manufacturing-insurance", // Match your app directory structure
+    image: "/images/Manufact.png",
+    href: "/manufacturing-insurance",
     badge: "Comprehensive",
   },
   {
     id: 'nonprofit',
     title: "Nonprofit & Human Services",
     description: "Tailored coverage for nonprofits, human service organizations, and community groups with D&O, professional liability, and volunteer protection.",
-    image: "/images/nonProf.png", // Updated to use public path
-    href: "/non-profit", // Match your app directory structure
+    image: "/images/nonProf.png",
+    href: "/non-profit",
     badge: "Specialized",
   },
   {
     id: 'public-entity',
     title: "Government & Public Entities",
     description: "Comprehensive coverage for municipalities, public agencies, and government organizations with specialized liability and constitutional coverage.",
-    image: "/images/publicE1.png", // Updated to use public path
-    href: "/public-entity", // Match your app directory structure
+    image: "/images/publicE1.png",
+    href: "/public-entity",
     badge: "Government",
   }
 ];
@@ -101,6 +147,43 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
 ));
 
 IndustryCard.displayName = 'IndustryCard';
+
+const CargoTypeCard = React.memo(({ cargo, index }: { cargo: CargoType; index: number }) => (
+  <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-orange-500">
+    
+    {/* Cargo Image */}
+    <div className="relative h-32 flex items-center justify-center bg-gray-50 p-4">
+      <Image
+        src={cargo.image}
+        alt={`${cargo.title} cargo insurance`}
+        width={120}
+        height={80}
+        className="object-contain transition-transform duration-300 group-hover:scale-110"
+        priority={index < 3}
+      />
+    </div>
+
+    {/* Content */}
+    <div className="p-4">
+      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-orange-600 transition-colors">
+        {cargo.title}
+      </h3>
+
+      {/* CTA */}
+      <a 
+        href={cargo.href}
+        className="flex items-center justify-center w-full bg-gray-900 hover:bg-orange-600 text-white py-2 rounded-lg font-semibold text-sm transition-all duration-200 group-hover:bg-orange-600"
+      >
+        Learn More
+        <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+        </svg>
+      </a>
+    </div>
+  </div>
+));
+
+CargoTypeCard.displayName = 'CargoTypeCard';
 
 const Overview: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -164,24 +247,22 @@ const Overview: React.FC = () => {
 
             {/* Mission Statement */}
             <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
-        <blockquote className="text-gray-800 text-lg leading-relaxed italic">
-  &quot;To provide specialized commercial insurance solutions that protect the businesses, 
-  organizations, and entities that build America. We combine deep industry knowledge 
-  with personalized service to deliver the coverage, compliance, and peace of mind 
-  our clients need to focus on what they do best.&quot;
-</blockquote>
+              <blockquote className="text-gray-800 text-lg leading-relaxed italic">
+                &quot;To provide specialized commercial insurance solutions that protect the businesses, 
+                organizations, and entities that build America. We combine deep industry knowledge 
+                with personalized service to deliver the coverage, compliance, and peace of mind 
+                our clients need to focus on what they do best.&quot;
+              </blockquote>
               {/* Mission Attribution */}
               <div className="mt-6 flex items-center">
                 <div className="w-12 h-0.5 bg-gradient-to-r from-orange-500 to-orange-400 mr-4"></div>
                 <span className="text-orange-600 font-semibold">Moxie Risk Partners</span>
               </div>
             </div>
-
-           
           </div>
         </div>
 
-             {/* Industries Section */}
+        {/* Industries Section */}
         <div className="space-y-12">
           <div className="space-y-6">
             <h2 className="text-4xl font-bold text-gray-900 leading-tight">
@@ -200,6 +281,61 @@ const Overview: React.FC = () => {
             ))}
           </div>
         </div>
+
+        {/* Cargo Types Section */}
+  {/* Cargo Types Section */}
+<div className="mt-32 space-y-12">
+  <div className="space-y-6">
+    <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+      Specialized Cargo Coverage Solutions
+    </h2>
+    <p className="text-xl text-gray-600 leading-relaxed">
+      Protect your freight with specialized motor truck cargo insurance tailored to your specific trailer type and cargo category.
+    </p>
+  </div>
+
+  {/* Cargo Types Grid - Display Only */}
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+    {CARGO_TYPES_DATA.map((cargo, index) => (
+      <div 
+        key={cargo.id} 
+        className="group relative bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-orange-500"
+      >
+        {/* Cargo Image */}
+        <div className="relative h-32 flex items-center justify-center bg-gray-50 p-4">
+          <Image
+            src={cargo.image}
+            alt={`${cargo.title} cargo insurance`}
+            width={120}
+            height={80}
+            className="object-contain transition-transform duration-300 group-hover:scale-110"
+            priority={index < 3}
+          />
+        </div>
+
+        {/* Title Only */}
+        <div className="p-4">
+          <h3 className="text-lg font-bold text-gray-900 text-center group-hover:text-orange-600 transition-colors">
+            {cargo.title}
+          </h3>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  {/* Centralized CTA Button */}
+  <div className="flex justify-center mt-10">
+    <a 
+      href="/motor-truck-cargo"
+      className="inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg group"
+    >
+      Explore All Cargo Coverage Options
+      <svg className="w-5 h-5 ml-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </a>
+  </div>
+</div>
       </div>
 
       <style jsx>{`

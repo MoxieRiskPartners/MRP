@@ -225,7 +225,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/images/ownerOpHero.png" 
+                  src="/images/ownerOp.png" 
                   alt="Owner operator truck driver with their commercial vehicle"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
@@ -303,14 +303,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                       <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
                         <IconComponent className="w-6 h-6 text-orange-600" />
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        coverage.category === 'required' ? 'bg-red-600 text-white' :
-                        coverage.category === 'recommended' ? 'bg-orange-600 text-white' :
-                        'bg-gray-600 text-white'
-                      }`}>
-                        {coverage.category === 'required' ? 'Required' : 
-                         coverage.category === 'recommended' ? 'Recommended' : 'Optional'}
-                      </span>
+                   
                     </div>
                     <h3 className="text-xl font-bold text-white">{coverage.title}</h3>
                   </div>
@@ -587,8 +580,6 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                       <option value="">Select Type</option>
                       <option value="semi">Semi Truck</option>
                       <option value="box-truck">Box Truck</option>
-                      <option value="flatbed">Flatbed</option>
-                      <option value="reefer">Refrigerated</option>
                       <option value="other">Other</option>
                     </select>
                   </div>

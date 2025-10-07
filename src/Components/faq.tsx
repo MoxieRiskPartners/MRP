@@ -151,7 +151,7 @@ const FAQPage = () => {
 // Trucking - Fleet Insurance FAQs
 {
   question: "What is considered a commercial fleet?",
-  answer: "A commercial fleet typically consists of 2 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business.",
+  answer: "A commercial fleet typically consists of 10 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business. Anything under 10 units is considered non-fleet in the underwriting world.",
   isOpen: false,
   category: "trucking"
 },

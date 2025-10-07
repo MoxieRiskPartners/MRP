@@ -1,9 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Phone, Mail, Truck, Package, AlertTriangle, Thermometer, Lock, FileText } from 'lucide-react';
+import { CheckCircle, ArrowRight, Shield, Phone, Mail, Truck, Package, AlertTriangle, Thermometer, Lock, FileText, Star } from 'lucide-react';
 import SuccessModal from '../Components/successModal';
-
 
 interface CargoBenefit {
   icon: React.ElementType;
@@ -37,8 +36,22 @@ interface FAQItem {
   isOpen: boolean;
 }
 
+interface CoverageData {
+  type: string;
+  typeCode: string;
+  title: string;
+  description: string;
+  commonLoads: string[];
+  risksCovered: string[];
+  whoNeedsIt: string[];
+  coverageAmount: string;
+  specialFeatures: string[];
+  image: string;
+}
+
 const MotorTruckCargo = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [selectedType, setSelectedType] = useState('dry-van');
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "Is cargo insurance required for truckers?",
@@ -75,9 +88,9 @@ const MotorTruckCargo = () => {
     coverageAmount: ''
   });
 
-const [showSuccessModal, setShowSuccessModal] = useState(false);
-const [showConfetti, setShowConfetti] = useState(false);
-const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -93,6 +106,88 @@ const [isSubmitting, setIsSubmitting] = useState(false);
 
     return () => observer.disconnect();
   }, []);
+
+  // Dynamic Cargo Coverage Data
+  const coverageDataTypes: CoverageData[] = [
+    {
+      type: 'Dry Van',
+      typeCode: 'dry-van',
+      title: 'Dry Van Cargo Insurance',
+      description: 'Comprehensive motor truck cargo protection for general freight haulers. Covers packaged goods, retail freight, and non-perishable cargo during loading, transit, and unloading operations.',
+      commonLoads: ['Packaged goods', 'Retail freight', 'Non-perishable items', 'General freight', 'Consumer products'],
+      risksCovered: ['Theft protection', 'Collision damage', 'Load shift damage', 'Fire coverage', 'Vandalism'],
+      whoNeedsIt: ['General freight haulers', 'Contract carriers', 'Distribution companies', 'Amazon contractors', 'FTL carriers'],
+      coverageAmount: '$100,000 - $250,000',
+      specialFeatures: ['UIIA endorsement available', 'Broad form coverage', 'Specific shipper options', 'Intermodal container coverage'],
+      image: '/images/dryvan.png'
+    },
+    {
+      type: 'Flatbed',
+      typeCode: 'flatbed',
+      title: 'Flatbed Cargo Insurance',
+      description: 'Heavy-duty cargo insurance for flatbed operations. Covers lumber, steel, machinery, and construction materials with specialized protection for load securement and weather-related damages.',
+      commonLoads: ['Steel products', 'Lumber', 'Heavy machinery', 'Construction materials', 'Industrial equipment'],
+      risksCovered: ['Load securement failure', 'Weather damage', 'Shifting load damage', 'Theft protection', 'Transit accidents'],
+      whoNeedsIt: ['Flatbed operators', 'Construction logistics', 'Steel haulers', 'Equipment transporters', 'Building material carriers'],
+      coverageAmount: '$100,000 - $250,000',
+      specialFeatures: ['Rollover deductible structure', 'Tarped load coverage', 'Oversized load endorsements', 'Weather protection'],
+      image: '/images/flatbed.png'
+    },
+    {
+      type: 'Refrigerated',
+      typeCode: 'refrigerated',
+      title: 'Reefer Cargo Insurance',
+      description: 'Specialized temperature-controlled cargo insurance for cold chain logistics. Protects perishable freight including produce, pharmaceuticals, dairy, and frozen goods against temperature fluctuations and spoilage.',
+      commonLoads: ['Fresh produce', 'Pharmaceuticals', 'Dairy products', 'Frozen foods', 'Medical supplies'],
+      risksCovered: ['Reefer breakdown coverage', 'Spoilage protection', 'Temperature fluctuation'],
+      whoNeedsIt: ['Food transporters', 'Cold chain logistics', 'Pharmaceutical haulers', 'Grocery distributors', 'Medical transport'],
+      coverageAmount: '$100,000 - $250,000',
+      specialFeatures: ['Mechanical breakdown coverage', 'Driver error coverage', 'Spoilage protection', 'Temperature monitoring', 'Delayed delivery coverage'],
+      image: '/images/refrigerated.png'
+    },
+    {
+      type: 'Hazmat',
+      typeCode: 'hazmat',
+      title: 'Hazmat Cargo Insurance',
+      description: 'High-limit hazardous materials cargo insurance for DOT-compliant carriers. Covers chemicals, fuels, and dangerous goods with pollution liability and environmental damage protection.',
+      commonLoads: ['Industrial chemicals', 'Petroleum products', 'Corrosive materials', 'Flammable liquids', 'Hazardous waste'],
+      risksCovered: ['Spill coverage', 'Explosion protection', 'Fire damage', 'Environmental liability', 'Cleanup costs'],
+      whoNeedsIt: ['Hazmat carriers', 'Chemical distributors', 'Fuel transporters', 'Industrial waste haulers', 'Tanker operators'],
+      coverageAmount: '$1,000,000 - $5,000,000',
+      specialFeatures: ['Pollution liability coverage', 'Environmental cleanup', 'DOT compliance support', 'Emergency response'],
+      image: '/images/hazmat.png'
+    },
+    {
+      type: 'Auto Hauler',
+      typeCode: 'auto-hauler',
+      title: 'Auto Transport Insurance',
+      description: 'Specialized vehicle transport cargo insurance for car carriers. Protects new and used vehicles, specialty autos, and salvage cars during loading, transport, and delivery operations.',
+      commonLoads: ['New vehicles', 'Used cars', 'Specialty vehicles', 'Salvage automobiles', 'Exotic cars'],
+      risksCovered: ['Load shift damage', 'Road debris damage', 'Vehicle theft', 'Loading/unloading damage', 'Weather damage'],
+      whoNeedsIt: ['Auto transport companies', 'Dealership transporters', 'Auction haulers', 'Enclosed car carriers', 'RV transporters'],
+      coverageAmount: '$100,000 - $1,000,000',
+      specialFeatures: ['Open & enclosed coverage', 'High-value vehicle options', 'Loading coverage', 'Multi-vehicle protection'],
+      image: '/images/autoHauler.png'
+    },
+    {
+      type: 'Dump Truck',
+      typeCode: 'dump-truck',
+      title: 'Dump Truck Cargo Insurance',
+      description: 'Heavy-duty insurance for aggregate and construction material haulers. Covers sand, gravel, asphalt, and demolition debris with protection for spillage and environmental contamination.',
+      commonLoads: ['Sand & gravel', 'Asphalt', 'Dirt & soil', 'Demolition debris', 'Road salt'],
+      risksCovered: ['Load spillage', 'Tip-over coverage', 'Environmental contamination', 'Equipment damage', 'Material theft'],
+      whoNeedsIt: ['Aggregate haulers', 'Construction contractors', 'Road maintenance', 'Demolition companies', 'Mining operations'],
+      coverageAmount: '$50,000 - $250,000',
+      specialFeatures: ['Multi-dump type coverage', 'Off-road operations', 'Environmental protection', 'Construction site coverage'],
+      image: '/images/dumptruck.png'
+    }
+  ];
+
+  const selectedCoverage = coverageDataTypes.find(coverage => coverage.typeCode === selectedType) || coverageDataTypes[0];
+
+  const handleTypeSelection = (typeCode: string) => {
+    setSelectedType(typeCode);
+  };
 
   const cargoBenefits: CargoBenefit[] = [
     {
@@ -241,17 +336,17 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     })));
   };
 
-const handleFormSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  console.log('Fleet insurance form submitted:', formData);
-  
-  setIsSubmitting(false);
-  setShowSuccessModal(true);
-  setShowConfetti(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    console.log('Cargo insurance form submitted:', formData);
+    
+    setIsSubmitting(false);
+    setShowSuccessModal(true);
+    setShowConfetti(true);
 
     setFormData({
       companyName: '',
@@ -264,9 +359,9 @@ const handleFormSubmit = async (e: React.FormEvent) => {
   };
 
   const handleCloseModal = () => {
-  setShowSuccessModal(false);
-  setShowConfetti(false);
-};
+    setShowSuccessModal(false);
+    setShowConfetti(false);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -318,7 +413,6 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                     Get Cargo Quote
-           
                   </button>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
@@ -368,8 +462,147 @@ const handleFormSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
 
-      {/* Coverage Types */}
+      {/* Cargo Coverage Selector Section */}
       <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Section Header */}
+          <div className="mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+              Choose Your Specialized Cargo Coverage
+            </h2>
+            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+              Each trailer type and freight category has unique risks and requirements. 
+              Select your specific cargo type below to explore tailored coverage options and industry-specific endorsements.
+            </p>
+          </div>
+
+          {/* Cargo Type Buttons */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+            {coverageDataTypes.map((coverage) => (
+              <button
+                key={coverage.typeCode}
+                onClick={() => handleTypeSelection(coverage.typeCode)}
+                className={`group relative p-6 rounded-2xl border-2 transition-all duration-300 transform hover:scale-105 hover:shadow-lg ${
+                  selectedType === coverage.typeCode
+                    ? 'border-orange-600 bg-orange-50 shadow-lg scale-105'
+                    : 'border-gray-200 bg-white hover:border-orange-300'
+                }`}
+              >
+                <div className="text-center">
+                  <div className="mb-4 mx-auto w-20 h-16 flex items-center justify-center">
+                    <img
+                      src={coverage.image}
+                      alt={coverage.type}
+                      className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                    />
+                  </div>
+                  <h3 className={`text-sm font-bold transition-colors ${
+                    selectedType === coverage.typeCode ? 'text-orange-600' : 'text-gray-800'
+                  }`}>
+                    {coverage.type}
+                  </h3>
+                </div>
+                
+                {/* Selected Indicator */}
+                {selectedType === coverage.typeCode && (
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-orange-600 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-4 h-4 text-white" />
+                  </div>
+                )}
+              </button>
+            ))}
+          </div>
+
+          {/* Coverage Details Panel */}
+          <div className="bg-gray-50 rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
+            
+            {/* Coverage Header */}
+            <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-orange-100">
+              <div className="mb-4 lg:mb-0">
+                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                  {selectedCoverage.title}
+                </h3>
+                <div className="inline-block bg-orange-600 text-white px-4 py-2 rounded-full font-bold text-sm">
+                  Coverage: {selectedCoverage.coverageAmount}
+                </div>
+              </div>
+            </div>
+
+            {/* Coverage Description */}
+            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-4xl">
+              {selectedCoverage.description}
+            </p>
+
+            {/* Coverage Details Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+              
+              {/* Common Loads */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+                  Common Loads Covered
+                </h4>
+                <div className="space-y-2">
+                  {selectedCoverage.commonLoads.map((load, index) => (
+                    <div key={index} className="flex items-start space-x-2 p-3 bg-white rounded-lg border border-gray-100">
+                      <CheckCircle className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{load}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Risks Covered */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+                  Risks Covered
+                </h4>
+                <div className="space-y-2">
+                  {selectedCoverage.risksCovered.map((risk, index) => (
+                    <div key={index} className="flex items-start space-x-2 p-3 bg-white rounded-lg border border-gray-100">
+                      <CheckCircle className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{risk}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Who Needs It */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+                  Who Needs This Coverage
+                </h4>
+                <div className="space-y-2">
+                  {selectedCoverage.whoNeedsIt.map((who, index) => (
+                    <div key={index} className="flex items-start space-x-2 p-3 bg-white rounded-lg border border-gray-100">
+                      <CheckCircle className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
+                      <span className="text-gray-700 text-sm">{who}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Special Features */}
+              <div className="space-y-4">
+                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+                  Special Features
+                </h4>
+                <div className="space-y-2">
+                  {selectedCoverage.specialFeatures.map((feature, index) => (
+                    <div key={index} className="flex items-start space-x-2 p-3 bg-orange-50 rounded-lg border border-orange-200">
+                      <Star className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0 fill-current" />
+                      <span className="text-gray-800 text-sm font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Coverage Types */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
@@ -421,7 +654,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* Cargo Types */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
@@ -463,7 +696,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* Coverage Details */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
@@ -477,7 +710,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {coverageDetails.map((detail) => (
-              <div key={detail.title} className="bg-gray-50 rounded-xl p-6 border border-gray-200">
+              <div key={detail.title} className="bg-white rounded-xl p-6 border border-gray-200">
                 <h3 className="text-lg font-bold text-gray-900 mb-3">
                   {detail.title}
                 </h3>
@@ -494,7 +727,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
@@ -508,11 +741,12 @@ const handleFormSubmit = async (e: React.FormEvent) => {
 
           <div className="space-y-4">
             {faqItems.map((faq, index) => (
-              <div key={index} className="bg-white rounded-xl border border-gray-200 shadow-sm">
+              <div key={index} className="bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
                 <button
-                  className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-50 rounded-xl transition-colors duration-200"
+                  className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-100 rounded-xl transition-colors duration-200"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={faq.isOpen}
+                  suppressHydrationWarning
                 >
                   <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <div className={`w-6 h-6 flex-shrink-0 transform transition-transform duration-200 ${faq.isOpen ? 'rotate-180' : ''}`}>
@@ -533,7 +767,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
       </section>
 
       {/* Final CTA with Form */}
-      <section className="relative py-20 bg-white overflow-hidden">
+      <section className="relative py-20 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -588,115 +822,119 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                 <p className="text-gray-600">Fast, competitive cargo insurance quotes</p>
               </div>
 
-            <form onSubmit={handleFormSubmit} className="space-y-4">
-  
-  <div>
-    <label className="block text-sm font-semibold text-gray-700 mb-2">
-      Company Name *
-    </label>
-    <input
-      type="text"
-      required
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-      placeholder="Your Company Name"
-      value={formData.companyName}
-      onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-    />
-  </div>
+              <form onSubmit={handleFormSubmit} className="space-y-4">
+                
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Company Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                    placeholder="Your Company Name"
+                    value={formData.companyName}
+                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+                    suppressHydrationWarning 
+                  />
+                </div>
 
-  <div>
-    <label className="block text-sm font-semibold text-gray-700 mb-2">
-      Contact Name *
-    </label>
-    <input
-      type="text"
-      required
-      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-      placeholder="Your Full Name"
-      value={formData.contactName}
-      onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-    />
-  </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Contact Name *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                    placeholder="Your Full Name"
+                    value={formData.contactName}
+                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
+                    suppressHydrationWarning
+                  />
+                </div>
 
-  {/* ADD THIS SECTION - Email and Phone fields */}
-  <div className="grid grid-cols-2 gap-4">
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-2">
-        Email *
-      </label>
-      <input
-        type="email"
-        required
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-        placeholder="email@company.com"
-        value={formData.email}
-        onChange={(e) => setFormData({...formData, email: e.target.value})}
-      />
-    </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Email *
+                    </label>
+               <input
+                      type="email"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                      placeholder="email@company.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({...formData, email: e.target.value})}
+                      suppressHydrationWarning
+                    />
+                  </div>
 
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-2">
-        Phone *
-      </label>
-      <input
-        type="tel"
-        required
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-        placeholder="(555) 123-4567"
-        value={formData.phone}
-        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-      />
-    </div>
-  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Phone *
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                      placeholder="(555) 123-4567"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                         suppressHydrationWarning
+                    />
+                  </div>
+                </div>
 
-  {/* Then your existing Coverage Amount and Cargo Type fields */}
-  <div className="grid grid-cols-2 gap-4">
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-2">
-        Coverage Amount *
-      </label>
-      <select
-        required
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-        value={formData.coverageAmount}
-        onChange={(e) => setFormData({...formData, coverageAmount: e.target.value})}
-      >
-        <option value="">Select Amount</option>
-        <option value="5000-25000">$5,000 - $25,000</option>
-        <option value="25000-50000">$25,000 - $50,000</option>
-        <option value="50000-100000">$50,000 - $100,000</option>
-        <option value="100000-250000">$100,000 - $250,000</option>
-      </select>
-    </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Coverage Amount *
+                    </label>
+                    <select
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
+                      value={formData.coverageAmount}
+                      onChange={(e) => setFormData({...formData, coverageAmount: e.target.value})}
+                         suppressHydrationWarning
+                    >
+                      <option value="">Select Amount</option>
+                      <option value="5000-25000">$5,000 - $25,000</option>
+                      <option value="25000-50000">$25,000 - $50,000</option>
+                      <option value="50000-100000">$50,000 - $100,000</option>
+                      <option value="100000-250000">$100,000 - $250,000</option>
+                    </select>
+                  </div>
 
-    <div>
-      <label className="block text-sm font-semibold text-gray-700 mb-2">
-        Cargo Type *
-      </label>
-      <select
-        required
-        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-        value={formData.cargoType}
-        onChange={(e) => setFormData({...formData, cargoType: e.target.value})}
-      >
-        <option value="">Select Type</option>
-        <option value="general">General Freight</option>
-        <option value="electronics">Electronics</option>
-        <option value="food">Food & Beverage</option>
-        <option value="refrigerated">Refrigerated Goods</option>
-        <option value="automotive">Automotive Parts</option>
-        <option value="construction">Construction Materials</option>
-        <option value="high-value">High-Value Goods</option>
-        <option value="hazmat">Hazardous Materials</option>
-      </select>
-    </div>
-  </div>
-
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Cargo Type *
+                    </label>
+                    <select
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
+                      value={formData.cargoType}
+                      onChange={(e) => setFormData({...formData, cargoType: e.target.value})}
+                         suppressHydrationWarning
+                    >
+                      <option value="">Select Type</option>
+                      <option value="general">General Freight</option>
+                      <option value="electronics">Electronics</option>
+                      <option value="food">Food & Beverage</option>
+                      <option value="refrigerated">Refrigerated Goods</option>
+                      <option value="automotive">Automotive Parts</option>
+                      <option value="construction">Construction Materials</option>
+                      <option value="high-value">High-Value Goods</option>
+                      <option value="hazmat">Hazardous Materials</option>
+                    </select>
+                  </div>
+                </div>
 
                 <button
                   type="submit"
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                    suppressHydrationWarning 
                 >
                   {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
                   {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
@@ -716,7 +954,8 @@ const handleFormSubmit = async (e: React.FormEvent) => {
           </div>
         </div>
       </section>
-{/* Success Modal */}
+
+      {/* Success Modal */}
       <SuccessModal 
         isOpen={showSuccessModal}
         onClose={handleCloseModal}
@@ -725,4 +964,5 @@ const handleFormSubmit = async (e: React.FormEvent) => {
     </div>
   );
 };
+
 export default MotorTruckCargo;
