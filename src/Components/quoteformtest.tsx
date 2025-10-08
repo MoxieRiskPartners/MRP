@@ -23,7 +23,12 @@ const QuoteFormTest = () => {
     dotNumber: '12345678'
   });
   
-  const [response, setResponse] = useState<any>(null);
+ const [response, setResponse] = useState<{
+  success?: boolean;
+  error?: boolean;
+  message?: string;
+  momentumResponse?: any;
+} | null>(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
