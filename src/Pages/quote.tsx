@@ -60,24 +60,52 @@ const QuotePage: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-const handleSubmit = async () => {
+  const handleSubmit = async () => {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    
-    console.log('Quote submitted:', formData);
-    
-    setIsSubmitting(false);
-    setCurrentStep(4); // Show thank you step
-    
-    // Scroll to top smoothly when success page is shown
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    try {
+      // Map your form data to Momentum's expected format
+      const momentumPayload = {
+        businessName: formData.businessName,
+        contactName: formData.contactName,
+        phone: formData.phone,
+        email: formData.email,
+        fleetSize: formData.fleetSize,
+        primaryCargo: formData.primaryCargo,
+        domiciledState: formData.domiciledState,
+        yearsInBusiness: formData.yearsInBusiness,
+        previousClaims: formData.previousClaims,
+        currentInsurance: formData.currentInsurance,
+        desiredStartDate: formData.desiredStartDate,
+        additionalInfo: formData.additionalInfo
+      };
+
+      // Send to your API route
+      const response = await fetch('/api/momentum-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(momentumPayload)
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        console.log('Quote submitted successfully:', result);
+        setCurrentStep(4); // Show thank you step
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        console.error('Submission failed:', result);
+        alert('There was an issue submitting your quote. Please try again or call us at (800) 669-4301');
+      }
+    } catch (error) {
+      console.error('Error submitting quote:', error);
+      alert('Unable to submit quote. Please call us at (800) 669-4301');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
-  
   const isStepValid = (step: number): boolean => {
     switch (step) {
       case 1:
