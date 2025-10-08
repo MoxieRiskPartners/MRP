@@ -699,7 +699,6 @@
 
 
 
-
 "use client";
 
 import React, { useState, useRef, useEffect } from 'react';
@@ -800,9 +799,11 @@ const Header = () => {
   const navItems = [
     { name: 'Claims', href: '/file-claims' },
     { name: 'Contact', href: '/contact-us' },
-    { name: 'About', href: '/about-us' },
-    { name: 'Client Portal', href: '/client-portal' } // Added Client Portal link
+    { name: 'About', href: '/about-us' }
   ];
+  
+  // NowCerts portal URL with your agency ID
+  const portalUrl = "https://www7.nowcerts.com/Login.aspx?AgencyId=9f838b40-7a33-4852-a129-7375ca8d7936&ShowAgencyLogo=true";
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -916,6 +917,16 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Client Portal Link - Opens in new tab */}
+              <a
+                href={portalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-700 hover:text-orange-500 px-3 py-2 text-lg font-medium transition-colors duration-200"
+              >
+                Client Portal
+              </a>
             </div>
           </nav>
 
@@ -1027,6 +1038,17 @@ const Header = () => {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Mobile Client Portal Link - Opens in new tab */}
+              <a
+                href={portalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block text-gray-700 hover:text-orange-500 hover:bg-gray-50 px-3 py-2 text-lg font-semibold rounded-md transition-colors duration-200"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Client Portal
+              </a>
 
               {/* Mobile Get Quote Button */}
               <div className="pt-4 border-t border-gray-200 mt-4">
