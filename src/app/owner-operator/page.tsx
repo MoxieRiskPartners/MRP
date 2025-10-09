@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import OwnerOperator from "@/Pages/ownerOperator";
+import OwnerOperator from "@/pages/ownerOperator";
 import Footer from "@/Components/footer";
 
 export default function OwnerOperatorCoveragePage() {

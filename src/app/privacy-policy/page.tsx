@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import PrivacyPage from "@/Pages/privacy";
+import PrivacyPage from "@/pages/privacy";
 import Footer from "@/Components/footer";
 
 export default function Privacy() {
