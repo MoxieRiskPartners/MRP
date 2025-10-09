@@ -55,6 +55,11 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+  // Add webpack config to help with module resolution
+  webpack: (config) => {
+    config.resolve.extensions = ['.tsx', '.ts', '.jsx', '.js'];
+    return config;
+  },
 };
 
 export default nextConfig;
