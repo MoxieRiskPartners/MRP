@@ -185,7 +185,7 @@ const Footer: React.FC = () => {
           <div className="lg:col-span-8">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-start md:ml-12">
               {footerSections.map((section) => (
-                <div key={section.id} className="space-y-4 text-center md:text-left">
+                <div key={section.id} className="space-y-4 text-left md:text-left">
                   
                   {/* Desktop Section Title */}
                   <h4 className="hidden md:block text-lg font-semibold text-white border-b border-orange-500 pb-2">
