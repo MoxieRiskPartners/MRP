@@ -7,7 +7,7 @@
 
 // import Footer from "@/Components/footer";
 
-import ComingSoon from "@/pages/comingsoon";
+import ComingSoon from "../pages/comingsoon";
 export default function Home() {
   return (
     <>

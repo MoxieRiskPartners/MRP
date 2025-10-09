@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import ManufacturingPage from "@/pages/manufacturing";
+import ManufacturingPage from "../../pages/manufacturing";
 import Footer from "@/Components/footer";
 
 export default function Manufacturing() {
