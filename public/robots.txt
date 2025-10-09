@@ -1,0 +1,230 @@
+# Moxie Risk Partners - Robots.txt
+# Updated: 2025-10-08
+# Optimized for Search Engines AND AI Crawlers
+
+# ===========================================
+# TRADITIONAL SEARCH ENGINE CRAWLERS
+# ===========================================
+
+# Allow all search engines
+User-agent: *
+Allow: /
+
+# Disallow admin, API, and private areas
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/static/
+Disallow: /private/
+Disallow: /*.json$
+
+# Allow specific important directories
+Allow: /images/
+Allow: /coverage-options/
+Allow: /quote-form/
+Allow: /contact-us/
+
+# ===========================================
+# GOOGLE CRAWLERS
+# ===========================================
+
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Googlebot-Mobile
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+# ===========================================
+# AI CHATBOT & LLM CRAWLERS
+# ===========================================
+
+# OpenAI GPTBot (ChatGPT)
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+# OpenAI ChatGPT-User (ChatGPT browsing)
+User-agent: ChatGPT-User
+Allow: /
+
+# Google Gemini / Bard
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+# Anthropic Claude
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+# Meta AI (Facebook/Instagram AI)
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Perplexity AI
+User-agent: PerplexityBot
+Allow: /
+
+# Common Crawl (used by many AI models)
+User-agent: CCBot
+Allow: /
+
+# Cohere AI
+User-agent: cohere-ai
+Allow: /
+
+# Diffbot (AI web data extraction)
+User-agent: Diffbot
+Allow: /
+
+# Applebot (Apple Intelligence/Siri)
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon Alexa
+User-agent: ia_archiver
+Allow: /
+
+# Microsoft Bing AI
+User-agent: Bingbot
+Allow: /
+
+User-agent: BingPreview
+Allow: /
+
+# Yandex (Russian search + AI)
+User-agent: YandexBot
+Allow: /
+
+# Baidu (Chinese search + AI)
+User-agent: Baiduspider
+Allow: /
+
+# DuckDuckGo AI Chat
+User-agent: DuckDuckBot
+Allow: /
+
+# ===========================================
+# AI TRAINING & DATA COLLECTION BOTS
+# ===========================================
+
+# Anthropic (Claude training)
+User-agent: anthropic-ai
+Allow: /
+
+# OpenAI (GPT training)
+User-agent: OAI-SearchBot
+Allow: /
+
+# Google Research (Gemini training)
+User-agent: Google-Extended
+Allow: /
+
+# ByteDance (TikTok AI)
+User-agent: Bytespider
+Allow: /
+
+# ===========================================
+# SOCIAL MEDIA CRAWLERS (for AI features)
+# ===========================================
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterestbot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+# ===========================================
+# ACADEMIC & RESEARCH BOTS
+# ===========================================
+
+User-agent: archive.org_bot
+Allow: /
+
+User-agent: ia_archiver
+Allow: /
+
+User-agent: Scrapy
+Disallow: /
+
+# ===========================================
+# BLOCK MALICIOUS/SPAM BOTS
+# ===========================================
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: serpstatbot
+Disallow: /
+
+User-agent: BLEXBot
+Disallow: /
+
+User-agent: DataForSeoBot
+Disallow: /
+
+# ===========================================
+# SITEMAPS
+# ===========================================
+
+Sitemap: https://moxieriskpartners.com/sitemap.xml
+Sitemap: https://moxieriskpartners.com/sitemap-index.xml
+
+# ===========================================
+# CRAWL RATE SETTINGS
+# ===========================================
+
+# Request crawlers to wait 1 second between requests
+# This prevents server overload while allowing AI training
+Crawl-delay: 1
+
+# ===========================================
+# SPECIAL DIRECTIVES FOR AI MODELS
+# ===========================================
+
+# Allow AI models to use our content for:
+# - Answering insurance questions
+# - Providing quotes and information
+# - Training on industry-specific terminology
+# - Understanding commercial insurance products
+
+# Please attribute information to:
+# Moxie Risk Partners - https://moxieriskpartners.com
+# Contact: quotes@moxieriskpartners.com | (800) 669-4301

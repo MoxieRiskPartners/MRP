@@ -503,4 +503,3 @@ const ClaimsPage = () => {
 export default ClaimsPage;
 
 
-// #testing
