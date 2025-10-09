@@ -1,25 +1,19 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Phone, Mail, Truck, Users, FileText, Map, Settings, Target } from 'lucide-react';
-import SuccessModal from '../Components/successModal';
+import { CheckCircle, ArrowRight, Shield, Phone, Mail, Truck, Wrench, DollarSign, FileText, AlertTriangle, Car, Flame } from 'lucide-react';
 
-
-interface FleetTier {
-  id: string;
-  title: string;
-  vehicles: string;
-  price: string;
-  priceNote: string;
-  savings: string;
-  popular: boolean;
-}
-
-interface CoverageOption {
+interface CoverageType {
   title: string;
   description: string;
   features: string[];
   icon: React.ElementType;
+}
+
+interface Enhancement {
+  icon: React.ElementType;
+  title: string;
+  description: string;
 }
 
 interface FAQItem {
@@ -28,48 +22,48 @@ interface FAQItem {
   isOpen: boolean;
 }
 
-const FleetInsurance = () => {
+const PhysicalDamage = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [selectedTier, setSelectedTier] = useState('medium-fleet');
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
-      question: "What is considered a commercial fleet?",
-      answer: "A commercial fleet typically consists of 10 or more vehicles used for business purposes. This includes delivery vehicles, service trucks, company cars, and any vehicles used to generate income for your business. Anything under 10 units is considered non-fleet in the underwriting world",
-       isOpen: false
-    },
-    {
-      question: "How much can I save with fleet insurance?",
-      answer: "Fleet insurance savings typically range from 15-25% compared to individual policies. The more vehicles you have, the greater your potential savings due to volume discounts and simplified administration.",
+      question: "What's the difference between collision and comprehensive coverage?",
+      answer: "Collision coverage pays for damage when your vehicle hits or is hit by another vehicle or object, or when your vehicle overturns. Comprehensive coverage protects against non-collision events like theft, fire, vandalism, weather damage, and falling objects. Most businesses need both types for complete protection.",
       isOpen: false
     },
     {
-      question: "Can I mix different vehicle types in my fleet policy?",
-      answer: "Yes, fleet policies can accommodate mixed vehicle types including trucks, vans, trailers, and passenger vehicles. We customize coverage based on each vehicle's specific use and risk profile.",
+      question: "Is physical damage insurance required by law?",
+      answer: "While federal and state laws don't mandate physical damage coverage, it's often required by lenders or leasing companies if you're financing vehicles. Even for owned vehicles, it's essential protection given the high cost of commercial vehicle replacement and repairs.",
       isOpen: false
     },
     {
-      question: "What happens if I add or remove vehicles from my fleet?",
-      answer: "Fleet policies offer flexibility to add or remove vehicles throughout the policy term. We provide automatic coverage for newly acquired vehicles and can adjust your policy as your fleet size changes.",
+      question: "How is my vehicle's value determined after a loss?",
+      answer: "Insurers typically use Actual Cash Value (ACV), which factors in the vehicle's original cost minus depreciation, age, mileage, and condition. Some policies offer Stated Value coverage where you and the insurer agree on a value upfront, though payment at loss is still typically the lesser of stated value or ACV.",
       isOpen: false
     },
     {
-      question: "Do all vehicles need the same coverage limits?",
-      answer: "No, fleet policies can be customized with different coverage limits for different vehicle types or uses. For example, cargo vehicles might need higher liability limits than passenger vehicles.",
+      question: "What does Gap coverage protect against?",
+      answer: "Gap coverage protects you when your vehicle is totaled and you owe more on your loan or lease than the vehicle's actual cash value. It pays the difference between the insurance settlement and your remaining loan balance, preventing out-of-pocket expenses after a total loss.",
+      isOpen: false
+    },
+    {
+      question: "Are rental vehicles covered under physical damage insurance?",
+      answer: "Standard physical damage coverage typically applies only to owned and specifically scheduled leased vehicles. However, you can add Hired Auto Physical Damage coverage to protect rental or borrowed vehicles you use for business purposes. This is essential if you regularly rent vehicles.",
       isOpen: false
     }
   ]);
+
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
     email: '',
     phone: '',
-    fleetSize: '',
-    fleetType: ''
+    vehicleCount: '',
+    vehicleType: ''
   });
 
-const [showSuccessModal, setShowSuccessModal] = useState(false);
-const [showConfetti, setShowConfetti] = useState(false);
-const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -86,114 +80,118 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     return () => observer.disconnect();
   }, []);
 
-  const fleetTiers: FleetTier[] = [
+  const coverageTypes: CoverageType[] = [
     {
-      id: "small-fleet",
-      title: "Small Fleet",
-      vehicles: "2-5 Vehicles",
-      price: "$1,200",
-      priceNote: "per vehicle/year",
-      savings: "Save 15%",
-      popular: false
+      title: "Collision Coverage",
+      description: "Protects your vehicles when damaged in an accident with another vehicle or object, regardless of who's at fault.",
+      features: [
+        "Accidents with other vehicles",
+        "Single-vehicle accidents",
+        "Hitting stationary objects",
+        "Vehicle rollover incidents"
+      ],
+      icon: Car
     },
     {
-      id: "medium-fleet", 
-      title: "Medium Fleet",
-      vehicles: "6-25 Vehicles",
-      price: "$950",
-      priceNote: "per vehicle/year",
-      savings: "Save 20%",
-      popular: true
-    },
-    {
-      id: "large-fleet",
-      title: "Large Fleet",
-      vehicles: "25+ Vehicles",
-      price: "$800",
-      priceNote: "per vehicle/year", 
-      savings: "Save 25%",
-      popular: false
-    }
-  ];
-
-  const coverageOptions: CoverageOption[] = [
-    {
-      title: "DOT Liability Coverage",
-      description: "Required $750K minimum liability with options up to $5M per occurrence for interstate compliance.",
-      features: ["$750K-$5M Coverage Limits", "Interstate Compliance", "BMC-32 Filing Support", "Instant Certificates"],
+      title: "Comprehensive Coverage",
+      description: "Covers damage from non-collision events, providing all-risk protection for your vehicles beyond accident scenarios.",
+      features: [
+        "Theft and vandalism",
+        "Fire and explosion",
+        "Weather damage (hail, wind, flood)",
+        "Falling objects and glass breakage"
+      ],
       icon: Shield
     },
     {
-      title: "Physical Damage Protection",
-      description: "Comprehensive and collision coverage for all vehicles in your fleet with flexible deductible options.",
-      features: ["Comprehensive Coverage", "Collision Protection", "Glass & Windshield", "Rental Reimbursement"],
-      icon: Truck
-    },
-    {
-      title: "Cargo Insurance",
-      description: "Up to $250,000 coverage for freight and cargo you transport with all-risk protection.",
-      features: ["Up to $250K Coverage", "All-Risk Protection", "Loading/Unloading", "Temperature Damage"],
-      icon: FileText
-    },
-    {
-      title: "Fleet Management Services",
-      description: "Beyond insurance - fleet tracking, driver training, safety programs, and DOT compliance consulting.",
-      features: ["Fleet Tracking Systems", "Driver Training Programs", "Safety Consulting", "DOT Compliance Support"],
-      icon: Settings
-    },
-    {
-      title: "Workers' Compensation",
-      description: "Protect your drivers and fleet personnel with comprehensive workers' compensation coverage.",
-      features: ["Driver Coverage", "Medical Benefits", "Lost Wage Protection", "Return-to-Work Programs"],
-      icon: Users
-    },
-    {
-      title: "Cyber Liability Insurance",
-      description: "Protection against cyber threats targeting fleet management systems and customer data.",
-      features: ["Data Breach Response", "System Downtime Coverage", "Cyber Extortion Protection", "Regulatory Compliance"],
-      icon: Target
+      title: "Specified Causes Coverage",
+      description: "A cost-effective alternative to comprehensive that covers specific, named perils rather than all-risk protection.",
+      features: [
+        "Fire and lightning",
+        "Theft and malicious mischief",
+        "Wind, hail, and flood",
+        "Earthquake and explosion"
+      ],
+      icon: Flame
     }
   ];
 
-  const fleetCategories = [
+  const enhancements: Enhancement[] = [
     {
-      title: "Transportation & Logistics",
-      fleetTypes: ["Long-Haul Trucking", "Local Delivery", "LTL Carriers", "Freight Brokers", "Logistics Companies"]
+      icon: DollarSign,
+      title: "Gap Coverage",
+      description: "Covers the difference between your vehicle's actual cash value and your outstanding loan or lease balance in the event of a total loss, protecting you from financial shortfalls."
     },
     {
-      title: "Service & Trades", 
-      fleetTypes: ["Construction Fleets", "HVAC Services", "Electrical Services", "Plumbing Services", "Field Services"]
+      icon: Truck,
+      title: "Rental Reimbursement",
+      description: "Pays for temporary rental vehicle costs while your damaged vehicle is being repaired, keeping your business operations running smoothly during downtime."
     },
     {
-      title: "Retail & Distribution",
-      fleetTypes: ["Food Delivery", "Retail Distribution", "E-commerce Delivery", "Medical Supply", "Industrial Supply"]
-    },
-    {
-      title: "Specialized Transport",
-      fleetTypes: ["Heavy Haul", "Oversized Loads", "Hazmat Transport", "Refrigerated Transport", "Auto Transport"]
-    }
-  ];
-
-  const managementServices = [
-    {
-      icon: Map,
-      title: "Fleet Tracking & Telematics",
-      description: "Advanced GPS tracking and telematics systems to monitor vehicle performance, driver behavior, and route optimization for improved efficiency and safety."
-    },
-    {
-      icon: Users,
-      title: "Driver Training Programs",
-      description: "Comprehensive driver safety training and certification programs to reduce accidents, improve CSA scores, and lower insurance premiums."
+      icon: Wrench,
+      title: "Towing & Labor",
+      description: "Covers towing costs to the nearest qualified repair facility after a covered loss, with options for extended towing to your preferred repair location."
     },
     {
       icon: FileText,
-      title: "DOT Compliance Management",
-      description: "Complete DOT compliance management including HOS monitoring, vehicle inspections, driver qualification files, and audit preparation."
+      title: "Downtime Coverage",
+      description: "Provides compensation when your vehicle is out of service for extended repairs following a covered loss, helping offset lost revenue during repair periods."
     },
     {
-      icon: Shield,
-      title: "Safety Consulting",
-      description: "Expert safety consulting services to develop comprehensive safety programs, reduce incidents, and create a culture of safety within your organization."
+      icon: Car,
+      title: "Hired Auto Physical Damage",
+      description: "Extends protection to vehicles you rent, hire, or borrow for business use, covering physical damage exposures beyond your owned fleet."
+    },
+    {
+      icon: AlertTriangle,
+      title: "Equipment & Accessories",
+      description: "Covers permanently installed equipment, custom modifications, and specialized tools beyond standard vehicle coverage, including GPS systems and communication devices."
+    }
+  ];
+
+  const vehicleCategories = [
+    {
+      title: "Light Commercial Vehicles",
+      types: ["Cargo Vans", "Pickup Trucks", "Service Vehicles", "Utility Vehicles", "Panel Vans"]
+    },
+    {
+      title: "Heavy Commercial Trucks",
+      types: ["Semi-Tractors", "Straight Trucks", "Box Trucks", "Dump Trucks", "Flatbed Trucks"]
+    },
+    {
+      title: "Specialized Equipment",
+      types: ["Refrigerated Units", "Tank Vehicles", "Heavy Haul Equipment", "Tow Trucks", "Construction Equipment"]
+    },
+    {
+      title: "Trailers & Attachments",
+      types: ["Dry Van Trailers", "Flatbed Trailers", "Refrigerated Trailers", "Dump Trailers", "Specialty Trailers"]
+    }
+  ];
+
+  const exclusions = [
+    {
+      title: "Wear and Tear",
+      description: "Normal aging, deterioration, mechanical breakdown, and road damage to tires"
+    },
+    {
+      title: "Racing & Competition",
+      description: "Vehicles used in organized racing, speed contests, or demolition events"
+    },
+    {
+      title: "Intentional Damage",
+      description: "Damage caused deliberately by the insured or with their knowledge"
+    },
+    {
+      title: "War & Nuclear Hazards",
+      description: "Damage from war, military action, nuclear reaction, or radioactive contamination"
+    },
+    {
+      title: "Non-Permanent Equipment",
+      description: "Portable electronic devices not permanently installed in the vehicle"
+    },
+    {
+      title: "Diminution of Value",
+      description: "Reduction in vehicle's market value after repairs from a covered accident"
     }
   ];
 
@@ -204,37 +202,31 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     })));
   };
 
-const handleFormSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
+  const handleFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  console.log('Fleet insurance form submitted:', formData);
-  
-  setIsSubmitting(false);
-  setShowSuccessModal(true);
-  setShowConfetti(true);
+    setTimeout(() => {
+      console.log('Physical damage insurance submitted:', formData);
+      setIsSubmitting(false);
+      setShowSuccessModal(true);
+      setShowConfetti(true);
 
-  setFormData({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    fleetSize: '',
-    fleetType: ''
-  });
-};
-
-  const handleTierSelection = (tierId: string) => {
-    setSelectedTier(tierId);
+      setFormData({
+        companyName: '',
+        contactName: '',
+        email: '',
+        phone: '',
+        vehicleCount: '',
+        vehicleType: ''
+      });
+    }, 1000);
   };
 
-
   const handleCloseModal = () => {
-  setShowSuccessModal(false);
-  setShowConfetti(false);
-};
+    setShowSuccessModal(false);
+    setShowConfetti(false);
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -247,8 +239,8 @@ const handleFormSubmit = async (e: React.FormEvent) => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/images/fleet.png" 
-                  alt="Commercial fleet vehicles for insurance"
+                  src="/images/phydamage.png" 
+                  alt="Commercial vehicles protected by physical damage insurance"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
@@ -259,22 +251,22 @@ const handleFormSubmit = async (e: React.FormEvent) => {
               <div className="space-y-8">
                 <div>
                   <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                    Commercial Fleet
+                    Commercial Auto
                     <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
-                      Insurance Solutions
+                      Physical Damage Insurance
                     </span>
                   </h1>
                   
                   <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-                    Comprehensive fleet protection with up to 25% savings. DOT-compliant coverage for 2+ vehicles with dedicated fleet specialists and streamlined management.
+                    Comprehensive protection for your commercial vehicles against collision, theft, fire, vandalism, and weather damage. Safeguard your assets and keep your business moving forward.
                   </p>
                 </div>
 
                 <div className="space-y-4">
                   {[
-                    'Up to 25% Fleet Discounts',
-                    'DOT Compliance Support',
-                    'Single Policy Management'
+                    'Collision & Comprehensive Coverage',
+                    'Actual Cash Value or Stated Amount',
+                    'Flexible Deductible Options'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0" />
@@ -285,8 +277,8 @@ const handleFormSubmit = async (e: React.FormEvent) => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                    Get Fleet Quote
-           
+                    Get Your Quote
+                    
                   </button>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
@@ -299,92 +291,31 @@ const handleFormSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
 
-      {/* Fleet Pricing Tiers */}
-      {/* <section className="py-20 bg-gray-50">
+      {/* Coverage Types */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Fleet Pricing Tiers
+              Types of Physical Damage Coverage
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              The more vehicles you insure, the more you save. Simple, transparent pricing with volume discounts that grow with your fleet size.
+              Choose from multiple coverage options designed to protect your commercial vehicles from a wide range of risks, from accidents to natural disasters.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            {fleetTiers.map((tier) => (
-              <div 
-                key={tier.id} 
-                className={`relative bg-white rounded-2xl p-8 border-2 transition-all duration-300 hover:shadow-xl ${
-                  tier.popular ? 'border-orange-600 shadow-lg scale-105' : 'border-gray-200'
-                }`}
-              >
-                {tier.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <span className="bg-gradient-to-r from-orange-600 to-red-600 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-                      Most Popular
-                    </span>
-                  </div>
-                )}
-                
-                <div className="text-center mb-6 mt-2">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.title}</h3>
-                  <div className="text-gray-600 font-medium">{tier.vehicles}</div>
-                </div>
-                
-                <div className="text-center mb-6">
-                  <div className="text-5xl font-bold text-gray-900 mb-2">{tier.price}</div>
-                  <div className="text-gray-600">{tier.priceNote}</div>
-                </div>
-                
-                <div className="text-center mb-6">
-                  <span className="inline-block bg-green-100 text-green-700 px-4 py-2 rounded-full font-bold">
-                    {tier.savings}
-                  </span>
-                </div>
-                
-                <button
-                  onClick={() => handleTierSelection(tier.id)}
-                  className={`w-full py-3 rounded-lg font-bold text-lg transition-all duration-300 ${
-                    tier.popular 
-                      ? 'bg-gradient-to-r from-orange-600 to-red-600 text-white hover:from-orange-700 hover:to-red-700' 
-                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                  }`}
-                >
-                  Get {tier.title} Quote
-                </button>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
-      {/* Coverage Options */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Coverage Areas
-            </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              From DOT liability to cargo protection, we provide comprehensive insurance solutions tailored to your specific fleet operations and compliance requirements.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {coverageOptions.map((coverage) => {
+            {coverageTypes.map((coverage) => {
               const IconComponent = coverage.icon;
               return (
-                <div key={coverage.title} className="bg-gray-50 rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div key={coverage.title} className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-xl transition-shadow duration-300">
                   <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
                     <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-3">
                       <IconComponent className="w-6 h-6 text-orange-600" />
                     </div>
                     <h3 className="text-xl font-bold text-white">{coverage.title}</h3>
                   </div>
-                  <div className="p-6 bg-white">
+                  <div className="p-6">
                     <p className="text-gray-600 mb-4">{coverage.description}</p>
                     <ul className="space-y-2">
                       {coverage.features.map((feature, index) => (
@@ -402,32 +333,32 @@ const handleFormSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
 
-      {/* Fleet Management Services */}
-      <section className="py-20 bg-gray-50">
+      {/* Coverage Enhancements */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Fleet Management Services
+              Coverage Enhancements
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Beyond insurance - comprehensive fleet management solutions that optimize operations, reduce costs, and improve safety across your entire fleet.
+              Customize your physical damage protection with additional coverages that address specific business needs and provide comprehensive financial security.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {managementServices.map((service) => {
-              const IconComponent = service.icon;
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {enhancements.map((enhancement) => {
+              const IconComponent = enhancement.icon;
               return (
-                <div key={service.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                <div key={enhancement.title} className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                   <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-6">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-3">
-                    {service.title}
+                    {enhancement.title}
                   </h3>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    {service.description}
+                    {enhancement.description}
                   </p>
                 </div>
               );
@@ -436,27 +367,27 @@ const handleFormSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
 
-      {/* Fleet Types */}
-      <section className="py-20 bg-white">
+      {/* Vehicle Types */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Fleet Types We Serve
+              Vehicles We Cover
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Specialized insurance solutions for every type of commercial fleet operation
+              Physical damage protection for every type of commercial vehicle in your operation, from light-duty vans to heavy-haul tractors and specialized equipment.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {fleetCategories.map((category) => (
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {vehicleCategories.map((category) => (
               <div key={category.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                 <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-orange-200">
                   {category.title}
                 </h3>
                 <ul className="space-y-2">
-                  {category.fleetTypes.map((type) => (
+                  {category.types.map((type) => (
                     <li key={type} className="flex items-center space-x-2">
                       <CheckCircle className="w-4 h-4 text-orange-600 flex-shrink-0" />
                       <span className="text-gray-700 text-sm">{type}</span>
@@ -466,8 +397,52 @@ const handleFormSubmit = async (e: React.FormEvent) => {
               </div>
             ))}
           </div>
+
+          {/* Don't See Your Vehicle CTA */}
+          <div className="mt-12 bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-200 rounded-xl p-8 text-center">
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              Don't See Your Vehicle Type?
+            </h3>
+            <p className="text-lg text-gray-700 mb-6 max-w-3xl mx-auto">
+              We cover virtually every type of commercial vehicle. If your specialized equipment, custom vehicle, or unique fleet isn't listed above, our experts can create a tailored physical damage solution for you.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a 
+                href="tel:+18006694301" 
+                className="inline-flex items-center justify-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call Us: (800) 669-4301
+              </a>
+              <a 
+                href="mailto:quotes@moxieriskpartners.com" 
+                className="inline-flex items-center justify-center border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white px-8 py-3 rounded-lg font-bold transition-all duration-300"
+              >
+                <Mail className="w-5 h-5 mr-2" />
+                Email Our Team
+              </a>
+            </div>
+          </div>
+        </div>
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mt-12 bg-blue-50 border-l-4 border-blue-600 rounded-lg p-6">
+            <div className="flex items-start space-x-3">
+              <FileText className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
+              <div>
+                <h4 className="font-bold text-gray-900 mb-2">Important Note</h4>
+                <p className="text-gray-700">
+                  Coverage exclusions can vary by policy and state. Always review your specific policy documents and discuss your coverage with your insurance agent to understand exactly what is and isn't covered under your physical damage insurance.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* What's Not Covered */}
+
+      
+
 
       {/* FAQ */}
       <section className="py-20 bg-gray-50">
@@ -475,10 +450,10 @@ const handleFormSubmit = async (e: React.FormEvent) => {
           
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Fleet Insurance FAQs
+              Physical Damage Insurance FAQs
             </h2>
             <p className="text-xl text-gray-600 mb-6">
-              Common questions about commercial fleet insurance coverage, savings, and management
+              Common questions about protecting your commercial vehicles with physical damage coverage
             </p>
           </div>
 
@@ -489,6 +464,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                   className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-50 rounded-xl transition-colors duration-200"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={faq.isOpen}
+                  suppressHydrationWarning 
                 >
                   <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <div className={`w-6 h-6 flex-shrink-0 transform transition-transform duration-200 ${faq.isOpen ? 'rotate-180' : ''}`}>
@@ -508,7 +484,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
         </div>
       </section>
 
-      {/* Final CTA with Form */}
+      {/* Final CTA with Contact Form */}
       <section className="relative py-20 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
@@ -517,14 +493,14 @@ const handleFormSubmit = async (e: React.FormEvent) => {
             <div className="space-y-8">
               <div>
                 <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                  Ready to Save on
+                  Protect Your Assets with
                   <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
-                    Fleet Insurance?
+                    Physical Damage Coverage
                   </span>
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of fleet operators who trust Moxie Risk Partners for their insurance needs. Get your customized fleet quote today and experience the difference specialized fleet insurance expertise makes.
+                  Don't leave your commercial vehicles vulnerable to costly damage. Get comprehensive physical damage protection tailored to your business needs. Our experienced agents will help you find the right coverage with competitive rates.
                 </p>
               </div>
 
@@ -561,10 +537,10 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                   <Shield className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive fleet insurance quotes</p>
+                <p className="text-gray-600">Customized physical damage protection for your fleet</p>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-4">
+              <div className="space-y-4">
                 
                 <div>
                   <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -577,6 +553,7 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                     placeholder="Your Company Name"
                     value={formData.companyName}
                     onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+                    suppressHydrationWarning 
                   />
                 </div>
 
@@ -627,49 +604,52 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Fleet Size *
+                      Number of Vehicles *
                     </label>
                     <select
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.fleetSize}
-                      onChange={(e) => setFormData({...formData, fleetSize: e.target.value})}
+                      value={formData.vehicleCount}
+                      onChange={(e) => setFormData({...formData, vehicleCount: e.target.value})}
+                      suppressHydrationWarning
                     >
-                      <option value="">Select Size</option>
-                      <option value="2-5">2-5 Vehicles</option>
-                      <option value="6-25">6-25 Vehicles</option>
-                      <option value="26-50">26-50 Vehicles</option>
-                      <option value="50+">50+ Vehicles</option>
+                      <option value="">Select Count</option>
+                      <option value="1-2">1-2 Vehicles</option>
+                      <option value="3-5">3-5 Vehicles</option>
+                      <option value="6-10">6-10 Vehicles</option>
+                      <option value="11-25">11-25 Vehicles</option>
+                      <option value="25+">25+ Vehicles</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Fleet Type *
+                      Vehicle Type *
                     </label>
                     <select
                       required
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.fleetType}
-                      onChange={(e) => setFormData({...formData, fleetType: e.target.value})}
+                      value={formData.vehicleType}
+                      onChange={(e) => setFormData({...formData, vehicleType: e.target.value})}
                     >
                       <option value="">Select Type</option>
-                      <option value="trucking">Trucking/Logistics</option>
-                      <option value="service">Service & Trades</option>
-                      <option value="retail">Retail/Distribution</option>
-                      <option value="specialized">Specialized Transport</option>
-                      <option value="other">Other</option>
+                      <option value="light-commercial">Light Commercial</option>
+                      <option value="heavy-trucks">Heavy Trucks</option>
+                      <option value="specialized">Specialized Equipment</option>
+                      <option value="trailers">Trailers</option>
+                      <option value="mixed">Mixed Fleet</option>
                     </select>
                   </div>
                 </div>
 
                 <button
-                  type="submit"
+                  onClick={handleFormSubmit}
                   disabled={isSubmitting}
                   className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  suppressHydrationWarning 
                 >
                   {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
-                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
+            
                 </button>
 
                 <div className="text-center mt-4 space-y-2">
@@ -681,19 +661,36 @@ const handleFormSubmit = async (e: React.FormEvent) => {
                     No spam, unsubscribe anytime. Licensed agents only.
                   </p>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </section>
       
-{/* Success Modal */}
-      <SuccessModal 
-        isOpen={showSuccessModal}
-        onClose={handleCloseModal}
-        showConfetti={showConfetti}
-      />
+      {/* Success Modal */}
+      {showSuccessModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-2xl p-8 max-w-md w-full shadow-2xl transform transition-all">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <CheckCircle className="w-10 h-10 text-green-600" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-2">Thank You!</h3>
+              <p className="text-gray-600 mb-6">
+                Your quote request has been received. One of our licensed agents will contact you shortly to discuss your physical damage insurance needs.
+              </p>
+              <button
+                onClick={handleCloseModal}
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-3 rounded-lg font-bold transition-all duration-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-export default FleetInsurance;
+
+export default PhysicalDamage;

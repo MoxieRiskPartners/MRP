@@ -200,20 +200,16 @@ const Hero = () => {
         <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
           {/* Desktop: Video with fallback image */}
           <div className="hidden md:block w-full h-full relative">
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ 
-                filter: 'brightness(0.4)',
-                minWidth: '100%',
-                minHeight: '100%',
-                width: 'auto',
-                height: 'auto'
-              }}
-            >
+       <video 
+  autoPlay 
+  loop 
+  muted 
+  playsInline
+  className="absolute inset-0 w-full h-full object-cover"
+  style={{ 
+    filter: 'brightness(0.4)'
+  }}
+>
               <source src="/hero5.mp4" type="video/mp4" />
               {/* Desktop fallback image */}
               <Image 

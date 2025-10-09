@@ -130,7 +130,7 @@ const CallToAction: React.FC = () => {
                     <div className="text-xs text-gray-600 font-medium">Claims Support</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-xl">
-                    <div className="text-2xl font-bold text-orange-600 mb-1">47</div>
+                    <div className="text-2xl font-bold text-orange-600 mb-1">48</div>
                     <div className="text-xs text-gray-600 font-medium">States Covered</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-xl">

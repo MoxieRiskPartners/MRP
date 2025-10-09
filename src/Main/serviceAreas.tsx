@@ -13,6 +13,7 @@ const SUPPORTED_STATES: State[] = [
   { code: 'AL', name: 'Alabama', region: 'Southeast' },
   { code: 'AZ', name: 'Arizona', region: 'Southwest' },
   { code: 'AR', name: 'Arkansas', region: 'Southeast' },
+  { code: 'CA', name: 'California', region: 'West' },
   { code: 'CO', name: 'Colorado', region: 'West' },
   { code: 'CT', name: 'Connecticut', region: 'Northeast' },
   { code: 'DE', name: 'Delaware', region: 'Northeast' },
@@ -104,6 +105,7 @@ const ServiceAreas: React.FC = () => {
       'AL': [[35000, 36999]],
       'AZ': [[85000, 86999]],
       'AR': [[71600, 72999]],
+      'CA': [[90000, 96199]], 
       'CO': [[80000, 81999]],
       'CT': [[6000, 6999]],
       'DE': [[19700, 19999]],
@@ -181,7 +183,7 @@ const ServiceAreas: React.FC = () => {
       setError('');
     } else {
       setFoundState(null);
-      setError('Sorry, we don&apos;t currently provide coverage in this area. Contact us to discuss options.');
+  setError("Sorry, we don't currently provide coverage in this area. Contact us to discuss options.");
     }
 
     setIsLoading(false);

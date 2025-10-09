@@ -284,7 +284,7 @@ const Overview: React.FC = () => {
 
         {/* Cargo Types Section */}
   {/* Cargo Types Section */}
-<div className="mt-32 space-y-12">
+{/* <div className="mt-32 space-y-12">
   <div className="space-y-6">
     <h2 className="text-4xl font-bold text-gray-900 leading-tight">
       Specialized Cargo Coverage Solutions
@@ -292,18 +292,18 @@ const Overview: React.FC = () => {
     <p className="text-xl text-gray-600 leading-relaxed">
       Protect your freight with specialized motor truck cargo insurance tailored to your specific trailer type and cargo category.
     </p>
-  </div>
+  </div> */}
 
   {/* Cargo Types Grid - Display Only */}
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+  {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
     {CARGO_TYPES_DATA.map((cargo, index) => (
       <div 
         key={cargo.id} 
         className="group relative bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-orange-500"
-      >
+      > */}
         {/* Cargo Image */}
-        <div className="relative h-32 flex items-center justify-center bg-gray-50 p-4">
-          <Image
+        {/* <div className="relative h-32 flex items-center justify-center bg-gray-50 p-4"> */}
+          {/* <Image
             src={cargo.image}
             alt={`${cargo.title} cargo insurance`}
             width={120}
@@ -311,20 +311,20 @@ const Overview: React.FC = () => {
             className="object-contain transition-transform duration-300 group-hover:scale-110"
             priority={index < 3}
           />
-        </div>
+        </div> */}
 
         {/* Title Only */}
-        <div className="p-4">
+        {/* <div className="p-4">
           <h3 className="text-lg font-bold text-gray-900 text-center group-hover:text-orange-600 transition-colors">
             {cargo.title}
           </h3>
         </div>
       </div>
     ))}
-  </div>
+  </div> */}
 
   {/* Centralized CTA Button */}
-  <div className="flex justify-center mt-10">
+  {/* <div className="flex justify-center mt-10">
     <a 
       href="/motor-truck-cargo"
       className="inline-flex items-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg group"
@@ -335,7 +335,7 @@ const Overview: React.FC = () => {
       </svg>
     </a>
   </div>
-</div>
+</div> */}
       </div>
 
       <style jsx>{`

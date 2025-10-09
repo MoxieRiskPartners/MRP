@@ -707,14 +707,10 @@ import Link from 'next/link';
 
 const Header = () => {
   const [isIndustriesOpen, setIsIndustriesOpen] = useState(false);
-  const [isCoverageOpen, setIsCoverageOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileIndustriesOpen, setIsMobileIndustriesOpen] = useState(false);
-  const [isMobileCoverageOpen, setIsMobileCoverageOpen] = useState(false);
   const industriesDropdownRef = useRef<HTMLDivElement>(null);
-  const coverageDropdownRef = useRef<HTMLDivElement>(null);
   const industriesTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const coverageTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Clear any existing timeout
   const clearDropdownTimeout = (timeoutRef: React.MutableRefObject<NodeJS.Timeout | null>) => {
@@ -738,16 +734,12 @@ const Header = () => {
       if (industriesDropdownRef.current && !industriesDropdownRef.current.contains(event.target as Node)) {
         setIsIndustriesOpen(false);
       }
-      if (coverageDropdownRef.current && !coverageDropdownRef.current.contains(event.target as Node)) {
-        setIsCoverageOpen(false);
-      }
     };
 
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
       clearDropdownTimeout(industriesTimeoutRef);
-      clearDropdownTimeout(coverageTimeoutRef);
     };
   }, []);
 
@@ -757,7 +749,6 @@ const Header = () => {
       if (window.innerWidth >= 768) {
         setIsMobileMenuOpen(false);
         setIsMobileIndustriesOpen(false);
-        setIsMobileCoverageOpen(false);
       }
     };
 
@@ -777,7 +768,6 @@ const Header = () => {
     }
     setIsMobileMenuOpen(false);
     setIsMobileIndustriesOpen(false);
-    setIsMobileCoverageOpen(false);
   };
 
   const industries = [
@@ -787,19 +777,12 @@ const Header = () => {
     { name: 'Public Entity', href: '/public-entity' },
     { name: 'Non-Profit Human Service', href: '/non-profit' }
   ];
-  
-  const coverages = [
-    { name: 'Commercial Auto Liability', href: '/commercial-auto-liability' }, 
-    { name: 'Fleet Insurance', href: '/fleet-insurance' },
-    { name: 'Motor Truck Cargo', href: '/motor-truck-cargo' },
-    { name: 'Owner Operator', href: '/owner-operator' },
-    { name: "Workers' Comp", href: '/workers-comp' }
-  ];
 
   const navItems = [
+      { name: 'Coverage', href: '/coverage-options' }, 
     { name: 'Claims', href: '/file-claims' },
     { name: 'Contact', href: '/contact-us' },
-    { name: 'About', href: '/about-us' }
+    // { name: 'About', href: '/about-us' }
   ];
   
   // NowCerts portal URL with your agency ID
@@ -817,7 +800,7 @@ const Header = () => {
               suppressHydrationWarning={true}
             >
               <img 
-                src="/logo.png" 
+                src="/images/logo.png" 
                 alt="Company Logo" 
                 className="h-14 w-auto sm:h-16"
               />
@@ -844,7 +827,7 @@ const Header = () => {
                   suppressHydrationWarning={true}
                 >
                   Industries
-                
+      
                 </button>
 
                 {isIndustriesOpen && (
@@ -867,47 +850,7 @@ const Header = () => {
                 )}
               </div>
 
-              {/* Coverage Dropdown */}
-              <div 
-                className="relative" 
-                ref={coverageDropdownRef}
-                onMouseEnter={() => {
-                  clearDropdownTimeout(coverageTimeoutRef);
-                  setIsCoverageOpen(true);
-                }}
-                onMouseLeave={() => setDropdownTimeout(coverageTimeoutRef, setIsCoverageOpen)}
-              >
-                <button
-                  onClick={() => setIsCoverageOpen(!isCoverageOpen)}
-                  className="flex items-center text-gray-700 hover:text-orange-500 px-2 py-2 text-lg font-medium transition-colors duration-200"
-                  aria-expanded={isCoverageOpen}
-                  suppressHydrationWarning={true}
-                >
-                  Coverage
-            
-                </button>
-
-                {isCoverageOpen && (
-                  <div 
-                    className="absolute top-full left-0 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-10"
-                    onMouseEnter={() => clearDropdownTimeout(coverageTimeoutRef)}
-                    onMouseLeave={() => setDropdownTimeout(coverageTimeoutRef, setIsCoverageOpen)}
-                  >
-                    {coverages.map((coverage, index) => (
-                      <Link
-                        key={index}
-                        href={coverage.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-gray-900 transition-colors duration-150"
-                        onClick={() => setIsCoverageOpen(false)}
-                      >
-                        {coverage.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Navigation Items */}
+              {/* Navigation Items - Coverage is now a regular link */}
               {navItems.map((item, index) => (
                 <Link
                   key={index}
@@ -934,7 +877,7 @@ const Header = () => {
           <div className="hidden md:flex">
             <Link 
               href="/quote-form"
-              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-sm"
+              className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-sm whitespace-nowrap"
             >
               Get a Quote
             </Link>
@@ -993,41 +936,7 @@ const Header = () => {
                 )}
               </div>
 
-              {/* Mobile Coverage Dropdown */}
-              <div>
-                <button
-                  onClick={() => setIsMobileCoverageOpen(!isMobileCoverageOpen)}
-                  className="flex items-center justify-between w-full text-left text-gray-700 hover:text-orange-500 hover:bg-gray-50 px-3 py-2 text-lg font-semibold rounded-md transition-colors duration-200"
-                  suppressHydrationWarning={true}
-                >
-                  Coverage
-                  <ChevronDown 
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      isMobileCoverageOpen ? 'rotate-180' : ''
-                    }`} 
-                  />
-                </button>
-
-                {isMobileCoverageOpen && (
-                  <div className="mt-1 space-y-1 pl-4">
-                    {coverages.map((coverage, index) => (
-                      <Link
-                        key={index}
-                        href={coverage.href}
-                        className="block text-gray-600 hover:text-gray-900 hover:bg-gray-50 px-3 py-2 text-sm rounded-md transition-colors duration-150"
-                        onClick={() => {
-                          setIsMobileMenuOpen(false);
-                          setIsMobileCoverageOpen(false);
-                        }}
-                      >
-                        {coverage.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Mobile Navigation Items */}
+              {/* Mobile Navigation Items - Coverage is now a regular link */}
               {navItems.map((item, index) => (
                 <Link
                   key={index}

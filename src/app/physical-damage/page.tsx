@@ -1,12 +1,12 @@
 import Header from "@/Main/Header";
-import FleetInsurance from "@/Pages/fleetInsurance";
+import PhysicalDamage from "@/Pages/physicaldamage";
 import Footer from "@/Components/footer";
 
-export default function FleetInsurancePage() {
+export default function PhysicalDamagePage() {
   return (
     <>
       <Header />
-      <FleetInsurance />
+      <PhysicalDamage/>
       <Footer />
     </>
   );

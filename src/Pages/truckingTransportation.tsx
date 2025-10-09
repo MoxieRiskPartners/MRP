@@ -514,13 +514,10 @@ interface InsuranceType {
   id: string;
   title: string;
   subtitle: string;
-  // description: string;
-  // features: string[];
-  idealFor: string;
-  coverageRange: string;
+  // idealFor: string;
+  // coverageRange: string;
   image: string;
   href: string;
-
 }
 
 const TruckingTransportationPage = () => {
@@ -581,55 +578,49 @@ const TruckingTransportationPage = () => {
 
   const insuranceTypes: InsuranceType[] = [
     {
-      id: 'owner-operator',
-      title: 'Owner Operator Insurance',
-      subtitle: 'For Independent Truckers',
-      // description: 'Comprehensive coverage designed for independent truck drivers who own and operate their own commercial vehicles. Get DOT-compliant protection with flexible terms.',
-      // features: [
-    
-      //   'Physical Damage Coverage',
-      //   'Non-Trucking Use Liability',
-      //   'Occupational Accident Protection'
-      // ],
-      idealFor: 'Independent truckers with 1-3 units',
-      coverageRange: '$750K - $5M liability',
-      image: '/images/ownerOp.png',
-      href: '/owner-operator',
-   
+      id: 'commercial-auto-liability',
+      title: 'Commercial Auto Liability',
+      subtitle: 'DOT Compliant Protection',
+      // idealFor: 'All commercial vehicle operations',
+      // coverageRange: '$750K - $5M liability',
+      image: '/images/commAuto1.png',
+      href: '/commercial-auto-liability',
     },
     {
-      id: 'fleet-insurance',
-      title: 'Fleet Insurance',
-      subtitle: 'Multi-Vehicle Coverage',
-      // description: 'Save up to 25% with comprehensive fleet protection for 2+ vehicles. Streamlined policy management, DOT compliance support, and dedicated fleet specialists.',
-      // features: [
-      //   'Volume Discounts (15-25% savings)',
-      //   'Single Policy Management',
-      //   'Fleet Safety Programs',
-      //   'Telematics & Tracking Options'
-      // ],
-      idealFor: 'Companies with 2+ commercial vehicles',
-      coverageRange: 'Scalable coverage for any fleet size',
-      image: '/images/fleet.png',
-      href: '/fleet-insurance',
-  
+      id: 'physical-damage',
+      title: 'Physical Damage Insurance',
+      subtitle: 'Vehicle Protection',
+      // idealFor: 'Businesses with commercial vehicles',
+      // coverageRange: 'ACV or Stated Amount',
+      image: '/images/phydamage.png',
+      href: '/physical-damage',
     },
     {
       id: 'motor-truck-cargo',
       title: 'Motor Truck Cargo',
       subtitle: 'Freight Protection',
-      // description: 'Protect the freight you haul with comprehensive cargo insurance. Coverage for all trailer types from dry van to hazmat, with limits up to $250,000 per load.',
-      // features: [
-      //   'All Cargo Types Covered',
-      //   'Loading/Unloading Protection',
-      //   'Refrigeration Breakdown',
-      //   'Broad Form Coverage'
-      // ],
-      idealFor: 'All trucking operations hauling freight',
-      coverageRange: '$5,000 - $250,000 per load',
+      // idealFor: 'All trucking operations hauling freight',
+      // coverageRange: '$5,000 - $250,000 per load',
       image: '/images/cargoHero.png',
       href: '/motor-truck-cargo',
-     
+    },
+    {
+      id: 'owner-operator',
+      title: 'Owner Operator Insurance',
+      subtitle: 'For Independent Truckers',
+      // idealFor: 'Independent truckers with 1-3 units',
+      // coverageRange: 'Comprehensive protection packages',
+      image: '/images/ownerOp.png',
+      href: '/owner-operator',
+    },
+    {
+      id: 'workers-compensation',
+      title: "Workers' Compensation",
+      subtitle: 'Employee Protection',
+      // idealFor: 'All businesses with employees',
+      // coverageRange: 'Industry-specific coverage',
+      image: '/images/workCompHero1.png',
+      href: '/workers-compensation',
     }
   ];
 
@@ -683,7 +674,7 @@ const TruckingTransportationPage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                    Get Coverage Quote
+                    Get Your Quote
                     <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </button>
                   
@@ -713,9 +704,8 @@ const TruckingTransportationPage = () => {
 
           <div className="grid lg:grid-cols-3 gap-8">
             {insuranceTypes.map((type) => {
-           
               return (
-         <div key={type.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
+                <div key={type.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
                   
                   {/* Image Section */}
                   <div className="relative h-84 overflow-hidden flex-shrink-0">
@@ -727,7 +717,7 @@ const TruckingTransportationPage = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   </div>
 
-                  {/* Content Section - flex-grow to push buttons to bottom */}
+                  {/* Content Section */}
                   <div className="p-6 flex flex-col flex-grow">
                     <div className="space-y-4 flex-grow">
                       <div>
@@ -739,22 +729,19 @@ const TruckingTransportationPage = () => {
                         </p>
                       </div>
 
-                      <p className="text-gray-600 leading-relaxed">
-                        {/* {type.description} */}
-                      </p>
-
-                      {/* Features List */}
-                      {/* <ul className="space-y-2">
-                        {type.features.map((feature, index) => (
-                          <li key={index} className="flex items-start space-x-2">
-                            <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span className="text-sm text-gray-700">{feature}</span>
-                          </li>
-                        ))}
-                      </ul> */}
+                      {/* <div className="space-y-2">
+                        <div className="flex items-start space-x-2">
+                          <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-gray-700"><strong>Ideal For:</strong> {type.idealFor}</span>
+                        </div>
+                        <div className="flex items-start space-x-2">
+                          <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-gray-700"><strong>Coverage:</strong> {type.coverageRange}</span>
+                        </div>
+                      </div> */}
                     </div>
 
-                    {/* CTA Buttons - at the bottom */}
+                    {/* CTA Buttons */}
                     <div className="flex gap-3 mt-6">
                       <a 
                         href={type.href}
@@ -780,7 +767,7 @@ const TruckingTransportationPage = () => {
           
           <div className="text-center mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Why Truckers Choose Moxie Risk Partners
+              Why Choose Moxie Risk Partners
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
               With decades of trucking insurance expertise, we understand your unique challenges 
@@ -844,7 +831,7 @@ const TruckingTransportationPage = () => {
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
                   Join thousands of trucking professionals who trust Moxie Risk Partners. 
-                  Get your quote today and experience specialized cargo insurance expertise.
+                  Get your quote today and experience specialized insurance expertise.
                 </p>
               </div>
 
@@ -874,10 +861,6 @@ const TruckingTransportationPage = () => {
                   </a>
                   <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
-              </div>
-
-              {/* Trust Elements */}
-              <div className="flex flex-wrap justify-start items-center gap-4 pt-6 border-t border-gray-200">
               </div>
             </div>
 
