@@ -19,6 +19,7 @@ export const metadata: Metadata = {
   keywords: "commercial insurance, trucking insurance, workers compensation, cargo insurance, construction insurance, manufacturing insurance, nonprofit insurance, public entity insurance, commercial auto liability, DOT compliance, owner operator insurance, fleet insurance, motor truck cargo, physical damage insurance, business insurance quotes, liability insurance, commercial vehicle insurance",
   authors: [{ name: "Moxie Risk Partners" }],
   robots: "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     url: "https://moxieriskpartners.com/",
