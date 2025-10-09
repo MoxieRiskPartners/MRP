@@ -121,17 +121,17 @@ const ComingSoon = () => {
               <h3 className="text-xl md:text-2xl font-bold text-white mb-3" style={{ 
                 textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' 
               }}>
-                Get Early Access to Quotes
+                Get Your Quote Now
               </h3>
               <p className="text-white/80 mb-6 text-sm md:text-base">
-                Be the first to receive personalized insurance quotes when we launch
+                No need to wait - receive personalized insurance quotes today
               </p>
               
               <button 
                 onClick={handleEarlyAccess}
                 className="w-full bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 rounded-lg text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
               >
-                Request Early Quote
+                Request Quote Now
               </button>
               
               {/* <p className="text-white/60 text-xs mt-4">
