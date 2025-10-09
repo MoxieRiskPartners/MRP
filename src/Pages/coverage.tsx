@@ -79,7 +79,7 @@ const CoveragePage = () => {
       id: 'physical-damage',
       title: 'Physical Damage Insurance',
       subtitle: 'Vehicle Protection',
-      image: '/images/fleet.png',
+      image: '/images/phydamage.png',
       href: '/physical-damage',
     },
     {

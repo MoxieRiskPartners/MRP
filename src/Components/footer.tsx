@@ -183,7 +183,7 @@ const Footer: React.FC = () => {
 
           {/* Navigation Sections */}
           <div className="lg:col-span-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center md:justify-items-start md:ml-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-start md:ml-12">
               {footerSections.map((section) => (
                 <div key={section.id} className="space-y-4 text-center md:text-left">
                   
