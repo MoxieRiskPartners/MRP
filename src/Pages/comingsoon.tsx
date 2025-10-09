@@ -134,9 +134,9 @@ const ComingSoon = () => {
                 Request Quote Now
               </button>
               
-              {/* <p className="text-white/60 text-xs mt-4">
+              <p className="text-white/60 text-xs mt-4">
                 Email us at <a href="mailto:admin@moxieriskpartners.com" className="text-orange-400 hover:text-orange-300 underline">admin@moxieriskpartners.com</a>
-              </p> */}
+              </p>
             </div>
           </div>
 

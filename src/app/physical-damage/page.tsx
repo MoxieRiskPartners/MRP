@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import PhysicalDamage from "@/pages/physicaldamage";
+import PhysicalDamage from "../../pages/physicaldamage";
 import Footer from "@/Components/footer";
 
 export default function PhysicalDamagePage() {

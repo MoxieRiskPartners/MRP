@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import WorkersCompPage from "@/pages/workersComp";
+import WorkersCompPage from "../../pages/workersComp";
 import Footer from "@/Components/footer";
 
 export default function WorkersComp() {

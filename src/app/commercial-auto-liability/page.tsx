@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import CommAutoLiability from "@/pages/commAuto";
+import CommAutoLiability from "../../pages/commAuto";
 import footer from "@/Components/footer";
 import Footer from "@/Components/footer";
 
