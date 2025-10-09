@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import NonProfitPage from "@/pages/nonProfit";
+import NonProfitPage from "@/Files/nonProfit";
 import Footer from "@/Components/footer";
 
 export default function  NonProfitP() {

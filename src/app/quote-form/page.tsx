@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import QuotePage from "@/pages/quote";
+import QuotePage from "@/Files/quote";
 import Footer from "@/Components/footer";
 
 export default function Quote () {

@@ -1,5 +1,5 @@
 import Header from "@/Main/Header";
-import PublicEntityPage from "@/pages/publicE";
+import PublicEntityPage from "@/Files/publicE";
 import Footer from "@/Components/footer";
 
 export default function PublicEntity() {
