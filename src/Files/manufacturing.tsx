@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -267,11 +266,44 @@ const ManufacturingPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        /* Fluid Responsive Scaling - Works on ALL screen sizes */
+        :root {
+          --fluid-spacing-xs: clamp(0.5rem, 1vw, 1rem);
+          --fluid-spacing-sm: clamp(1rem, 2vw, 1.5rem);
+          --fluid-spacing-md: clamp(1.5rem, 3vw, 2rem);
+          --fluid-spacing-lg: clamp(2rem, 4vw, 3rem);
+          --fluid-spacing-xl: clamp(3rem, 6vw, 5rem);
+          --fluid-spacing-2xl: clamp(4rem, 8vw, 6rem);
+        }
+        
+        /* Ensure smooth scaling on ultra-wide monitors */
+        @media (min-width: 2000px) {
+          .responsive-container {
+            max-width: 1920px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+        
+        /* Prevent overflow on any screen */
+        * {
+          box-sizing: border-box;
+        }
+        
+        /* Smooth transitions for all scaling */
+        .transition-all {
+          transition-property: all;
+          transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+          transition-duration: 150ms;
+        }
+      `}</style>
+
       
       {/* Hero Section - Side by Side Layout */}
-      <section ref={heroRef} className="bg-white py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
             
             {/* Left Side - Hero Image */}
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
@@ -287,23 +319,23 @@ const ManufacturingPage = () => {
 
             {/* Right Side - Content */}
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-              <div className="space-y-8">
+              <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 leading-tight mb-[clamp(1rem,2.5vw,1.5rem)]">
                     Manufacturing
                     <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                       Insurance Solutions
                     </span>
                   </h1>
                   
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
+                  <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)] max-w-lg">
                     Comprehensive protection for manufacturers across all industries. Specialized coverage for 
                     product liability, equipment breakdown, and operational risks.
                   </p>
                 </div>
 
                 {/* Features */}
-                <div className="space-y-4">
+                <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
                   {[
                     'All Manufacturing Types',
                     'Product Liability Experts',
@@ -311,7 +343,7 @@ const ManufacturingPage = () => {
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0" />
-                      <span className="text-lg font-medium text-gray-800">{feature}</span>
+                      <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-medium text-gray-800">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -319,14 +351,14 @@ const ManufacturingPage = () => {
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
                     suppressHydrationWarning={true}
                   >
                     Get Your Quote
                   
                   </button>
                   
-                  <a href="tel:+18003265581" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                  <a href="tel:+18003265581" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 flex items-center justify-center">
                     Call (800) 326-5581
                   </a>
                 </div>
@@ -337,22 +369,22 @@ const ManufacturingPage = () => {
       </section>
 
       {/* Coverage Options Selector Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
           {/* Section Header - Left Aligned */}
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Choose Your Manufacturing Coverage
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
               From product liability to equipment breakdown, we provide comprehensive insurance 
               solutions tailored to your specific manufacturing operations and industry requirements.
             </p>
           </div>
 
           {/* Coverage Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-[clamp(2rem,4vw,3rem)]">
             {coverageTypes.map((coverage) => {
               const IconComponent = coverage.icon;
               return (
@@ -396,9 +428,9 @@ const ManufacturingPage = () => {
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
             
             {/* Coverage Header */}
-            <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-orange-100">
+            <div className="flex flex-col lg:flex-row justify-between items-start mb-[clamp(1.5rem,3vw,2rem)] pb-6 border-b-2 border-orange-100">
               <div className="mb-4 lg:mb-0">
-                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-bold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
                 <div className="inline-block bg-orange-600 text-white px-4 py-2 rounded-full font-bold text-sm">
@@ -408,16 +440,16 @@ const ManufacturingPage = () => {
             </div>
 
             {/* Coverage Description */}
-            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-4xl">
+            <p className="text-[clamp(0.95rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)] max-w-[min(56rem,90vw)]">
               {selectedCoverage.description}
             </p>
 
             {/* Coverage Details Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)] mb-[clamp(1.5rem,3vw,2rem)]">
               
               {/* Common Applications */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
                   Common Applications
                 </h4>
                 <div className="space-y-2">
@@ -431,8 +463,8 @@ const ManufacturingPage = () => {
               </div>
 
               {/* Risks Covered */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
                   Risks Covered
                 </h4>
                 <div className="space-y-2">
@@ -446,8 +478,8 @@ const ManufacturingPage = () => {
               </div>
 
               {/* Who Needs It */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
                   Who Needs This Coverage
                 </h4>
                 <div className="space-y-2">
@@ -461,8 +493,8 @@ const ManufacturingPage = () => {
               </div>
 
               {/* Special Features */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-orange-200">
                   Special Features
                 </h4>
                 <div className="space-y-2">
@@ -480,29 +512,29 @@ const ManufacturingPage = () => {
       </section>
 
       {/* Risk Management Services Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Risk Management Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
               Strategic business advisory services that differentiate us from traditional insurance agents. 
               We're your comprehensive risk management partner, not just your insurance provider.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {consultingServices.map((service) => {
               const IconComponent = service.icon;
               return (
                 <div key={service.title} className="bg-gray-50 rounded-xl p-8 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                  <div className="mb-6">
+                  <div className="mb-[clamp(1rem,2.5vw,1.5rem)]">
                     <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-gray-900 mb-3">
+                    <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-bold text-gray-900 mb-3">
                       {service.title}
                     </h3>
                   </div>
@@ -517,22 +549,22 @@ const ManufacturingPage = () => {
       </section>
 
       {/* Industries Served Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Industries Served
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
               Specialized insurance solutions for every manufacturing sector and production type
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {industryCategories.map((category) => (
               <div key={category.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-orange-200">
+                <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-bold text-gray-900 mb-4 pb-2 border-b-2 border-orange-200">
                   {category.title}
                 </h3>
                 <ul className="space-y-2">
@@ -550,19 +582,19 @@ const ManufacturingPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="max-w-[min(56rem,90vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Manufacturing Insurance FAQs
             </h2>
-            <p className="text-xl text-gray-600 mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 mb-[clamp(1rem,2.5vw,1.5rem)]">
               Common questions about manufacturing insurance coverage, costs, and requirements
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
             {faqItems.map((faq, index) => (
               <div key={index} className="bg-gray-50 rounded-xl border border-gray-200 shadow-sm">
                 <button
@@ -571,7 +603,7 @@ const ManufacturingPage = () => {
                   aria-expanded={faq.isOpen}
                   suppressHydrationWarning={true}
                 >
-                  <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <div className={`w-6 h-6 flex-shrink-0 transform transition-transform duration-200 ${faq.isOpen ? 'rotate-180' : ''}`}>
                     <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -590,22 +622,22 @@ const ManufacturingPage = () => {
       </section>
 
       {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-20 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-[clamp(3rem,8vw,5rem)] bg-gray-50 overflow-hidden">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
             
             {/* Left Side - CTA Content */}
-            <div className="space-y-8">
+            <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 mb-[clamp(1rem,2.5vw,1.5rem)] leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                     Manufacturing Business?
                   </span>
                 </h2>
                 
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
                   Join thousands of manufacturers who trust Moxie Risk Partners 
                   for their insurance needs. Get your quote today and experience the difference 
                   specialized manufacturing insurance expertise makes.
@@ -613,7 +645,7 @@ const ManufacturingPage = () => {
               </div>
 
               {/* Contact Information Grid */}
-              <div className="grid md:grid-cols-1 gap-6">
+              <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)]">
                 
                 {/* Phone */}
                 <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
@@ -621,7 +653,7 @@ const ManufacturingPage = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+18003265581" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                  <a href="tel:+18003265581" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-green-600 hover:text-green-700 transition-colors">
                     (800) 326-5581
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
@@ -633,7 +665,7 @@ const ManufacturingPage = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Email Us</h4>
-                  <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">
+                  <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
                   <p className="text-xs text-gray-500 mt-1">Quick Response</p>
@@ -646,15 +678,15 @@ const ManufacturingPage = () => {
             {/* Right Side - Quote Form */}
             <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
               
-              <div className="text-center mb-6">
+              <div className="text-center mb-[clamp(1rem,2.5vw,1.5rem)]">
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
+                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
                 <p className="text-gray-600">Fast, competitive manufacturing insurance quotes</p>
               </div>
 
-              <form onSubmit={handleFormSubmit} className="space-y-4">
+              <form onSubmit={handleFormSubmit} className="space-y-[clamp(0.75rem,2vw,1rem)]">
                 
                 {/* Company Name */}
                 <div>
@@ -770,7 +802,7 @@ const ManufacturingPage = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
                   suppressHydrationWarning={true}
                 >
                   {isSubmitting ? (

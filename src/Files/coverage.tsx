@@ -581,6 +581,37 @@ const CoveragePage = () => {
         </div>
       )}
 
+      {/* Mobile-optimized CTA Section */}
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gradient-to-br from-gray-50 to-white">
+        <div className="responsive-container max-w-[min(64rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="text-center animate-fade-in-up delay-400">
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-[clamp(1.5rem,4vw,2rem)] text-white shadow-2xl">
+              <h3 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold mb-[clamp(0.75rem,2vw,1rem)]">
+                Need Help Finding the Right Coverage?
+              </h3>
+              <p className="text-[clamp(1rem,1.5vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)] text-orange-100 px-[clamp(0.5rem,1vw,0.5rem)]">
+                Our insurance experts are standing by to help you find the perfect protection for your business. Get personalized guidance today.
+              </p>
+              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] sm:flex-row justify-center">
+                <a 
+                  href="tel:+18006694301"
+                  className="bg-white text-orange-600 hover:bg-gray-100 px-[clamp(1.5rem,4vw,2rem)] py-[clamp(0.75rem,2vw,0.875rem)] rounded-lg font-bold transition-colors text-[clamp(0.875rem,1.2vw,1rem)] shadow-md hover:shadow-lg"
+                >
+                  Call (800) 669-4301
+                </a>
+                <button 
+                  onClick={scrollToForm}
+                  className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-[clamp(1.5rem,4vw,2rem)] py-[clamp(0.75rem,2vw,0.875rem)] rounded-lg font-bold transition-colors text-[clamp(0.875rem,1.2vw,1rem)]"
+                  suppressHydrationWarning
+                >
+                  Get Free Quote
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Why Choose Us Section */}
       <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
