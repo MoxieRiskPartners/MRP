@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -75,8 +73,6 @@ const TruckingTransportationPage = () => {
       id: 'commercial-auto-liability',
       title: 'Commercial Auto Liability',
       subtitle: 'DOT Compliant Protection',
-      // idealFor: 'All commercial vehicle operations',
-      // coverageRange: '$750K - $5M liability',
       image: '/images/commAuto1.png',
       href: '/commercial-auto-liability',
     },
@@ -84,8 +80,6 @@ const TruckingTransportationPage = () => {
       id: 'physical-damage',
       title: 'Physical Damage Insurance',
       subtitle: 'Vehicle Protection',
-      // idealFor: 'Businesses with commercial vehicles',
-      // coverageRange: 'ACV or Stated Amount',
       image: '/images/phydamage.png',
       href: '/physical-damage',
     },
@@ -93,8 +87,6 @@ const TruckingTransportationPage = () => {
       id: 'motor-truck-cargo',
       title: 'Motor Truck Cargo',
       subtitle: 'Freight Protection',
-      // idealFor: 'All trucking operations hauling freight',
-      // coverageRange: '$5,000 - $250,000 per load',
       image: '/images/cargoHero.png',
       href: '/motor-truck-cargo',
     },
@@ -102,8 +94,6 @@ const TruckingTransportationPage = () => {
       id: 'owner-operator',
       title: 'Owner Operator Insurance',
       subtitle: 'For Independent Truckers',
-      // idealFor: 'Independent truckers with 1-3 units',
-      // coverageRange: 'Comprehensive protection packages',
       image: '/images/ownerOp.png',
       href: '/owner-operator',
     },
@@ -111,10 +101,15 @@ const TruckingTransportationPage = () => {
       id: 'workers-compensation',
       title: "Workers' Compensation",
       subtitle: 'Employee Protection',
-      // idealFor: 'All businesses with employees',
-      // coverageRange: 'Industry-specific coverage',
       image: '/images/workCompHero1.png',
       href: '/workers-compensation',
+    },
+    {
+      id: 'captives',
+      title: 'Captive Insurance Programs',
+      subtitle: 'Risk Management Solutions',
+      image: '/images/captives.png',
+      href: '/captives-benefit',
     }
   ];
 
@@ -172,8 +167,8 @@ const TruckingTransportationPage = () => {
                     <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
                   </button>
                   
-                  <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                    Call (800) 669-4301
+                  <a href="tel:+18003265581" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                    Call (800) 326-5581
                   </a>
                 </div>
               </div>
@@ -188,15 +183,15 @@ const TruckingTransportationPage = () => {
           
           <div className="mb-16 text-center">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Complete Trucking Insurance Coverage
+              Comprehensive Insurance Solutions
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              From single owner-operators to large fleets, we provide specialized insurance solutions 
-              tailored to your specific trucking operations and compliance requirements.
+              From DOT-compliant liability to cargo protection, we provide complete coverage 
+              solutions tailored to your trucking operation's unique needs.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {insuranceTypes.map((type) => {
               return (
                 <div key={type.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
@@ -298,39 +293,40 @@ const TruckingTransportationPage = () => {
         </div>
       </section>
 
-      {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-20 bg-white overflow-hidden">
+      {/* Contact/Quote Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
-            {/* Left Side - CTA Content */}
+          <div className="text-center mb-12">
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+              Get Your Free Trucking Insurance Quote
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Fast, competitive quotes for all types of trucking operations. 
+              Our specialists are ready to help you get on the road with the right coverage.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Left Side - Contact Methods */}
             <div className="space-y-8">
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-                  Ready to Protect Your
-                  <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
-                    Trucking Business?
-                  </span>
-                </h2>
-                
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of trucking professionals who trust Moxie Risk Partners. 
-                  Get your quote today and experience specialized insurance expertise.
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Our Trucking Specialists</h3>
+                <p className="text-gray-600 text-lg leading-relaxed">
+                  Get expert guidance on DOT compliance, coverage requirements, and competitive rates. 
+                  Our team specializes in trucking insurance and understands your unique needs.
                 </p>
               </div>
 
-              {/* Contact Information Grid */}
-              <div className="grid md:grid-cols-1 gap-6">
-                
+              <div className="grid grid-cols-2 gap-4">
                 {/* Phone */}
                 <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+18006694301" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
-                    (800) 669-4301
+                  <a href="tel:+18003265581" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                     Call (800) 326-5581
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>

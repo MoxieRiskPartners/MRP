@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Phone, Mail, FileText, Truck, } from 'lucide-react';
+import { CheckCircle, ArrowRight, Shield, Phone, Mail, X } from 'lucide-react';
 import SuccessModal from '../Components/successModal';
 
 interface CoverageType {
   id: string;
   title: string;
-  subtitle: string;
-  image: string;
-  href: string;
+  description: string;
+  detailedOverview: string;
+  coverageAmount: string;
+  keyFeatures: string[];
+  whoNeedsIt: string[];
 }
 
 const CoveragePage = () => {
@@ -17,6 +19,7 @@ const CoveragePage = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedCoverage, setSelectedCoverage] = useState<CoverageType | null>(null);
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
@@ -27,6 +30,7 @@ const CoveragePage = () => {
   });
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -40,6 +44,18 @@ const CoveragePage = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  // Prevent body scroll when modal is open
+  useEffect(() => {
+    if (selectedCoverage) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [selectedCoverage]);
 
   const handleFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -67,42 +83,266 @@ const CoveragePage = () => {
     setShowConfetti(false);
   };
 
+  const openCoverageModal = (coverage: CoverageType) => {
+    setSelectedCoverage(coverage);
+  };
+
+  const closeCoverageModal = () => {
+    setSelectedCoverage(null);
+  };
+
+  const scrollToForm = () => {
+    closeCoverageModal();
+    setTimeout(() => {
+      formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  };
+
   const coverageTypes: CoverageType[] = [
+    // CONSTRUCTION COVERAGES
     {
-      id: 'commercial-auto-liability',
-      title: 'Commercial Auto Liability',
-      subtitle: 'DOT Compliant Protection',
-      image: '/images/commAuto1.png',
-      href: '/commercial-auto-liability',
-    },
-    {
-      id: 'physical-damage',
-      title: 'Physical Damage Insurance',
-      subtitle: 'Vehicle Protection',
-      image: '/images/phydamage.png',
-      href: '/physical-damage',
-    },
-    {
-      id: 'motor-truck-cargo',
-      title: 'Motor Truck Cargo',
-      subtitle: 'Freight Protection',
-      image: '/images/cargoHero.png',
-      href: '/motor-truck-cargo',
-    },
-    {
-      id: 'owner-operator',
-      title: 'Owner Operator Insurance',
-      subtitle: 'For Independent Truckers',
-      image: '/images/ownerOp.png',
-      href: '/owner-operator',
+      id: 'general-liability',
+      title: 'General Liability',
+      description: 'Protection against third-party claims for bodily injury, property damage, and advertising injury',
+      detailedOverview: 'Comprehensive protection against third-party claims, property damage, and completed operations. Essential coverage for all construction trades with protection against lawsuits and accidents.',
+      coverageAmount: '$1M - $2M per occurrence',
+      keyFeatures: [
+        'Third-party injury claims protection',
+        'Property damage coverage',
+        'Products-completed operations',
+        'Additional insured endorsements',
+        'Primary & non-contributory coverage'
+      ],
+      whoNeedsIt: ['General contractors', 'Subcontractors', 'Construction managers', 'Specialty trades', 'Design-build firms']
     },
     {
       id: 'workers-compensation',
       title: "Workers' Compensation",
-      subtitle: 'Employee Protection',
-      image: '/images/workCompHero1.png',
-      href: '/workers-compensation',
-    }
+      description: 'Mandatory employee protection covering medical expenses, lost wages, and disability benefits for work-related injuries',
+      detailedOverview: 'Mandatory employee protection with EMR management and safety training support. Covers medical expenses, lost wages, and provides crucial protection for your workforce.',
+      coverageAmount: 'State-mandated minimums',
+      keyFeatures: [
+        'Work-related injuries coverage',
+        'Medical expenses',
+        'Lost wage replacement',
+        'Disability benefits',
+        'Return-to-work programs',
+        'EMR rate management'
+      ],
+      whoNeedsIt: ['All construction employers', 'General contractors', 'Specialty contractors', 'Construction services', 'Labor contractors']
+    },
+    {
+      id: 'builders-risk',
+      title: "Builders Risk",
+      description: 'Project protection from fire, weather, vandalism, and theft during construction covering structures, materials, and equipment',
+      detailedOverview: 'Project protection from fire, weather, vandalism, and theft during construction. Covers the structure, materials, and equipment while work is in progress.',
+      coverageAmount: 'Project value coverage',
+      keyFeatures: [
+        'Fire & explosion protection',
+        'Weather damage coverage',
+        'Theft & vandalism',
+        'Material damage',
+        'Soft cost coverage',
+        'Debris removal'
+      ],
+      whoNeedsIt: ['Project owners', 'General contractors', 'Construction managers', 'Developers', 'Property managers']
+    },
+    {
+      id: 'commercial-auto',
+      title: 'Commercial Auto',
+      description: 'Specialized coverage for construction vehicles and equipment transport with comprehensive liability and physical damage protection',
+      detailedOverview: 'Specialized coverage for construction vehicles and equipment transport. Protects your fleet with comprehensive liability and physical damage coverage.',
+      coverageAmount: '$1M+ liability limits',
+      keyFeatures: [
+        'Vehicle liability protection',
+        'Comprehensive coverage',
+        'Collision protection',
+        'Uninsured motorist',
+        'Fleet discounts',
+        'Equipment coverage'
+      ],
+      whoNeedsIt: ['Fleet operators', 'Equipment transporters', 'Service contractors', 'Material suppliers', 'Mobile services']
+    },
+    {
+      id: 'professional-liability',
+      title: 'Professional Liability',
+      description: 'Errors and omissions coverage for professional services and advice provided to clients',
+      detailedOverview: 'Errors & omissions protection for design professionals and consultants. Covers mistakes, omissions, and professional negligence claims.',
+      coverageAmount: '$1M - $5M per claim',
+      keyFeatures: [
+        'Design errors coverage',
+        'Professional omissions protection',
+        'Negligent acts',
+        'Breach of duty coverage',
+        'Prior acts coverage',
+        'Extended reporting'
+      ],
+      whoNeedsIt: ['Architects', 'Engineers', 'Design consultants', 'Construction managers', 'Project managers']
+    },
+    {
+      id: 'tools-equipment',
+      title: 'Tools & Equipment',
+      description: 'Protect valuable tools and machinery from theft, damage, and loss with comprehensive replacement cost coverage',
+      detailedOverview: 'Protect valuable tools and machinery from theft, damage, and loss. Comprehensive coverage for contractors\' most important assets.',
+      coverageAmount: 'Actual tool value',
+      keyFeatures: [
+        'Theft protection',
+        'Damage coverage',
+        'Loss of use',
+        'Replacement cost coverage',
+        'Newly acquired coverage',
+        'Worldwide territory'
+      ],
+      whoNeedsIt: ['All contractors', 'Equipment owners', 'Tool-dependent trades', 'Mobile contractors', 'Specialty trades']
+    },
+    
+    // MANUFACTURING COVERAGES
+    {
+      id: 'product-liability',
+      title: 'Product Liability',
+      description: 'Comprehensive protection against manufacturing defects, design flaws, and product-related injuries or damages',
+      detailedOverview: 'Comprehensive protection against manufacturing defects, design flaws, and product-related injuries or damages. Essential coverage for any business that manufactures, distributes, or sells products.',
+      coverageAmount: '$1M - $10M per occurrence',
+      keyFeatures: [
+        'Manufacturing defect coverage',
+        'Design error protection',
+        'Product recall expenses',
+        'Legal defense costs',
+        'Worldwide territory',
+        'Settlement authority'
+      ],
+      whoNeedsIt: ['All manufacturers', 'Product distributors', 'Private label producers', 'Component suppliers', 'Consumer goods companies']
+    },
+    {
+      id: 'equipment-breakdown',
+      title: 'Equipment Breakdown',
+      description: 'Specialized coverage for manufacturing equipment failure, machinery breakdown, and resulting business interruption',
+      detailedOverview: 'Specialized coverage for manufacturing equipment failure, machinery breakdown, and resulting business interruption. Critical protection for production-dependent businesses.',
+      coverageAmount: 'Equipment replacement value',
+      keyFeatures: [
+        'Machinery breakdown coverage',
+        'Business interruption',
+        'Expediting expenses',
+        'Spoilage coverage',
+        '24/7 claims support',
+        'Emergency repairs'
+      ],
+      whoNeedsIt: ['Heavy manufacturers', 'Technology companies', 'Food processors', 'Chemical manufacturers', 'Equipment-dependent operations']
+    },
+    {
+      id: 'commercial-property',
+      title: 'Commercial Property',
+      description: 'Coverage for buildings, equipment, inventory, and business property against damage and loss',
+      detailedOverview: 'Protect manufacturing facilities, inventory, raw materials, and finished goods from fire, theft, and natural disasters. Comprehensive asset protection for manufacturers.',
+      coverageAmount: 'Property replacement cost',
+      keyFeatures: [
+        'Fire & explosion coverage',
+        'Weather damage',
+        'Theft & vandalism',
+        'Business interruption',
+        'Agreed value coverage',
+        'Debris removal'
+      ],
+      whoNeedsIt: ['Facility owners', 'Equipment lessees', 'Inventory holders', 'Multi-location operations', 'All manufacturers']
+    },
+    {
+      id: 'cyber-liability',
+      title: 'Cyber Liability',
+      description: 'Protection against data breaches, cyber attacks, and digital security incidents',
+      detailedOverview: 'Protection against data breaches, cyber attacks, and technology-related risks in modern manufacturing operations. Essential for connected manufacturing environments.',
+      coverageAmount: '$1M - $25M per claim',
+      keyFeatures: [
+        'Data breach response',
+        'Cyber extortion coverage',
+        'Business interruption',
+        'Regulatory fines',
+        'Incident response team',
+        'Forensic investigation'
+      ],
+      whoNeedsIt: ['Connected manufacturers', 'IoT operations', 'Customer data holders', 'Cloud-based systems', 'Digital manufacturers']
+    },
+    {
+      id: 'environmental-liability',
+      title: 'Environmental Liability',
+      description: 'Coverage for pollution incidents, environmental cleanup, and regulatory compliance issues',
+      detailedOverview: 'Coverage for pollution incidents, environmental cleanup, and regulatory compliance issues. Critical for manufacturers with environmental exposures.',
+      coverageAmount: '$1M - $50M per claim',
+      keyFeatures: [
+        'Pollution cleanup',
+        'Third-party claims',
+        'Regulatory defense',
+        'Business interruption',
+        'Gradual pollution coverage',
+        'Transportation coverage'
+      ],
+      whoNeedsIt: ['Chemical manufacturers', 'Industrial operations', 'Waste generators', 'Fuel storage operations', 'Heavy industry']
+    },
+    
+    // TRUCKING & TRANSPORTATION COVERAGES
+    {
+      id: 'commercial-auto-liability',
+      title: 'Commercial Auto Liability',
+      description: 'DOT-compliant protection for commercial vehicle operations with liability coverage ranging from $750K to $5M',
+      detailedOverview: 'DOT-compliant protection for all commercial vehicle operations. Mandatory coverage for trucking companies with competitive rates and expert guidance.',
+      coverageAmount: '$750K - $5M liability',
+      keyFeatures: [
+        'DOT compliance',
+        'Third-party liability',
+        'Bodily injury coverage',
+        'Property damage',
+        'Cargo incidental coverage',
+        'MCS-90 endorsement'
+      ],
+      whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Owner operators', 'Transportation businesses']
+    },
+    {
+      id: 'physical-damage',
+      title: 'Physical Damage Insurance',
+      description: 'Vehicle protection coverage for your fleet covering actual cash value or stated amount for collision and comprehensive claims',
+      detailedOverview: 'Comprehensive vehicle protection for your commercial trucks and equipment. Covers collision, comprehensive, and total loss with flexible deductible options.',
+      coverageAmount: 'ACV or Stated Amount',
+      keyFeatures: [
+        'Collision coverage',
+        'Comprehensive coverage',
+        'Total loss protection',
+        'Flexible deductibles',
+        'Towing & labor',
+        'Rental reimbursement'
+      ],
+      whoNeedsIt: ['Businesses with commercial vehicles', 'Fleet owners', 'Leased equipment', 'New truck buyers', 'High-value equipment']
+    },
+    {
+      id: 'motor-truck-cargo',
+      title: 'Motor Truck Cargo',
+      description: 'Freight protection covering goods in transit from loading to final delivery with comprehensive coverage options',
+      detailedOverview: 'Essential protection for goods in transit covering theft, damage, and loss of freight. Required by most brokers and shippers with customizable limits.',
+      coverageAmount: '$5,000 - $250,000 per load',
+      keyFeatures: [
+        'Goods in transit coverage',
+        'Loading/unloading protection',
+        'Theft coverage',
+        'Damage protection',
+        'Refrigeration breakdown',
+        'Debris removal'
+      ],
+      whoNeedsIt: ['All trucking operations hauling freight', 'Owner operators', 'Fleet carriers', 'Specialized haulers', 'Refrigerated transport']
+    },
+    {
+      id: 'owner-operator',
+      title: 'Owner Operator Insurance',
+      description: 'Comprehensive protection packages for independent truckers with 1-3 units including liability, physical damage, and cargo coverage',
+      detailedOverview: 'Specialized insurance packages designed for independent truckers. Combines liability, physical damage, and cargo coverage at competitive rates for small fleet operations.',
+      coverageAmount: 'Comprehensive protection packages',
+      keyFeatures: [
+        'Combined coverage packages',
+        'Flexible payment options',
+        'DOT compliance support',
+        'Competitive rates',
+        'Claims assistance',
+        'Quick quote turnaround'
+      ],
+      whoNeedsIt: ['Independent truckers with 1-3 units', 'New authority holders', 'Lease purchase operators', 'Small fleet owners', 'Specialized haulers']
+    },
   ];
 
   return (
@@ -155,6 +395,7 @@ const CoveragePage = () => {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
+                    onClick={scrollToForm}
                     className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
                     suppressHydrationWarning
                   >
@@ -171,272 +412,198 @@ const CoveragePage = () => {
         </div>
       </section>
 
-      {/* Coverage Types Section */}
+      {/* All Coverage Types Section - Cards with Modal */}
       <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
-          <div className="mb-16 text-center">
+          <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Our Coverage Solutions
+              Our Insurance
+              <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
+                Coverage Options
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              Comprehensive insurance protection across all business types and industries. 
-              From trucking operations to employee protection, we have you covered.
+            <p className="text-xl text-gray-600 max-w-3xl">
+              Comprehensive protection across all industries. Click "Learn More" on any coverage to see details.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            {coverageTypes.map((type) => {
-              return (
-                <div key={type.id} className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full">
-                  
-                  {/* Image Section */}
-                  <div className="relative h-84 overflow-hidden flex-shrink-0">
-                    <img
-                      src={type.image}
-                      alt={type.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  </div>
-
-                  {/* Content Section */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="space-y-4 flex-grow">
-                      <div>
-                        <h3 className="text-2xl font-bold text-gray-900 mb-1">
-                          {type.title}
-                        </h3>
-                        <p className="text-sm font-semibold text-orange-600">
-                          {type.subtitle}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* CTA Buttons */}
-                    <div className="flex gap-3 mt-6">
-                      <a 
-                        href={type.href}
-                        className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-3 rounded-lg font-semibold text-center transition-all duration-300"
-                      >
-                        Learn More
-                      </a>
-                      <button 
-                        className="flex-1 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white py-3 rounded-lg font-semibold transition-all duration-300"
-                        suppressHydrationWarning
-                      >
-                        Get Quote
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Additional Coverage Options Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4 leading-tight">
-              Additional Coverage Options
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Expand your protection with specialized coverage options tailored to your unique business needs
-            </p>
-          </div>
-
+          {/* Coverage Grid - Cards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            
-            {/* General Liability */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                General Liability
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Protection against third-party claims for bodily injury, property damage, and advertising injury
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
+            {coverageTypes.map((coverage) => (
+              <div 
+                key={coverage.id}
+                className="bg-white rounded-xl border border-gray-200 hover:border-orange-500 hover:shadow-lg transition-all duration-300 p-6 flex flex-col"
+              >
+                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  {coverage.title}
+                </h3>
+                <p className="text-gray-600 text-sm mb-4 flex-grow">
+                  {coverage.description}
+                </p>
 
-            {/* Commercial Property */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Commercial Property
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Coverage for buildings, equipment, inventory, and business property against damage and loss
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-
-            {/* Cyber Liability */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Cyber Liability
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Protection against data breaches, cyber attacks, and digital security incidents
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-
-            {/* Professional Liability */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Professional Liability
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Errors and omissions coverage for professional services and advice provided to clients
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-
-            {/* Non-Trucking Liability */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Non-Trucking Liability (NTL)
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Coverage for owner-operators when not under dispatch or hauling cargo for hire
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-
-            {/* Occupational Accident */}
-            <div className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:border-orange-300 hover:shadow-lg transition-all duration-300">
-              <h3 className="text-xl font-bold text-gray-900 mb-2">
-                Occupational Accident
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Alternative to workers' comp for owner-operators and independent contractors
-              </p>
-              <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold text-sm inline-flex items-center">
-                Learn More
-                <ArrowRight className="w-4 h-4 ml-1" />
-              </a>
-            </div>
-
+                {/* Learn More Button */}
+                <button
+                  onClick={() => openCoverageModal(coverage)}
+                  className="mt-auto flex items-center text-orange-600 hover:text-orange-700 font-semibold text-sm transition-colors group"
+                >
+                  Learn More
+                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Don't See Your Coverage CTA Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-orange-50 to-red-50 border-2 border-orange-200 rounded-2xl p-8 lg:p-12">
-            <div className="text-center max-w-4xl mx-auto">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Shield className="w-10 h-10 text-white" />
-              </div>
-              
-              <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-                Don't See the Coverage You're Looking For?
-              </h2>
-              
-              <p className="text-xl text-gray-700 mb-8 leading-relaxed">
-                We offer a wide range of specialized insurance solutions beyond what's listed above. 
-                Whether you need umbrella coverage or any other commercial insurance, our experienced 
-                specialists can create a customized protection plan for your business.
-              </p>
+      {/* Coverage Details Modal */}
+      {selectedCoverage && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop with blur */}
+          <div 
+            className="absolute inset-0 bg-white/80 backdrop-blur-md"
+            onClick={closeCoverageModal}
+          ></div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          {/* Modal Content */}
+          <div className="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto animate-modal-scale border border-gray-200">
+            
+            {/* Close Button */}
+            <button
+              onClick={closeCoverageModal}
+              className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10"
+            >
+              <X className="w-5 h-5 text-gray-600" />
+            </button>
+
+            {/* Modal Header */}
+            <div className="p-8 border-b border-gray-200">
+              <h2 className="text-3xl font-bold text-gray-900 mb-3 pr-10">
+                {selectedCoverage.title}
+              </h2>
+              <p className="text-gray-600">
+                {selectedCoverage.description}
+              </p>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-8 space-y-6">
+              
+              {/* Overview */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Overview</h3>
+                <p className="text-gray-700 leading-relaxed">
+                  {selectedCoverage.detailedOverview}
+                </p>
+              </div>
+
+              {/* Coverage Amount */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Coverage Amount</h3>
+                <p className="text-orange-600 font-bold text-xl">
+                  {selectedCoverage.coverageAmount}
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Key Features</h3>
+                <ul className="space-y-2">
+                  {selectedCoverage.keyFeatures.map((feature, idx) => (
+                    <li key={idx} className="flex items-start">
+                      <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
+                      <span className="text-gray-700">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Who Needs This */}
+              <div>
+                <h3 className="text-lg font-bold text-gray-900 mb-3">Who Needs This Coverage</h3>
+                <div className="flex flex-wrap gap-2">
+                  {selectedCoverage.whoNeedsIt.map((item, idx) => (
+                    <span 
+                      key={idx}
+                      className="px-3 py-1.5 bg-orange-50 text-orange-700 rounded-full text-sm font-medium"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer - CTA Buttons */}
+            <div className="p-8 border-t border-gray-200 bg-gray-50">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="tel:+18006694301" 
-                  className="inline-flex items-center justify-center bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call Our Specialists: (800) 669-4301
+                  Call Now
                 </a>
-                
-                <a 
-                  href="mailto:quotes@moxieriskpartners.com" 
-                  className="inline-flex items-center justify-center border-2 border-orange-600 text-orange-600 hover:bg-orange-600 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300"
+                <button 
+                  onClick={scrollToForm}
+                  className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
-                  <Mail className="w-5 h-5 mr-2" />
-                  Email Us
-                </a>
-              </div>
-
-              <div className="mt-6 flex items-center justify-center space-x-2 text-sm text-gray-600">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span>Available 24/7 for your convenience</span>
+                  Get a Quote
+                  <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      )}
 
       {/* Why Choose Us Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Why Choose Moxie Risk Partners
+            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              Why Choose
+              <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
+                Moxie Risk Partners?
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              With decades of insurance expertise, we provide comprehensive coverage solutions 
-              that protect your business while delivering exceptional service and competitive rates.
-            </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                title: "Industry Expertise",
-                description: "Specialized knowledge across all commercial insurance lines with dedicated experts",
-                icon: Shield
-              },
-              {
-                title: "Fast Service",
-                description: "Same-day certificates, instant filings, and 24/7 support when you need it",
-                icon: CheckCircle
-              },
-              {
-                title: "Competitive Rates",
-                description: "Access to multiple A-rated carriers ensuring the best coverage at the best price",
-                icon: FileText
-              },
-              {
-                title: "Complete Support",
-                description: "From quotes to claims, we're with you every step of the way",
-                icon: Shield
-              }
-            ].map((item) => {
-              const IconComponent = item.icon;
-              return (
-                <div key={item.title} className="text-center">
-                  <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed">{item.description}</p>
-                </div>
-              );
-            })}
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-8 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Shield className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Expert Guidance</h3>
+              <p className="text-gray-600">
+                Licensed insurance professionals with decades of combined experience across all industries
+              </p>
+            </div>
+
+            <div className="text-center p-8 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Competitive Rates</h3>
+              <p className="text-gray-600">
+                Access to multiple A-rated carriers ensures you get the best coverage at the most competitive prices
+              </p>
+            </div>
+
+            <div className="text-center p-8 bg-gray-50 rounded-2xl">
+              <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Phone className="w-8 h-8 text-white" />
+              </div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">24/7 Support</h3>
+              <p className="text-gray-600">
+                Round-the-clock claims support and dedicated service team always available when you need us
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      
       {/* Enhanced CTA Footer with Quote Form */}
       <section className="relative py-20 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
