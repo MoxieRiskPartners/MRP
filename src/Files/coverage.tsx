@@ -418,10 +418,7 @@ const CoveragePage = () => {
           
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              Our Insurance
-              <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
-                Coverage Options
-              </span>
+              Our Insurance <span className="text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">Coverage Options</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl">
               Comprehensive protection across all industries. Click "Learn More" on any coverage to see details.
@@ -446,6 +443,7 @@ const CoveragePage = () => {
                 <button
                   onClick={() => openCoverageModal(coverage)}
                   className="mt-auto flex items-center text-orange-600 hover:text-orange-700 font-semibold text-sm transition-colors group"
+                  suppressHydrationWarning
                 >
                   Learn More
                   <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
