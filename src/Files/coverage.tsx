@@ -347,11 +347,36 @@ const CoveragePage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        /* Fluid Responsive Scaling - Works on ALL screen sizes */
+        :root {
+          --fluid-spacing-xs: clamp(0.5rem, 1vw, 1rem);
+          --fluid-spacing-sm: clamp(1rem, 2vw, 1.5rem);
+          --fluid-spacing-md: clamp(1.5rem, 3vw, 2rem);
+          --fluid-spacing-lg: clamp(2rem, 4vw, 3rem);
+          --fluid-spacing-xl: clamp(3rem, 6vw, 5rem);
+        }
+        
+        /* Ensure smooth scaling on ultra-wide monitors */
+        @media (min-width: 2000px) {
+          .responsive-container {
+            max-width: 1920px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+        
+        /* Prevent overflow on any screen */
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
+
       
       {/* Hero Section */}
-      <section ref={heroRef} className="bg-white py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
             
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
@@ -365,16 +390,16 @@ const CoveragePage = () => {
             </div>
 
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-              <div className="space-y-8">
+              <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 leading-tight mb-6">
                    Insurance
                     <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                       Coverage Solutions
                     </span>
                   </h1>
                   
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
+                  <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-8 max-w-lg">
                     From commercial auto liability to workers' compensation, we provide comprehensive insurance solutions 
                     tailored to your business needs. Expert guidance, competitive rates, and superior service.
                   </p>
@@ -388,7 +413,7 @@ const CoveragePage = () => {
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-orange-600 flex-shrink-0" />
-                      <span className="text-lg font-medium text-gray-800">{feature}</span>
+                      <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-medium text-gray-800">{feature}</span>
                     </div>
                   ))}
                 </div>
@@ -396,13 +421,13 @@ const CoveragePage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <button 
                     onClick={scrollToForm}
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
                     suppressHydrationWarning
                   >
                     Get Your Quote
                   </button>
                   
-                  <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                  <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center">
                     Call (800) 669-4301
                   </a>
                 </div>
@@ -413,20 +438,20 @@ const CoveragePage = () => {
       </section>
 
       {/* All Coverage Types Section - Cards with Modal */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
           <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Our Insurance <span className="text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">Coverage Options</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-3xl">
               Comprehensive protection across all industries. Click "Learn More" on any coverage to see details.
             </p>
           </div>
 
           {/* Coverage Grid - Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-6">
             {coverageTypes.map((coverage) => (
               <div 
                 key={coverage.id}
@@ -470,6 +495,7 @@ const CoveragePage = () => {
             <button
               onClick={closeCoverageModal}
               className="absolute top-4 right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors z-10"
+              suppressHydrationWarning
             >
               <X className="w-5 h-5 text-gray-600" />
             </button>
@@ -485,11 +511,11 @@ const CoveragePage = () => {
             </div>
 
             {/* Modal Body */}
-            <div className="p-8 space-y-6">
+            <div className="p-8 space-y-[clamp(1rem,2.5vw,1.5rem)]">
               
               {/* Overview */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Overview</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Overview</h3>
                 <p className="text-gray-700 leading-relaxed">
                   {selectedCoverage.detailedOverview}
                 </p>
@@ -497,7 +523,7 @@ const CoveragePage = () => {
 
               {/* Coverage Amount */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Coverage Amount</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Coverage Amount</h3>
                 <p className="text-orange-600 font-bold text-xl">
                   {selectedCoverage.coverageAmount}
                 </p>
@@ -505,7 +531,7 @@ const CoveragePage = () => {
 
               {/* Key Features */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Key Features</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Key Features</h3>
                 <ul className="space-y-2">
                   {selectedCoverage.keyFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
@@ -518,7 +544,7 @@ const CoveragePage = () => {
 
               {/* Who Needs This */}
               <div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">Who Needs This Coverage</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Who Needs This Coverage</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedCoverage.whoNeedsIt.map((item, idx) => (
                     <span 
@@ -537,14 +563,14 @@ const CoveragePage = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="tel:+18006694301" 
-                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center group shadow-lg"
+                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 px-6 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Call Now
                 </a>
                 <button 
                   onClick={scrollToForm}
-                  className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 px-6 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center group shadow-lg"
+                  className="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 px-6 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
                   Get a Quote
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -556,10 +582,10 @@ const CoveragePage = () => {
       )}
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4">
               Why Choose
               <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                 Moxie Risk Partners?
@@ -567,12 +593,12 @@ const CoveragePage = () => {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-[clamp(1.5rem,3vw,2rem)]">
             <div className="text-center p-8 bg-gray-50 rounded-2xl">
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Expert Guidance</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Expert Guidance</h3>
               <p className="text-gray-600">
                 Licensed insurance professionals with decades of combined experience across all industries
               </p>
@@ -582,7 +608,7 @@ const CoveragePage = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Competitive Rates</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Competitive Rates</h3>
               <p className="text-gray-600">
                 Access to multiple A-rated carriers ensures you get the best coverage at the most competitive prices
               </p>
@@ -592,7 +618,7 @@ const CoveragePage = () => {
               <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Phone className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">24/7 Support</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">24/7 Support</h3>
               <p className="text-gray-600">
                 Round-the-clock claims support and dedicated service team always available when you need us
               </p>
@@ -603,22 +629,22 @@ const CoveragePage = () => {
 
       
       {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-20 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-[clamp(3rem,8vw,5rem)] bg-gray-50 overflow-hidden">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
             
             {/* Left Side - CTA Content */}
-            <div className="space-y-8">
+            <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 mb-6 leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                     Business?
                   </span>
                 </h2>
                 
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+                <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-8">
                   Join thousands of businesses who trust Moxie Risk Partners for their insurance needs. 
                   Get your quote today and experience the difference specialized expertise makes.
                 </p>
@@ -633,7 +659,7 @@ const CoveragePage = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+18006694301" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                  <a href="tel:+18006694301" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-green-600 hover:text-green-700 transition-colors">
                     (800) 669-4301
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
@@ -645,7 +671,7 @@ const CoveragePage = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Email Us</h4>
-                  <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">
+                  <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-purple-600 hover:text-purple-700 transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
                   <p className="text-xs text-gray-500 mt-1">Quick Response</p>
@@ -660,7 +686,7 @@ const CoveragePage = () => {
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-white" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
+                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
                 <p className="text-gray-600">Fast, competitive insurance quotes</p>
               </div>
 
@@ -774,7 +800,7 @@ const CoveragePage = () => {
                 <button
                   onClick={handleFormSubmit}
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   suppressHydrationWarning
                 >
                   {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
