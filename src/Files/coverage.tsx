@@ -368,7 +368,7 @@ const CoveragePage = () => {
               <div className="space-y-8">
                 <div>
                   <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-                    Complete Insurance
+                   Insurance
                     <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                       Coverage Solutions
                     </span>
