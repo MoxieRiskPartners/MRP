@@ -10,7 +10,7 @@ interface CoverageData {
   typeCode: string;
   title: string;
   description: string;
-  badge: string;
+  // badge: string;
   features: string[];
   icon: React.ElementType;
 }
@@ -103,7 +103,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'manufacturing',
       title: 'Manufacturing',
       description: 'Specialized coverage for manufacturing employees facing industrial hazards, machinery risks, and occupational injuries.',
-      badge: 'High Risk',
+      // badge: 'High Risk',
       features: ['Industrial Injury Coverage', 'Machinery Accident Protection', 'Occupational Illness Benefits', 'Return-to-Work Programs'],
       icon: Factory
     },
@@ -112,7 +112,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'construction',
       title: 'Construction',
       description: 'Comprehensive protection for construction workers in high-risk environments with specialized injury and safety programs.',
-      badge: 'High Risk',
+      // badge: 'High Risk',
       features: ['Fall Protection Coverage', 'Heavy Equipment Injuries', 'Site Safety Programs', 'Temporary Disability Benefits'],
       icon: HardHat
     },
@@ -121,7 +121,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'trucking',
       title: 'Trucking',
       description: 'Specialized coverage for commercial drivers and transportation employees with road-specific injury protection.',
-      badge: 'Transport Focused',
+      // badge: 'Transport Focused',
        features: ['Driver Injury Coverage', 'Loading/Unloading Protection', 'Mechanic Injury Coverage', 'Fleet Safety Programs'],
       icon: Truck
     },
@@ -130,7 +130,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'nonprofit',
       title: 'Non-Profit',
       description: 'Affordable workers\' compensation solutions for non-profit organizations with volunteer and employee protection.',
-      badge: 'Specialized',
+      // badge: 'Specialized',
       features: ['Volunteer Coverage Options', 'Budget-Friendly Premiums', 'Event Injury Protection', 'Staff Safety Programs'],
       icon: Heart
     },
@@ -139,7 +139,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'public-entity',
       title: 'Public Entity',
       description: 'Government and municipal employee coverage with public sector-specific benefits and regulatory compliance.',
-      badge: 'Government',
+      // badge: 'Government',
       features: ['Government Employee Coverage', 'Municipal Benefits', 'Public Safety Officers', 'Regulatory Compliance'],
       icon: Building
     },
@@ -148,7 +148,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       typeCode: 'general-business',
       title: 'General Business',
       description: 'Standard workers\' compensation coverage for office environments, retail, and low-risk business operations.',
-      badge: 'Standard',
+      // badge: 'Standard',
       features: ['Office Injury Coverage', 'Slip and Fall Protection', 'Repetitive Strain Benefits', 'Standard Medical Coverage'],
       icon: FileText
     }
@@ -362,7 +362,7 @@ const handleCloseModal = () => {
 
                   {/* Badge */}
                   <div className="absolute -top-1 left-2">
-                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                    {/* <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
                       industry.badge === 'High Risk' ? 'bg-red-100 text-red-800' :
                       industry.badge === 'Government' ? 'bg-blue-100 text-blue-800' :
                       industry.badge === 'Transport Focused' ? 'bg-purple-100 text-purple-800' :
@@ -370,7 +370,7 @@ const handleCloseModal = () => {
                       'bg-gray-100 text-gray-800'
                     }`}>
                       {industry.badge}
-                    </span>
+                    </span> */}
                   </div>
                 </button>
               );
@@ -386,7 +386,7 @@ const handleCloseModal = () => {
                 <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                   {selectedIndustry.title} Workers' Compensation
                 </h3>
-                <div className={`inline-block px-4 py-2 rounded-full font-bold text-sm ${
+                {/* <div className={`inline-block px-4 py-2 rounded-full font-bold text-sm ${
                   selectedIndustry.badge === 'High Risk' ? 'bg-red-600 text-white' :
                   selectedIndustry.badge === 'Government' ? 'bg-blue-600 text-white' :
                   selectedIndustry.badge === 'Transport Focused' ? 'bg-purple-600 text-white' :
@@ -394,7 +394,7 @@ const handleCloseModal = () => {
                   'bg-gray-600 text-white'
                 }`}>
                   {selectedIndustry.badge}
-                </div>
+                </div> */}
               </div>
             </div>
 

@@ -66,11 +66,22 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Construction redirect
-      {
-        source: '/construction',
-        destination: '/construction-insurance',
-        permanent: true,
-      },
+  {
+  source: '/construction/:path*',
+  destination: '/construction-insurance',
+  permanent: true,
+  has: [
+    {
+      type: 'host',
+      value: 'localhost',
+    },
+  ],
+},
+{
+  source: '/construction/:path*',
+  destination: '/construction-insurance',
+  permanent: true,
+},
       // Accessibility redirect
       {
         source: '/accessibility',

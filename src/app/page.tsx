@@ -35,7 +35,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-    {/* <ComingSoon /> */}
+    <ComingSoon />
        {/* <Header />
       <Hero />
       <Overivew />
