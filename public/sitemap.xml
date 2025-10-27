@@ -48,6 +48,13 @@
     <priority>0.85</priority>
   </url>
 
+  <url>
+    <loc>https://moxieriskpartners.com/faq-page</loc>
+    <lastmod>2025-10-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <!-- INDUSTRY PAGES (HIGH PRIORITY - MAIN SERVICE AREAS) -->
   <url>
     <loc>https://moxieriskpartners.com/trucking-transportation</loc>
