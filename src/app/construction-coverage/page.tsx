@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "Construction Insurance | General Liability & Workers Comp for Contractors",
   description: "Comprehensive construction insurance for contractors, builders, and subcontractors. General liability, workers compensation, commercial auto, and equipment coverage. Get competitive quotes for your trade.",
   alternates: {
-    canonical: 'https://moxieriskpartners.com/construction-insurance',
+    canonical: 'https://moxieriskpartners.com/construction-coverage',  // ✅ CHANGED
   },
   openGraph: {
     title: "Construction Insurance | General Liability & Workers Comp for Contractors",
     description: "Comprehensive construction insurance for contractors, builders, and subcontractors. General liability, workers compensation, commercial auto, and equipment coverage.",
-    url: "https://moxieriskpartners.com/construction-insurance",
+    url: "https://moxieriskpartners.com/construction-coverage",  // ✅ CHANGED
     siteName: "Moxie Risk Partners",
     images: [
       {

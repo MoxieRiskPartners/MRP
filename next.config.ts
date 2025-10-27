@@ -119,11 +119,17 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // All construction nested pages redirect to main page
-      {
-        source: '/construction-insurance/:path*',
-        destination: '/construction-insurance',
-        permanent: true,
-      },
+   // All construction insurance nested pages redirect to construction-coverage
+{
+  source: '/construction-insurance/:path*',
+  destination: '/construction-coverage',  // ✅ CORRECT
+  permanent: true,
+},
+{
+  source: '/construction-insurance',
+  destination: '/construction-coverage',  // ✅ Also redirect the base URL
+  permanent: true,
+},
       // All nonprofit nested pages redirect to main page
       {
         source: '/nonprofit-insurance/:path*',
