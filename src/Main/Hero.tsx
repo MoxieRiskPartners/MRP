@@ -20,6 +20,7 @@ const Hero = () => {
   const [isCoverageDropdownOpen, setIsCoverageDropdownOpen] = useState(false);
   const [showSuccessPopup, setShowSuccessPopup] = useState(false);
   const [triggerConfetti, setTriggerConfetti] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
   
@@ -144,24 +145,91 @@ const Hero = () => {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
     
-    // Show success popup with confetti
-    setShowSuccessPopup(true);
-    setTriggerConfetti(true);
+    // Validate required fields
+    if (!formData.firstName || !formData.lastName || !formData.industry || 
+        !formData.phone || !formData.email) {
+      alert('Please fill in all required fields');
+      return;
+    }
     
-    // Reset form
-    setFormData({
-      firstName: '',
-      lastName: '',
-      industry: '',
-      coverageNeeded: [],
-      phone: '',
-      email: '',
-      dotNumber: ''
-    });
+    // For trucking industry, DOT number is required
+    if (formData.industry === 'trucking' && !formData.dotNumber) {
+      alert('Please enter your USDOT number');
+      return;
+    }
+    
+    // Show loading state
+    setIsSubmitting(true);
+    
+    try {
+      console.log('Submitting hero form...', formData);
+      
+      // Build payload for Momentum API
+      const momentumPayload = {
+        // Contact Info
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        contactName: `${formData.firstName} ${formData.lastName}`,
+        email: formData.email,
+        phone: formData.phone,
+        
+        // Business Info
+        industry: formData.industry,
+        coverageNeeded: formData.coverageNeeded.join(', '), // Convert array to string
+        dotNumber: formData.dotNumber || '',
+        
+        // Additional metadata to distinguish from main form
+        formType: 'Hero Quick Quote',
+        source: 'Homepage Hero Form'
+      };
+      
+      console.log('Sending to API:', momentumPayload);
+      
+      // Send to your API route
+      const response = await fetch('/api/momentum-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(momentumPayload)
+      });
+      
+      const result = await response.json();
+      console.log('API response:', result);
+      
+      if (result.success) {
+        console.log('✓ Quote submitted successfully to Momentum!');
+        
+        // Show success popup with confetti
+        setShowSuccessPopup(true);
+        setTriggerConfetti(true);
+        
+        // Reset form
+        setFormData({
+          firstName: '',
+          lastName: '',
+          industry: '',
+          coverageNeeded: [],
+          phone: '',
+          email: '',
+          dotNumber: ''
+        });
+        
+      } else {
+        // Error from API
+        console.error('API error:', result.message);
+        alert(`There was an issue submitting your quote: ${result.message}\n\nPlease call us at (800) 669-4301`);
+      }
+      
+    } catch (error) {
+      console.error('Error submitting hero form:', error);
+      alert('Unable to submit quote. Please call us at (800) 669-4301 for immediate assistance.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const closeSuccessPopup = () => {
@@ -474,11 +542,22 @@ const Hero = () => {
 
                     {/* Submit Button */}
                     <button 
-                      type="submit" 
-                      className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-lg text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none"
                       suppressHydrationWarning
                     >
-                      Get My Quote
+                      {isSubmitting ? (
+                        <span className="flex items-center justify-center gap-2">
+                          <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          Submitting...
+                        </span>
+                      ) : (
+                        'Get My Quote'
+                      )}
                     </button>
 
                     {/* Trust Elements */}

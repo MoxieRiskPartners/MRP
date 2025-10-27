@@ -115,7 +115,7 @@ const nextConfig: NextConfig = {
       // All manufacturing nested pages redirect to main page
       {
         source: '/manufacturing-insurance/:path*',
-        destination: '/manufacturing-insurance',
+        destination: '/manufacturing-coverage/',
         permanent: true,
       },
       // All construction nested pages redirect to main page
