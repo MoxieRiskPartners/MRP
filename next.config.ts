@@ -55,6 +55,127 @@ const nextConfig: NextConfig = {
       },
     ]
   },
+
+  // 301 Redirects for SEO and old URLs
+  async redirects() {
+    return [
+      // Workers Comp redirect
+      {
+        source: '/workers-comp',
+        destination: '/workers-compensation',
+        permanent: true,
+      },
+      // Construction redirect
+      {
+        source: '/construction',
+        destination: '/construction-insurance',
+        permanent: true,
+      },
+      // Accessibility redirect
+      {
+        source: '/accessibility',
+        destination: '/about-us',
+        permanent: true,
+      },
+      // Owner Operator nested URL redirect
+      {
+        source: '/trucking-insurance/owner-operator',
+        destination: '/owner-operator',
+        permanent: true,
+      },
+      // All fleet insurance nested pages redirect to trucking
+      {
+        source: '/fleet-insurance/:path*',
+        destination: '/trucking-transportation',
+        permanent: true,
+      },
+      // All trucking insurance nested pages redirect to main page
+      {
+        source: '/trucking-insurance/:path*',
+        destination: '/trucking-transportation',
+        permanent: true,
+      },
+      // All owner operator nested pages redirect to main page
+      {
+        source: '/owner-operator-insurance/:path*',
+        destination: '/owner-operator',
+        permanent: true,
+      },
+      // All manufacturing nested pages redirect to main page
+      {
+        source: '/manufacturing-insurance/:path*',
+        destination: '/manufacturing-insurance',
+        permanent: true,
+      },
+      // All construction nested pages redirect to main page
+      {
+        source: '/construction-insurance/:path*',
+        destination: '/construction-insurance',
+        permanent: true,
+      },
+      // All nonprofit nested pages redirect to main page
+      {
+        source: '/nonprofit-insurance/:path*',
+        destination: '/non-profit',
+        permanent: true,
+      },
+      // All public entity nested pages redirect to main page
+      {
+        source: '/public-entity-insurance/:path*',
+        destination: '/public-entity',
+        permanent: true,
+      },
+      // Other standalone insurance pages
+      {
+        source: '/cyber-liability-insurance',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      {
+        source: '/directors-officers-insurance',
+        destination: '/non-profit',
+        permanent: true,
+      },
+      {
+        source: '/employment-practices-liability',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      {
+        source: '/professional-liability-insurance',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      {
+        source: '/commercial-property-insurance',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      {
+        source: '/general-liability-insurance',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      // Service areas and industries pages
+      {
+        source: '/service-areas',
+        destination: '/about-us',
+        permanent: true,
+      },
+      {
+        source: '/industries/:path*',
+        destination: '/coverage-options',
+        permanent: true,
+      },
+      // Quote page variations
+      {
+        source: '/quote',
+        destination: '/quote-form',
+        permanent: true,
+      },
+    ];
+  },
+
   // Add webpack config to help with module resolution
   webpack: (config) => {
     config.resolve.extensions = ['.tsx', '.ts', '.jsx', '.js'];
