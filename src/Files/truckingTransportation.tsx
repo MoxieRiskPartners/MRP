@@ -318,7 +318,7 @@ const TruckingTransportationPage = () => {
                 </p>
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
+          <div className="grid md:grid-cols-1 gap-6">
                 {/* Phone */}
                 <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
                   <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-3">

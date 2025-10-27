@@ -270,13 +270,7 @@ const Footer: React.FC = () => {
               >
                 Terms & Conditions
               </a>
-              {/* <a 
-                href="/accessibility" 
-                className="text-gray-300 hover:text-orange-400 transition-colors"
-                onClick={handleLinkClick}
-              >
-                Accessibility
-              </a> */}
+
             </div>
 
             {/* License Info */}
