@@ -68,7 +68,7 @@ const nextConfig: NextConfig = {
       // Construction redirect
   {
   source: '/construction/:path*',
-  destination: '/construction-insurance',
+  destination: '/construction-coverage',
   permanent: true,
   has: [
     {
@@ -79,7 +79,7 @@ const nextConfig: NextConfig = {
 },
 {
   source: '/construction/:path*',
-  destination: '/construction-insurance',
+  destination: '/construction-coverage',
   permanent: true,
 },
       // Accessibility redirect
