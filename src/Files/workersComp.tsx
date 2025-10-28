@@ -25,9 +25,7 @@ interface FAQItem {
 const WorkersCompPage = () => {
   const [selectedType, setSelectedType] = useState('manufacturing');
   const [isVisible, setIsVisible] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-const [showConfetti, setShowConfetti] = useState(false);
-const [isSubmitting, setIsSubmitting] = useState(false);
+
 
 
   const [faqItems, setFaqItems] = useState
@@ -74,14 +72,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
       isOpen: false
     }
   ]);
-  const [formData, setFormData] = useState({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    industryType: '',
-    employeeCount: ''
-  });
+
 
   const heroRef = useRef(null);
 
