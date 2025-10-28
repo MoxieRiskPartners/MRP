@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     console.log('✓ Form Type:', formData.formType);
     
     // STEP 5: Build CLEAN payload - only ONE field name per data point
-    const momentumPayload: Record<string, any> = {
+   const momentumPayload: Record<string, unknown> = {
       // ========================================
       // REQUIRED CORE FIELDS
       // ========================================
