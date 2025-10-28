@@ -134,7 +134,7 @@ const ContactPage = () => {
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="/images/contactus.png" 
+                  src="/images/logo.png" 
                   alt="Professional insurance team ready to help with your coverage needs"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />

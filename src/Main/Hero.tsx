@@ -168,23 +168,39 @@ const Hero = () => {
       console.log('Submitting hero form...', formData);
       
       // Build payload for Momentum API
-      const momentumPayload = {
-        // Contact Info
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        contactName: `${formData.firstName} ${formData.lastName}`,
-        email: formData.email,
-        phone: formData.phone,
-        
-        // Business Info
-        industry: formData.industry,
-        coverageNeeded: formData.coverageNeeded.join(', '), // Convert array to string
-        dotNumber: formData.dotNumber || '',
-        
-        // Additional metadata to distinguish from main form
-        formType: 'Hero Quick Quote',
-        source: 'Homepage Hero Form'
-      };
+const momentumPayload = {
+  // Contact Info
+  firstName: formData.firstName,
+  lastName: formData.lastName,
+  contactName: `${formData.firstName} ${formData.lastName}`,
+  email: formData.email,
+  phone: formData.phone,
+  
+  // Business Info
+  industry: formData.industry,
+  dotNumber: formData.dotNumber || '',
+  
+  // Form metadata
+  formType: 'Hero Quick Quote',
+  source: 'Homepage Hero Form',
+  
+  // Description field with all details
+  description: `Hero Quick Quote
+
+Contact: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Industry: ${formData.industry}
+${formData.dotNumber ? `US DOT #: ${formData.dotNumber}` : ''}
+
+Coverage Needed:
+${formData.coverageNeeded.map(coverage => {
+  const option = coverageOptions.find(opt => opt.value === coverage);
+  return `- ${option?.label || coverage}`;
+}).join('\n')}
+
+Source: Homepage Hero Form`
+};
       
       console.log('Sending to API:', momentumPayload);
       

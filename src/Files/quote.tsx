@@ -5,13 +5,28 @@ import { CheckCircle, ArrowRight, ArrowLeft, Shield, Phone, MessageSquare, Clock
 
 
 interface QuoteFormData {
+  industry: string;
   businessName: string;
   contactName: string;
   phone: string;
   email: string;
-  fleetSize: string;
-  primaryCargo: string;
-  domiciledState: string;
+  fleetSize?: string;
+  primaryCargo?: string;
+  domiciledState?: string;
+  dotNumber?: string;
+  contractorType?: string;
+  yearsExperience?: string;
+  industryType?: string;
+  annualRevenue?: string;
+  organizationType?: string;
+  annualBudget?: string;
+  entityType?: string;
+  coverageAmount?: string;
+  cargoType?: string;
+  vehicleType?: string;
+  vehicleValue?: string;
+  currentPremiums?: string;
+  employeeCount?: string;
   yearsInBusiness: string;
   previousClaims: string;
   currentInsurance: string;
@@ -21,6 +36,7 @@ interface QuoteFormData {
 
 const QuotePage: React.FC = () => {
   const [formData, setFormData] = useState<QuoteFormData>({
+    industry: '',
     businessName: '',
     contactName: '',
     phone: '',
@@ -28,6 +44,20 @@ const QuotePage: React.FC = () => {
     fleetSize: '',
     primaryCargo: '',
     domiciledState: '',
+    dotNumber: '',
+    contractorType: '',
+    yearsExperience: '',
+    industryType: '',
+    annualRevenue: '',
+    organizationType: '',
+    annualBudget: '',
+    entityType: '',
+    coverageAmount: '',
+    cargoType: '',
+    vehicleType: '',
+    vehicleValue: '',
+    currentPremiums: '',
+    employeeCount: '',
     yearsInBusiness: '',
     previousClaims: '',
     currentInsurance: '',
@@ -38,6 +68,81 @@ const QuotePage: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isVisible, setIsVisible] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Industry options - EXACTLY matching Hero form
+  const industryOptions = [
+    { value: 'trucking', label: 'Trucking & Transportation' },
+    { value: 'construction', label: 'Construction & Contracting' },
+    { value: 'manufacturing', label: 'Manufacturing & Production' },
+    { value: 'nonprofit', label: 'Nonprofit & Human Services' },
+    { value: 'public-entity', label: 'Government & Public Entities' }
+  ];
+
+  // Coverage options - EXACTLY matching Hero form structure
+  const getCoverageOptions = (industry: string) => {
+    const baseOptions = [
+      { value: 'general-liability', label: 'General Liability' },
+      { value: 'property', label: 'Commercial Property' },
+      { value: 'cyber-liability', label: 'Cyber Liability' },
+      { value: 'workers-comp', label: 'Workers Compensation' }
+    ];
+
+    switch (industry) {
+      case 'trucking':
+        return [
+          { value: 'auto-liability', label: 'Auto Liability' },
+          { value: 'physical-damage', label: 'Physical Damage' },
+          { value: 'motor-truck-cargo', label: 'Motor Truck Cargo' },
+          { value: 'general-liability', label: 'General Liability' },
+          { value: 'workers-comp', label: 'Workers Compensation' },
+          { value: 'ntl-phys', label: 'NTL/Phys' },
+          { value: 'occupational-accident', label: 'Occupational Accident' },
+          { value: 'brokerage-coverages', label: 'Brokerage Coverages' },
+          { value: 'garaging-shop', label: 'Garaging/Shop Coverages' },
+          { value: 'commercial-property', label: 'Commercial Property' },
+          { value: 'cyber-liability', label: 'Cyber Liability' }
+        ];
+      
+      case 'construction':
+        return [
+          ...baseOptions,
+          { value: 'commercial-auto', label: 'Commercial Auto' },
+          { value: 'professional-liability', label: 'Professional Liability' },
+          { value: 'contractors-pollution', label: 'Contractors Pollution' },
+          { value: 'surety-bonds', label: 'Surety Bonds' }
+        ];
+      
+      case 'manufacturing':
+        return [
+          ...baseOptions,
+          { value: 'product-liability', label: 'Product Liability' },
+          { value: 'professional-liability', label: 'Professional Liability' },
+          { value: 'equipment-breakdown', label: 'Equipment Breakdown' },
+          { value: 'business-interruption', label: 'Business Interruption' }
+        ];
+      
+      case 'nonprofit':
+        return [
+          ...baseOptions,
+          { value: 'directors-officers', label: 'Directors & Officers' },
+          { value: 'employment-practices', label: 'Employment Practices Liability' },
+          { value: 'professional-liability', label: 'Professional Liability' },
+          { value: 'volunteer-accident', label: 'Volunteer Accident' }
+        ];
+      
+      case 'public-entity':
+        return [
+          ...baseOptions,
+          { value: 'public-officials', label: 'Public Officials Liability' },
+          { value: 'law-enforcement', label: 'Law Enforcement Liability' },
+          { value: 'employment-practices', label: 'Employment Practices Liability' },
+          { value: 'constitutional-rights', label: 'Constitutional Rights Coverage' }
+        ];
+      
+      default:
+        return baseOptions;
+    }
+  };
 
   // All US states for the domiciled state dropdown
   const allStates = [
@@ -64,21 +169,91 @@ const QuotePage: React.FC = () => {
     setIsSubmitting(true);
     
     try {
-      // Map your form data to Momentum's expected format
+      // Build description with all relevant fields
+      const buildDescription = () => {
+        let desc = `Multi-Step Quote Form\n\nBusiness: ${formData.businessName}\nContact: ${formData.contactName}\nIndustry: ${formData.industry}\n`;
+        
+        // Add industry-specific fields
+        if (formData.dotNumber) desc += `US DOT #: ${formData.dotNumber}\n`;
+        if (formData.fleetSize) desc += `Fleet Size: ${formData.fleetSize}\n`;
+        if (formData.primaryCargo) desc += `Cargo Type: ${formData.primaryCargo}\n`;
+        if (formData.contractorType) desc += `Contractor Type: ${formData.contractorType}\n`;
+        if (formData.yearsExperience) desc += `Years Experience: ${formData.yearsExperience}\n`;
+        if (formData.industryType) desc += `Industry Type: ${formData.industryType}\n`;
+        if (formData.annualRevenue) desc += `Annual Revenue: ${formData.annualRevenue}\n`;
+        if (formData.organizationType) desc += `Organization Type: ${formData.organizationType}\n`;
+        if (formData.annualBudget) desc += `Annual Budget: ${formData.annualBudget}\n`;
+        if (formData.entityType) desc += `Entity Type: ${formData.entityType}\n`;
+        if (formData.coverageAmount) desc += `Coverage Amount: ${formData.coverageAmount}\n`;
+        if (formData.cargoType) desc += `Cargo Type: ${formData.cargoType}\n`;
+        if (formData.vehicleType) desc += `Vehicle Type: ${formData.vehicleType}\n`;
+        if (formData.vehicleValue) desc += `Vehicle Value: ${formData.vehicleValue}\n`;
+        if (formData.currentPremiums) desc += `Current Premiums: ${formData.currentPremiums}\n`;
+        if (formData.employeeCount) desc += `Employee Count: ${formData.employeeCount}\n`;
+        if (formData.domiciledState) desc += `State: ${formData.domiciledState}\n`;
+        
+        desc += `\nYears in Business: ${formData.yearsInBusiness}\nPrevious Claims: ${formData.previousClaims}\n`;
+        
+        if (formData.currentInsurance) desc += `Current Carrier: ${formData.currentInsurance}\n`;
+        if (formData.desiredStartDate) desc += `Start Date: ${formData.desiredStartDate}\n`;
+        if (formData.additionalInfo) desc += `\nAdditional Info:\n${formData.additionalInfo}\n`;
+        
+        desc += `\nSource: Quote Page - Multi-Step Form`;
+        
+        return desc;
+      };
+
+      // Build payload for Momentum API
       const momentumPayload = {
-        businessName: formData.businessName,
+        // Contact Info
+        firstName: formData.contactName.split(' ')[0],
+        lastName: formData.contactName.split(' ').slice(1).join(' ') || formData.contactName,
         contactName: formData.contactName,
-        phone: formData.phone,
         email: formData.email,
-        fleetSize: formData.fleetSize,
-        primaryCargo: formData.primaryCargo,
-        domiciledState: formData.domiciledState,
+        phone: formData.phone,
+        
+        // Business Info
+        companyName: formData.businessName,
+        businessName: formData.businessName,
+        organizationName: formData.businessName,
+        entityName: formData.businessName,
+        industry: formData.industry,
+        state: formData.domiciledState,
+        
+        // Industry-specific fields (conditionally added)
+        ...(formData.dotNumber && { dotNumber: formData.dotNumber }),
+        ...(formData.fleetSize && { fleetSize: formData.fleetSize }),
+        ...(formData.primaryCargo && { cargoType: formData.primaryCargo }),
+        ...(formData.contractorType && { contractorType: formData.contractorType }),
+        ...(formData.yearsExperience && { yearsExperience: formData.yearsExperience }),
+        ...(formData.industryType && { industryType: formData.industryType }),
+        ...(formData.annualRevenue && { annualRevenue: formData.annualRevenue }),
+        ...(formData.organizationType && { organizationType: formData.organizationType }),
+        ...(formData.annualBudget && { annualBudget: formData.annualBudget }),
+        ...(formData.entityType && { entityType: formData.entityType }),
+        ...(formData.coverageAmount && { coverageAmount: formData.coverageAmount }),
+        ...(formData.cargoType && { cargoType: formData.cargoType }),
+        ...(formData.vehicleType && { vehicleType: formData.vehicleType }),
+        ...(formData.vehicleValue && { vehicleValue: formData.vehicleValue }),
+        ...(formData.currentPremiums && { currentPremiums: formData.currentPremiums }),
+        ...(formData.employeeCount && { employeeCount: formData.employeeCount }),
+        
+        // Additional fields
         yearsInBusiness: formData.yearsInBusiness,
         previousClaims: formData.previousClaims,
         currentInsurance: formData.currentInsurance,
         desiredStartDate: formData.desiredStartDate,
-        additionalInfo: formData.additionalInfo
+        effectiveDate: formData.desiredStartDate,
+        
+        // Form metadata
+        formType: 'Multi-Step Quote Form',
+        source: 'Quote Page',
+        
+        // Description
+        description: buildDescription()
       };
+
+      console.log('Submitting to API:', momentumPayload);
 
       // Send to your API route
       const response = await fetch('/api/momentum-quote', {
@@ -106,12 +281,25 @@ const QuotePage: React.FC = () => {
       setIsSubmitting(false);
     }
   };
+
   const isStepValid = (step: number): boolean => {
     switch (step) {
       case 1:
-        return !!(formData.businessName && formData.contactName && formData.phone && formData.email);
+        return !!(formData.industry && formData.businessName && formData.contactName && formData.phone && formData.email);
       case 2:
-        return !!(formData.fleetSize && formData.primaryCargo && formData.domiciledState);
+        // Validation depends on industry
+        if (formData.industry === 'trucking') {
+          return !!(formData.dotNumber && formData.fleetSize && formData.domiciledState);
+        } else if (formData.industry === 'construction') {
+          return !!(formData.contractorType && formData.yearsExperience && formData.domiciledState);
+        } else if (formData.industry === 'manufacturing') {
+          return !!(formData.industryType && formData.annualRevenue && formData.domiciledState);
+        } else if (formData.industry === 'nonprofit') {
+          return !!(formData.organizationType && formData.annualBudget && formData.domiciledState);
+        } else if (formData.industry === 'public-entity') {
+          return !!(formData.entityType && formData.annualBudget && formData.domiciledState);
+        }
+        return !!formData.domiciledState;
       case 3:
         return !!(formData.yearsInBusiness && formData.previousClaims);
       default:
@@ -122,12 +310,14 @@ const QuotePage: React.FC = () => {
   const nextStep = () => {
     if (currentStep < 3 && isStepValid(currentStep)) {
       setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   const prevStep = () => {
     if (currentStep > 1) {
       setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -178,14 +368,35 @@ const QuotePage: React.FC = () => {
   const renderStep1 = () => (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Contact Information</h2>
-        <p className="text-lg text-gray-600">Let's start with your basic information</p>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">Let&apos;s Get Started</h2>
+        <p className="text-lg text-gray-600">Tell us about your business</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        
+        {/* Industry Selector - FULL WIDTH */}
+        <div className="md:col-span-2 space-y-2">
+          <label htmlFor="industry" className="block text-sm font-semibold text-gray-700">
+            Industry <span className="text-red-500">*</span>
+          </label>
+          <select
+            id="industry"
+            name="industry"
+            value={formData.industry}
+            onChange={handleInputChange}
+            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+            required
+          >
+            <option value="">Select your industry</option>
+            {industryOptions.map(opt => (
+              <option key={opt.value} value={opt.value}>{opt.label}</option>
+            ))}
+          </select>
+        </div>
+
         <div className="space-y-2">
           <label htmlFor="businessName" className="block text-sm font-semibold text-gray-700">
-            Business Name *
+            Business Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -194,14 +405,14 @@ const QuotePage: React.FC = () => {
             value={formData.businessName}
             onChange={handleInputChange}
             className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900 placeholder-gray-500"
-            placeholder="e.g., ABC Trucking LLC"
+            placeholder="e.g., ABC Company LLC"
             required
           />
         </div>
 
         <div className="space-y-2">
           <label htmlFor="contactName" className="block text-sm font-semibold text-gray-700">
-            Contact Name *
+            Contact Name <span className="text-red-500">*</span>
           </label>
           <input
             type="text"
@@ -217,7 +428,7 @@ const QuotePage: React.FC = () => {
 
         <div className="space-y-2">
           <label htmlFor="phone" className="block text-sm font-semibold text-gray-700">
-            Phone Number *
+            Phone Number <span className="text-red-500">*</span>
           </label>
           <input
             type="tel"
@@ -233,7 +444,7 @@ const QuotePage: React.FC = () => {
 
         <div className="space-y-2">
           <label htmlFor="email" className="block text-sm font-semibold text-gray-700">
-            Email Address *
+            Email Address <span className="text-red-500">*</span>
           </label>
           <input
             type="email"
@@ -250,80 +461,297 @@ const QuotePage: React.FC = () => {
     </div>
   );
 
-  const renderStep2 = () => (
-    <div className="space-y-8">
-      <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Business Operations</h2>
-        <p className="text-lg text-gray-600">Tell us about your trucking operation</p>
+  const renderStep2 = () => {
+    const industryLabel = industryOptions.find(i => i.value === formData.industry)?.label || 'business';
+    
+    return (
+      <div className="space-y-8">
+        <div className="text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Business Details</h2>
+          <p className="text-lg text-gray-600">Tell us about your {industryLabel.toLowerCase()}</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          
+          {/* TRUCKING FIELDS */}
+          {formData.industry === 'trucking' && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="dotNumber" className="block text-sm font-semibold text-gray-700">
+                  US DOT # <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="dotNumber"
+                  name="dotNumber"
+                  value={formData.dotNumber || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900 placeholder-gray-500"
+                  placeholder="Your DOT Number"
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="fleetSize" className="block text-sm font-semibold text-gray-700">
+                  Fleet Size <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="fleetSize"
+                  name="fleetSize"
+                  value={formData.fleetSize || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select fleet size</option>
+                  <option value="1">Owner Operator (1 Unit)</option>
+                  <option value="2-5">Small Fleet (2-5 Units)</option>
+                  <option value="6-25">Medium Fleet (6-25 Units)</option>
+                  <option value="26-50">Large Fleet (26-50 Units)</option>
+                  <option value="50+">Enterprise (50+ Units)</option>
+                </select>
+              </div>
+              
+              <div className="md:col-span-2 space-y-2">
+                <label htmlFor="primaryCargo" className="block text-sm font-semibold text-gray-700">
+                  Primary Cargo Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="primaryCargo"
+                  name="primaryCargo"
+                  value={formData.primaryCargo || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select cargo type</option>
+                  <option value="General Freight">General Freight</option>
+                  <option value="Refrigerated">Refrigerated</option>
+                  <option value="Flatbed">Flatbed</option>
+                  <option value="Automotive">Automotive</option>
+                  <option value="Building Materials">Building Materials</option>
+                  <option value="Hazmat">Hazmat</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+            </>
+          )}
+          
+          {/* CONSTRUCTION FIELDS */}
+          {formData.industry === 'construction' && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="contractorType" className="block text-sm font-semibold text-gray-700">
+                  Contractor Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="contractorType"
+                  name="contractorType"
+                  value={formData.contractorType || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select type</option>
+                  <option value="General Contractor">General Contractor</option>
+                  <option value="Electrical">Electrical</option>
+                  <option value="Plumbing">Plumbing</option>
+                  <option value="Roofing">Roofing</option>
+                  <option value="HVAC">HVAC</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="yearsExperience" className="block text-sm font-semibold text-gray-700">
+                  Years Experience <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="yearsExperience"
+                  name="yearsExperience"
+                  value={formData.yearsExperience || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select years</option>
+                  <option value="0-2 Years">0-2 Years</option>
+                  <option value="3-5 Years">3-5 Years</option>
+                  <option value="6-10 Years">6-10 Years</option>
+                  <option value="10+ Years">10+ Years</option>
+                </select>
+              </div>
+            </>
+          )}
+          
+          {/* MANUFACTURING FIELDS */}
+          {formData.industry === 'manufacturing' && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="industryType" className="block text-sm font-semibold text-gray-700">
+                  Industry Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="industryType"
+                  name="industryType"
+                  value={formData.industryType || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select industry</option>
+                  <option value="Food & Beverage">Food & Beverage</option>
+                  <option value="Automotive">Automotive</option>
+                  <option value="Electronics">Electronics</option>
+                  <option value="Chemical">Chemical</option>
+                  <option value="Textile">Textile</option>
+                  <option value="Metal & Machinery">Metal & Machinery</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="annualRevenue" className="block text-sm font-semibold text-gray-700">
+                  Annual Revenue <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="annualRevenue"
+                  name="annualRevenue"
+                  value={formData.annualRevenue || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select revenue</option>
+                  <option value="Under $1M">Under $1M</option>
+                  <option value="$1M - $5M">$1M - $5M</option>
+                  <option value="$5M - $25M">$5M - $25M</option>
+                  <option value="$25M - $100M">$25M - $100M</option>
+                  <option value="Over $100M">Over $100M</option>
+                </select>
+              </div>
+            </>
+          )}
+          
+          {/* NONPROFIT FIELDS */}
+          {formData.industry === 'nonprofit' && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="organizationType" className="block text-sm font-semibold text-gray-700">
+                  Organization Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="organizationType"
+                  name="organizationType"
+                  value={formData.organizationType || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select type</option>
+                  <option value="Human Services">Human Services</option>
+                  <option value="Healthcare & Medical">Healthcare & Medical</option>
+                  <option value="Education & Youth">Education & Youth</option>
+                  <option value="Arts & Culture">Arts & Culture</option>
+                  <option value="Religious Organization">Religious Organization</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="annualBudget" className="block text-sm font-semibold text-gray-700">
+                  Annual Budget <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="annualBudget"
+                  name="annualBudget"
+                  value={formData.annualBudget || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select budget</option>
+                  <option value="Under $100K">Under $100K</option>
+                  <option value="$100K - $500K">$100K - $500K</option>
+                  <option value="$500K - $2M">$500K - $2M</option>
+                  <option value="$2M - $10M">$2M - $10M</option>
+                  <option value="Over $10M">Over $10M</option>
+                </select>
+              </div>
+            </>
+          )}
+          
+          {/* PUBLIC ENTITY FIELDS */}
+          {formData.industry === 'public-entity' && (
+            <>
+              <div className="space-y-2">
+                <label htmlFor="entityType" className="block text-sm font-semibold text-gray-700">
+                  Entity Type <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="entityType"
+                  name="entityType"
+                  value={formData.entityType || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select type</option>
+                  <option value="Municipal Government">Municipal Government</option>
+                  <option value="County Government">County Government</option>
+                  <option value="Special District">Special District</option>
+                  <option value="State & Federal">State & Federal</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              
+              <div className="space-y-2">
+                <label htmlFor="annualBudget" className="block text-sm font-semibold text-gray-700">
+                  Annual Budget <span className="text-red-500">*</span>
+                </label>
+                <select
+                  id="annualBudget"
+                  name="annualBudget"
+                  value={formData.annualBudget || ''}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+                  required
+                >
+                  <option value="">Select budget</option>
+                  <option value="Under $1M">Under $1M</option>
+                  <option value="$1M - $10M">$1M - $10M</option>
+                  <option value="$10M - $50M">$10M - $50M</option>
+                  <option value="$50M - $250M">$50M - $250M</option>
+                  <option value="Over $250M">Over $250M</option>
+                </select>
+              </div>
+            </>
+          )}
+          
+          {/* STATE FIELD - SHOWN FOR ALL INDUSTRIES */}
+          <div className="md:col-span-2 space-y-2">
+            <label htmlFor="domiciledState" className="block text-sm font-semibold text-gray-700">
+              State <span className="text-red-500">*</span>
+            </label>
+            <select
+              id="domiciledState"
+              name="domiciledState"
+              value={formData.domiciledState || ''}
+              onChange={handleInputChange}
+              className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
+              required
+            >
+              <option value="">Select your state</option>
+              {allStates.map(state => (
+                <option key={state} value={state}>{state}</option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        <div className="space-y-2">
-          <label htmlFor="fleetSize" className="block text-sm font-semibold text-gray-700">
-            Fleet Size *
-          </label>
-          <select
-            id="fleetSize"
-            name="fleetSize"
-            value={formData.fleetSize}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
-            required
-          >
-            <option value="">Select fleet size</option>
-            <option value="2-9">2-9 Non-Fleet</option>
-            <option value="10-50">10-50 Mid-Fleet</option>
-            <option value="50-100">50-100 Large Fleet</option>
-            <option value="100+">100+ Enterprise</option>
-          </select>
-        </div>
-
-        <div className="space-y-2">
-          <label htmlFor="primaryCargo" className="block text-sm font-semibold text-gray-700">
-            Primary Cargo Type *
-          </label>
-          <select
-            id="primaryCargo"
-            name="primaryCargo"
-            value={formData.primaryCargo}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
-            required
-          >
-            <option value="">Select cargo type</option>
-            <option value="dry-van">Dry Van</option>
-            <option value="reefer">Reefer (Refrigerated)</option>
-            <option value="flatbed">Flatbed</option>
-            <option value="intermodal">Intermodal</option>
-            <option value="ltl">LTL (Less Than Truckload)</option>
-            <option value="hazmat">Hazmat</option>
-            <option value="oversized">Oversized/Heavy Haul</option>
-            <option value="mixed">Mixed Freight</option>
-          </select>
-        </div>
-
-        <div className="md:col-span-2 space-y-2">
-          <label htmlFor="domiciledState" className="block text-sm font-semibold text-gray-700">
-            State of Domicile *
-          </label>
-          <select
-            id="domiciledState"
-            name="domiciledState"
-            value={formData.domiciledState}
-            onChange={handleInputChange}
-            className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:ring-2 focus:ring-orange-500/20 outline-none transition-all text-gray-900"
-            required
-          >
-            <option value="">Select your domiciled state</option>
-            {allStates.map(state => (
-              <option key={state} value={state}>{state}</option>
-            ))}
-          </select>
-          <p className="text-sm text-gray-500">The state where your business is legally domiciled</p>
-        </div>
-      </div>
-    </div>
-  );
+    );
+  };
 
   const renderStep3 = () => (
     <div className="space-y-8">
@@ -335,7 +763,7 @@ const QuotePage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
         <div className="space-y-2">
           <label htmlFor="yearsInBusiness" className="block text-sm font-semibold text-gray-700">
-            Years in Business *
+            Years in Business <span className="text-red-500">*</span>
           </label>
           <select
             id="yearsInBusiness"
@@ -356,7 +784,7 @@ const QuotePage: React.FC = () => {
 
         <div className="space-y-2">
           <label htmlFor="previousClaims" className="block text-sm font-semibold text-gray-700">
-            Claims in Last 3 Years *
+            Claims in Last 3 Years <span className="text-red-500">*</span>
           </label>
           <select
             id="previousClaims"
@@ -431,7 +859,7 @@ const QuotePage: React.FC = () => {
       <div>
         <h2 className="text-4xl font-bold text-gray-900 mb-4">Quote Request Submitted!</h2>
         <p className="text-xl text-gray-600 leading-relaxed">
-          Thanks for choosing Moxie Risk Partners. Our trucking insurance experts will review your information and contact you within 2 business hours with your customized quote.
+          Thanks for choosing Moxie Risk Partners. Our insurance experts will review your information and contact you within 2 business hours with your customized quote.
         </p>
       </div>
 
@@ -472,10 +900,6 @@ const QuotePage: React.FC = () => {
             <Phone className="w-5 h-5 mr-2" />
             Call (800) 669-4301
           </a>
-          {/* <button className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center">
-            <MessageSquare className="w-5 h-5 mr-2" />
-            Live Chat
-          </button> */}
         </div>
       </div>
     </div>

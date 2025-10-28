@@ -1,5 +1,5 @@
 import { Metadata } from "next";
-import Image from "next/image";
+// import Image from "next/image";
 // import Header from "@/Main/Header";
 // import Hero from "@/Main/Hero";
 // import Overivew from "@/Main/Overivew";

@@ -3,6 +3,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Phone, Mail, X } from 'lucide-react';
 import SuccessModal from '../Components/successModal';
+import Link from 'next/link';
+
+
 
 interface CoverageType {
   id: string;
@@ -20,14 +23,18 @@ const CoveragePage = () => {
   const [showConfetti, setShowConfetti] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedCoverage, setSelectedCoverage] = useState<CoverageType | null>(null);
+
   const [formData, setFormData] = useState({
     companyName: '',
     contactName: '',
     email: '',
     phone: '',
-    coverageType: '',
-    industryType: ''
+    coverageType: [] as string[], // Changed to array for multiple selections
+    industry: '' // Changed from industryType to industry
   });
+  
+  const [isCoverageDropdownOpen, setIsCoverageDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const heroRef = useRef(null);
   const formRef = useRef<HTMLDivElement>(null);
@@ -45,6 +52,18 @@ const CoveragePage = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsCoverageDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Prevent body scroll when modal is open
   useEffect(() => {
     if (selectedCoverage) {
@@ -57,25 +76,97 @@ const CoveragePage = () => {
     };
   }, [selectedCoverage]);
 
-  const handleFormSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleFormSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.companyName || !formData.contactName || !formData.email || 
+        !formData.phone || formData.coverageType.length === 0 || !formData.industry) {
+      alert('Please fill in all required fields');
+      return;
+    }
+    
     setIsSubmitting(true);
+    
+    try {
+      console.log('Submitting coverage page form...', formData);
+      
+      // Build payload for Momentum API - NO firstName/lastName to prevent duplicates
+      const momentumPayload = {
+        // Contact Info - ONLY contactName (prevents duplicates)
+        contactName: formData.contactName,
+        email: formData.email,
+        phone: formData.phone,
+        
+        // Business Info
+        companyName: formData.companyName,
+        industry: formData.industry,
+        
+        // Coverage Info - send as array
+        coverageNeeded: formData.coverageType,
+        
+        // Form metadata
+        formType: 'Coverage Page Quote',
+        source: 'Coverage Page Form',
+        
+        // Description field with all details
+        description: `Coverage Page Quote
 
-    setTimeout(() => {
-      console.log('Form submitted:', formData);
-      setIsSubmitting(false);
-      setShowSuccessModal(true);
-      setShowConfetti(true);
+Contact: ${formData.contactName}
+Company: ${formData.companyName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Industry: ${formData.industry}
+Coverage Requested:
+${formData.coverageType.map(coverage => {
+  const option = allCoverageOptions.find(opt => opt.value === coverage);
+  return `- ${option?.label || coverage}`;
+}).join('\n')}
 
-      setFormData({
-        companyName: '',
-        contactName: '',
-        email: '',
-        phone: '',
-        coverageType: '',
-        industryType: ''
+Source: Coverage Page Form`
+      };
+      
+      console.log('Sending to API:', momentumPayload);
+      
+      // Send to API
+      const response = await fetch('/api/momentum-quote', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(momentumPayload)
       });
-    }, 1000);
+      
+      const result = await response.json();
+      console.log('API response:', result);
+      
+      if (result.success) {
+        console.log('✓ Quote submitted successfully!');
+        
+        // Show success modal with confetti
+        setShowSuccessModal(true);
+        setShowConfetti(true);
+        
+        // Reset form
+        setFormData({
+          companyName: '',
+          contactName: '',
+          email: '',
+          phone: '',
+          coverageType: [],
+          industry: ''
+        });
+        
+      } else {
+        alert(`Error submitting quote: ${result.message}\n\nPlease call (800) 669-4301`);
+      }
+      
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Unable to submit. Please call (800) 669-4301 for immediate assistance.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCloseModal = () => {
@@ -96,6 +187,35 @@ const CoveragePage = () => {
     setTimeout(() => {
       formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 100);
+  };
+
+  // All 16 coverage options for the form dropdown
+  const allCoverageOptions = [
+    { value: 'commercial-auto-liability', label: 'Commercial Auto Liability' },
+    { value: 'physical-damage', label: 'Physical Damage' },
+    { value: 'motor-truck-cargo', label: 'Motor Truck Cargo' },
+    { value: 'non-trucking-liability', label: 'Non-Trucking Liability (NTL)' },
+    { value: 'occupational-accident', label: 'Occupational Accident (Occ/Acc)' },
+    { value: 'general-liability', label: 'General Liability' },
+    { value: 'workers-comp', label: "Workers' Compensation" },
+    { value: 'builders-risk', label: 'Builders Risk' },
+    { value: 'cyber-liability', label: 'Cyber Liability' },
+    { value: 'product-liability', label: 'Product Liability' },
+    { value: 'commercial-property', label: 'Commercial Property' },
+    { value: 'professional-liability', label: 'Professional Liability' },
+    { value: 'tools-equipment', label: 'Tools & Equipment' },
+    { value: 'equipment-breakdown', label: 'Equipment Breakdown' },
+    { value: 'environmental-liability', label: 'Environmental Liability' },
+    { value: 'multiple-other', label: 'Multiple Coverages / Not Sure / Other' }
+  ];
+
+  const handleCoverageToggle = (coverageValue: string) => {
+    setFormData(prev => ({
+      ...prev,
+      coverageType: prev.coverageType.includes(coverageValue)
+        ? prev.coverageType.filter(c => c !== coverageValue)
+        : [...prev.coverageType, coverageValue]
+    }));
   };
 
   const coverageTypes: CoverageType[] = [
@@ -282,18 +402,19 @@ const CoveragePage = () => {
     {
       id: 'commercial-auto-liability',
       title: 'Commercial Auto Liability',
-      description: 'DOT-compliant protection for commercial vehicle operations with liability coverage ranging from $750K to $5M',
-      detailedOverview: 'DOT-compliant protection for all commercial vehicle operations. Mandatory coverage for trucking companies with competitive rates and expert guidance.',
-      coverageAmount: '$750K - $5M liability',
+      description: 'DOT-compliant protection for commercial vehicle operations with liability coverage for trucking companies and fleets',
+      detailedOverview: 'DOT-compliant protection for all commercial vehicle operations including construction vehicles, delivery trucks, and semi-tractors. Mandatory coverage for trucking companies with competitive rates and expert guidance. Whether you\'re insuring a work pickup truck or a fleet of tractor trailers, we provide comprehensive liability protection tailored to your specific needs.',
+      coverageAmount: '$1M - $5M+ liability',
       keyFeatures: [
         'DOT compliance',
         'Third-party liability',
         'Bodily injury coverage',
         'Property damage',
         'Cargo incidental coverage',
-        'MCS-90 endorsement'
+        'MCS-90 endorsement',
+        'Umbrella policies up to $10M available'
       ],
-      whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Owner operators', 'Transportation businesses']
+      whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Construction companies', 'Transportation businesses']
     },
     {
       id: 'physical-damage',
@@ -315,33 +436,50 @@ const CoveragePage = () => {
       id: 'motor-truck-cargo',
       title: 'Motor Truck Cargo',
       description: 'Freight protection covering goods in transit from loading to final delivery with comprehensive coverage options',
-      detailedOverview: 'Essential protection for goods in transit covering theft, damage, and loss of freight. Required by most brokers and shippers with customizable limits.',
-      coverageAmount: '$5,000 - $250,000 per load',
+      detailedOverview: 'Essential protection for goods in transit covering theft, damage, and loss of freight. Required by most brokers and shippers with customizable limits from $100,000 to over $250,000 per load, with capabilities to write policies up to $1M for specialized cargo.',
+      coverageAmount: '$100K - $250K+ per load',
       keyFeatures: [
         'Goods in transit coverage',
         'Loading/unloading protection',
         'Theft coverage',
         'Damage protection',
         'Refrigeration breakdown',
-        'Debris removal'
+        'Debris removal',
+        'Higher limits available up to $1M'
       ],
       whoNeedsIt: ['All trucking operations hauling freight', 'Owner operators', 'Fleet carriers', 'Specialized haulers', 'Refrigerated transport']
     },
     {
-      id: 'owner-operator',
-      title: 'Owner Operator Insurance',
-      description: 'Comprehensive protection packages for independent truckers with 1-3 units including liability, physical damage, and cargo coverage',
-      detailedOverview: 'Specialized insurance packages designed for independent truckers. Combines liability, physical damage, and cargo coverage at competitive rates for small fleet operations.',
-      coverageAmount: 'Comprehensive protection packages',
+      id: 'non-trucking-liability',
+      title: 'Non-Trucking Liability (NTL)',
+      description: 'Bobtail coverage for owner operators when operating under own authority without a trailer or outside dispatch',
+      detailedOverview: 'Non-Trucking Liability (NTL), also known as Bobtail insurance, protects owner operators when driving their truck for personal use or without a trailer. This coverage is essential for independent drivers operating under their own authority when not under dispatch.',
+      coverageAmount: '$1M+ liability coverage',
       keyFeatures: [
-        'Combined coverage packages',
-        'Flexible payment options',
-        'DOT compliance support',
-        'Competitive rates',
-        'Claims assistance',
-        'Quick quote turnaround'
+        'Personal use protection',
+        'Bobtail coverage',
+        'Non-dispatch operation',
+        'Affordable premiums',
+        'Quick policy issuance',
+        '24/7 claims support'
       ],
-      whoNeedsIt: ['Independent truckers with 1-3 units', 'New authority holders', 'Lease purchase operators', 'Small fleet owners', 'Specialized haulers']
+      whoNeedsIt: ['Owner operators', 'Independent drivers', 'Lease purchase operators', 'Contract carriers', 'Individual truckers']
+    },
+    {
+      id: 'occupational-accident',
+      title: 'Occupational Accident (Occ/Acc)',
+      description: 'Medical and disability coverage for owner operators and independent contractors in lieu of workers compensation',
+      detailedOverview: 'Occupational Accident insurance provides medical expense coverage, disability benefits, and accidental death protection for owner operators and independent contractors who are not eligible for traditional workers compensation coverage. Essential protection for individual drivers.',
+      coverageAmount: 'Up to $1M coverage',
+      keyFeatures: [
+        'Medical expense coverage',
+        'Disability benefits',
+        'Accidental death benefit',
+        'No workers comp needed',
+        'Affordable premiums',
+        'Quick claim processing'
+      ],
+      whoNeedsIt: ['Owner operators', 'Independent contractors', '1099 drivers', 'Lease operators', 'Individual truckers']
     },
   ];
 
@@ -419,13 +557,13 @@ const CoveragePage = () => {
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={scrollToForm}
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
-                    suppressHydrationWarning
-                  >
-                    Get Your Quote
-                  </button>
+                                           <Link 
+  href="/quote-form"
+  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+   suppressHydrationWarning
+>
+  Get Your Quote
+</Link>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center">
                     Call (800) 669-4301
@@ -660,7 +798,7 @@ const CoveragePage = () => {
 
       
       {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-[clamp(3rem,8vw,5rem)] bg-gray-50 overflow-hidden">
+      <section ref={formRef} className="relative py-[clamp(3rem,8vw,5rem)] bg-gray-50 overflow-hidden">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
@@ -711,7 +849,7 @@ const CoveragePage = () => {
             </div>
 
             {/* Right Side - Quote Form */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+   <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-xl border border-gray-200 p-8">
               
               <div className="text-center mb-6">
                 <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -730,7 +868,7 @@ const CoveragePage = () => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                     placeholder="Your Company Name"
                     value={formData.companyName}
                     onChange={(e) => setFormData({...formData, companyName: e.target.value})}
@@ -745,7 +883,7 @@ const CoveragePage = () => {
                   <input
                     type="text"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                     placeholder="Your Full Name"
                     value={formData.contactName}
                     onChange={(e) => setFormData({...formData, contactName: e.target.value})}
@@ -761,7 +899,7 @@ const CoveragePage = () => {
                     <input
                       type="email"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                       placeholder="email@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -776,7 +914,7 @@ const CoveragePage = () => {
                     <input
                       type="tel"
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                       placeholder="(555) 123-4567"
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
@@ -788,42 +926,70 @@ const CoveragePage = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Coverage Type *
+                      Coverage Type * <span className="text-gray-500 text-xs">(Select all that apply)</span>
                     </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.coverageType}
-                      onChange={(e) => setFormData({...formData, coverageType: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="">Select Coverage</option>
-                      <option value="commercial-auto-liability">Commercial Auto Liability</option>
-                      <option value="physical-damage">Physical Damage</option>
-                      <option value="motor-truck-cargo">Motor Truck Cargo</option>
-                      <option value="owner-operator">Owner Operator</option>
-                      <option value="workers-comp">Workers' Compensation</option>
-                    </select>
+                    <div className="relative" ref={dropdownRef}>
+                      <button
+                        type="button"
+                        onClick={() => setIsCoverageDropdownOpen(!isCoverageDropdownOpen)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-left flex justify-between items-center text-gray-900 bg-white"
+                      >
+                        <span className="text-gray-700 truncate">
+                          {formData.coverageType.length === 0 
+                            ? 'Select coverage types...'
+                            : formData.coverageType.length === 1
+                            ? allCoverageOptions.find(opt => opt.value === formData.coverageType[0])?.label
+                            : `${formData.coverageType.length} coverage types selected`
+                          }
+                        </span>
+                        <svg 
+                          className={`w-5 h-5 transition-transform text-gray-600 flex-shrink-0 ml-2 ${isCoverageDropdownOpen ? 'rotate-180' : ''}`}
+                          fill="none" 
+                          stroke="currentColor" 
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {isCoverageDropdownOpen && (
+                        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+                          {allCoverageOptions.map((option) => (
+                            <label 
+                              key={option.value} 
+                              className="flex items-center p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+                            >
+                              <input
+                                type="checkbox"
+                                checked={formData.coverageType.includes(option.value)}
+                                onChange={() => handleCoverageToggle(option.value)}
+                                className="mr-3 w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 flex-shrink-0"
+                              />
+                              <span className="text-gray-900 text-sm font-medium">{option.label}</span>
+                            </label>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Industry Type *
+                      Industry *
                     </label>
                     <select
                       required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.industryType}
-                      onChange={(e) => setFormData({...formData, industryType: e.target.value})}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 bg-white"
+                      value={formData.industry}
+                      onChange={(e) => setFormData({...formData, industry: e.target.value})}
                       suppressHydrationWarning
                     >
                       <option value="">Select Industry</option>
-                      <option value="trucking">Trucking/Transportation</option>
-                      <option value="construction">Construction</option>
-                      <option value="manufacturing">Manufacturing</option>
-                      <option value="service">Service Company</option>
-                      <option value="retail">Retail/Distribution</option>
-                      <option value="other">Other</option>
+                      <option value="trucking">Trucking & Transportation</option>
+                      <option value="construction">Construction & Contracting</option>
+                      <option value="manufacturing">Manufacturing & Production</option>
+                      <option value="nonprofit">Nonprofit & Human Services</option>
+                      <option value="public-entity">Government & Public Entities</option>
                     </select>
                   </div>
                 </div>
@@ -834,8 +1000,20 @@ const CoveragePage = () => {
                   className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   suppressHydrationWarning
                 >
-                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
-                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
+                  {isSubmitting ? (
+                    <span className="flex items-center justify-center gap-2">
+                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                      </svg>
+                      Submitting...
+                    </span>
+                  ) : (
+                    <>
+                      Get My Quote Now
+                      <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+                    </>
+                  )}
                 </button>
 
                 <div className="text-center mt-4 space-y-2">

@@ -87,9 +87,33 @@ const AboutPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        /* Fluid Responsive Scaling - Works on ALL screen sizes */
+        :root {
+          --fluid-spacing-xs: clamp(0.5rem, 1vw, 1rem);
+          --fluid-spacing-sm: clamp(1rem, 2vw, 1.5rem);
+          --fluid-spacing-md: clamp(1.5rem, 3vw, 2rem);
+          --fluid-spacing-lg: clamp(2rem, 4vw, 3rem);
+          --fluid-spacing-xl: clamp(3rem, 6vw, 5rem);
+        }
+        
+        /* Ensure smooth scaling on ultra-wide monitors */
+        @media (min-width: 2000px) {
+          .responsive-container {
+            max-width: 1920px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+        }
+        
+        /* Prevent overflow on any screen */
+        * {
+          box-sizing: border-box;
+        }
+      `}</style>
       
       {/* Hero Section - Full Width Background */}
-      <section ref={heroRef} className="relative bg-white py-12 lg:py-20 overflow-hidden">
+      <section ref={heroRef} className="relative bg-white py-[clamp(3rem,8vw,5rem)] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img 
@@ -101,31 +125,31 @@ const AboutPage = () => {
         </div>
         
         {/* Hero Content */}
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="responsive-container relative max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           <div className={`text-center transform transition-all duration-1000 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'}`}>
-            <h1 className="text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-white leading-tight mb-[clamp(1rem,2vw,1.5rem)]">
               About Moxie Risk Partners
             </h1>
             
-            <p className="text-xl lg:text-2xl text-white/90 leading-relaxed mb-12 max-w-4xl mx-auto">
+            <p className="text-[clamp(1rem,1.5vw,1.5rem)] text-white/90 leading-relaxed mb-[clamp(2rem,4vw,3rem)] max-w-[min(64rem,90vw)] mx-auto">
               We're a dedicated team of insurance professionals who believe in moving fast, 
               speaking plainly, and delivering results that matter to your business.
             </p>
 
             {/* Hero Stats */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-8 lg:gap-16">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-[clamp(2rem,4vw,4rem)]">
               <div className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
+                <div className="text-[clamp(2rem,4vw,3rem)] font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
                   26+
                 </div>
-                <div className="text-white/90 font-semibold">Years Experience</div>
+                <div className="text-white/90 font-semibold text-[clamp(0.875rem,1.2vw,1rem)]">Years Experience</div>
               </div>
               
               <div className="text-center">
-                <div className="text-4xl lg:text-5xl font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
+                <div className="text-[clamp(2rem,4vw,3rem)] font-bold text-transparent bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text mb-2">
                   100%
                 </div>
-                <div className="text-white/90 font-semibold">Transparent</div>
+                <div className="text-white/90 font-semibold text-[clamp(0.875rem,1.2vw,1rem)]">Transparent</div>
               </div>
             </div>
           </div>
@@ -133,29 +157,28 @@ const AboutPage = () => {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="mb-[clamp(2rem,4vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Our Story
             </h2>
-            {/* <div className="w-36 h-1 bg-orange-600 rounded-full"></div> */}
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-[clamp(2rem,4vw,3rem)]">
             {/* Story Intro */}
             <div className="text-center">
-              <p className="text-2xl lg:text-3xl text-orange-600 leading-relaxed max-w-5xl mx-auto font-medium">
+              <p className="text-[clamp(1.25rem,2vw,1.875rem)] text-orange-600 leading-relaxed max-w-[min(80rem,90vw)] mx-auto font-medium">
                 The trucking and logistics industry moves America, but finding reliable insurance shouldn't slow you down.
               </p>
             </div>
 
             {/* Story Columns */}
-            <div className="grid lg:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900">Why We Started</h3>
-                <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
+            <div className="grid lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)]">
+              <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
+                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900">Why We Started</h3>
+                <div className="space-y-4 text-[clamp(1rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed">
                   <p>
                     Too many businesses struggle with complicated processes, unclear terms, and agents who don't understand 
                     the unique challenges of commercial transportation, manufacturing, and public sector operations. 
@@ -168,9 +191,9 @@ const AboutPage = () => {
                 </div>
               </div>
               
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900">Who We Are</h3>
-                <div className="space-y-4 text-lg text-gray-600 leading-relaxed">
+              <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
+                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900">Who We Are</h3>
+                <div className="space-y-4 text-[clamp(1rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed">
                   <p>
                     We're based in the heart of the Midwest because we know this region. We understand the routes, 
                     the weather challenges, the regulations, and most importantly, the hardworking people who keep 
@@ -189,27 +212,27 @@ const AboutPage = () => {
       </section>
 
       {/* Mission & Vision Section */}
-      <section id="mission" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
+      <section id="mission" className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="grid lg:grid-cols-2 gap-[clamp(2rem,5vw,5rem)]">
             
             {/* Mission */}
-            <div className="space-y-6">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
+              <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight">
                 Our Mission
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed">
                 To provide fast, reliable, and transparent insurance solutions that move as fast as our clients do. 
                 We believe insurance should protect your business, not complicate it.
               </p>
             </div>
             
             {/* Vision */}
-            <div className="space-y-6">
-              <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
+              <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight">
                 Our Vision
               </h2>
-              <p className="text-xl text-gray-600 leading-relaxed">
+              <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed">
                 To be the most trusted and efficient commercial insurance agency in the Nation. 
                 We're building the future of business insurance, one relationship at a time.
               </p>
@@ -219,42 +242,36 @@ const AboutPage = () => {
       </section>
 
       {/* Industry Expertise Section */}
-      <section id="expertise" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="expertise" className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="mb-[clamp(2rem,4vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Our Industry Expertise
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(64rem,90vw)] mb-6">
               These aren't just words on a wall - they're the principles that guide every interaction, 
               every quote, and every decision we make.
             </p>
-            {/* <div className="w-96 h-1 bg-orange-600 rounded-full"></div> */}
           </div>
 
-          <div className="space-y-8">
+          <div className="space-y-[clamp(1rem,2vw,2rem)]">
             {coreValues.map((value, index) => {
               
               return (
-                <div key={index} className="flex items-start space-x-6 p-8 bg-gray-50 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                <div key={index} className="flex items-start space-x-[clamp(1rem,2vw,1.5rem)] p-[clamp(1rem,2vw,2rem)] bg-gray-50 rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300">
                   
                   {/* Number Badge */}
                   <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-                      <span className="text-white font-bold text-xl">{value.number}</span>
+                    <div className="w-[clamp(3rem,4vw,4rem)] h-[clamp(3rem,4vw,4rem)] bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
+                      <span className="text-white font-bold text-[clamp(1rem,1.5vw,1.25rem)]">{value.number}</span>
                     </div>
-                  </div>
-
-                  {/* Icon */}
-                  <div className="flex-shrink-0 mt-1">
-                    
                   </div>
                   
                   {/* Content */}
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-3">{value.title}</h3>
-                    <p className="text-lg text-gray-600 leading-relaxed">{value.description}</p>
+                    <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-3">{value.title}</h3>
+                    <p className="text-[clamp(1rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed">{value.description}</p>
                   </div>
                 </div>
               );
@@ -264,29 +281,28 @@ const AboutPage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section id="why-choose" className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="why-choose" className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+          <div className="text-center mb-[clamp(2rem,4vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
               Why Choose Moxie Risk Partners
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(64rem,90vw)] mx-auto mb-6">
               We've built our reputation on delivering results for businesses just like yours.
             </p>
-            {/* <div className="w-96 h-1 bg-orange-600 rounded-full mx-auto"></div> */}
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-[clamp(1.5rem,3vw,2rem)]">
             {highlights.map((highlight, index) => (
-              <div key={index} className="text-center p-8 bg-white rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <div className="text-5xl lg:text-6xl font-bold text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text mb-4">
+              <div key={index} className="text-center p-[clamp(1.5rem,3vw,2rem)] bg-white rounded-2xl border border-gray-200 hover:shadow-lg transition-shadow duration-300">
+                <div className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text mb-4">
                   {highlight.stat}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">
                   {highlight.title}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-[clamp(1rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed">
                   {highlight.description}
                 </p>
               </div>
@@ -296,17 +312,17 @@ const AboutPage = () => {
       </section>
 
       {/* Call to Action Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="space-y-8">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(64rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)] text-center">
+          <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight">
               Ready to Experience the 
               <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
                 Moxie Difference?
               </span>
             </h2>
             
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed max-w-[min(48rem,90vw)] mx-auto">
               Join the growing number of businesses across trucking, manufacturing, public entities, and 
               commercial sectors who trust us with their insurance needs. Let's get started on your quote today.
             </p>
@@ -314,15 +330,15 @@ const AboutPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="/quote-form" 
-                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+                className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
               >
                 Get Your Quote
-                <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+               
               </a>
               
               <a 
                 href="tel:+18006694301" 
-                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center"
+                className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center"
               >
                 <Phone className="mr-2 w-5 h-5" />
                 Call (800) 669-4301

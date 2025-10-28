@@ -1,6 +1,5 @@
-
 // src/app/api/momentum-quote/route.ts
-// CLEAN VERSION - No duplicate fields
+// FIXED VERSION - Removes firstName/lastName to prevent duplicate contacts
 import { getMomentumToken } from '@/lib/momentum-auth';
 
 export async function POST(request: Request) {
@@ -34,12 +33,7 @@ export async function POST(request: Request) {
     }
     console.log('✓ Agency ID loaded:', agencyId);
     
-    // STEP 3: Parse contact name into first and last
-    const nameParts = formData.contactName?.split(' ') || ['', ''];
-    const firstName = nameParts[0] || formData.firstName || 'Not Provided';
-    const lastName = nameParts.slice(1).join(' ') || formData.lastName || '';
-    
-    // STEP 4: Determine Line of Business Type
+    // STEP 3: Determine Line of Business Type
     const commercialIndustries = [
       'trucking', 'construction', 'manufacturing', 'nonprofit', 'public-entity',
       'commercial-auto', 'motor-truck-cargo', 'owner-operator', 'physical-damage'
@@ -51,7 +45,7 @@ export async function POST(request: Request) {
     console.log('✓ Line of Business:', lineOfBusiness);
     console.log('✓ Form Type:', formData.formType);
     
-    // STEP 5: Build CLEAN payload - only ONE field name per data point
+    // STEP 4: Build CLEAN payload - NO firstName/lastName to prevent duplicates
    const momentumPayload: Record<string, unknown> = {
       // ========================================
       // REQUIRED CORE FIELDS
@@ -61,11 +55,10 @@ export async function POST(request: Request) {
       LineOfBusiness: lineOfBusiness,
       
       // ========================================
-      // CONTACT INFORMATION
+      // CONTACT INFORMATION - ONLY ContactName (no FirstName/LastName)
+      // This prevents Momentum from creating duplicate contacts
       // ========================================
-      FirstName: firstName,
-      LastName: lastName || firstName,
-      ContactName: formData.contactName || `${firstName} ${lastName}`,
+      ContactName: formData.contactName || 'Not Provided',
       Email: formData.email || '',
       Phone: formData.phone || '',
       
@@ -83,7 +76,7 @@ export async function POST(request: Request) {
       // ========================================
       // LOCATION (if provided)
       // ========================================
-      State: formData.state || "To Be Collected",
+      State: formData.state || formData.domiciledState || "To Be Collected",
       Address: formData.address || "To Be Collected",
       City: formData.city || "To Be Collected",
       Zip: formData.zip || formData.zipCode || "00000",
@@ -114,8 +107,8 @@ export async function POST(request: Request) {
     if (formData.vehicleType) {
       momentumPayload.VehicleType = formData.vehicleType;
     }
-    if (formData.cargoType) {
-      momentumPayload.CargoType = formData.cargoType;
+    if (formData.cargoType || formData.primaryCargo) {
+      momentumPayload.CargoType = formData.cargoType || formData.primaryCargo;
     }
     
     // Construction fields
@@ -157,18 +150,40 @@ export async function POST(request: Request) {
       momentumPayload.VehicleValue = formData.vehicleValue;
     }
     
+    // Workers Comp fields
+    if (formData.employeeCount) {
+      momentumPayload.EmployeeCount = formData.employeeCount;
+    }
+    
+    // Captives fields
+    if (formData.currentPremiums) {
+      momentumPayload.CurrentPremiums = formData.currentPremiums;
+    }
+    
+    // Quote page fields
+    if (formData.yearsInBusiness) {
+      momentumPayload.YearsInBusiness = formData.yearsInBusiness;
+    }
+    if (formData.previousClaims) {
+      momentumPayload.PreviousClaims = formData.previousClaims;
+    }
+    if (formData.currentInsurance) {
+      momentumPayload.CurrentInsurance = formData.currentInsurance;
+    }
+    
     // Coverage needs
     if (formData.coverageNeeded) {
       momentumPayload.CoverageNeeded = formData.coverageNeeded;
     }
     
-    console.log('✓ Clean payload prepared');
+    console.log('✓ Clean payload prepared (NO firstName/lastName)');
     console.log('✓ FormName:', momentumPayload.FormName);
     console.log('✓ LineOfBusiness:', momentumPayload.LineOfBusiness);
+    console.log('✓ ContactName:', momentumPayload.ContactName);
     console.log('✓ Field count:', Object.keys(momentumPayload).length);
     console.log('Full Payload:', JSON.stringify(momentumPayload, null, 2));
     
-    // STEP 6: Submit to Momentum API
+    // STEP 5: Submit to Momentum API
     console.log('→ Submitting to Momentum API...');
     const response = await fetch('https://api.nowcerts.com/api/PushJsonQuoteApplications', {
       method: 'POST',
@@ -181,7 +196,7 @@ export async function POST(request: Request) {
     
     console.log('← Momentum API response status:', response.status);
     
-    // STEP 7: Parse response
+    // STEP 6: Parse response
     const responseText = await response.text();
     console.log('← Raw response (first 300 chars):', responseText.substring(0, 300));
     
@@ -205,11 +220,11 @@ export async function POST(request: Request) {
       }, { status: 500 });
     }
     
-    // STEP 8: Handle response
+    // STEP 7: Handle response
     if (result.status === 1) {
       console.log('✓ Quote submitted successfully!');
       console.log('Momentum ID:', result.message);
-      console.log('=== Submission Complete ===');
+      console.log('=== Submission Complete (No Duplicates) ===');
       
       return Response.json({
         success: true,
