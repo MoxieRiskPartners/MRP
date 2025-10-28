@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Phone, Mail, Truck, FileText, Users, Award, DollarSign, Clock } from 'lucide-react';
-import SuccessModal from '../Components/successModal';
-
+import IndustryQuoteForm from '@/Components/IndustryQuoteForm';
+import { ownerOperatorFields } from '@/config/industryFormConfigs';
+import Link from 'next/link';
 
 interface CoverageOption {
   title: string;
@@ -60,18 +61,8 @@ const OwnerOperator = () => {
       isOpen: false
     }
   ]);
-  const [formData, setFormData] = useState({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    operatorType: '',
-    truckType: ''
-  });
+ 
 
-const [showSuccessModal, setShowSuccessModal] = useState(false);
-const [showConfetti, setShowConfetti] = useState(false);
-const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -186,32 +177,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     })));
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Owner operator form submitted:', formData);
-    
-    setIsSubmitting(false);
-    setShowSuccessModal(true);
-      setShowConfetti(true);
-
-    setFormData({
-      companyName: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      operatorType: '',
-      truckType: ''
-    });
-  };
-
-  const handleCloseModal = () => {
-  setShowSuccessModal(false);
-  setShowConfetti(false);
-};
 
 
   return (
@@ -262,10 +228,12 @@ const [isSubmitting, setIsSubmitting] = useState(false);
                 </div>
 
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                    Get Your Quote
-                  
-                  </button>
+              <Link 
+  href="/quote-form"
+  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+>
+  Get Your Quote
+</Link>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
                     Call (800) 669-4301
@@ -480,140 +448,21 @@ const [isSubmitting, setIsSubmitting] = useState(false);
               </div>
             </div>
 
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-              
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Truck className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive owner operator insurance quotes</p>
-              </div>
+           
+          
+           
 
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Company Name"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Full Name"
-                    value={formData.contactName}
-                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="email@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Operator Type *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.operatorType}
-                      onChange={(e) => setFormData({...formData, operatorType: e.target.value})}
-                    >
-                      <option value="">Select Type</option>
-                      <option value="own-authority">Own Authority</option>
-                      <option value="leased">Leased to Carrier</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Truck Type *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.truckType}
-                      onChange={(e) => setFormData({...formData, truckType: e.target.value})}
-                    >
-                      <option value="">Select Type</option>
-                      <option value="semi">Semi Truck</option>
-                      <option value="box-truck">Box Truck</option>
-                      <option value="other">Other</option>
-                    </select>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                >
-                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
-                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
-                </button>
-
-                <div className="text-center mt-4 space-y-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span>100% Secure & Confidential</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, unsubscribe anytime. Licensed agents only.
-                  </p>
-                </div>
-              </form>
-            </div>
+            <IndustryQuoteForm  // 6 lines
+  industry="owner-operator"
+  formName="Owner Operator Insurance Quote"
+  title="Get Your Free Quote"
+  subtitle="Fast, competitive owner operator insurance quotes"
+  fields={ownerOperatorFields}
+/>
           </div>
         </div>
       </section>
-{/* Success Modal */}
-      <SuccessModal 
-        isOpen={showSuccessModal}
-        onClose={handleCloseModal}
-        showConfetti={showConfetti}
-      />
+
     </div>
   );
 };

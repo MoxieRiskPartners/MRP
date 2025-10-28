@@ -2,7 +2,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Factory, Settings, Zap, Database, AlertTriangle, Cpu } from 'lucide-react';
-import SuccessModal from '@/Components/successModal';
+import IndustryQuoteForm from '@/Components/IndustryQuoteForm';
+import { manufacturingFields } from '@/config/industryFormConfigs';
+import Link from 'next/link';
+
+
 
 interface CoverageData {
   type: string;
@@ -53,19 +57,7 @@ const ManufacturingPage = () => {
       isOpen: false
     }
   ]);
-  const [formData, setFormData] = useState({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    industryType: '',
-    annualRevenue: ''
-  });
 
-  // Modal state management
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -221,44 +213,7 @@ const ManufacturingPage = () => {
     })));
   };
 
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Start submitting state
-    setIsSubmitting(true);
-    
-    try {
-      console.log('Manufacturing insurance form submitted:', formData);
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Show success modal with confetti
-      setShowSuccessModal(true);
-      setShowConfetti(true);
-      
-      // Reset form
-      setFormData({
-        companyName: '',
-        contactName: '',
-        email: '',
-        phone: '',
-        industryType: '',
-        annualRevenue: ''
-      });
-      
-    } catch (error) {
-      console.error('Form submission error:', error);
-      // Handle error state here if needed
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleCloseModal = () => {
-    setShowSuccessModal(false);
-    setShowConfetti(false);
-  };
+  
 
   const handleTypeSelection = (typeCode: string) => {
     setSelectedType(typeCode);
@@ -350,13 +305,12 @@ const ManufacturingPage = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
-                    suppressHydrationWarning={true}
-                  >
-                    Get Your Quote
-                  
-                  </button>
+      <Link 
+  href="/quote-form"
+  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+>
+  Get Your Quote
+</Link>
                   
                   <a href="tel:+18003265581" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 flex items-center justify-center">
                     Call (800) 326-5581
@@ -675,171 +629,23 @@ const ManufacturingPage = () => {
               </div>
             </div>
 
+           
+
             {/* Right Side - Quote Form */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-              
-              <div className="text-center mb-[clamp(1rem,2.5vw,1.5rem)]">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive manufacturing insurance quotes</p>
-              </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-[clamp(0.75rem,2vw,1rem)]">
-                
-                {/* Company Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Company Name"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                    suppressHydrationWarning={true}
-                  />
-                </div>
-
-                {/* Contact Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Full Name"
-                    value={formData.contactName}
-                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-                    suppressHydrationWarning={true}
-                  />
-                </div>
-
-                {/* Email and Phone Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="email@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      suppressHydrationWarning={true}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      suppressHydrationWarning={true}
-                    />
-                  </div>
-                </div>
-
-                {/* Industry Type and Annual Revenue Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Industry Type *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.industryType}
-                      onChange={(e) => setFormData({...formData, industryType: e.target.value})}
-                      suppressHydrationWarning={true}
-                    >
-                      <option value="" className="text-gray-500">Select Industry</option>
-                      <option value="food-beverage" className="text-gray-900">Food & Beverage</option>
-                      <option value="automotive" className="text-gray-900">Automotive</option>
-                      <option value="electronics" className="text-gray-900">Electronics</option>
-                      <option value="chemical" className="text-gray-900">Chemical</option>
-                      <option value="textile" className="text-gray-900">Textile</option>
-                      <option value="metal" className="text-gray-900">Metal & Machinery</option>
-                      <option value="other" className="text-gray-900">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Annual Revenue *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.annualRevenue}
-                      onChange={(e) => setFormData({...formData, annualRevenue: e.target.value})}
-                      suppressHydrationWarning={true}
-                    >
-                      <option value="" className="text-gray-500">Select Revenue</option>
-                      <option value="under-1m" className="text-gray-900">Under $1M</option>
-                      <option value="1m-5m" className="text-gray-900">$1M - $5M</option>
-                      <option value="5m-25m" className="text-gray-900">$5M - $25M</option>
-                      <option value="25m-100m" className="text-gray-900">$25M - $100M</option>
-                      <option value="over-100m" className="text-gray-900">Over $100M</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6"
-                  suppressHydrationWarning={true}
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                      Submitting...
-                    </>
-                  ) : (
-                    <>
-                      Get My Quote Now
-                      <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </button>
-
-                {/* Trust Elements */}
-                <div className="text-center mt-4 space-y-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span>100% Secure & Confidential</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, unsubscribe anytime. Licensed agents only.
-                  </p>
-                </div>
-              </form>
-            </div>
+<div>
+  <IndustryQuoteForm 
+    industry="manufacturing"
+    formName="Manufacturing Industry Quote"
+    title="Get Your Free Quote"
+    subtitle="Fast, competitive manufacturing insurance quotes"
+    fields={manufacturingFields}
+  />
+</div>
+            
           </div>
         </div>
       </section>
 
-      {/* Success Modal */}
-      <SuccessModal 
-        isOpen={showSuccessModal}
-        onClose={handleCloseModal}
-        showConfetti={showConfetti}
-      />
     </div>
   );
 };

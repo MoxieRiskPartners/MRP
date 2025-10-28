@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Building, Heart, FileText, Award, Target, Globe } from 'lucide-react';
-import SuccessModal from '@/Components/successModal';
+import IndustryQuoteForm from '@/Components/IndustryQuoteForm';
+import { nonprofitFields } from '@/config/industryFormConfigs';
 
 interface ServiceData {
   type: string;
@@ -49,19 +50,6 @@ const NonProfitPage = () => {
       isOpen: false
     }
   ]);
-  const [formData, setFormData] = useState({
-    organizationName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    organizationType: '',
-    annualBudget: ''
-  });
-
-  // Modal state management
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const [showConfetti, setShowConfetti] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const heroRef = useRef(null);
 
@@ -159,37 +147,10 @@ const NonProfitPage = () => {
     })));
   };
 
-  const handleFormSubmit = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-    setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    console.log('Nonprofit form submitted:', formData);
-    
-    setIsSubmitting(false);
-    
-    // Show success modal with confetti
-    setShowSuccessModal(true);
-    setShowConfetti(true);
 
-    // Reset form
-    setFormData({
-      organizationName: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      organizationType: '',
-      annualBudget: ''
-    });
-  };
 
-  const handleCloseModal = () => {
-    setShowSuccessModal(false);
-    setShowConfetti(false);
-  };
-
+   
   const handleTypeSelection = (typeCode: string) => {
     setSelectedType(typeCode);
   };
@@ -505,163 +466,24 @@ const NonProfitPage = () => {
                   <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
+         
+
+          
             </div>
-
-            {/* Right Side - Quote Form */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-              
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive nonprofit insurance quotes</p>
-              </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                
-                {/* Organization Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Organization Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Organization Name"
-                    value={formData.organizationName}
-                    onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
-
-                {/* Contact Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Full Name"
-                    value={formData.contactName}
-                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
-
-                {/* Email and Phone Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="email@organization.org"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
-                </div>
-
-                {/* Organization Type and Annual Budget Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Organization Type *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.organizationType}
-                      onChange={(e) => setFormData({...formData, organizationType: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="" className="text-gray-500">Select Type</option>
-                      <option value="human-services" className="text-gray-900">Human Services</option>
-                      <option value="healthcare" className="text-gray-900">Healthcare & Medical</option>
-                      <option value="education" className="text-gray-900">Education & Youth</option>
-                      <option value="arts-culture" className="text-gray-900">Arts & Culture</option>
-                      <option value="religious" className="text-gray-900">Religious Organization</option>
-                      <option value="other" className="text-gray-900">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Annual Budget *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.annualBudget}
-                      onChange={(e) => setFormData({...formData, annualBudget: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="" className="text-gray-500">Select Budget</option>
-                      <option value="under-100k" className="text-gray-900">Under $100K</option>
-                      <option value="100k-500k" className="text-gray-900">$100K - $500K</option>
-                      <option value="500k-2m" className="text-gray-900">$500K - $2M</option>
-                      <option value="2m-10m" className="text-gray-900">$2M - $10M</option>
-                      <option value="over-10m" className="text-gray-900">Over $10M</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                  suppressHydrationWarning
-                >
-                  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
-                  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
-                </button>
-
-                {/* Trust Elements */}
-                <div className="text-center mt-4 space-y-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span>100% Secure & Confidential</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, unsubscribe anytime. Licensed agents only.
-                  </p>
-                </div>
-              </form>
-            </div>
+            <div>
+  <IndustryQuoteForm 
+    industry="nonprofit"
+    formName="Nonprofit Insurance Quote"
+    title="Get Your Free Quote"
+    subtitle="Fast, competitive nonprofit insurance quotes"
+    fields={nonprofitFields}
+  />
+</div>
           </div>
         </div>
       </section>
 
-      {/* Success Modal */}
-      <SuccessModal 
-        isOpen={showSuccessModal}
-        onClose={handleCloseModal}
-        showConfetti={showConfetti}
-      />
+     
     </div>
   );
 };

@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, HardHat, Factory, Truck, Heart, Building, FileText } from 'lucide-react';
-import SuccessModal from '../Components/successModal';
-
+import IndustryQuoteForm from '@/Components/IndustryQuoteForm';
+import { workersCompFields } from '@/config/industryFormConfigs';
+import Link from 'next/link';
 
 interface CoverageData {
   type: string;
@@ -209,36 +210,12 @@ const [isSubmitting, setIsSubmitting] = useState(false);
     })));
   };
 
-const handleFormSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsSubmitting(true);
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
-  
-  console.log('Workers comp form submitted:', formData);
-  
-  setIsSubmitting(false);
-  setShowSuccessModal(true);
-  setShowConfetti(true);  // ADD THIS LINE
-
-  setFormData({
-    companyName: '',
-    contactName: '',
-    email: '',
-    phone: '',
-    industryType: '',
-    employeeCount: ''
-  });
-};
 
   const handleTypeSelection = (typeCode: string) => {
     setSelectedType(typeCode);
   };
 
-const handleCloseModal = () => {
-  setShowSuccessModal(false);
-  setShowConfetti(false);
-};
 
   return (
     <div className="min-h-screen bg-white">
@@ -293,10 +270,12 @@ const handleCloseModal = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                    Get Your Quote
-                  
-                  </button>
+              <Link 
+  href="/quote-form"
+  className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+>
+  Get Your Quote
+</Link>
                   
                   <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
                     Call (800) 669-4301
@@ -637,161 +616,21 @@ const handleCloseModal = () => {
                             </div>
                           </div>
               
-
-            {/* Right Side - Quote Form */}
-            <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
-              
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive workers' compensation quotes</p>
-              </div>
-
-              <form onSubmit={handleFormSubmit} className="space-y-4">
-                
-                {/* Company Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Company Name"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
-
-                {/* Contact Name */}
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                    placeholder="Your Full Name"
-                    value={formData.contactName}
-                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
-
-                {/* Email and Phone Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="email@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
-                </div>
-
-                {/* Industry Type and Employee Count Row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Industry Type *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.industryType}
-                      onChange={(e) => setFormData({...formData, industryType: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="" className="text-gray-500">Select Industry</option>
-                      <option value="manufacturing" className="text-gray-900">Manufacturing</option>
-                      <option value="construction" className="text-gray-900">Construction</option>
-                      <option value="trucking" className="text-gray-900">Trucking</option>
-                      <option value="nonprofit" className="text-gray-900">Non-Profit</option>
-                      <option value="public-entity" className="text-gray-900">Public Entity</option>
-                      <option value="general-business" className="text-gray-900">General Business</option>
-                      <option value="other" className="text-gray-900">Other</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Employee Count *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
-                      value={formData.employeeCount}
-                      onChange={(e) => setFormData({...formData, employeeCount: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="" className="text-gray-500">Select Count</option>
-                      <option value="1-5" className="text-gray-900">1-5 Employees</option>
-                      <option value="6-25" className="text-gray-900">6-25 Employees</option>
-                      <option value="26-100" className="text-gray-900">26-100 Employees</option>
-                      <option value="101-500" className="text-gray-900">101-500 Employees</option>
-                      <option value="500+" className="text-gray-900">500+ Employees</option>
-                    </select>
-                  </div>
-                </div>
-
-                {/* Submit Button */}
-  <button
-  type="submit"
-  disabled={isSubmitting}
-  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-  suppressHydrationWarning
->
-  {isSubmitting ? 'Submitting...' : 'Get My Quote Now'}
-  {!isSubmitting && <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />}
-</button>
-
-                {/* Trust Elements */}
-                <div className="text-center mt-4 space-y-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span>100% Secure & Confidential</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, unsubscribe anytime. Licensed agents only.
-                  </p>
-                </div>
-              </form>
+<div>
+  <IndustryQuoteForm 
+    industry="workers-comp"
+    formName="Workers Compensation Quote"
+    title="Get Your Free Quote"
+    subtitle="Fast, competitive workers' compensation insurance quotes"
+    fields={workersCompFields}
+  />
+</div>
+           
             </div>
           </div>
-        </div>
+
       </section>
-      <SuccessModal 
-        isOpen={showSuccessModal}
-        onClose={handleCloseModal}
-        showConfetti={showConfetti}
-      />
+ 
     </div>
   );
 };

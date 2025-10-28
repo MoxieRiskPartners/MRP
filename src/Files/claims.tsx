@@ -486,7 +486,7 @@ const ClaimsPage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+18006694301" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                 Report Claim: (800) 669-4301
-                <Phone className="ml-2 w-5 h-5" />
+                
               </a>
               
               <a href="tel:+18006694301" className="bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
