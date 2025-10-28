@@ -228,7 +228,7 @@ export async function POST(request: Request) {
       }, { status: 400 });
     }
     
-} catch (error: unknown) {
+  } catch (error: unknown) {
     console.error('✗ Unexpected error during quote submission:', error);
     console.error('Error details:', error instanceof Error ? error.stack : error);
     
