@@ -1,13 +1,13 @@
 import { Metadata } from "next";
-import Image from "next/image";
-import Header from "@/Main/Header";
-import Hero from "@/Main/Hero";
-import Overivew from "@/Main/Overivew";
-import ServiceAreas from "@/Main/serviceAreas";
-import CallToAction from "@/Components/callToAction";
-import Footer from "@/Components/footer";
+// import Image from "next/image";
+// import Header from "@/Main/Header";
+// import Hero from "@/Main/Hero";
+// import Overivew from "@/Main/Overivew";
+// import ServiceAreas from "@/Main/serviceAreas";
+// import CallToAction from "@/Components/callToAction";
+// import Footer from "@/Components/footer";
 
-// import ComingSoon from "../Files/comingsoon";
+import ComingSoon from "../Files/comingsoon";
 
 export const metadata: Metadata = {
   title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-    {/* <ComingSoon /> */}
-       <Header />
+    <ComingSoon />
+       {/* <Header />
       <Hero />
       <Overivew />
       <ServiceAreas />
       <CallToAction />
-      <Footer />
+      <Footer /> */}
 
     </>
   );
