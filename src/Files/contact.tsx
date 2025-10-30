@@ -16,15 +16,17 @@ const ContactPage = () => {
   const [selectedClaimType, setSelectedClaimType] = useState('trucking');
   const [isVisible, setIsVisible] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+
+  
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    company: '',
-    hearAbout: '',
-    insuranceNeeds: ''
-  });
+  firstName: '',
+  lastName: '',
+  email: '',
+  phone: '',
+  company: '',
+  hearAbout: '',
+  insuranceNeeds: ''
+});
 
   const heroRef = useRef(null);
 
@@ -102,16 +104,97 @@ const ContactPage = () => {
 
   const selectedClaim = claimTypes.find(claim => claim.id === selectedClaimType) || claimTypes[0];
 
-  const handleFormSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormSubmitted(true);
+const handleFormSubmit = async (e: React.MouseEvent) => {
+  e.preventDefault();
+  
+  // Validate required fields
+  if (!formData.firstName || !formData.lastName || !formData.email || 
+      !formData.phone || !formData.hearAbout || !formData.insuranceNeeds) {
+    alert('Please fill in all required fields');
+    return;
+  }
+  
+  try {
+    console.log('Submitting contact form...', formData);
     
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setFormSubmitted(false);
-    }, 5000);
-  };
+    // Build payload for Momentum API
+    const momentumPayload = {
+      // Contact Info - Use contactName combining first + last
+      contactName: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      phone: formData.phone,
+      
+      // Business Info
+      companyName: formData.company || 'Not Provided',
+      
+      // Form metadata
+      formType: 'Contact Page Inquiry',
+      source: 'Contact Page Form',
+      leadSource: formData.hearAbout,
+      
+      // Industry - general since this is contact form
+      industry: 'general-inquiry',
+      
+      // Description field with all details
+      description: `Contact Page Inquiry
+
+Contact: ${formData.firstName} ${formData.lastName}
+Company: ${formData.company || 'Not Provided'}
+Email: ${formData.email}
+Phone: ${formData.phone}
+How they heard about us: ${formData.hearAbout}
+
+Insurance Needs:
+${formData.insuranceNeeds}
+
+Source: Contact Page Form`
+    };
+    
+    console.log('Sending to API:', momentumPayload);
+    
+    // Send to API
+    const response = await fetch('/api/momentum-quote', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(momentumPayload)
+    });
+    
+    const result = await response.json();
+    console.log('API response:', result);
+    
+    if (result.success) {
+      console.log('✓ Contact form submitted successfully!');
+      
+      // Show success message
+      setFormSubmitted(true);
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        company: '',
+        hearAbout: '',
+        insuranceNeeds: ''
+      });
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000);
+      
+    } else {
+      alert(`Error submitting form: ${result.message}\n\nPlease call (800) 326-5581`);
+    }
+    
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Unable to submit. Please call (800) 326-5581 for immediate assistance.');
+  }
+};
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -326,7 +409,7 @@ const ContactPage = () => {
             </div>
           )}
 
-          <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200 shadow-lg">
+          <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl p-8 border border-gray-200 shadow-lg">
             
             {/* Name Row */}
             <div className="grid grid-cols-2 gap-4 mb-6">
@@ -338,7 +421,7 @@ const ContactPage = () => {
                   type="text"
                   name="firstName"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                   placeholder="Your First Name"
                   value={formData.firstName}
                   onChange={handleInputChange}
@@ -354,7 +437,7 @@ const ContactPage = () => {
                   type="text"
                   name="lastName"
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                   placeholder="Your Last Name"
                   value={formData.lastName}
                   onChange={handleInputChange}
@@ -364,39 +447,40 @@ const ContactPage = () => {
             </div>
 
             {/* Email and Phone Row */}
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                  placeholder="email@company.com"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  suppressHydrationWarning={true}
-                />
-              </div>
+{/* Email and Phone Row */}
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+  <div>
+    <label className="block text-sm font-semibold text-gray-700 mb-2">
+      Email Address *
+    </label>
+    <input
+      type="email"
+      name="email"
+      required
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+      placeholder="email@company.com"
+      value={formData.email}
+      onChange={handleInputChange}
+      suppressHydrationWarning={true}
+    />
+  </div>
 
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  name="phone"
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
-                  placeholder="(555) 123-4567"
-                  value={formData.phone}
-                  onChange={handleInputChange}
-                  suppressHydrationWarning={true}
-                />
-              </div>
-            </div>
+  <div>
+    <label className="block text-sm font-semibold text-gray-700 mb-2">
+      Phone Number *
+    </label>
+    <input
+      type="tel"
+      name="phone"
+      required
+      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+      placeholder="(555) 123-4567"
+      value={formData.phone}
+      onChange={handleInputChange}
+      suppressHydrationWarning={true}
+    />
+  </div>
+</div>
 
             {/* Company Name */}
             <div className="mb-6">
@@ -406,7 +490,7 @@ const ContactPage = () => {
               <input
                 type="text"
                 name="company"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                 placeholder="Your Company Name"
                 value={formData.company}
                 onChange={handleInputChange}
@@ -422,7 +506,7 @@ const ContactPage = () => {
               <select
                 name="hearAbout"
                 required
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
                 value={formData.hearAbout}
                 onChange={handleInputChange}
                 suppressHydrationWarning={true}
@@ -447,7 +531,7 @@ const ContactPage = () => {
                 name="insuranceNeeds"
                 required
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 resize-vertical"
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 resize-vertical bg-white"
                 placeholder="Please describe your operation, number of vehicles, types of coverage needed, current insurance challenges, etc."
                 value={formData.insuranceNeeds}
                 onChange={handleInputChange}
