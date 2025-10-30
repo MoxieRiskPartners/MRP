@@ -76,26 +76,7 @@ const CoveragePage = () => {
     };
   }, [selectedCoverage]);
 
-  // Add this useEffect after the other useEffect hooks
-useEffect(() => {
-  if (formData.industry) {
-    const validCoverages = getIndustrySpecificCoverages(formData.industry);
-    const validCoverageValues = validCoverages.map(opt => opt.value);
-    
-    // Remove any selected coverages that aren't valid for the new industry
-    const filteredCoverageType = formData.coverageType.filter(coverage => 
-      validCoverageValues.includes(coverage)
-    );
-    
-    if (filteredCoverageType.length !== formData.coverageType.length) {
-      setFormData(prev => ({
-        ...prev,
-        coverageType: filteredCoverageType
-      }));
-    }
-  }
-}, [formData.industry]);
-
+  
   const handleFormSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     
@@ -293,6 +274,26 @@ const getIndustrySpecificCoverages = (industry: string) => {
     relevantCoverages.includes(option.value)
   );
 };
+
+// Add this useEffect after the other useEffect hooks
+useEffect(() => {
+  if (formData.industry) {
+    const validCoverages = getIndustrySpecificCoverages(formData.industry);
+    const validCoverageValues = validCoverages.map(opt => opt.value);
+    
+    // Remove any selected coverages that aren't valid for the new industry
+    const filteredCoverageType = formData.coverageType.filter(coverage => 
+      validCoverageValues.includes(coverage)
+    );
+    
+    if (filteredCoverageType.length !== formData.coverageType.length) {
+      setFormData(prev => ({
+        ...prev,
+        coverageType: filteredCoverageType
+      }));
+    }
+  }
+}, [formData.industry]);
 
   const coverageTypes: CoverageType[] = [
     // CONSTRUCTION COVERAGES

@@ -54,13 +54,17 @@ export async function POST(request: Request) {
       FormName: formData.formType || "Website Quote Request",
       LineOfBusiness: lineOfBusiness,
       
-      // ========================================
-      // CONTACT INFORMATION - ONLY ContactName (no FirstName/LastName)
-      // This prevents Momentum from creating duplicate contacts
-      // ========================================
-      ContactName: formData.contactName || 'Not Provided',
-      Email: formData.email || '',
-      Phone: formData.phone || '',
+   
+// ========================================
+// CONTACT INFORMATION - ContactName + FirstName/LastName
+// ContactName is primary (prevents duplicates)
+// FirstName/LastName populate the list view "Name" column
+// ========================================
+ContactName: formData.contactName || formData.ContactName || 'Not Provided',
+FirstName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ')[0],
+LastName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ').slice(1).join(' ') || '',
+Email: formData.email || formData.Email || '',
+Phone: formData.phone || formData.Phone || '',
       
       // ========================================
       // COMPANY/BUSINESS NAME (choose best match)

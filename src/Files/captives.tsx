@@ -253,76 +253,59 @@ const CaptivesPage = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-200">
-             
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-1">•</span>
-                  <span>You form or join a licensed insurance company (the "captive")</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-1">•</span>
-                  <span>Your existing policies remain in place with higher deductibles</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-1">•</span>
-                  <span>The captive funds and manages these higher deductibles</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-1">•</span>
-                  <span>You participate in underwriting profits and investment returns</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-blue-600 mr-2 mt-1">•</span>
-                  <span>The captive pays claims within the deductible layer</span>
-                </li>
-              </ul>
-            </div>
+         <div className="grid md:grid-cols-1 gap-8 mb-12">
+           <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl border border-blue-200">
+  <h3 className="text-2xl font-bold text-gray-900 mb-4">How It Works</h3>
+  <p className="text-gray-700 leading-relaxed mb-4">
+    You pay premiums similar in cost to your traditional insurance program. Here's what makes it different:
+  </p>
+  <ul className="space-y-3 text-gray-700">
+    <li className="flex items-start">
+      <span className="text-blue-600 mr-2 mt-1">•</span>
+      <span>Roughly 1/3 of your premium goes into a "Loss Fund" that earns interest</span>
+    </li>
+    <li className="flex items-start">
+      <span className="text-blue-600 mr-2 mt-1">•</span>
+      <span>You're responsible for paying the first portion of each claim (your retention)</span>
+    </li>
+    <li className="flex items-start">
+      <span className="text-blue-600 mr-2 mt-1">•</span>
+      <span>The insurance company covers the rest above your retention</span>
+    </li>
+    <li className="flex items-start">
+      <span className="text-blue-600 mr-2 mt-1">•</span>
+      <span>Claims are paid from your Loss Fund</span>
+    </li>
+    <li className="flex items-start">
+      <span className="text-blue-600 mr-2 mt-1">•</span>
+      <span>If money remains in the fund at year-end, you get it back on a 3-5 year rolling accounting cycle</span>
+    </li>
+  </ul>
+</div>
 
-            <div className="bg-gradient-to-br from-green-50 to-emerald-50 p-8 rounded-2xl border border-green-200">
-             
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Key Principle</h3>
-              <div className="bg-white p-6 rounded-lg border border-green-200 mb-4">
-                <p className="text-gray-800 font-semibold mb-3">
-                  Coverage Lines Stay the Same:
-                </p>
-                <ul className="space-y-2 text-gray-700">
-                  <li>✓ General Liability - Same</li>
-                  <li>✓ Workers' Compensation - Same</li>
-                  <li>✓ Commercial Auto - Same</li>
-                  <li>✓ Property Coverage - Same</li>
-                </ul>
-              </div>
-              <div className="bg-orange-50 p-4 rounded-lg border border-orange-200">
-                <p className="text-orange-900 font-semibold">
-                  What Changes: The deductible increases, and the captive manages that higher retention
-                </p>
-              </div>
-            </div>
+           
           </div>
 
           <div className="bg-gray-900 text-white p-8 rounded-2xl">
-            <div className="flex items-start space-x-4">
-              <Shield className="w-12 h-12 text-orange-500 flex-shrink-0 mt-1" />
-              <div>
-                <h3 className="text-2xl font-bold mb-3">Real-World Example</h3>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  <strong>Scenario:</strong> Your company currently has General Liability insurance with a $25,000 deductible 
-                  and pays $300,000 in annual premiums.
-                </p>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                  <strong>With a Captive:</strong> You increase your deductible to $100,000 (reducing premiums to $250,000) 
-                  and join a group captive. The captive creates a fund to handle that $100,000 retention layer.
-                </p>
-                <p className="text-orange-300 font-semibold">
-                  Result: If claims are low, you receive dividends from unused funds plus investment returns. 
-                  Your coverage limits and protection remain exactly the same—only the deductible structure changed.
-                </p>
-              </div>
-            </div>
-          </div>
+  <div className="flex items-start space-x-4">
+    <Shield className="w-12 h-12 text-orange-500 flex-shrink-0 mt-1" />
+    <div>
+      <h3 className="text-2xl font-bold mb-3">Why Captives Are Unique</h3>
+      <p className="text-gray-300 leading-relaxed mb-4">
+        Every company has different needs, risk profiles, and captive structures. The right captive program 
+        depends on your industry, size, loss history, and strategic goals.
+      </p>
+      <p className="text-gray-300 leading-relaxed mb-4">
+        Rather than giving generic examples, we prefer to have a detailed conversation about your specific 
+        situation and design a captive solution that fits your unique needs.
+      </p>
+      <p className="text-orange-300 font-semibold">
+        Ready to explore if a captive makes sense for your business? Let's talk through your options 
+        and create a customized strategy together.
+      </p>
+    </div>
+  </div>
+</div>
         </div>
       </section>
 
@@ -446,56 +429,57 @@ const CaptivesPage = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
-              The Captive Formation Process
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We guide you through every step of evaluating and implementing a captive program
-            </p>
-          </div>
+     {/* Process Section */}
+<section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-16">
+      <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+        Our Captive Consultation Process
+      </h2>
+      <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+        We guide you through evaluating captive programs and connecting you with the right partners
+      </p>
+    </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                number: '01',
-                title: 'Feasibility Study',
-                description: 'Analyze your loss history, current premiums, and risk profile to determine if a captive makes sense'
-              },
-              {
-                number: '02',
-                title: 'Structure Selection',
-                description: 'Choose the optimal captive type and domicile based on your goals, size, and industry'
-              },
-              {
-                number: '03',
-                title: 'Formation & Setup',
-                description: 'Form the captive entity, secure licensing, establish governance, and fund initial capital'
-              },
-              {
-                number: '04',
-                title: 'Ongoing Management',
-                description: 'Monitor performance, manage claims, adjust strategy, and receive distributions as earned'
-              }
-            ].map((step, index) => (
-              <div key={index} className="relative">
-                <div className="bg-white p-6 rounded-xl shadow-lg h-full">
-                  <div className="text-5xl font-bold text-orange-200 mb-4">{step.number}</div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{step.description}</p>
-                </div>
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2">
-                    <ArrowRight className="w-6 h-6 text-orange-400" />
-                  </div>
-                )}
-              </div>
-            ))}
+    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {[
+        {
+          number: '01',
+          title: 'Feasibility Study',
+          description: 'Analyze your loss history, current premiums, and risk profile to determine if a captive makes sense'
+        },
+        {
+          number: '02',
+          title: 'Structure Selection',
+          description: 'Choose the optimal captive type and domicile based on your goals, size, and industry'
+        },
+        {
+          number: '03',
+          title: 'Partner Connection & Setup',
+          description: 'Connect with experienced captive managers who handle entity setup, licensing, governance, and initial capital funding'
+        },
+        {
+          number: '04',
+          title: 'Ongoing Management',
+          description: 'Monitor performance, manage claims, adjust strategy, and receive distributions as earned'
+        }
+      ].map((step, index) => (
+        <div key={index} className="relative">
+          <div className="bg-white p-6 rounded-xl shadow-lg h-full">
+            <div className="text-5xl font-bold text-orange-200 mb-4">{step.number}</div>
+            <h3 className="text-xl font-bold text-gray-900 mb-3">{step.title}</h3>
+            <p className="text-gray-600 leading-relaxed">{step.description}</p>
           </div>
+          {index < 3 && (
+            <div className="hidden lg:block absolute top-1/2 -right-3 transform -translate-y-1/2">
+              <ArrowRight className="w-6 h-6 text-orange-400" />
+            </div>
+          )}
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* FAQ Section */}
       <section className="py-20 bg-white">

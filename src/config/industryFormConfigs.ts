@@ -557,6 +557,7 @@ export const workersCompFields: FormField[] = [
   }
 ];
 
+
 // ==================== CAPTIVES INSURANCE ====================
 export const captivesFields: FormField[] = [
   {
@@ -589,16 +590,18 @@ export const captivesFields: FormField[] = [
   },
   {
     name: 'currentPremiums',
-    label: 'Current Annual Premiums',
+    label: 'Estimated Annual Premiums (Optional - helps us recommend the right program)',
     type: 'select',
     placeholder: 'Select Range',
-    required: true,
+    required: false,  // ✅ Changed to optional
     options: [
+      { value: 'Under $250K', label: 'Under $250K' },
       { value: '$250K - $500K', label: '$250K - $500K' },
       { value: '$500K - $1M', label: '$500K - $1M' },
       { value: '$1M - $2M', label: '$1M - $2M' },
       { value: '$2M - $5M', label: '$2M - $5M' },
-      { value: 'Over $5M', label: 'Over $5M' }
+      { value: 'Over $5M', label: 'Over $5M' },
+      { value: 'Not Sure', label: 'Not Sure / Prefer to Discuss' }  // ✅ Added opt-out
     ]
   },
   {
@@ -619,6 +622,7 @@ export const captivesFields: FormField[] = [
     ]
   }
 ];
+
 // ==================== TRUCKING & TRANSPORTATION ====================
 export const truckingTransportationFields: FormField[] = [
   {
