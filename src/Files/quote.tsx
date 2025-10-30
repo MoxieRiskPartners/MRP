@@ -246,7 +246,7 @@ const QuotePage: React.FC = () => {
         effectiveDate: formData.desiredStartDate,
         
         // Form metadata
-        formType: 'Multi-Step Quote Form',
+        formType: 'Get a quote Page',
         source: 'Quote Page',
         
         // Description
