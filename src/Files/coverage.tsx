@@ -76,6 +76,26 @@ const CoveragePage = () => {
     };
   }, [selectedCoverage]);
 
+  // Add this useEffect after the other useEffect hooks
+useEffect(() => {
+  if (formData.industry) {
+    const validCoverages = getIndustrySpecificCoverages(formData.industry);
+    const validCoverageValues = validCoverages.map(opt => opt.value);
+    
+    // Remove any selected coverages that aren't valid for the new industry
+    const filteredCoverageType = formData.coverageType.filter(coverage => 
+      validCoverageValues.includes(coverage)
+    );
+    
+    if (filteredCoverageType.length !== formData.coverageType.length) {
+      setFormData(prev => ({
+        ...prev,
+        coverageType: filteredCoverageType
+      }));
+    }
+  }
+}, [formData.industry]);
+
   const handleFormSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     
@@ -218,6 +238,62 @@ Source: Coverage Page Form`
     }));
   };
 
+  // Add this function right after the allCoverageOptions array definition
+const getIndustrySpecificCoverages = (industry: string) => {
+  if (!industry) return allCoverageOptions; // Show all if no industry selected
+  
+  const coveragesByIndustry: { [key: string]: string[] } = {
+    'trucking': [
+      'commercial-auto-liability',
+      'physical-damage',
+      'motor-truck-cargo',
+      'non-trucking-liability',
+      'occupational-accident',
+      'general-liability',
+      'multiple-other'
+    ],
+    'construction': [
+      'general-liability',
+      'workers-comp',
+      'builders-risk',
+      'commercial-auto-liability',
+      'professional-liability',
+      'tools-equipment',
+      'multiple-other'
+    ],
+    'manufacturing': [
+      'product-liability',
+      'equipment-breakdown',
+      'commercial-property',
+      'cyber-liability',
+      'environmental-liability',
+      'general-liability',
+      'multiple-other'
+    ],
+    'nonprofit': [
+      'general-liability',
+      'workers-comp',
+      'professional-liability',
+      'cyber-liability',
+      'commercial-property',
+      'multiple-other'
+    ],
+    'public-entity': [
+      'general-liability',
+      'workers-comp',
+      'cyber-liability',
+      'commercial-property',
+      'professional-liability',
+      'multiple-other'
+    ]
+  };
+  
+  const relevantCoverages = coveragesByIndustry[industry] || [];
+  return allCoverageOptions.filter(option => 
+    relevantCoverages.includes(option.value)
+  );
+};
+
   const coverageTypes: CoverageType[] = [
     // CONSTRUCTION COVERAGES
     {
@@ -266,22 +342,6 @@ Source: Coverage Page Form`
         'Debris removal'
       ],
       whoNeedsIt: ['Project owners', 'General contractors', 'Construction managers', 'Developers', 'Property managers']
-    },
-    {
-      id: 'commercial-auto',
-      title: 'Commercial Auto',
-      description: 'Specialized coverage for construction vehicles and equipment transport with comprehensive liability and physical damage protection',
-      detailedOverview: 'Specialized coverage for construction vehicles and equipment transport. Protects your fleet with comprehensive liability and physical damage coverage.',
-      coverageAmount: '$1M+ liability limits',
-      keyFeatures: [
-        'Vehicle liability protection',
-        'Comprehensive coverage',
-        'Collision protection',
-        'Uninsured motorist',
-        'Fleet discounts',
-        'Equipment coverage'
-      ],
-      whoNeedsIt: ['Fleet operators', 'Equipment transporters', 'Service contractors', 'Material suppliers', 'Mobile services']
     },
     {
       id: 'professional-liability',
@@ -398,23 +458,26 @@ Source: Coverage Page Form`
       whoNeedsIt: ['Chemical manufacturers', 'Industrial operations', 'Waste generators', 'Fuel storage operations', 'Heavy industry']
     },
     
-    // TRUCKING & TRANSPORTATION COVERAGES
+    // TRUCKING & TRANSPORTATION COVERAGES - CONSOLIDATED COMMERCIAL AUTO
     {
       id: 'commercial-auto-liability',
       title: 'Commercial Auto Liability',
-      description: 'DOT-compliant protection for commercial vehicle operations with liability coverage for trucking companies and fleets',
-      detailedOverview: 'DOT-compliant protection for all commercial vehicle operations including construction vehicles, delivery trucks, and semi-tractors. Mandatory coverage for trucking companies with competitive rates and expert guidance. Whether you\'re insuring a work pickup truck or a fleet of tractor trailers, we provide comprehensive liability protection tailored to your specific needs.',
+      description: 'Comprehensive protection for all commercial vehicles from pickup trucks to tractor trailers with liability and optional physical damage coverage',
+      detailedOverview: 'Complete commercial auto insurance for all vehicle types and industries. Whether you\'re insuring a construction pickup truck or a fleet of tractor trailers, we provide comprehensive liability protection with optional physical damage coverage. DOT-compliant for trucking operations and tailored coverage for construction, delivery, and service businesses. Mandatory liability coverage with competitive rates and expert guidance from experienced agents.',
       coverageAmount: '$1M - $5M+ liability',
       keyFeatures: [
-        'DOT compliance',
-        'Third-party liability',
-        'Bodily injury coverage',
-        'Property damage',
+        'DOT compliance for trucking',
+        'Third-party liability protection',
+        'Bodily injury & property damage coverage',
+        'Optional collision & comprehensive (physical damage)',
         'Cargo incidental coverage',
         'MCS-90 endorsement',
+        'Uninsured motorist protection',
+        'Fleet discounts available',
+        'Flexible deductibles',
         'Umbrella policies up to $10M available'
       ],
-      whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Construction companies', 'Transportation businesses']
+      whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Construction companies', 'Transportation businesses', 'Equipment transporters', 'Service contractors', 'Material suppliers', 'Delivery services']
     },
     {
       id: 'physical-damage',
@@ -848,185 +911,186 @@ Source: Coverage Page Form`
               </div>
             </div>
 
-            {/* Right Side - Quote Form */}
-   <div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-xl border border-gray-200 p-8">
-              
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
-                <p className="text-gray-600">Fast, competitive insurance quotes</p>
-              </div>
+           {/* Right Side - Quote Form */}
+<div className="bg-gradient-to-br from-orange-50 to-red-50 rounded-2xl shadow-xl border border-gray-200 p-8">
+  
+  <div className="text-center mb-6">
+    <div className="w-16 h-16 bg-gradient-to-br from-orange-500 to-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+      <Shield className="w-8 h-8 text-white" />
+    </div>
+    <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
+    <p className="text-gray-600">Fast, competitive insurance quotes</p>
+  </div>
 
-              <div className="space-y-4">
-                
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Company Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
-                    placeholder="Your Company Name"
-                    value={formData.companyName}
-                    onChange={(e) => setFormData({...formData, companyName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
+  <div className="space-y-4">
+    
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-2">
+        Company Name *
+      </label>
+      <input
+        type="text"
+        required
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+        placeholder="Your Company Name"
+        value={formData.companyName}
+        onChange={(e) => setFormData({...formData, companyName: e.target.value})}
+        suppressHydrationWarning
+      />
+    </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Contact Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
-                    placeholder="Your Full Name"
-                    value={formData.contactName}
-                    onChange={(e) => setFormData({...formData, contactName: e.target.value})}
-                    suppressHydrationWarning
-                  />
-                </div>
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-2">
+        Contact Name *
+      </label>
+      <input
+        type="text"
+        required
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+        placeholder="Your Full Name"
+        value={formData.contactName}
+        onChange={(e) => setFormData({...formData, contactName: e.target.value})}
+        suppressHydrationWarning
+      />
+    </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
-                      placeholder="email@company.com"
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
+    {/* MOBILE: Stack vertically, DESKTOP: 2 columns */}
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Email *
+        </label>
+        <input
+          type="email"
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+          placeholder="email@company.com"
+          value={formData.email}
+          onChange={(e) => setFormData({...formData, email: e.target.value})}
+          suppressHydrationWarning
+        />
+      </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
-                      placeholder="(555) 123-4567"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      suppressHydrationWarning
-                    />
-                  </div>
-                </div>
+      <div>
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Phone *
+        </label>
+        <input
+          type="tel"
+          required
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 placeholder-gray-500 bg-white"
+          placeholder="(555) 123-4567"
+          value={formData.phone}
+          onChange={(e) => setFormData({...formData, phone: e.target.value})}
+          suppressHydrationWarning
+        />
+      </div>
+    </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Coverage Type * <span className="text-gray-500 text-xs">(Select all that apply)</span>
-                    </label>
-                    <div className="relative" ref={dropdownRef}>
-                      <button
-                        type="button"
-                        onClick={() => setIsCoverageDropdownOpen(!isCoverageDropdownOpen)}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-left flex justify-between items-center text-gray-900 bg-white"
-                      >
-                        <span className="text-gray-700 truncate">
-                          {formData.coverageType.length === 0 
-                            ? 'Select coverage types...'
-                            : formData.coverageType.length === 1
-                            ? allCoverageOptions.find(opt => opt.value === formData.coverageType[0])?.label
-                            : `${formData.coverageType.length} coverage types selected`
-                          }
-                        </span>
-                        <svg 
-                          className={`w-5 h-5 transition-transform text-gray-600 flex-shrink-0 ml-2 ${isCoverageDropdownOpen ? 'rotate-180' : ''}`}
-                          fill="none" 
-                          stroke="currentColor" 
-                          viewBox="0 0 24 24"
-                        >
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </button>
-                      
-                      {isCoverageDropdownOpen && (
-                        <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
-                          {allCoverageOptions.map((option) => (
-                            <label 
-                              key={option.value} 
-                              className="flex items-center p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
-                            >
-                              <input
-                                type="checkbox"
-                                checked={formData.coverageType.includes(option.value)}
-                                onChange={() => handleCoverageToggle(option.value)}
-                                className="mr-3 w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 flex-shrink-0"
-                              />
-                              <span className="text-gray-900 text-sm font-medium">{option.label}</span>
-                            </label>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
+    {/* Industry - Full width on mobile, better UX */}
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-2">
+        Industry *
+      </label>
+      <select
+        required
+        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 bg-white"
+        value={formData.industry}
+        onChange={(e) => setFormData({...formData, industry: e.target.value})}
+        suppressHydrationWarning
+      >
+        <option value="">Select Industry</option>
+        <option value="trucking">Trucking & Transportation</option>
+        <option value="construction">Construction & Contracting</option>
+        <option value="manufacturing">Manufacturing & Production</option>
+        <option value="nonprofit">Nonprofit & Human Services</option>
+        <option value="public-entity">Government & Public Entities</option>
+      </select>
+    </div>
 
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Industry *
-                    </label>
-                    <select
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-gray-900 bg-white"
-                      value={formData.industry}
-                      onChange={(e) => setFormData({...formData, industry: e.target.value})}
-                      suppressHydrationWarning
-                    >
-                      <option value="">Select Industry</option>
-                      <option value="trucking">Trucking & Transportation</option>
-                      <option value="construction">Construction & Contracting</option>
-                      <option value="manufacturing">Manufacturing & Production</option>
-                      <option value="nonprofit">Nonprofit & Human Services</option>
-                      <option value="public-entity">Government & Public Entities</option>
-                    </select>
-                  </div>
-                </div>
+    {/* Coverage - Full width on mobile for better dropdown UX */}
+    <div>
+      <label className="block text-sm font-semibold text-gray-700 mb-2">
+        Coverage Type * <span className="text-gray-500 text-xs">(Select all that apply)</span>
+      </label>
+      <div className="relative" ref={dropdownRef}>
+        <button
+          type="button"
+          onClick={() => setIsCoverageDropdownOpen(!isCoverageDropdownOpen)}
+          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent outline-none transition-all text-left flex justify-between items-center text-gray-900 bg-white min-h-[3rem]"
+        >
+          <span className="text-gray-700 truncate">
+            {formData.coverageType.length === 0 
+              ? 'Select coverage types...'
+              : formData.coverageType.length === 1
+              ? allCoverageOptions.find(opt => opt.value === formData.coverageType[0])?.label
+              : `${formData.coverageType.length} coverage types selected`
+            }
+          </span>
+          <svg 
+            className={`w-5 h-5 transition-transform text-gray-600 flex-shrink-0 ml-2 ${isCoverageDropdownOpen ? 'rotate-180' : ''}`}
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+        
+        {isCoverageDropdownOpen && (
+          <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 max-h-60 overflow-y-auto">
+          {getIndustrySpecificCoverages(formData.industry).map((option) => (
+              <label 
+                key={option.value} 
+                className="flex items-center p-3 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+              >
+                <input
+                  type="checkbox"
+                  checked={formData.coverageType.includes(option.value)}
+                  onChange={() => handleCoverageToggle(option.value)}
+                  className="mr-3 w-4 h-4 text-orange-500 border-gray-300 rounded focus:ring-orange-500 flex-shrink-0"
+                />
+                <span className="text-gray-900 text-sm font-medium">{option.label}</span>
+              </label>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
 
-                <button
-                  onClick={handleFormSubmit}
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                  suppressHydrationWarning
-                >
-                  {isSubmitting ? (
-                    <span className="flex items-center justify-center gap-2">
-                      <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                      </svg>
-                      Submitting...
-                    </span>
-                  ) : (
-                    <>
-                      Get My Quote Now
-                      <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-                    </>
-                  )}
-                </button>
+    <button
+      onClick={handleFormSubmit}
+      disabled={isSubmitting}
+      className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+      suppressHydrationWarning
+    >
+      {isSubmitting ? (
+        <span className="flex items-center justify-center gap-2">
+          <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Submitting...
+        </span>
+      ) : (
+        <>
+          Get My Quote Now
+          <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+        </>
+      )}
+    </button>
 
-                <div className="text-center mt-4 space-y-2">
-                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
-                    <CheckCircle className="w-4 h-4 text-green-500" />
-                    <span>100% Secure & Confidential</span>
-                  </div>
-                  <p className="text-xs text-gray-500">
-                    No spam, unsubscribe anytime. Licensed agents only.
-                  </p>
-                </div>
-              </div>
-            </div>
+    <div className="text-center mt-4 space-y-2">
+      <div className="flex items-center justify-center space-x-2 text-sm text-gray-600">
+        <CheckCircle className="w-4 h-4 text-green-500" />
+        <span>100% Secure & Confidential</span>
+      </div>
+      <p className="text-xs text-gray-500">
+        No spam, unsubscribe anytime. Licensed agents only.
+      </p>
+    </div>
+  </div>
+</div>
           </div>
         </div>
       </section>
