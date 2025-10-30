@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 const ComingSoon = () => {
   const handleEarlyAccess = () => {
-    window.location.href = 'mailto:admin@moxieriskpartners.com?subject=Early Quote Access Request';
+    window.location.href = 'mailto:quotes@moxieriskpartners.com?subject=Early Quote Access Request';
   };
 
   return (
@@ -135,7 +135,7 @@ const ComingSoon = () => {
               </button>
               
               <p className="text-white/60 text-xs mt-4">
-                Email us at <a href="mailto:admin@moxieriskpartners.com" className="text-orange-400 hover:text-orange-300 underline">admin@moxieriskpartners.com</a>
+                Email us at <a href="mailto:quotes@moxieriskpartners.com" className="text-orange-400 hover:text-orange-300 underline">quotes@moxieriskpartners.com</a>
               </p>
             </div>
           </div>
