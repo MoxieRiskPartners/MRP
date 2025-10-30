@@ -146,18 +146,7 @@ const CaptivesPage = () => {
       ],
       minPremium: '$750,000+ annually'
     },
-    {
-      type: 'Micro Captive (831(b))',
-      title: 'Micro Captive Insurance',
-      description: 'Small captive that receives $2.2M or less in annual premiums and elects special IRS tax treatment. Can exclude premiums from taxable income and pay tax only on investment income.',
-      idealFor: [
-        'Smaller businesses seeking captive benefits',
-        'Closely-held companies with tax planning goals',
-        'Organizations with niche or hard-to-insure risks',
-        'Businesses wanting to self-insure specific exposures'
-      ],
-      minPremium: 'Under $2.2M annually'
-    }
+
   ];
 
   return (

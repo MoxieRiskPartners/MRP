@@ -81,7 +81,7 @@ const Header = () => {
 
   const navItems = [
       { name: 'Coverage', href: '/coverage-options' }, 
-    // { name: 'Claims', href: '/file-claims' },
+    { name: 'Claims', href: '/file-claims' },
     { name: 'Contact', href: '/contact-us' },
     // { name: 'About', href: '/about-us' }
   ];

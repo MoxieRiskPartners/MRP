@@ -16,7 +16,8 @@ const ContactPage = () => {
   const [selectedClaimType, setSelectedClaimType] = useState('trucking');
   const [isVisible, setIsVisible] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
-
+const [showThankYou, setShowThankYou] = useState(false);
+const [isSubmitting, setIsSubmitting] = useState(false);
   
   const [formData, setFormData] = useState({
   firstName: '',
@@ -114,6 +115,8 @@ const handleFormSubmit = async (e: React.MouseEvent) => {
     return;
   }
   
+    setIsSubmitting(true);
+
   try {
     console.log('Submitting contact form...', formData);
     
@@ -193,6 +196,9 @@ Source: Contact Page Form`
   } catch (error) {
     console.error('Error:', error);
     alert('Unable to submit. Please call (800) 326-5581 for immediate assistance.');
+  } finally {
+    // ✅ This runs whether success or error
+    setIsSubmitting(false);
   }
 };
 
@@ -204,6 +210,76 @@ Source: Contact Page Form`
   const handleClaimTypeChange = (claimId: string) => {
     setSelectedClaimType(claimId);
   };
+
+const renderThankYou = () => (
+  <div className="min-h-screen bg-white py-20">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center space-y-8">
+        <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto">
+          <CheckCircle className="w-12 h-12 text-green-600" />
+        </div>
+        
+        <div>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Thank You for Reaching Out!</h2>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            We've received your message and our team will contact you within 24 hours to discuss your insurance needs.
+          </p>
+        </div>
+
+        <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">What happens next?</h3>
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="w-8 h-8 text-blue-600" />
+              </div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">Review</h4>
+              <p className="text-gray-600">Our team reviews your inquiry and prepares information</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="w-8 h-8 text-purple-600" />
+              </div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">Personalization</h4>
+              <p className="text-gray-600">We customize solutions based on your specific needs</p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Phone className="w-8 h-8 text-green-600" />
+              </div>
+              <h4 className="text-lg font-bold text-gray-900 mb-2">Contact</h4>
+              <p className="text-gray-600">We reach out to discuss your options and answer questions</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl p-8 text-white">
+          <h3 className="text-2xl font-bold mb-4">Need immediate assistance?</h3>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a 
+              href="tel:+18003265581" 
+              className="bg-white text-orange-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center cursor-pointer"
+            >
+              <Phone className="w-5 h-5 mr-2" />
+              Call (800) 326-5581
+            </a>
+            <a 
+              href="mailto:info@moxieriskpartners.com"
+              className="border-2 border-white text-white hover:bg-white hover:text-orange-600 px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center cursor-pointer"
+            >
+              <Mail className="w-5 h-5 mr-2" />
+              Email Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+if (showThankYou) {
+  return renderThankYou();
+}
 
   return (
     <div className="min-h-screen bg-white">
@@ -540,15 +616,25 @@ className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus
             </div>
 
             {/* Submit Button */}
-            <button
-              type="button"
-              onClick={handleFormSubmit}
-              className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mb-4"
-              suppressHydrationWarning={true}
-            >
-              GET MY FREE QUOTE
-              <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
-            </button>
+        <button
+  type="button"
+  onClick={handleFormSubmit}
+  disabled={isSubmitting}
+  className="w-full bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mb-4 cursor-pointer disabled:cursor-not-allowed disabled:transform-none"
+  suppressHydrationWarning={true}
+>
+  {isSubmitting ? (
+    <>
+      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
+      Submitting...
+    </>
+  ) : (
+    <>
+      GET MY FREE QUOTE
+      <ArrowRight className="ml-2 w-5 h-5 transition-transform group-hover:translate-x-1" />
+    </>
+  )}
+</button>
 
             {/* Disclaimer */}
             <p className="text-sm text-gray-600 text-center leading-relaxed">
