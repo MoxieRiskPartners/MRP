@@ -61,8 +61,8 @@ export async function POST(request: Request) {
 // FirstName/LastName populate the list view "Name" column
 // ========================================
 ContactName: formData.contactName || formData.ContactName || 'Not Provided',
-FirstName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ')[0],
-LastName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ').slice(1).join(' ') || '',
+// FirstName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ')[0],
+// LastName: (formData.contactName || formData.ContactName || 'Not Provided').split(' ').slice(1).join(' ') || '',
 Email: formData.email || formData.Email || '',
 Phone: formData.phone || formData.Phone || '',
       
