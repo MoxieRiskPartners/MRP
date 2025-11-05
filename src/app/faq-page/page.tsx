@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
+import Header from "@/Components/Header";
 import Footer from "@/Components/footer";
-import FAQPage from "@/Components/faq";
+import FAQPage from "@/UtilityPages/faq";
 
 export const metadata: Metadata = {
   title: "FAQ | Commercial Insurance Questions Answered | Moxie Risk Partners",

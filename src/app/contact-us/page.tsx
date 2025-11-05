@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import ContactPage from "@/Files/contact";
+import Header from "@/Components/Header";
+import ContactPage from "@/UtilityPages/contact";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

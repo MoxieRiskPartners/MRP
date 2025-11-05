@@ -1,5 +1,5 @@
-import Header from "@/Main/Header";
-import CaptivesPage from "@/Files/captives";
+import Header from "@/Components/Header";
+import CaptivesPage from "@/ServicesPages/captives";
 
 import Footer from "@/Components/footer";
 

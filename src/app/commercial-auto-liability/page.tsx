@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import CommAutoLiability from "@/Files/commAuto";
+import Header from "@/Components/Header";
+import CommAutoLiability from "@/ServicesPages/commAuto";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import PublicEntityPage from "@/Files/publicE";
+import Header from "@/Components/Header";
+import PublicEntityPage from "@/IndustriesPages/publicE";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

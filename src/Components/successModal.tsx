@@ -13,20 +13,14 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, showConfet
 
   useEffect(() => {
     if (showConfetti) {
-      console.log('SuccessModal: showConfetti triggered, setting localShowConfetti to true');
       setLocalShowConfetti(true);
       // Auto-hide confetti after 2.5 seconds
       const timer = setTimeout(() => {
-        console.log('SuccessModal: hiding confetti after timeout');
         setLocalShowConfetti(false);
       }, 2500);
       return () => clearTimeout(timer);
     }
   }, [showConfetti]);
-
-  useEffect(() => {
-    console.log('SuccessModal: localShowConfetti changed to:', localShowConfetti);
-  }, [localShowConfetti]);
 
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {

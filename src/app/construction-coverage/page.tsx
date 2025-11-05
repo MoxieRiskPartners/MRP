@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import ConstructionPage from "@/Files/construction";
+import Header from "@/Components/Header";
+import ConstructionPage from "@/IndustriesPages/construction";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

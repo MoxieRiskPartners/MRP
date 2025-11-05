@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import PhysicalDamage from "@/Files/physicaldamage";
+import Header from "@/Components/Header";
+import PhysicalDamage from "@/ServicesPages/physicaldamage";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

@@ -1,6 +1,6 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
-import OwnerOperator from "@/Files/ownerOperator";
+import Header from "@/Components/Header";
+import OwnerOperator from "@/ServicesPages/ownerOperator";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {

@@ -1,7 +1,7 @@
 import { Metadata } from "next";
-import Header from "@/Main/Header";
+import Header from "@/Components/Header";
 import Footer from "@/Components/footer";
-import CoveragePage from "@/Files/coverage";
+import CoveragePage from "@/ServicesPages/coverage";
 
 export const metadata: Metadata = {
   title: "Commercial Insurance Coverage Options | Liability, Cargo & More",
