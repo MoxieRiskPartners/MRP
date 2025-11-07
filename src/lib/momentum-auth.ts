@@ -35,7 +35,7 @@ export async function getMomentumToken(): Promise<string> {
   }
 
   console.log('Fetching new Momentum token...');
-
+console.log('ENV CHECK:');  console.log('MOMENTUM_USERNAME:', process.env.MOMENTUM_USERNAME ? '✓ EXISTS' : '✗ MISSING');  console.log('MOMENTUM_PASSWORD:', process.env.MOMENTUM_PASSWORD ? '✓ EXISTS' : '✗ MISSING');  console.log('MOMENTUM_AGENCY_ID:', process.env.MOMENTUM_AGENCY_ID ? '✓ EXISTS' : '✗ MISSING');  console.log('USERNAME length:', process.env.MOMENTUM_USERNAME?.length || 0);  console.log('PASSWORD length:', process.env.MOMENTUM_PASSWORD?.length || 0);  console.log('AGENCY_ID length:', process.env.MOMENTUM_AGENCY_ID?.length || 0);
   try {
     const response = await fetch('https://api.nowcerts.com/api/token', {
       method: 'POST',
