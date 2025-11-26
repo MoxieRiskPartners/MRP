@@ -187,6 +187,13 @@ Phone: formData.phone || formData.Phone || '',
     console.log('✓ Field count:', Object.keys(momentumPayload).length);
     console.log('Full Payload:', JSON.stringify(momentumPayload, null, 2));
     
+
+    console.log('ENV CHECK:');
+  console.log('MOMENTUM_USERNAME:', process.env.MOMENTUM_USERNAME ? '✓ EXISTS' : '✗ MISSING');
+  console.log('MOMENTUM_PASSWORD:', process.env.MOMENTUM_PASSWORD ? '✓ EXISTS' : '✗ MISSING');
+  console.log('USERNAME length:', process.env.MOMENTUM_USERNAME?.length || 0);
+  console.log('PASSWORD length:', process.env.MOMENTUM_PASSWORD?.length || 0);
+  
     // STEP 5: Submit to Momentum API
     console.log('→ Submitting to Momentum API...');
     const response = await fetch('https://api.nowcerts.com/api/PushJsonQuoteApplications', {

@@ -138,7 +138,11 @@ export default function RootLayout({
               "slogan": "Commercial insurance that moves as fast as you do",
               "foundingDate": "2020",
               "address": {
-                "@type": "PostalAddress",
+                "@type": "PostalAddress", 
+                "streetAddress": "5900 Saratoga Rd", 
+                "addressLocality": "Asbury",
+                "addressRegion": "Iowa", 
+                "postalCode": "52002", 
                 "addressCountry": "US"
               },
               "contactPoint": [
