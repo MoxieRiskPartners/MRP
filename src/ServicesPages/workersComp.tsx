@@ -274,8 +274,8 @@ const WorkersCompPage = () => {
   Get Your Quote
 </Link>
                   
-                  <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                    Call (800) 669-4301
+                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                    Call (515) 581-7187
                   </a>
                 </div>
               </div>
@@ -473,8 +473,8 @@ const WorkersCompPage = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold text-gray-900 mb-2">24/7 Claims Hotline</h4>
-                    <a href="tel:+18006694301" className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors">
-                      (800) 669-4301
+                    <a href="tel:+15155817187" className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors">
+                      (515) 581-7187
                     </a>
                     <p className="text-sm text-gray-500 mt-1">Immediate assistance available</p>
                   </div>
@@ -591,8 +591,8 @@ const WorkersCompPage = () => {
                                   <Phone className="w-6 h-6 text-white" />
                                 </div>
                                 <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                                <a href="tel:+18006694301" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
-                                  (800) 669-4301
+                                <a href="tel:+15155817187" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                                  (515) 581-7187
                                 </a>
                                 <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                               </div>

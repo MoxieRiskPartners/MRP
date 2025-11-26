@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import Image from "next/image";
-// import Header from "@/Components/Header";
-// import Hero from "@/LandingPages/Hero";
-// import Overview from "@/LandingPages/Overview";
-// import ServiceAreas from "@/LandingPages/serviceAreas";
-// import CallToAction from "@/Components/callToAction";
-// import Footer from "@/Components/footer";
+import Header from "@/Components/Header";
+import Hero from "@/LandingPages/Hero";
+import Overview from "@/LandingPages/Overview";
+import ServiceAreas from "@/LandingPages/serviceAreas";
+import CallToAction from "@/Components/callToAction";
+import Footer from "@/Components/footer";
 
 import ComingSoon from "../Files/comingsoon";
 
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-    <ComingSoon /> 
-      {/*<Header />
+    {/* <ComingSoon />  */}
+      <Header />
       <Hero />
       <Overview/>
       <ServiceAreas />
       <CallToAction />
-      <Footer /> */}
+      <Footer />
 
     </>
   );

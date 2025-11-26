@@ -213,8 +213,8 @@ const NonProfitPage = () => {
               
                   </button>
                   
-                  <a href="tel:+18003265581" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                    Call (800) 326-5581
+                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                    Call (515) 581-7187
                   </a>
                 </div>
               </div>
@@ -448,8 +448,8 @@ const NonProfitPage = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+180063265581" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
-                    (800) 326-5581
+                  <a href="tel:+15155817187" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                    (515) 581-7187
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>

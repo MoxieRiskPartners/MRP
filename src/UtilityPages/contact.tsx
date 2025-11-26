@@ -190,12 +190,12 @@ Source: Contact Page Form`
       }, 5000);
       
     } else {
-      alert(`Error submitting form: ${result.message}\n\nPlease call (800) 326-5581`);
+      alert(`Error submitting form: ${result.message}\n\nPlease call (515) 581-7187`);
     }
     
   } catch (error) {
     console.error('Error:', error);
-    alert('Unable to submit. Please call (800) 326-5581 for immediate assistance.');
+    alert('Unable to submit. Please call (515) 581-7187 for immediate assistance.');
   } finally {
     // ✅ This runs whether success or error
     setIsSubmitting(false);
@@ -257,11 +257,11 @@ const renderThankYou = () => (
           <h3 className="text-2xl font-bold mb-4">Need immediate assistance?</h3>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
-              href="tel:+18003265581" 
+              href="tel:+15155817187" 
               className="bg-white text-orange-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center cursor-pointer"
             >
               <Phone className="w-5 h-5 mr-2" />
-              Call (800) 326-5581
+              Call (515) 581-7187
             </a>
             <a 
               href="mailto:info@moxieriskpartners.com"
@@ -335,7 +335,7 @@ if (showThankYou) {
                   </a>
 
                   <a
-                    href="tel:+18003265581"
+                    href="tel:+15155817187"
                     className="flex items-center space-x-3 p-4 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors duration-200 group"
                   >
  <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -343,7 +343,7 @@ if (showThankYou) {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-900">Call Us</p>
-                      <p className="text-lg font-bold text-green-600 group-hover:text-green-700">(800) 326-5581</p>
+                      <p className="text-lg font-bold text-green-600 group-hover:text-green-700">(515) 581-7187</p>
                     </div>
                   </a>
                 </div>

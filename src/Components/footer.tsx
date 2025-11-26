@@ -56,7 +56,7 @@ const Footer: React.FC = () => {
       links: [
         { href: '/file-claims', label: 'File a Claim', ariaLabel: 'File an insurance claim' },
         { href: '/file-claims#support', label: '24/7 Claims Support', ariaLabel: '24/7 claims assistance' },
-        { href: 'tel:+18006694301', label: 'Emergency Claims Line', ariaLabel: 'Call emergency claims line', isExternal: true },
+        { href: 'tel:+15155817187', label: 'Emergency Claims Line', ariaLabel: 'Call emergency claims line', isExternal: true },
         { href: '/faq-page', label: 'FAQ', ariaLabel: 'Frequently asked questions' },
         // { href: '/contact#resources', label: 'Resources', ariaLabel: 'Insurance resources and guides' },
       ]
@@ -149,11 +149,11 @@ const Footer: React.FC = () => {
               <div className="flex items-center space-x-3">
                 <Phone className="w-5 h-5 text-orange-400 flex-shrink-0" />
                 <a 
-                  href="tel:+18006694301" 
+                  href="tel:+15155817187" 
                   className="text-gray-200 hover:text-orange-400 transition-colors"
-                  aria-label="Call us at (800) 669-4301"
+                  aria-label="Call us at (515) 581-7187"
                 >
-                  (800) 669-4301
+                  (515) 581-7187
                 </a>
               </div>
               <div className="flex items-center space-x-3">

@@ -117,7 +117,7 @@ const Hero = () => {
   };
 
   const handleCallExpert = () => {
-    window.location.href = 'tel:+18006694301';
+    window.location.href = 'tel:+15155817187';
   };
 
   // Form handlers
@@ -237,12 +237,12 @@ Source: Homepage Hero Form`
       } else {
         // Error from API
         console.error('API error:', result.message);
-        alert(`There was an issue submitting your quote: ${result.message}\n\nPlease call us at (800) 669-4301`);
+        alert(`There was an issue submitting your quote: ${result.message}\n\nPlease call us at (515) 581-7187`);
       }
       
     } catch (error) {
       console.error('Error submitting hero form:', error);
-      alert('Unable to submit quote. Please call us at (800) 669-4301 for immediate assistance.');
+      alert('Unable to submit quote. Please call us at (515) 581-7187 for immediate assistance.');
     } finally {
       setIsSubmitting(false);
     }

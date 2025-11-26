@@ -337,11 +337,11 @@ const AboutPage = () => {
               </a>
               
               <a 
-                href="tel:+18006694301" 
+                href="tel:+15155817187" 
                 className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center"
               >
                 <Phone className="mr-2 w-5 h-5" />
-                Call (800) 669-4301
+                Call (515) 581-7187
               </a>
             </div>
           </div>

@@ -159,12 +159,12 @@ Source: Coverage Page Form`
         });
         
       } else {
-        alert(`Error submitting quote: ${result.message}\n\nPlease call (800) 669-4301`);
+        alert(`Error submitting quote: ${result.message}\n\nPlease call (515) 581-7187`);
       }
       
     } catch (error) {
       console.error('Error:', error);
-      alert('Unable to submit. Please call (800) 669-4301 for immediate assistance.');
+      alert('Unable to submit. Please call (515) 581-7187 for immediate assistance.');
     } finally {
       setIsSubmitting(false);
     }
@@ -629,8 +629,8 @@ useEffect(() => {
   Get Your Quote
 </Link>
                   
-                  <a href="tel:+18006694301" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center">
-                    Call (800) 669-4301
+                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-[clamp(1.5rem,3vw,2rem)] py-[clamp(0.75rem,1.5vw,1rem)] rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center">
+                    Call (515) 581-7187
                   </a>
                 </div>
               </div>
@@ -764,7 +764,7 @@ useEffect(() => {
             <div className="p-8 border-t border-gray-200 bg-gray-50">
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
-                  href="tel:+18006694301" 
+                  href="tel:+15155817187" 
                   className="flex-1 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white py-4 px-6 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
                   <Phone className="w-5 h-5 mr-2" />
@@ -796,10 +796,10 @@ useEffect(() => {
               </p>
               <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] sm:flex-row justify-center">
                 <a 
-                  href="tel:+18006694301"
+                  href="tel:+15155817187"
                   className="bg-white text-orange-600 hover:bg-gray-100 px-[clamp(1.5rem,4vw,2rem)] py-[clamp(0.75rem,2vw,0.875rem)] rounded-lg font-bold transition-colors text-[clamp(0.875rem,1.2vw,1rem)] shadow-md hover:shadow-lg"
                 >
-                  Call (800) 669-4301
+                  Call (515) 581-7187
                 </a>
                 <button 
                   onClick={scrollToForm}
@@ -892,8 +892,8 @@ useEffect(() => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+18006694301" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-green-600 hover:text-green-700 transition-colors">
-                    (800) 669-4301
+                  <a href="tel:+15155817187" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-green-600 hover:text-green-700 transition-colors">
+                    (515) 581-7187
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>

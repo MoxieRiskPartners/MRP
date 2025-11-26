@@ -111,7 +111,7 @@ export default function RootLayout({
               },
               "image": "https://moxieriskpartners.com/images/og-image.png",
               "description": "Specialized commercial insurance agency providing trucking insurance, workers compensation, cargo insurance, construction insurance, and risk management solutions nationwide.",
-              "telephone": "+1-800-669-4301",
+              "telephone": "+1-515-581-7187",
               "email": "quotes@moxieriskpartners.com",
               "priceRange": "$$",
               "areaServed": {
@@ -148,7 +148,7 @@ export default function RootLayout({
               "contactPoint": [
                 {
                   "@type": "ContactPoint",
-                  "telephone": "+1-800-669-4301",
+                  "telephone": "+1-515-581-7187",
                   "email": "quotes@moxieriskpartners.com",
                   "contactType": "Sales",
                   "availableLanguage": ["English"],
@@ -163,7 +163,7 @@ export default function RootLayout({
                 },
                 {
                   "@type": "ContactPoint",
-                  "telephone": "+1-800-669-4301",
+                  "telephone": "+1-515-581-7187",
                   "email": "claims@moxieriskpartners.com",
                   "contactType": "Customer Service",
                   "availableLanguage": ["English"],

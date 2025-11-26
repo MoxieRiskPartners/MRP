@@ -272,11 +272,11 @@ const QuotePage: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         console.error('Submission failed:', result);
-        alert('There was an issue submitting your quote. Please try again or call us at (800) 669-4301');
+        alert('There was an issue submitting your quote. Please try again or call us at (515) 581-7187');
       }
     } catch (error) {
       console.error('Error submitting quote:', error);
-      alert('Unable to submit quote. Please call us at (800) 669-4301');
+      alert('Unable to submit quote. Please call us at (515) 581-7187');
     } finally {
       setIsSubmitting(false);
     }
@@ -894,11 +894,11 @@ const QuotePage: React.FC = () => {
         <h3 className="text-2xl font-bold mb-4">Need immediate assistance?</h3>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a 
-            href="tel:+18006694301" 
+            href="tel:+15155817187" 
             className="bg-white text-orange-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-bold transition-colors flex items-center justify-center"
           >
             <Phone className="w-5 h-5 mr-2" />
-            Call (800) 669-4301
+            Call (515) 581-7187
           </a>
         </div>
       </div>
@@ -968,11 +968,11 @@ const QuotePage: React.FC = () => {
               {/* CTA */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
-                  href="tel:+18006694301" 
+                  href="tel:+15155817187" 
                   className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call (800) 669-4301
+                  Call (515) 581-7187
                 </a>
               </div>
             </div>

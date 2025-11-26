@@ -278,7 +278,7 @@ const ServiceAreas: React.FC = () => {
           <Link href="/quote-form" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
             Get Quote Now
           </Link>
-          <a href="tel:+18003265581" className="border-2 border-orange-500 text-orange-600 hover:bg-orange-50 px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
+          <a href="tel:+15155817187" className="border-2 border-orange-500 text-orange-600 hover:bg-orange-50 px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
             Contact Local Rep
           </a>
         </div>
@@ -287,7 +287,7 @@ const ServiceAreas: React.FC = () => {
       <div className="text-center">
         <div className="text-amber-600 text-2xl mb-2">⚠</div>
         <p className="text-sm sm:text-base text-gray-700 mb-4">{error}</p>
-        <a href="tel:+18003265581" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
+        <a href="tel:+15155817187" className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
           Contact Us Anyway
         </a>
       </div>
@@ -393,10 +393,10 @@ const ServiceAreas: React.FC = () => {
             </p>
             <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
               <a 
-                 href="tel:+18003265581"
+                 href="tel:+15155817187"
                 className="bg-white text-orange-600 hover:bg-gray-100 px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base"
               >
-                Call (800) 326-5581
+                Call (515) 581-7187
               </a>
             <a 
   href="/contact-us"
@@ -510,7 +510,7 @@ const ServiceAreas: React.FC = () => {
   </svg>
   Get Quote Now
 </Link>
-            <a href="tel:+18003265581" className="flex-1 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center text-sm sm:text-base">
+            <a href="tel:+15155817187" className="flex-1 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center text-sm sm:text-base">
   <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
   </svg>

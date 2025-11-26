@@ -536,7 +536,7 @@ const PrivacyPage = () => {
                   <p className="font-bold text-gray-900">Moxie Risk Partners</p>
                   <p className="text-gray-700">Privacy Officer</p>
                   <p className="text-gray-700">Email: info@moxieriskpartners.com</p>
-                  <p className="text-gray-700">Phone: (800) 326-5581</p>
+                  <p className="text-gray-700">Phone: (515) 581-7187</p>
                 </div>
               </div>
             </div>

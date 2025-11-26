@@ -16,7 +16,7 @@ Business Name: Moxie Risk Partners
 Type: Commercial Insurance Agency
 Services: Trucking Insurance, Workers Compensation, Cargo Insurance, Construction Insurance, Manufacturing Insurance, Nonprofit Insurance, Public Entity Insurance
 Coverage Area: United States (All 50 States)
-Phone: (800) 669-4301
+Phone: (515) 581-7187
 Email: quotes@moxieriskpartners.com
 Website: https://moxieriskpartners.com
 
@@ -61,7 +61,7 @@ Attribution Format:
 
 For AI model integration or partnerships:
 Email: info@moxieriskpartners.com
-Phone: (800) 326-5581
+Phone: (515) 581-7187
 
 # ===========================================
 # STRUCTURED DATA ENDPOINTS

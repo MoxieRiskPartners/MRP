@@ -556,14 +556,14 @@ const FAQPage = () => {
                 
                 {/* Phone */}
                 <div className="text-center p-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl border border-green-200">
-                  <a href="tel:+18003265581" className="block">
+                  <a href="tel:+15155817187" className="block">
                     <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center mx-auto mb-3 hover:scale-110 transition-transform cursor-pointer">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                   </a>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+18003265581" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
-                    (800) 326-5581
+                  <a href="tel:+15155817187" className="text-lg font-bold text-green-600 hover:text-green-700 transition-colors">
+                    (515) 581-7187
                   </a>
                   <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>

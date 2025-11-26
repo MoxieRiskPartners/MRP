@@ -214,8 +214,8 @@ const ClaimsPage = () => {
 
                 {/* CTA Buttons */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+18006694301" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                Call : (800) 669-4301
+              <a href="tel:+15155817187" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
+                Call : (515) 581-7187
       
               </a>
                   
@@ -324,7 +324,7 @@ const ClaimsPage = () => {
                   While we provide immediate support and continuous advocacy, larger liability claims may take months or years to fully resolve. 
                   <strong> We offer ongoing monitoring and support as often as you need - weekly, monthly, or as your situation requires.</strong> 
                   <span className="inline-block mt-2">
-                    <a href="tel:+18006694301" className="text-orange-600 hover:text-orange-700 font-semibold underline">
+                    <a href="tel:+15155817187" className="text-orange-600 hover:text-orange-700 font-semibold underline">
                       Call our experts now to discuss your specific claim timeline →
                     </a>
                   </span>
@@ -421,8 +421,8 @@ const ClaimsPage = () => {
                   </div>
                   <div className="flex-1">
                     <h4 className="text-lg font-semibold text-gray-900 mb-2">24/7 Emergency Line</h4>
-                    <a href="tel:+18006694301" className="text-2xl font-bold text-red-600 hover:text-red-700 transition-colors">
-                      (800) 669-4301
+                    <a href="tel:+15155817187" className="text-2xl font-bold text-red-600 hover:text-red-700 transition-colors">
+                      (515) 581-7187
                     </a>
                     <p className="text-sm text-gray-500 mt-1">Always available for urgent claims</p>
                   </div>
@@ -484,12 +484,12 @@ const ClaimsPage = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+18006694301" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                Report Claim: (800) 669-4301
+              <a href="tel:+15155817187" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
+                Report Claim: (515) 581-7187
                 
               </a>
               
-              <a href="tel:+18006694301" className="bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+              <a href="tel:+15155817187" className="bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
                 Contact Claims Team
               </a>
             </div>
