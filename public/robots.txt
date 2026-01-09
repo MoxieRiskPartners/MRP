@@ -13,15 +13,15 @@ Allow: /
 # Disallow admin, API, and private areas
 Disallow: /api/
 Disallow: /admin/
-Disallow: /_next/static/
 Disallow: /private/
-Disallow: /*.json$
+
 
 # Allow specific important directories
 Allow: /images/
 Allow: /coverage-options/
 Allow: /quote-form/
 Allow: /contact-us/
+Allow: /_next/static/
 
 # ===========================================
 # GOOGLE CRAWLERS
@@ -178,12 +178,6 @@ Disallow: /
 # ===========================================
 # BLOCK MALICIOUS/SPAM BOTS
 # ===========================================
-
-User-agent: AhrefsBot
-Disallow: /
-
-User-agent: SemrushBot
-Disallow: /
 
 User-agent: MJ12bot
 Disallow: /

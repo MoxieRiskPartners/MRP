@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, AlertTriangle, FileText, Lock, Scale, Gavel } from 'lucide-react';
+import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, AlertTriangle, FileText, Lock, Scale, Gavel, MessageSquare } from 'lucide-react';
 
 const TermsPage = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -445,14 +445,76 @@ const TermsPage = () => {
             </div>
           </div>
 
-          {/* Section 10: Contact Information */}
+          {/* Section 10: SMS Terms of Service */}
+          <div id="sms-terms" className="space-y-6">
+            <div className="flex items-start space-x-4 mb-6">
+              <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                <MessageSquare className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">10. SMS Terms of Service</h2>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <p className="text-blue-800 leading-relaxed">
+                  By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages 
+                  from Moxie Risk Partners. This includes SMS messages for customer care. Message frequency varies. 
+                  Message and data rates may apply.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-bold text-gray-900 mb-4">SMS Communication Details</h3>
+                <ul className="space-y-3">
+                  {[
+                    { title: "Consent:", desc: "By providing your phone number, you consent to receive SMS messages" },
+                    { title: "Message Types:", desc: "Customer care, service updates, and relevant communications" },
+                    { title: "Frequency:", desc: "Message frequency varies based on your interactions and needs" },
+                    { title: "Costs:", desc: "Message and data rates may apply depending on your carrier plan" }
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                      <CheckCircle className="w-5 h-5 text-orange-600 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <span className="font-bold text-gray-900">{item.title}</span>
+                        <span className="text-gray-700"> {item.desc}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-200">
+                <h4 className="text-lg font-bold text-yellow-900 mb-2">How to Manage SMS</h4>
+                <p className="text-yellow-800">
+                  <strong>HELP:</strong> Message HELP for help.<br />
+                  <strong>STOP:</strong> Reply STOP to any message to opt out.
+                </p>
+              </div>
+
+              <div className="bg-green-50 rounded-xl p-6 border border-green-200">
+                <p className="text-green-900">
+                  See privacy policy at{' '}
+                  <a 
+                    href="https://moxieriskpartners.com/privacy-policy" 
+                    className="text-green-700 underline hover:text-green-800 font-semibold"
+                  >
+                    https://moxieriskpartners.com/privacy-policy
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Section 11: Contact Information */}
           <div className="space-y-6">
             <div className="flex items-start space-x-4 mb-6">
               <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center flex-shrink-0">
                 <Mail className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-gray-900 mb-2">10. Contact Us</h2>
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">11. Contact Us</h2>
               </div>
             </div>
             

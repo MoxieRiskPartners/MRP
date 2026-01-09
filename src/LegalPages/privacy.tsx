@@ -296,6 +296,12 @@ const PrivacyPage = () => {
                   <strong>We do not sell your personal information to third parties for their marketing purposes.</strong>
                 </p>
               </div>
+
+              <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
+                <p className="text-blue-900 font-semibold">
+                  <strong>SMS consent is not shared with third parties.</strong>
+                </p>
+              </div>
             </div>
           </div>
 
