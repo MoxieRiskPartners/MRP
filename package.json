@@ -9,6 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^4.3.2",
+    "jspdf": "^4.0.0",
+    "jspdf-autotable": "^5.0.7",
     "leaflet": "^1.9.4",
     "lottie-react": "^2.4.1",
     "lucide-react": "^0.544.0",
@@ -16,7 +19,8 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-leaflet": "^5.0.0",
-    "react-native-toast-message": "^2.3.3"
+    "react-native-toast-message": "^2.3.3",
+    "resend": "^6.7.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -25,7 +25,7 @@ interface ClaimsResource {
 }
 
 const ClaimsPage = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "How quickly should I report a claim?",
@@ -90,7 +90,14 @@ const ClaimsPage = () => {
       features: ["Cargo Claims", "Equipment Breakdown", "Professional Liability", "Product Liability"],
       availability: "Industry Specialists",
       icon: FileText
-    }
+    },
+  //    {
+  //   title: "Trucking Incident Report",
+  //   description: "Complete our detailed trucking incident form online - covers all required information for fast processing",
+  //   features: ["Digital Form", "Instant Submission", "Auto-save Progress", "PDF Download"],
+  //   availability: "Online Portal",
+  //   icon: FileText
+  // },
   ];
 
   const processSteps: ProcessStep[] = [
@@ -212,17 +219,23 @@ const ClaimsPage = () => {
                   ))}
                 </div>
 
-                {/* CTA Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+15155817187" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                Call : (515) 581-7187
-      
-              </a>
-                  
-                  <a href="#claims-resources" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                    View Resources
-                  </a>
-                </div>
+        
+           {/* CTA Buttons */}
+<div className="flex flex-col sm:flex-row gap-4">
+  <a href="tel:+15155817187" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
+    Call : (515) 581-7187
+  </a>
+  
+  {/* ADD THIS - Trucking Claims Form Button */}
+  <a href="/file-claim" className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+    <FileText className="mr-2 w-5 h-5" />
+    File Trucking Claim
+  </a>
+  
+  {/* <a href="#claims-resources" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+    View Resources
+  </a> */}
+</div>
               </div>
             </div>
           </div>
@@ -277,6 +290,8 @@ const ClaimsPage = () => {
                         </li>
                       ))}
                     </ul>
+
+                    
                   </div>
                 </div>
               );
@@ -322,10 +337,10 @@ const ClaimsPage = () => {
                 <p className="text-gray-700 leading-relaxed">
                   Every claim is unique and resolution times vary significantly based on complexity, investigation requirements, and circumstances beyond our control. 
                   While we provide immediate support and continuous advocacy, larger liability claims may take months or years to fully resolve. 
-                  <strong> We offer ongoing monitoring and support as often as you need - weekly, monthly, or as your situation requires.</strong> 
+                  <strong> We offer ongoing monitoring and support as often as you need - weekly, monthly, or as your situation requires. </strong> 
                   <span className="inline-block mt-2">
                     <a href="tel:+15155817187" className="text-orange-600 hover:text-orange-700 font-semibold underline">
-                      Call our experts now to discuss your specific claim timeline →
+                       Call our experts now to discuss your specific claim timeline →
                     </a>
                   </span>
                 </p>
@@ -468,34 +483,39 @@ const ClaimsPage = () => {
 
       {/* Final CTA Section */}
       <section className="relative py-20 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center">
-            <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              Need to File a
-              <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
-                Claim?
-              </span>
-            </h2>
-            
-            <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-4xl mx-auto">
-              Industry-specialized claims teams ready 24/7/365 nationwide for trucking, construction, 
-              manufacturing, and all commercial business types
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:+15155817187" className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
-                Report Claim: (515) 581-7187
-                
-              </a>
-              
-              <a href="tel:+15155817187" className="bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                Contact Claims Team
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <div className="text-center">
+      <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+        Need to File a
+        <span className="block text-transparent bg-gradient-to-r from-orange-600 to-red-600 bg-clip-text">
+          Claim?
+        </span>
+      </h2>
+      
+      <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-4xl mx-auto">
+        Industry-specialized claims teams ready 24/7/365 nationwide for trucking, construction, 
+        manufacturing, and all commercial business types
+      </p>
+      
+      {/* FIXED - Added justify-center and max-width wrapper */}
+      <div className="flex flex-col sm:flex-row gap-4 justify-center items-center max-w-4xl mx-auto">
+        <a href="tel:+15155817187" className="w-full sm:w-auto bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
+          Report Claim: (515) 581-7187
+        </a>
+        
+        <a href="/file-claim" className="w-full sm:w-auto bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+          <FileText className="mr-2 w-5 h-5" />
+          Trucking Claim Form
+        </a>
+        
+        <a href="tel:+15155817187" className="w-full sm:w-auto bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+          Contact Claims Team
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
     </div>
   );
 };
