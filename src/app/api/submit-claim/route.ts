@@ -45,7 +45,8 @@ function buildAttachments(
   files: FileAttachment[],
   policeReportFiles: FileAttachment[],
   citationFiles: FileAttachment[],
-  billOfLadingFiles: FileAttachment[]
+  billOfLadingFiles: FileAttachment[],
+  insuranceCardFile: FileAttachment | null
 ): { filename: string; content: string }[] {
   const attachments: { filename: string; content: string }[] = [];
 
@@ -53,6 +54,11 @@ function buildAttachments(
     filename: `Claim-${claimNumber}.pdf`,
     content: pdfBuffer.toString('base64'),
   });
+
+  // Add insurance card first (important document)
+  if (insuranceCardFile?.data) {
+    attachments.push({ filename: insuranceCardFile.name, content: insuranceCardFile.data });
+  }
 
   policeReportFiles.forEach((file) => {
     if (file.data) {
@@ -85,9 +91,16 @@ function generateFileListHtml(
   files: FileAttachment[],
   policeReportFiles: FileAttachment[],
   citationFiles: FileAttachment[],
-  billOfLadingFiles: FileAttachment[]
+  billOfLadingFiles: FileAttachment[],
+  insuranceCardFile: FileAttachment | null
 ): string {
-  const allFiles = [...policeReportFiles, ...citationFiles, ...billOfLadingFiles, ...files];
+  const allFiles = [
+    ...(insuranceCardFile ? [insuranceCardFile] : []),
+    ...policeReportFiles,
+    ...citationFiles,
+    ...billOfLadingFiles,
+    ...files
+  ];
   
   if (allFiles.length === 0) return '';
 
@@ -97,8 +110,14 @@ function generateFileListHtml(
       <table style="width: 100%; border-collapse: collapse;">
   `;
 
+  // Insurance Card section
+  if (insuranceCardFile) {
+    html += `<tr><td colspan="2" style="padding: 8px 0 4px; color: #1E40AF; font-weight: bold; font-size: 12px;">🪪 Insurance Card:</td></tr>`;
+    html += `<tr><td style="padding: 4px 0; color: #374151; font-size: 13px;">• ${insuranceCardFile.name}</td><td style="padding: 4px 0; color: #6B7280; font-size: 12px; text-align: right;">${(insuranceCardFile.size / 1024).toFixed(1)} KB</td></tr>`;
+  }
+
   if (policeReportFiles.length > 0) {
-    html += `<tr><td colspan="2" style="padding: 8px 0 4px; color: #1E40AF; font-weight: bold; font-size: 12px;">Police Reports:</td></tr>`;
+    html += `<tr><td colspan="2" style="padding: ${insuranceCardFile ? '12px' : '8px'} 0 4px; color: #1E40AF; font-weight: bold; font-size: 12px;">Police Reports:</td></tr>`;
     policeReportFiles.forEach((file) => {
       html += `<tr><td style="padding: 4px 0; color: #374151; font-size: 13px;">• ${file.name}</td><td style="padding: 4px 0; color: #6B7280; font-size: 12px; text-align: right;">${(file.size / 1024).toFixed(1)} KB</td></tr>`;
     });
@@ -132,12 +151,24 @@ function generateFileListHtml(
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { formData, witnesses, files = [], policeReportFiles = [], citationFiles = [], billOfLadingFiles = [] } = body;
+    const { 
+      formData, 
+      witnesses, 
+      files = [], 
+      policeReportFiles = [], 
+      citationFiles = [], 
+      billOfLadingFiles = [],
+      insuranceCardFile = null  // NEW: Insurance card file
+    } = body;
 
     const claimNumber = generateClaimNumber();
     const submittedAt = formatSubmissionDate();
 
-    const fileCount = (files?.length || 0) + (policeReportFiles?.length || 0) + (citationFiles?.length || 0) + (billOfLadingFiles?.length || 0);
+    const fileCount = (files?.length || 0) + 
+                      (policeReportFiles?.length || 0) + 
+                      (citationFiles?.length || 0) + 
+                      (billOfLadingFiles?.length || 0) +
+                      (insuranceCardFile ? 1 : 0);  // Count insurance card
 
     const pdfBuffer = await renderToBuffer(
       ClaimPDF({
@@ -155,7 +186,8 @@ export async function POST(request: NextRequest) {
       files as FileAttachment[],
       policeReportFiles as FileAttachment[],
       citationFiles as FileAttachment[],
-      billOfLadingFiles as FileAttachment[]
+      billOfLadingFiles as FileAttachment[],
+      insuranceCardFile as FileAttachment | null  // NEW
     );
 
     const incidentTime = formData.incidentHour 
@@ -173,7 +205,8 @@ export async function POST(request: NextRequest) {
       files as FileAttachment[],
       policeReportFiles as FileAttachment[],
       citationFiles as FileAttachment[],
-      billOfLadingFiles as FileAttachment[]
+      billOfLadingFiles as FileAttachment[],
+      insuranceCardFile as FileAttachment | null  // NEW
     );
 
     // ============================================
@@ -201,6 +234,14 @@ export async function POST(request: NextRequest) {
             <tr>
               <td style="padding: 8px 0; color: #6B7280; width: 140px;">Company:</td>
               <td style="padding: 8px 0; font-weight: bold;">${formData.companyName || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #6B7280;">Policy #:</td>
+              <td style="padding: 8px 0;">${formData.claimantPolicyNumber || 'Not provided'}</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 0; color: #6B7280;">Insurance Co:</td>
+              <td style="padding: 8px 0;">${formData.claimantInsuranceCompany || 'Not provided'}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; color: #6B7280;">Date of Incident:</td>
@@ -245,6 +286,14 @@ export async function POST(request: NextRequest) {
             </tr>
             ` : ''}
           </table>
+
+          ${insuranceCardFile ? `
+          <div style="margin-top: 20px; padding: 15px; background: #ECFDF5; border-radius: 8px; border-left: 4px solid #10B981;">
+            <p style="margin: 0; color: #065F46; font-size: 14px;">
+              <strong>🪪 Insurance Card Attached:</strong> ${insuranceCardFile.name}
+            </p>
+          </div>
+          ` : ''}
 
           <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 8px; border-left: 4px solid #F97316;">
             <h3 style="margin: 0 0 10px; color: #1F2937; font-size: 14px;">Claims Contact</h3>
