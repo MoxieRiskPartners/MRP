@@ -105,8 +105,8 @@ const ComingSoon = () => {
             <p className="text-lg md:text-xl text-white leading-relaxed max-w-3xl mx-auto" style={{ 
               textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)' 
             }}>
-              Specialized commercial insurance for trucking, construction, manufacturing, nonprofit, and public entities with DOT compliance support and 24/7 claims advocacy. 
-              <strong style={{ color: '#D9BC82' }}> Fast quotes and expedited service</strong> - we protect what builds America.
+              Specialized commercial insurance for trucking, construction, manufacturing, nonprofit, and public entities with Risk Management support and dedicated claims advocacy.
+              <strong style={{ color: '#D9BC82' }}> Specialized expertise and dedicated service</strong> - we protect what builds America.
             </p>
           </div>
 
@@ -147,16 +147,9 @@ const ComingSoon = () => {
             border: '1px solid rgba(255, 255, 255, 0.15)'
           }}>
             <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold" style={{ 
-                color: '#D9BC82', 
-                textShadow: '0 0 8px rgba(217, 188, 130, 0.4)' 
-              }}>24/7</div>
-              <div className="text-white/90 text-sm font-medium">Claims Support</div>
-            </div>
-            <div className="text-center">
-              <div className="text-2xl md:text-3xl font-bold" style={{ 
-                color: '#D9BC82', 
-                textShadow: '0 0 8px rgba(217, 188, 130, 0.4)' 
+              <div className="text-2xl md:text-3xl font-bold" style={{
+                color: '#D9BC82',
+                textShadow: '0 0 8px rgba(217, 188, 130, 0.4)'
               }}>48</div>
               <div className="text-white/90 text-sm font-medium">States</div>
             </div>

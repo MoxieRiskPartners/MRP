@@ -491,7 +491,6 @@ const PhysicalDamage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
@@ -502,7 +501,6 @@ const PhysicalDamage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
             </div>

@@ -56,7 +56,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         'Bobtail & Non-Trucking Liability',
         'General Liability Claims'
       ],
-      footerText: 'Our transportation specialists are available 24/7 to handle your trucking claims with expertise and urgency.',
+      footerText: 'Our transportation specialists are available to handle your trucking claims with expertise and urgency.',
       icon: Truck
     },
     {
@@ -70,7 +70,7 @@ const [isSubmitting, setIsSubmitting] = useState(false);
         'Business Interruption',
         'Workers\' Compensation'
       ],
-      footerText: 'Our manufacturing claims team provides rapid response and specialized knowledge for industrial operations.',
+      footerText: 'Our manufacturing claims team provides dedicated support and specialized knowledge for industrial operations.',
       icon: Factory
     },
     {
@@ -222,7 +222,7 @@ const renderThankYou = () => (
         <div>
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Thank You for Reaching Out!</h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            We've received your message and our team will contact you within 24 hours to discuss your insurance needs.
+            We've received your message and our team will be in touch shortly to discuss your insurance needs.
           </p>
         </div>
 
@@ -351,7 +351,7 @@ if (showThankYou) {
                 {/* Help Text */}
                 <div className="bg-[#FBF5EB] p-4 rounded-lg border border-[#E5CFA5]">
                   <p className="text-[#8A6528] font-semibold text-center">
-                    24/7 Help available! Get in touch with our dedicated team now.
+                    Help available! Get in touch with our dedicated team now.
                   </p>
                 </div>
               </div>
@@ -444,7 +444,7 @@ if (showThankYou) {
             {/* Footer Text and CTA */}
             <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
               <p className="text-gray-700 mb-4">
-                <strong>Report a claim 24/7:</strong> {selectedClaim.footerText}
+                <strong>Report a claim:</strong> {selectedClaim.footerText}
               </p>
               <a 
                 href="/file-claims" 
@@ -467,7 +467,7 @@ if (showThankYou) {
               Get Your Free Quote!
             </h2>
             <p className="text-xl text-gray-600 mb-6">
-              Fill out the form below and get an insurance expert to discuss coverage or quotes within 24 hours. 
+              Fill out the form below and an insurance expert will reach out to discuss coverage or quotes. 
               All information is kept confidential and secure.
             </p>
           </div>

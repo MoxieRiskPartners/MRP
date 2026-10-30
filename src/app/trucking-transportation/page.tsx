@@ -5,13 +5,13 @@ import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {
   title: "Trucking Insurance | Commercial Auto Liability for Carriers & Fleets",
-  description: "Specialized trucking insurance for owner-operators and fleets. Commercial auto liability, cargo, physical damage, and DOT compliance. Get competitive quotes in 24 hours with A+ rated carriers.",
+  description: "Specialized trucking insurance for owner-operators and fleets. Commercial auto liability, cargo, physical damage, and Risk Management Support. Get competitive quotes with A+ rated carriers.",
   alternates: {
     canonical: 'https://moxieriskpartners.com/trucking-transportation',
   },
   openGraph: {
     title: "Trucking Insurance | Commercial Auto Liability for Carriers & Fleets",
-    description: "Specialized trucking insurance for owner-operators and fleets. Commercial auto liability, cargo, physical damage, and DOT compliance. Get competitive quotes in 24 hours.",
+    description: "Specialized trucking insurance for owner-operators and fleets. Commercial auto liability, cargo, physical damage, and Risk Management Support. Get competitive quotes.",
     url: "https://moxieriskpartners.com/trucking-transportation",
     siteName: "Moxie Risk Partners",
     images: [

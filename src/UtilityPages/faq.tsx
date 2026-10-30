@@ -17,7 +17,7 @@ const FAQPage = () => {
     // Claims FAQs
     {
       question: "How quickly should I report a claim?",
-      answer: "Immediately. Our 24/7 hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team.",
+      answer: "Immediately. Our claims hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team.",
       isOpen: false,
       category: "claims"
     },
@@ -29,7 +29,7 @@ const FAQPage = () => {
     },
     {
       question: "What makes your claims service different?",
-      answer: "Industry-specialized adjusters for trucking, construction, and manufacturing. 1-hour response guarantee, A+ AM Best rating, and 98.7% customer satisfaction with nationwide coverage. Every claim is unique - call our experts to discuss your specific situation and timeline.",
+      answer: "Industry-specialized adjusters for trucking, construction, and manufacturing. A+ AM Best rating and 98.7% customer satisfaction with nationwide coverage. Every claim is unique - call our experts to discuss your specific situation and timeline.",
       isOpen: false,
       category: "claims"
     },
@@ -73,7 +73,7 @@ const FAQPage = () => {
 },
 {
   question: "How quickly can I get a certificate of insurance?",
-  answer: "We provide instant certificates of insurance once your policy is bound. This is essential for DOT compliance and meeting shipper requirements.",
+  answer: "We provide certificates of insurance once your policy is bound. This is essential for Risk Management Support and meeting shipper requirements.",
   isOpen: false,
   category: "trucking"
 },
@@ -105,7 +105,7 @@ const FAQPage = () => {
 },
 {
   question: "How quickly can I get owner operator coverage?",
-  answer: "With proper documentation, we can often provide same-day coverage and instant certificates. DOT filings are submitted immediately upon binding your policy.",
+  answer: "With proper documentation, we can arrange coverage and provide certificates of insurance. DOT filings are submitted upon binding your policy.",
   isOpen: false,
   category: "trucking"
 },
@@ -265,7 +265,7 @@ const FAQPage = () => {
     },
     {
       question: "How do I file a workers' compensation claim?",
-      answer: "Report the injury to your employer immediately (within 24-48 hours in most states). Seek medical attention from an approved provider if possible. Your employer should provide claim forms and report to their insurance carrier. Document everything and keep copies of all medical records. We provide 24/7 claims support to guide you through the process.",
+      answer: "Report the injury to your employer immediately (within 24-48 hours in most states). Seek medical attention from an approved provider if possible. Your employer should provide claim forms and report to their insurance carrier. Document everything and keep copies of all medical records. We provide claims support to guide you through the process.",
       isOpen: false,
       category: "workers-comp"
     },
@@ -565,7 +565,6 @@ const FAQPage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -579,7 +578,6 @@ const FAQPage = () => {
                   <a href="mailto:info@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     info@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
               

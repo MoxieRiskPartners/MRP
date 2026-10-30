@@ -496,8 +496,8 @@ const ServiceAreas: React.FC = () => {
                       </svg>
                     </div>
                     <div>
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">Fast Quote Response</span>
-                      <p className="text-gray-600 text-xs sm:text-sm">Quick turnaround on quotes and policy questions</p>
+                      <span className="font-semibold text-gray-800 text-sm sm:text-base">Quote Assistance</span>
+                      <p className="text-gray-600 text-xs sm:text-sm">Help with quotes and policy questions</p>
                     </div>
                   </div>
                 </div>

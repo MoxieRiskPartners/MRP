@@ -341,10 +341,9 @@ Source: Homepage Hero Form`
                   Moxie Risk Partners
                 </h2>
                 
-                {/* Updated Description (removed "instant") - Fixed apostrophe */}
+                {/* Updated Description */}
 <p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)' }}>
-  Specialized commercial insurance for trucking, construction, manufacturing, nonprofit, and public entities with DOT compliance support and 24/7 claims advocacy. 
-  <strong style={{ color: '#D9BC82' }}> Fast quotes and expedited service</strong> - we protect what builds America.
+  Specialized commercial insurance and risk management solutions.
 </p>
                 
                 {/* Call to Action Buttons */}
@@ -372,10 +371,6 @@ Source: Homepage Hero Form`
                   border: '1px solid rgba(255, 255, 255, 0.15)'
                 }}>
                   <div className="text-center">
-                    <div className="text-2xl md:text-3xl font-bold" style={{ color: '#D9BC82', textShadow: '0 0 8px rgba(204, 159, 84, 0.4)' }}>24/7</div>
-                    <div className="text-white/90 text-sm font-medium">Claims Support</div>
-                  </div>
-                  <div className="text-center">
                     <div className="text-2xl md:text-3xl font-bold" style={{ color: '#D9BC82', textShadow: '0 0 8px rgba(204, 159, 84, 0.4)' }}>48</div>
                     <div className="text-white/90 text-sm font-medium">States</div>
                   </div>
@@ -386,8 +381,8 @@ Source: Homepage Hero Form`
                 </div>
               </div>
 
-              {/* Right Side: Enhanced Quote Form - Hidden on Mobile */}
-              <div className="hidden lg:block lg:max-w-md xl:max-w-lg">
+              {/* Right Side: Enhanced Quote Form - Hidden for now per client request */}
+              <div className="hidden">
                 <div className="rounded-2xl p-8 shadow-2xl" style={{
                   background: 'linear-gradient(135deg, rgba(30, 30, 35, 0.95) 0%, rgba(45, 45, 50, 0.92) 100%)',
                   backdropFilter: 'blur(20px)',

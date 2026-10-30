@@ -11,13 +11,13 @@ import ComingSoon from "../Files/comingsoon";
 
 export const metadata: Metadata = {
   title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with 24/7 support.",
+  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with expert support.",
   alternates: {
     canonical: 'https://moxieriskpartners.com',
   },
   openGraph: {
     title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and 24/7 support.",
+    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
     url: "https://moxieriskpartners.com",
     siteName: "Moxie Risk Partners",
     images: [

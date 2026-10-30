@@ -58,7 +58,7 @@ const OwnerOperator = () => {
     },
     {
       question: "How quickly can I get owner operator coverage?",
-      answer: "With proper documentation, we can often provide same-day coverage and instant certificates. DOT filings are submitted immediately upon binding your policy.",
+      answer: "With proper documentation, we can arrange coverage and provide certificates of insurance. DOT filings are submitted upon binding your policy.",
       isOpen: false
     },
     {
@@ -89,7 +89,7 @@ const OwnerOperator = () => {
     {
       title: "Primary Auto Liability",
       description: "Required federal coverage protecting against third-party bodily injury and property damage claims from trucking operations.",
-      features: ["FMCSA Minimum $750K Coverage", "Higher Limits Available", "Interstate Operations", "Instant Certificates"],
+      features: ["FMCSA Minimum $750K Coverage", "Higher Limits Available", "Interstate Operations", "Certificates of Insurance"],
       category: 'required',
       icon: Shield
     },
@@ -222,9 +222,9 @@ const OwnerOperator = () => {
 
                 <div className="space-y-4">
                   {[
-                    'DOT Compliant Coverage',
+                    'Risk Management Support ',
                     'Flexible Payment Terms',
-                    '24/7 Claims Support'
+                    'Claims Support'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
@@ -424,7 +424,7 @@ const OwnerOperator = () => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of independent truck drivers who trust Moxie Risk Partners for their insurance needs. Get specialized owner operator coverage designed for your unique risks and requirements.
+                  Join the independent truck drivers who trust Moxie Risk Partners for their insurance needs. Get specialized owner-operator coverage designed for your unique risks and requirements.
                 </p>
               </div>
 
@@ -438,7 +438,6 @@ const OwnerOperator = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
@@ -449,7 +448,6 @@ const OwnerOperator = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
             </div>

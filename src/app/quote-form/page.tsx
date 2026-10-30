@@ -5,13 +5,13 @@ import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {
   title: "Get a Free Commercial Insurance Quote | Fast & Competitive Rates",
-  description: "Request your free commercial insurance quote online. Get competitive rates on trucking insurance, workers comp, cargo coverage, and more. Same-day quotes available with A+ rated carriers.",
+  description: "Request your free commercial insurance quote online. Get competitive rates on trucking insurance, workers comp, cargo coverage, and more. Quotes from A+ rated carriers.",
   alternates: {
     canonical: 'https://moxieriskpartners.com/quote-form',
   },
   openGraph: {
     title: "Get a Free Commercial Insurance Quote | Fast & Competitive Rates",
-    description: "Request your free commercial insurance quote online. Get competitive rates on trucking insurance, workers comp, cargo coverage, and more. Same-day quotes available.",
+    description: "Request your free commercial insurance quote online. Get competitive rates on trucking insurance, workers comp, cargo coverage, and more. Backed by A+ rated carriers.",
     url: "https://moxieriskpartners.com/quote-form",
     siteName: "Moxie Risk Partners",
     images: [

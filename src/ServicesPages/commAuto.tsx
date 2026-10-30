@@ -64,7 +64,7 @@ const CommAutoLiability = () => {
     },
     {
       question: "How quickly can I get a certificate of insurance?",
-      answer: "We provide instant certificates of insurance once your policy is bound. This is essential for DOT compliance and meeting shipper requirements.",
+      answer: "We provide certificates of insurance once your policy is bound. This is essential for Risk Management Support and meeting shipper requirements.",
       isOpen: false
     },
     {
@@ -95,8 +95,8 @@ const CommAutoLiability = () => {
   const liabilityBenefits: LiabilityBenefit[] = [
     {
       icon: Shield,
-      title: "DOT Compliance",
-      description: "Meet all FMCSA requirements with proper liability limits and instant certificate issuance for DOT compliance.",
+      title: "Risk Management Support",
+      description: "Meet all FMCSA requirements with proper liability limits and certificate issuance.",
       stat: "Federally compliant"
     },
     {
@@ -254,8 +254,8 @@ const CommAutoLiability = () => {
                 {/* Features */}
                 <div className="space-y-4">
                   {[
-                    'DOT Compliance',
-                    'Instant Certificates',
+                    'Risk Management Support',
+                    'Certificates of Insurance',
                     'Nationwide Coverage'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
@@ -528,7 +528,6 @@ const CommAutoLiability = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -540,7 +539,6 @@ const CommAutoLiability = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
             </div>

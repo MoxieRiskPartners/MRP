@@ -59,7 +59,7 @@ const WorkersCompPage = () => {
     },
     {
       question: "How do I file a workers' compensation claim?",
-      answer: "Report the injury to your employer immediately (within 24-48 hours in most states). Seek medical attention from an approved provider if possible. Your employer should provide claim forms and report to their insurance carrier. Document everything and keep copies of all medical records. We provide 24/7 claims support to guide you through the process.",
+      answer: "Report the injury to your employer immediately (within 24-48 hours in most states). Seek medical attention from an approved provider if possible. Your employer should provide claim forms and report to their insurance carrier. Document everything and keep copies of all medical records. We provide claims support to guide you through the process.",
       isOpen: false
     },
     {
@@ -255,7 +255,7 @@ const WorkersCompPage = () => {
                 <div className="space-y-4">
                   {[
                     'All Industries Covered',
-                    '24/7 Claims Support',
+                    'Claims Support',
                     'Return-to-Work Programs'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
@@ -436,7 +436,7 @@ const WorkersCompPage = () => {
               File a Workers' Compensation Claim
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Quick and easy claim filing process with 24/7 expert support
+              Quick and easy claim filing process with expert support
             </p>
 
           </div>
@@ -472,11 +472,11 @@ const WorkersCompPage = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">24/7 Claims Hotline</h4>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Claims Hotline</h4>
                     <a href="tel:+15155817187" className="text-2xl font-bold text-green-600 hover:text-green-700 transition-colors">
                       (515) 581-7187
                     </a>
-                    <p className="text-sm text-gray-500 mt-1">Immediate assistance available</p>
+                    <p className="text-sm text-gray-500 mt-1">Here to help with your claim</p>
                   </div>
                 </div>
               </div>
@@ -575,9 +575,7 @@ const WorkersCompPage = () => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of employers who trust Moxie Risk Partners 
-                  for their workers' compensation needs. Get your quote today and experience 
-                  the difference specialized industry expertise makes for your coverage and claims.
+                  Join the employers who trust Moxie Risk Partners for their workers' compensation needs. Get your quote today and experience the difference specialized industry expertise makes for your coverage and claims.
                 </p>
               </div>
 
@@ -594,7 +592,6 @@ const WorkersCompPage = () => {
                                 <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                                   (515) 581-7187
                                 </a>
-                                <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                               </div>
 
                               {/* Email */}
@@ -606,7 +603,6 @@ const WorkersCompPage = () => {
                                 <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                                   quotes@moxieriskpartners.com
                                 </a>
-                                <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                               </div>
               
                           

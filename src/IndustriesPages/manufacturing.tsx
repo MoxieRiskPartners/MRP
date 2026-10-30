@@ -108,7 +108,7 @@ const ManufacturingPage = () => {
       risksCovered: ['Machinery breakdown coverage', 'Business interruption', 'Expediting expenses', 'Spoilage coverage', 'Extra expense'],
       whoNeedsIt: ['Heavy manufacturers', 'Technology companies', 'Food processors', 'Chemical manufacturers', 'Equipment-dependent operations'],
       coverageAmount: 'Equipment replacement value',
-      specialFeatures: ['24/7 claims support', 'Emergency repairs', 'Temporary replacement', 'Loss prevention services'],
+      specialFeatures: ['Claims support', 'Emergency repairs', 'Temporary replacement', 'Loss prevention services'],
       icon: Settings
     },
     {
@@ -132,7 +132,7 @@ const ManufacturingPage = () => {
       risksCovered: ['Data breach response', 'Cyber extortion coverage', 'Business interruption', 'Regulatory fines', 'Credit monitoring'],
       whoNeedsIt: ['Connected manufacturers', 'IoT operations', 'Customer data holders', 'Cloud-based systems', 'Digital manufacturers'],
       coverageAmount: '$1M - $25M per claim',
-      specialFeatures: ['Incident response team', '24/7 hotline', 'Forensic investigation', 'Public relations support'],
+      specialFeatures: ['Incident response team', 'Dedicated hotline', 'Forensic investigation', 'Public relations support'],
       icon: Cpu
     },
     {
@@ -332,8 +332,8 @@ const ManufacturingPage = () => {
               Choose Your Manufacturing Coverage
             </h2>
             <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
-              From product liability to equipment breakdown, we provide comprehensive insurance 
-              solutions tailored to your specific manufacturing operations and industry requirements.
+              From product liability to equipment breakdown, we provide comprehensive insurance
+              solutions tailored to your manufacturing operations. These are some of our most common coverages, and we write many more.
             </p>
           </div>
 
@@ -387,9 +387,6 @@ const ManufacturingPage = () => {
                 <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-bold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
-                <div className="inline-block bg-[#CC9F54] text-white px-4 py-2 rounded-full font-bold text-sm">
-                  Coverage: {selectedCoverage.coverageAmount}
-                </div>
               </div>
             </div>
 
@@ -592,8 +589,8 @@ const ManufacturingPage = () => {
                 </h2>
                 
                 <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
-                  Join thousands of manufacturers who trust Moxie Risk Partners 
-                  for their insurance needs. Get your quote today and experience the difference 
+                  Join the manufacturers who trust Moxie Risk Partners
+                  for their insurance needs. Get your quote today and experience the difference
                   specialized manufacturing insurance expertise makes.
                 </p>
               </div>
@@ -610,7 +607,6 @@ const ManufacturingPage = () => {
                   <a href="tel:+15155817187" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -622,7 +618,6 @@ const ManufacturingPage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
 
          

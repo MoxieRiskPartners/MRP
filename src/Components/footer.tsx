@@ -55,7 +55,7 @@ const Footer: React.FC = () => {
       title: 'Support',
       links: [
         { href: '/file-claims', label: 'File a Claim', ariaLabel: 'File an insurance claim' },
-        { href: '/file-claims#support', label: '24/7 Claims Support', ariaLabel: '24/7 claims assistance' },
+        { href: '/file-claims#support', label: 'Claims Support', ariaLabel: 'Claims assistance' },
         { href: 'tel:+15155817187', label: 'Emergency Claims Line', ariaLabel: 'Call emergency claims line', isExternal: true },
         { href: '/faq-page', label: 'FAQ', ariaLabel: 'Frequently asked questions' },
         // { href: '/contact#resources', label: 'Resources', ariaLabel: 'Insurance resources and guides' },
@@ -173,10 +173,6 @@ const Footer: React.FC = () => {
               <div className="flex items-center space-x-2 text-sm text-gray-300">
                 <div className="w-3 h-3 bg-green-400 rounded-full"></div>
                 <span>A-Rated Carriers</span>
-              </div>
-              <div className="flex items-center space-x-2 text-sm text-gray-300">
-                <div className="w-3 h-3 bg-[#D4B06B] rounded-full"></div>
-                <span>24/7 Support</span>
               </div>
             </div>
           </div>

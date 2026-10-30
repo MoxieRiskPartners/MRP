@@ -29,7 +29,7 @@ const ClaimsPage = () => {
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "How quickly should I report a claim?",
-      answer: "Immediately. Our 24/7 hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team.",
+      answer: "Immediately. Our claims hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team.",
       isOpen: false
     },
     {
@@ -39,7 +39,7 @@ const ClaimsPage = () => {
     },
     {
       question: "What makes your claims service different?",
-      answer: "Industry-specialized adjusters for trucking, construction, and manufacturing. 1-hour response guarantee, A+ AM Best rating, and 98.7% customer satisfaction with nationwide coverage. Every claim is unique - call our experts to discuss your specific situation and timeline.",
+      answer: "Industry-specialized claims advocacy for trucking, construction, and manufacturing. A+ AM Best rating and 98.7% customer satisfaction with nationwide coverage. Every claim is unique - call our experts to discuss your specific situation and timeline.",
       isOpen: false
     },
     {
@@ -74,14 +74,14 @@ const ClaimsPage = () => {
       title: "Property & Casualty Claims",
       description: "Comprehensive coverage for property damage, liability claims, and casualty incidents across all industries",
       features: ["Commercial Property", "General Liability", "Auto Claims", "Equipment Damage"],
-      availability: "24/7 Support",
+      availability: "Expert Support",
       icon: Shield
     },
     {
       title: "Workers' Compensation Claims", 
       description: "Specialized support for workplace injuries with return-to-work programs and medical management",
       features: ["Injury Reporting", "Medical Management", "Return-to-Work", "Disability Benefits"],
-      availability: "Immediate Response",
+      availability: "Dedicated Support",
       icon: Users
     },
     {
@@ -104,20 +104,20 @@ const ClaimsPage = () => {
     { 
       step: "01", 
       title: "Report Claim", 
-      time: "24/7 Hotline",
+      time: "Anytime",
       description: "Call, email, or report online anytime"
     },
     { 
-      step: "02", 
-      title: "Expert Assigned", 
-      time: "Within 1 Hour",
-      description: "Industry-specialized adjuster reviews your case"
+      step: "02",
+      title: "We Advocate for You",
+      time: "Right Away",
+      description: "We report your claim and advocate with your carrier on your behalf"
     },
     { 
-      step: "03", 
-      title: "Investigation", 
-      time: "Immediate Start",
-      description: "Evidence gathering and documentation begins"
+      step: "03",
+      title: "Claim Review",
+      time: "Ongoing",
+      description: "We help you gather documentation and keep your claim moving with the carrier"
     },
     { 
       step: "04", 
@@ -136,13 +136,13 @@ const ClaimsPage = () => {
   const supportSteps = [
     {
       number: 1,
-      title: "Instant Response",
-      description: "Call, email, or submit online anytime - our team responds within 1 hour guaranteed"
+      title: "Responsive Support",
+      description: "Call, email, or submit online anytime - our team responds promptly"
     },
     {
       number: 2,
       title: "Industry Experts",
-      description: "Specialized adjusters who understand your business type and specific coverage needs"
+      description: "Specialists who know your industry and advocate with your carrier on your behalf"
     },
     {
       number: 3,
@@ -195,12 +195,12 @@ const ClaimsPage = () => {
                   </h1>
                   
                   <h2 className="text-2xl font-semibold text-gray-700 mb-4">
-                    24/7 Nationwide Expert Support for All Industries
+                    Nationwide Expert Support for All Industries
                   </h2>
                   
                   <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
                     When incidents happen, every minute counts. Our industry-specialized claims teams provide 
-                    immediate nationwide support with A+ AM Best financial strength and 1-hour response guarantee 
+                    immediate nationwide support with A+ AM Best financial strength
                     for trucking, construction, manufacturing, and all commercial business types.
                   </p>
                 </div>
@@ -208,7 +208,7 @@ const ClaimsPage = () => {
                 {/* Features */}
                 <div className="space-y-4">
                   {[
-                    '1-Hour Response',
+                    'Dedicated Claims Team',
                     'All Industries',
                     'A+ AM Best Rated'
                   ].map((feature, index) => (
@@ -390,16 +390,16 @@ const ClaimsPage = () => {
         </div>
       </section>
 
-      {/* 24/7 Support Section */}
+      {/* Support Section */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
             <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
-              24/7 Claims Support
+              Claims Support
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Round-the-clock expert assistance for all your commercial insurance claims
+              Expert assistance for all your commercial insurance claims
             </p>
             {/* <div className="w-96 h-1 bg-gray-900 rounded-full"></div> */}
           </div>
@@ -435,11 +435,11 @@ const ClaimsPage = () => {
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">24/7 Emergency Line</h4>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Emergency Line</h4>
                     <a href="tel:+15155817187" className="text-2xl font-bold text-red-600 hover:text-red-700 transition-colors">
                       (515) 581-7187
                     </a>
-                    <p className="text-sm text-gray-500 mt-1">Always available for urgent claims</p>
+                    <p className="text-sm text-gray-500 mt-1">Here to help with urgent claims</p>
                   </div>
                 </div>
               </div>
@@ -494,7 +494,7 @@ const ClaimsPage = () => {
       </h2>
       
       <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-4xl mx-auto">
-        Industry-specialized claims teams ready 24/7/365 nationwide for trucking, construction, 
+        Industry-specialized claims teams ready nationwide for trucking, construction,
         manufacturing, and all commercial business types
       </p>
       
@@ -509,9 +509,6 @@ const ClaimsPage = () => {
           Trucking Claim Form
         </a>
         
-        <a href="tel:+15155817187" className="w-full sm:w-auto bg-white text-gray-900 border-2 border-gray-300 hover:bg-gray-50 px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center whitespace-nowrap">
-          Contact Claims Team
-        </a>
       </div>
     </div>
   </div>

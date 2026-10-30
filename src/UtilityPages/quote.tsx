@@ -956,7 +956,7 @@ const QuotePage: React.FC = () => {
                 {[
                   'Expert Consultation Included',
                   'Multiple Carrier Options',
-                  'Fast Response Within Hours'
+                  'Dedicated Expert Support'
                 ].map((feature, index) => (
                   <div key={index} className="flex items-center space-x-3">
                     <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0" />

@@ -5,13 +5,13 @@ import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {
   title: "Owner Operator Insurance | Truck Insurance for Independent Drivers",
-  description: "Specialized owner operator truck insurance with same-day coverage and instant certificates. Commercial auto liability, cargo, physical damage, and occupational accident coverage. DOT filings submitted immediately upon binding.",
+  description: "Specialized owner operator truck insurance with flexible coverage and certificates of insurance. Commercial auto liability, cargo, physical damage, and occupational accident coverage. DOT filings handled upon binding.",
   alternates: {
     canonical: 'https://moxieriskpartners.com/owner-operator',
   },
   openGraph: {
     title: "Owner Operator Insurance | Truck Insurance for Independent Drivers",
-    description: "Specialized owner operator truck insurance with same-day coverage and instant certificates. Commercial auto liability, cargo, physical damage, and occupational accident coverage.",
+    description: "Specialized owner operator truck insurance with flexible coverage and certificates of insurance. Commercial auto liability, cargo, physical damage, and occupational accident coverage.",
     url: "https://moxieriskpartners.com/owner-operator",
     siteName: "Moxie Risk Partners",
     images: [

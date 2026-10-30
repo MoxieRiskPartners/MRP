@@ -434,8 +434,7 @@ const NonProfitPage = () => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of nonprofit organizations who trust our specialized expertise. 
-                  Get comprehensive risk management solutions tailored to your mission today.
+                  Join the nonprofit organizations that trust our specialized expertise. Get comprehensive risk management solutions tailored to your mission today.
                 </p>
               </div>
 
@@ -451,7 +450,6 @@ const NonProfitPage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -463,7 +461,6 @@ const NonProfitPage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
          

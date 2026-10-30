@@ -350,8 +350,8 @@ const ConstructionPage = () => {
               Choose Your Construction Coverage
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Each construction trade and project type has unique risks and requirements. 
-              Select your specific coverage type below to explore tailored protection options and industry-specific endorsements.
+              Each construction trade and project type has unique risks and requirements.
+              Select a coverage type below to explore tailored protection options and industry-specific endorsements. These are some of our most common coverages, and we write many more.
             </p>
           </div>
 
@@ -405,9 +405,6 @@ const ConstructionPage = () => {
                 <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
-                <div className="inline-block bg-[#CC9F54] text-white px-4 py-2 rounded-full font-bold text-sm">
-                  Coverage: {selectedCoverage.coverageAmount}
-                </div>
               </div>
             </div>
 
@@ -492,7 +489,7 @@ const ConstructionPage = () => {
               Construction Trades We Serve
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Specialized insurance solutions for every construction specialty
+              Specialized insurance solutions for every construction specialty. Don’t see your trade? We work with contractors of all types. Contact us to discuss your operation.
             </p>
           </div>
 
@@ -573,8 +570,7 @@ const ConstructionPage = () => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of construction professionals who trust Moxie Risk Partners. 
-                  Get your quote today and experience specialized construction insurance expertise.
+                  Join the construction professionals who trust Moxie Risk Partners. Get your quote today and experience specialized construction insurance expertise.
                 </p>
               </div>
 
@@ -590,7 +586,6 @@ const ConstructionPage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -602,7 +597,6 @@ const ConstructionPage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
 
             

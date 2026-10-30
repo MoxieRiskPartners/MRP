@@ -185,8 +185,8 @@ const AboutPage = () => {
                     That's why we created Moxie Risk Partners.
                   </p>
                   <p>
-                    With over 26 years of combined industry experience, our team understands what businesses need: 
-                    fast responses, competitive rates, and coverage you can count on across all sectors.
+                    With over 45 years of combined industry experience, our team understands what businesses need:
+                    responsive service, competitive rates, and coverage you can count on across all sectors.
                   </p>
                 </div>
               </div>

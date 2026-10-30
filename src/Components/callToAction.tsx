@@ -102,8 +102,8 @@ const CallToAction: React.FC = () => {
                       <circle cx="23.5" cy="14" r="0.8" fill="#CC9F54"/>
                     </svg>
                   ),
-                  text: 'Fast quote turnaround time',
-                  desc: 'Quick responses when you need them most'
+                  text: 'Dedicated quote support',
+                  desc: 'Responsive help when you need it most'
                 }
               ].map((benefit, index) => (
                 <div key={index} className="flex items-start">
@@ -142,7 +142,7 @@ const CallToAction: React.FC = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
-                <span className="font-medium">Fast Response</span>
+                <span className="font-medium">Dedicated Support</span>
               </div>
             </div>
           </div>
@@ -176,7 +176,7 @@ const CallToAction: React.FC = () => {
                 {/* Quick Stats */}
                 <div className="grid grid-cols-3 gap-4 mb-8">
                   <div className="text-center p-4 bg-gray-50 rounded-xl">
-                    <div className="text-2xl font-bold text-[#B8893D] mb-1">24/7</div>
+                    <div className="text-2xl font-bold text-[#B8893D] mb-1">Expert</div>
                     <div className="text-xs text-gray-600 font-medium">Claims Support</div>
                   </div>
                   <div className="text-center p-4 bg-gray-50 rounded-xl">

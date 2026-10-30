@@ -62,7 +62,7 @@ const INDUSTRIES_DATA: Industry[] = [
   {
     id: 'trucking',
     title: "Trucking & Transportation",
-    description: "Comprehensive fleet insurance with DOT compliance support, cargo protection, and specialized coverage for owner-operators and commercial fleets.",
+    description: "Comprehensive fleet insurance with Risk Management support, cargo protection, and specialized coverage for owner-operators and commercial fleets.",
     image: "/images/Trucking2.png",
     href: "/trucking-transportation",
     badge: "Most Popular",
@@ -207,7 +207,7 @@ const Overview: React.FC = () => {
             </h2>
             
             <p className="text-lg text-gray-600 leading-relaxed">
-              With over 25 years of combined experience, Moxie Risk Partners brings trusted insurance 
+              With over 45 years of combined experience, Moxie Risk Partners brings trusted insurance
               solutions to commercial businesses nationwide. Our team of industry specialists understands 
               the unique challenges facing trucking companies, contractors, manufacturers, and nonprofits.
             </p>

@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://moxieriskpartners.com'),
   title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with 24/7 support.",
-  keywords: "commercial insurance, trucking insurance, workers compensation, cargo insurance, construction insurance, manufacturing insurance, nonprofit insurance, public entity insurance, commercial auto liability, DOT compliance, owner operator insurance, fleet insurance, motor truck cargo, physical damage insurance, business insurance quotes, liability insurance, commercial vehicle insurance",
+  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with expert support.",
+  keywords: "commercial insurance, trucking insurance, workers compensation, cargo insurance, construction insurance, manufacturing insurance, nonprofit insurance, public entity insurance, commercial auto liability, Risk Management Support, owner operator insurance, fleet insurance, motor truck cargo, physical damage insurance, business insurance quotes, liability insurance, commercial vehicle insurance",
   authors: [{ name: "Moxie Risk Partners" }],
   creator: "Moxie Risk Partners",
   publisher: "Moxie Risk Partners",
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://moxieriskpartners.com/",
     title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and 24/7 support.",
+    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
     siteName: "Moxie Risk Partners",
     locale: "en_US",
     images: [
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and 24/7 support.",
+    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
     images: ["https://moxieriskpartners.com/images/twitter-image.png"],
   },
   verification: {
@@ -119,7 +119,7 @@ const insuranceAgencySchema = {
     "Public Entity Insurance",
     "Owner Operator Insurance",
     "Fleet Insurance",
-    "DOT Compliance Services"
+    "Risk Management Support"
   ],
   "slogan": "Commercial insurance that moves as fast as you do",
   "foundingDate": "2020",
@@ -177,7 +177,7 @@ const faqSchema = {
       "name": "How quickly should I report a claim?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Immediately. Our 24/7 hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team."
+        "text": "Immediately. Our claims hotline ensures you can report anytime for all business types. Quick reporting preserves evidence and activates our industry-specialized response team."
       }
     },
     {
@@ -218,7 +218,7 @@ const faqSchema = {
       "name": "How quickly can I get a certificate of insurance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We provide instant certificates of insurance once your policy is bound. This is essential for DOT compliance and meeting shipper requirements."
+        "text": "We provide certificates of insurance once your policy is bound. This is essential for Risk Management Support and meeting shipper requirements."
       }
     },
     // Trucking - Owner Operator FAQs
@@ -243,7 +243,7 @@ const faqSchema = {
       "name": "How quickly can I get owner operator coverage?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "With proper documentation, we can often provide same-day coverage and instant certificates. DOT filings are submitted immediately upon binding your policy."
+        "text": "With proper documentation, we can arrange coverage and provide certificates of insurance. DOT filings are submitted upon binding your policy."
       }
     },
     // Trucking - Motor Truck Cargo FAQs

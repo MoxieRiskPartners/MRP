@@ -152,7 +152,7 @@ const MotorTruckCargo = () => {
       risksCovered: ['Spill coverage', 'Explosion protection', 'Fire damage', 'Environmental liability', 'Cleanup costs'],
       whoNeedsIt: ['Hazmat carriers', 'Chemical distributors', 'Fuel transporters', 'Industrial waste haulers', 'Tanker operators'],
       coverageAmount: '$1,000,000 - $5,000,000',
-      specialFeatures: ['Pollution liability coverage', 'Environmental cleanup', 'DOT compliance support', 'Emergency response'],
+      specialFeatures: ['Pollution liability coverage', 'Environmental cleanup', 'Risk Management support', 'Emergency response'],
       image: '/images/hazmat.png'
     },
     {
@@ -374,7 +374,7 @@ const MotorTruckCargo = () => {
                   {[
                     'Broad Form Coverage',
                     '$250K Max Coverage',
-                    '24/7 Claims Support'
+                    'Claims Support'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
@@ -499,9 +499,6 @@ const MotorTruckCargo = () => {
                 <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
-                <div className="inline-block bg-[#CC9F54] text-white px-4 py-2 rounded-full font-bold text-sm">
-                  Coverage: {selectedCoverage.coverageAmount}
-                </div>
               </div>
             </div>
 
@@ -772,7 +769,6 @@ const MotorTruckCargo = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
@@ -783,7 +779,6 @@ const MotorTruckCargo = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
             </div>

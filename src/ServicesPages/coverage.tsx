@@ -405,7 +405,7 @@ useEffect(() => {
         'Business interruption',
         'Expediting expenses',
         'Spoilage coverage',
-        '24/7 claims support',
+        'Claims support',
         'Emergency repairs'
       ],
       whoNeedsIt: ['Heavy manufacturers', 'Technology companies', 'Food processors', 'Chemical manufacturers', 'Equipment-dependent operations']
@@ -467,7 +467,7 @@ useEffect(() => {
       detailedOverview: 'Complete commercial auto insurance for all vehicle types and industries. Whether you\'re insuring a construction pickup truck or a fleet of tractor trailers, we provide comprehensive liability protection with optional physical damage coverage. DOT-compliant for trucking operations and tailored coverage for construction, delivery, and service businesses. Mandatory liability coverage with competitive rates and expert guidance from experienced agents.',
       coverageAmount: '$1M - $5M+ liability',
       keyFeatures: [
-        'DOT compliance for trucking',
+        'Risk management support for trucking',
         'Third-party liability protection',
         'Bodily injury & property damage coverage',
         'Optional collision & comprehensive (physical damage)',
@@ -500,7 +500,7 @@ useEffect(() => {
       id: 'motor-truck-cargo',
       title: 'Motor Truck Cargo',
       description: 'Freight protection covering goods in transit from loading to final delivery with comprehensive coverage options',
-      detailedOverview: 'Essential protection for goods in transit covering theft, damage, and loss of freight. Required by most brokers and shippers with customizable limits from $100,000 to over $250,000 per load, with capabilities to write policies up to $1M for specialized cargo.',
+      detailedOverview: 'Essential protection for goods in transit covering theft, damage, and loss of freight. Required by most brokers and shippers, with customizable limits tailored to your freight — and higher limits available for specialized cargo.',
       coverageAmount: '$100K - $250K+ per load',
       keyFeatures: [
         'Goods in transit coverage',
@@ -509,7 +509,7 @@ useEffect(() => {
         'Damage protection',
         'Refrigeration breakdown',
         'Debris removal',
-        'Higher limits available up to $1M'
+        'Higher limits available'
       ],
       whoNeedsIt: ['All trucking operations hauling freight', 'Owner operators', 'Fleet carriers', 'Specialized haulers', 'Refrigerated transport']
     },
@@ -525,7 +525,7 @@ useEffect(() => {
         'Non-dispatch operation',
         'Affordable premiums',
         'Quick policy issuance',
-        '24/7 claims support'
+        'Claims support'
       ],
       whoNeedsIt: ['Owner operators', 'Independent drivers', 'Lease purchase operators', 'Contract carriers', 'Individual truckers']
     },
@@ -609,9 +609,9 @@ useEffect(() => {
 
                 <div className="space-y-4">
                   {[
-                    'DOT Compliant Coverage',
+                    'Risk Management Support ',
                     'All Industries Served',
-                    '24/7 Expert Support'
+                    'Expert Support'
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
@@ -648,7 +648,7 @@ useEffect(() => {
               Our Insurance <span className="text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">Coverage Options</span>
             </h2>
             <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-3xl">
-              Comprehensive protection across all industries. Click "Learn More" on any coverage to see details.
+              Comprehensive protection across all industries. These are some of our most common coverages, and we write many more. Click “Learn More” on any coverage to see details.
             </p>
           </div>
 
@@ -723,14 +723,6 @@ useEffect(() => {
                 </p>
               </div>
 
-              {/* Coverage Amount */}
-              <div>
-                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Coverage Amount</h3>
-                <p className="text-[#CC9F54] font-bold text-xl">
-                  {selectedCoverage.coverageAmount}
-                </p>
-              </div>
-
               {/* Key Features */}
               <div>
                 <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Key Features</h3>
@@ -788,12 +780,13 @@ useEffect(() => {
         <div className="responsive-container max-w-[min(64rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           <div className="text-center animate-fade-in-up delay-400">
             <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-[clamp(1.5rem,4vw,2rem)] text-white shadow-2xl">
-              <h3 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold mb-[clamp(0.75rem,2vw,1rem)]">
-                Need Help Finding the Right Coverage?
-              </h3>
-              <p className="text-[clamp(1rem,1.5vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)] text-[#F0E2C8] px-[clamp(0.5rem,1vw,0.5rem)]">
-                Our insurance experts are standing by to help you find the perfect protection for your business. Get personalized guidance today.
-              </p>
+             <h3 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold mb-[clamp(0.75rem,2vw,1rem)]">
+  Don't See the Coverage You Need?
+</h3>
+<p className="text-[clamp(1rem,1.5vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)] text-[#F0E2C8] px-[clamp(0.5rem,1vw,0.5rem)]">
+  The coverages above are just a starting point. We write many more lines for businesses,
+  organizations, and public entities. Tell us what you need and our team will find the right fit.
+</p>
               <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] sm:flex-row justify-center">
                 <a 
                   href="tel:+15155817187"
@@ -851,9 +844,9 @@ useEffect(() => {
               <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mx-auto mb-6">
                 <Phone className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">24/7 Support</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Dedicated Support</h3>
               <p className="text-gray-600">
-                Round-the-clock claims support and dedicated service team always available when you need us
+                Dedicated claims support and a service team ready to help when you need us
               </p>
             </div>
           </div>
@@ -878,8 +871,7 @@ useEffect(() => {
                 </h2>
                 
                 <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-8">
-                  Join thousands of businesses who trust Moxie Risk Partners for their insurance needs. 
-                  Get your quote today and experience the difference specialized expertise makes.
+                  Join the businesses that trust Moxie Risk Partners for their insurance needs. Get your quote today and experience the difference specialized expertise makes.
                 </p>
               </div>
 
@@ -895,7 +887,6 @@ useEffect(() => {
                   <a href="tel:+15155817187" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -907,7 +898,6 @@ useEffect(() => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
             </div>

@@ -108,7 +108,7 @@ const SuccessModal: React.FC<SuccessModalProps> = ({ isOpen, onClose, showConfet
             </h3>
             <p className="text-lg text-gray-600 mb-6">
               Thank you for your interest in our public entity insurance solutions. 
-              One of our specialized agents will contact you within 24 hours.
+              One of our specialized agents will be in touch shortly.
             </p>
             
             <div className="bg-gray-50 rounded-xl p-6 mb-6 text-left">
@@ -664,8 +664,7 @@ const PublicEntityPage = () => {
                 </h2>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Join thousands of government entities who trust our specialized expertise. 
-                  Get comprehensive risk management solutions tailored to your public service mission today.
+                  Join the government entities that trust our specialized expertise. Get comprehensive risk management solutions tailored to your public service mission today.
                 </p>
               </div>
 
@@ -679,7 +678,6 @@ const PublicEntityPage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
@@ -690,7 +688,6 @@ const PublicEntityPage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
 
               </div>

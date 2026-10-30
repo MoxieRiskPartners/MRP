@@ -124,8 +124,7 @@ const TruckingTransportationPage = () => {
                 <div className="space-y-4">
                   {[
                     'Owner Operators & Fleets',
-                    'DOT Compliance Support',
-                    '24/7 Claims Service'
+                    'Risk Management support',
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
@@ -161,8 +160,8 @@ const TruckingTransportationPage = () => {
               Comprehensive Insurance Solutions
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto">
-              From DOT-compliant liability to cargo protection, we provide complete coverage 
-              solutions tailored to your trucking operation's unique needs.
+              From DOT-compliant liability to cargo protection, we provide coverage
+              tailored to your trucking operation's unique needs. These are some of our most common coverages, and we write many more.
             </p>
           </div>
 
@@ -242,8 +241,8 @@ const TruckingTransportationPage = () => {
                 icon: Shield
               },
               {
-                title: "Fast Service",
-                description: "Same-day certificates, instant filings, and 24/7 claims support when you need it",
+                title: "Dedicated Service",
+                description: "Certificates, filings, and claims support when you need it",
                 icon: CheckCircle
               },
               {
@@ -252,8 +251,8 @@ const TruckingTransportationPage = () => {
                 icon: FileText
               },
               {
-                title: "DOT Compliance",
-                description: "Complete compliance support including BMC-91X filings and regulatory guidance",
+                title: "Risk Management Support",
+                description: "Risk management support tailored to your trucking operation's needs",
                 icon: Truck
               }
             ].map((item) => {
@@ -292,7 +291,7 @@ const TruckingTransportationPage = () => {
               <div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">Contact Our Trucking Specialists</h3>
                 <p className="text-gray-600 text-lg leading-relaxed">
-                  Get expert guidance on DOT compliance, coverage requirements, and competitive rates. 
+                  Get expert guidance on Risk Management, coverage requirements, and competitive rates.
                   Our team specializes in trucking insurance and understands your unique needs.
                 </p>
               </div>
@@ -307,7 +306,6 @@ const TruckingTransportationPage = () => {
                   <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                      Call (515) 581-7187
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">24/7 Available</p>
                 </div>
 
                 {/* Email */}
@@ -319,7 +317,6 @@ const TruckingTransportationPage = () => {
                   <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
-                  <p className="text-xs text-gray-500 mt-1">Quick Response</p>
                 </div>
               </div>
     
