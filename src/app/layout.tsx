@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -12,10 +12,19 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Browser bar color on phones (Next 14+ puts this in `viewport`, not `metadata`)
+export const viewport: Viewport = {
+  themeColor: "#231F20", // Moxie Black
+};
+
+const SITE_TITLE = "Trucking & Commercial Insurance | Moxie Risk Partners";
+const SITE_DESCRIPTION =
+  "Commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Fast quotes on auto liability, cargo, and workers' comp.";
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://moxieriskpartners.com'),
-  title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with expert support.",
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   keywords: "commercial insurance, trucking insurance, workers compensation, cargo insurance, construction insurance, manufacturing insurance, nonprofit insurance, public entity insurance, commercial auto liability, Risk Management Support, owner operator insurance, fleet insurance, motor truck cargo, physical damage insurance, business insurance quotes, liability insurance, commercial vehicle insurance",
   authors: [{ name: "Moxie Risk Partners" }],
   creator: "Moxie Risk Partners",
@@ -37,8 +46,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://moxieriskpartners.com/",
-    title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     siteName: "Moxie Risk Partners",
     locale: "en_US",
     images: [
@@ -53,22 +62,15 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["https://moxieriskpartners.com/images/twitter-image.png"],
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
+  // Add once Google Search Console is set up:
+  // verification: { google: "PASTE-REAL-CODE-HERE" },
   category: 'insurance',
   classification: 'Business',
-  other: {
-    "theme-color": "#ea580c",
-    "geo.region": "US",
-    "geo.placename": "United States",
-    "geo.position": "39.8283;-98.5795",
-    "ICBM": "39.8283, -98.5795",
-  },
+  manifest: "/site.webmanifest",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -155,6 +157,7 @@ const insuranceAgencySchema = {
       "areaServed": "US"
     }
   ],
+  // Add Moxie's real profile URLs (LinkedIn, Facebook, Google Business Profile)
   "sameAs": []
 };
 
@@ -209,7 +212,7 @@ const faqSchema = {
       "name": "How quickly can I get a certificate of insurance?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "We provide certificates of insurance once your policy is bound. This is essential for Risk Management Support and meeting shipper requirements."
+        "text": "We provide certificates of insurance once your policy is bound, so you can meet shipper, broker, and contract requirements."
       }
     },
     // Trucking - Owner Operator FAQs
@@ -362,19 +365,6 @@ const websiteSchema = {
   "inLanguage": "en-US"
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://moxieriskpartners.com/"
-    }
-  ]
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -397,10 +387,6 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
         />
         {children}
       </body>

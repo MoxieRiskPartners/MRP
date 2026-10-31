@@ -66,22 +66,11 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       // Construction redirect
-  {
-  source: '/construction/:path*',
-  destination: '/construction-coverage',
-  permanent: true,
-  has: [
-    {
-      type: 'host',
-      value: 'localhost',
-    },
-  ],
-},
-{
-  source: '/construction/:path*',
-  destination: '/construction-coverage',
-  permanent: true,
-},
+      {
+        source: '/construction/:path*',
+        destination: '/construction-coverage',
+        permanent: true,
+      },
       // Accessibility redirect
       {
         source: '/accessibility',
@@ -115,21 +104,15 @@ const nextConfig: NextConfig = {
       // All manufacturing nested pages redirect to main page
       {
         source: '/manufacturing-insurance/:path*',
-        destination: '/manufacturing-coverage/',
+        destination: '/manufacturing-coverage',
         permanent: true,
       },
-      // All construction nested pages redirect to main page
-   // All construction insurance nested pages redirect to construction-coverage
-{
-  source: '/construction-insurance/:path*',
-  destination: '/construction-coverage',  // ✅ CORRECT
-  permanent: true,
-},
-{
-  source: '/construction-insurance',
-  destination: '/construction-coverage',  // ✅ Also redirect the base URL
-  permanent: true,
-},
+      // All construction insurance pages (base URL included) redirect to main page
+      {
+        source: '/construction-insurance/:path*',
+        destination: '/construction-coverage',
+        permanent: true,
+      },
       // All nonprofit nested pages redirect to main page
       {
         source: '/nonprofit-insurance/:path*',
@@ -191,12 +174,6 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
     ];
-  },
-
-  // Add webpack config to help with module resolution
-  webpack: (config) => {
-    config.resolve.extensions = ['.tsx', '.ts', '.jsx', '.js'];
-    return config;
   },
 };
 

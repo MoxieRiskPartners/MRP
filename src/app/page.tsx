@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import Header from "@/Components/Header";
 import Hero from "@/LandingPages/Hero";
 import Overview from "@/LandingPages/Overview";
@@ -7,42 +6,22 @@ import ServiceAreas from "@/LandingPages/serviceAreas";
 import CallToAction from "@/Components/callToAction";
 import Footer from "@/Components/footer";
 
-import ComingSoon from "../Files/comingsoon";
-
+// Title, description, and social previews come from src/app/layout.tsx
 export const metadata: Metadata = {
-  title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-  description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes on auto liability, workers' comp, cargo insurance, and more. Licensed nationwide with expert support.",
   alternates: {
-    canonical: 'https://moxieriskpartners.com',
-  },
-  openGraph: {
-    title: "Moxie Risk Partners | Commercial Insurance & Risk Management Solutions",
-    description: "Specialized commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Get competitive quotes with expert guidance and dedicated support.",
-    url: "https://moxieriskpartners.com",
-    siteName: "Moxie Risk Partners",
-    images: [
-      {
-        url: "https://moxieriskpartners.com/images/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Moxie Risk Partners - Commercial Insurance Solutions",
-      }
-    ],
+    canonical: "https://moxieriskpartners.com",
   },
 };
-
 
 export default function Home() {
   return (
     <>
-    {/* <ComingSoon />  */}
       <Header />
       <Hero />
-      <Overview/>
+      <Overview />
       <ServiceAreas />
       <CallToAction />
       <Footer />
-
     </>
   );
 }
