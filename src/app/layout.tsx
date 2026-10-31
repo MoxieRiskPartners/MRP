@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "https://moxieriskpartners.com/images/og-image.png",
+        url: "/images/og-image.png",
         width: 1200,
         height: 630,
         alt: "Moxie Risk Partners - Commercial Insurance Solutions",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["https://moxieriskpartners.com/images/twitter-image.png"],
+    images: ["/images/twitter-image.png"],
   },
   // Add once Google Search Console is set up:
   // verification: { google: "PASTE-REAL-CODE-HERE" },
