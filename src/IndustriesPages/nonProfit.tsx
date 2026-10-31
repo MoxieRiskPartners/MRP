@@ -52,6 +52,11 @@ const NonProfitPage = () => {
   ]);
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -159,15 +164,15 @@ const NonProfitPage = () => {
     <div className="min-h-screen bg-white">
       
       {/* Hero Section - Side by Side Layout */}
-      <section ref={heroRef} className="bg-white py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
+      <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
+
             {/* Left Side - Hero Image */}
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/images/Nonprofit.png" 
+                <img
+                  src="/images/Nonprofit.png"
                   alt="Nonprofit professionals working together"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
@@ -177,17 +182,17 @@ const NonProfitPage = () => {
 
             {/* Right Side - Content */}
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-              <div className="space-y-8">
+              <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 leading-tight mb-[clamp(1rem,2.5vw,1.5rem)]">
                     Nonprofit Human Services
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Insurance
                     </span>
                   </h1>
-                  
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-                    Comprehensive risk management solutions designed specifically for nonprofit organizations 
+
+                  <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
+                    Comprehensive risk management solutions designed specifically for nonprofit organizations
                     and human service providers. Protect your mission while securing your future.
                   </p>
                 </div>
@@ -201,19 +206,18 @@ const NonProfitPage = () => {
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
-                      <span className="text-lg font-medium text-gray-800">{feature}</span>
+                      <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-medium text-gray-800">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
+                  <button className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group">
                     Get Your Quote
-              
                   </button>
-                  
-                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+
+                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 flex items-center justify-center">
                     Call (515) 581-7187
                   </a>
                 </div>
@@ -224,23 +228,20 @@ const NonProfitPage = () => {
       </section>
 
       {/* Specialized Services Selector Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header - Left Aligned */}
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Specialized Services
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto">
               Integrated risk management and business advisory services designed for nonprofit success.
             </p>
-            {/* Underline bar */}
-            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
           {/* Service Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-[clamp(2rem,4vw,3rem)]">
             {serviceTypes.map((service) => {
               const IconComponent = service.icon;
               return (
@@ -255,19 +256,19 @@ const NonProfitPage = () => {
                 >
                   <div className="text-center">
                     <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                      <IconComponent 
+                      <IconComponent
                         className={`w-12 h-12 transition-all duration-300 ${
                           selectedType === service.typeCode ? 'text-[#CC9F54]' : 'text-gray-600'
                         } group-hover:scale-110`}
                       />
                     </div>
-                    <h3 className={`text-sm font-bold transition-colors ${
+                    <h3 className={`text-sm font-semibold transition-colors ${
                       selectedType === service.typeCode ? 'text-[#CC9F54]' : 'text-gray-800'
                     }`}>
                       {service.type}
                     </h3>
                   </div>
-                  
+
                   {/* Selected Indicator */}
                   {selectedType === service.typeCode && (
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#CC9F54] rounded-full flex items-center justify-center">
@@ -277,27 +278,41 @@ const NonProfitPage = () => {
                 </button>
               );
             })}
+
+            {/* And More Card */}
+            <button
+              onClick={scrollToForm}
+              className="group relative p-6 rounded-2xl border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-[#CC9F54]">
+                  And More...
+                </h3>
+              </div>
+            </button>
           </div>
 
           {/* Service Details Panel */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
-            
-            {/* Service Header */}
-            <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-[#F0E2C8]">
+
+            <div className="flex flex-col lg:flex-row justify-between items-start mb-[clamp(1.5rem,3vw,2rem)] pb-6 border-b-2 border-[#F0E2C8]">
               <div className="mb-4 lg:mb-0">
-                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-semibold text-gray-900 mb-2">
                   {selectedService.title}
                 </h3>
               </div>
             </div>
 
-            {/* Service Description */}
-            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-4xl">
+            <p className="text-[clamp(0.95rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)] max-w-[min(56rem,90vw)]">
               {selectedService.description}
             </p>
 
-            {/* Features Grid */}
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(250px,100%),1fr))] gap-[clamp(1rem,2.5vw,1.5rem)]">
               {selectedService.features.map((feature, index) => (
                 <div key={index} className="flex items-start space-x-3 p-4 bg-[#FBF5EB] rounded-lg border border-[#E5CFA5]">
                   <Star className="w-5 h-5 text-[#CC9F54] mt-0.5 flex-shrink-0 fill-current" />
@@ -310,19 +325,19 @@ const NonProfitPage = () => {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Why Nonprofit Organizations Choose Us
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mx-auto mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto">
               We understand the unique challenges facing nonprofit human service organizations
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(280px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {whyChooseUs.map((benefit) => {
               const IconComponent = benefit.icon;
               return (
@@ -330,7 +345,7 @@ const NonProfitPage = () => {
                   <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-xl flex items-center justify-center mx-auto mb-6">
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                  <h3 className="text-[clamp(1.1rem,1.5vw,1.25rem)] font-semibold text-gray-900 mb-4">
                     {benefit.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">
@@ -344,23 +359,22 @@ const NonProfitPage = () => {
       </section>
 
       {/* Organizations Served Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Nonprofit Organizations We Serve
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto">
               Specialized insurance and risk management for every type of nonprofit organization
             </p>
-            {/* <div className="w-96 h-2 bg-gray-900 rounded-full"></div> */}
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {nonprofitSectors.map((sector) => (
               <div key={sector.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
+                <h3 className="text-[clamp(1.1rem,1.5vw,1.25rem)] font-bold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
                   {sector.title}
                 </h3>
                 <ul className="space-y-2">
@@ -378,14 +392,14 @@ const NonProfitPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(56rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Nonprofit Insurance FAQs
             </h2>
-            <p className="text-xl text-gray-600 mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600">
               Common questions about nonprofit insurance coverage and risk management services
             </p>
           </div>
@@ -399,7 +413,7 @@ const NonProfitPage = () => {
                   aria-expanded={faq.isOpen}
                   suppressHydrationWarning
                 >
-                  <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <div className={`w-6 h-6 flex-shrink-0 transform transition-transform duration-200 ${faq.isOpen ? 'rotate-180' : ''}`}>
                     <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -418,36 +432,36 @@ const NonProfitPage = () => {
       </section>
 
       {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-20 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
+      <section className="relative py-[clamp(3rem,8vw,5rem)] bg-gray-50 overflow-hidden">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
+
             {/* Left Side - CTA Content */}
-            <div className="space-y-8">
+            <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 mb-[clamp(1rem,2.5vw,1.5rem)] leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                     Nonprofit Mission?
                   </span>
                 </h2>
-                
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+
+                <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
                   Join the nonprofit organizations that trust our specialized expertise. Get comprehensive risk management solutions tailored to your mission today.
                 </p>
               </div>
 
-              {/* Contact Information Grid - Single Column as requested */}
-              <div className="grid md:grid-cols-1 gap-6">
-                
+              {/* Contact Information Grid */}
+              <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)]">
+
                 {/* Phone */}
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
                   <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
+                  <a href="tel:+15155817187" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
                 </div>
@@ -458,24 +472,24 @@ const NonProfitPage = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Email Us</h4>
-                  <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
+                  <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
                 </div>
               </div>
-         
-
-          
             </div>
-            <div>
-  <IndustryQuoteForm 
-    industry="nonprofit"
-    formName="Nonprofit Insurance Quote"
-    title="Get Your Free Quote"
-    subtitle="Fast, competitive nonprofit insurance quotes"
-    fields={nonprofitFields}
-  />
-</div>
+
+            {/* Right Side - Quote Form */}
+            <div ref={formRef}>
+              <IndustryQuoteForm
+                industry="nonprofit"
+                formName="Nonprofit Insurance Quote"
+                title="Get Your Free Quote"
+                subtitle="Fast, competitive nonprofit insurance quotes"
+                fields={nonprofitFields}
+              />
+            </div>
+
           </div>
         </div>
       </section>

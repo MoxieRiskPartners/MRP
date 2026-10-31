@@ -81,6 +81,11 @@ const WorkersCompPage = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -269,7 +274,7 @@ const WorkersCompPage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
               <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -301,7 +306,7 @@ const WorkersCompPage = () => {
           </div>
 
           {/* Industry Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-12">
             {industryTypes.map((industry) => {
               const IconComponent = industry.icon;
               return (
@@ -316,7 +321,7 @@ const WorkersCompPage = () => {
                 >
                   <div className="text-center">
                     <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                      <IconComponent 
+                      <IconComponent
                         className={`w-12 h-12 transition-all duration-300 ${
                           selectedType === industry.typeCode ? 'text-[#CC9F54]' : 'text-gray-600'
                         } group-hover:scale-110`}
@@ -328,29 +333,33 @@ const WorkersCompPage = () => {
                       {industry.type}
                     </h3>
                   </div>
-                  
+
                   {/* Selected Indicator */}
                   {selectedType === industry.typeCode && (
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#CC9F54] rounded-full flex items-center justify-center">
                       <CheckCircle className="w-4 h-4 text-white" />
                     </div>
                   )}
-
-                  {/* Badge */}
-                  <div className="absolute -top-1 left-2">
-                    {/* <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
-                      industry.badge === 'High Risk' ? 'bg-red-100 text-red-800' :
-                      industry.badge === 'Government' ? 'bg-blue-100 text-blue-800' :
-                      industry.badge === 'Transport Focused' ? 'bg-purple-100 text-purple-800' :
-                      industry.badge === 'Specialized' ? 'bg-green-100 text-green-800' :
-                      'bg-gray-100 text-gray-800'
-                    }`}>
-                      {industry.badge}
-                    </span> */}
-                  </div>
                 </button>
               );
             })}
+
+            {/* And More Card */}
+            <button
+              onClick={scrollToForm}
+              className="group relative p-6 rounded-2xl border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-bold text-[#CC9F54]">
+                  And More...
+                </h3>
+              </div>
+            </button>
           </div>
 
           {/* Industry Details Panel */}
@@ -497,22 +506,6 @@ const WorkersCompPage = () => {
                 </div>
               </div>
 
-              {/* Online Portal */}
-              <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <FileText className="w-6 h-6 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-2">Online Portal</h4>
-                    <a href="/claims" className="inline-flex items-center px-4 py-2 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors">
-                      File Online Claim
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </a>
-                    <p className="text-sm text-gray-500 mt-2">Secure online claim filing</p>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -609,7 +602,7 @@ const WorkersCompPage = () => {
                             </div>
                           </div>
               
-<div>
+<div ref={formRef}>
   <IndustryQuoteForm 
     industry="workers-comp"
     formName="Workers Compensation Quote"

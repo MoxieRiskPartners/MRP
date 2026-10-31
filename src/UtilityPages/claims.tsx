@@ -187,7 +187,7 @@ const ClaimsPage = () => {
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
               <div className="space-y-8">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
              
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Claims Support
@@ -227,7 +227,7 @@ const ClaimsPage = () => {
   </a>
   
   {/* ADD THIS - Trucking Claims Form Button */}
-  <a href="/file-claim" className="bg-[#CC9F54] hover:bg-[#B8893D] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+  <a href="/file-claim" className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
     <FileText className="mr-2 w-5 h-5" />
     File Trucking Claim
   </a>
@@ -248,7 +248,7 @@ const ClaimsPage = () => {
           
           {/* Section Header - Left Aligned */}
           <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight">
               What Type of Claim Are You Reporting?
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
@@ -269,9 +269,9 @@ const ClaimsPage = () => {
                   <div className="bg-gray-900 text-white p-6">
                     <div className="flex items-center space-x-3 mb-2">
                       <IconComponent className="w-8 h-8" />
-                      <h3 className="text-xl font-bold">{resource.title}</h3>
+                      <h3 className="text-xl font-semibold">{resource.title}</h3>
                     </div>
-                    <span className="inline-block bg-[#CC9F54] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    <span className="inline-block bg-[#CC9F54] text-moxie-black px-3 py-1 rounded-full text-sm font-semibold">
                       {resource.availability}
                     </span>
                   </div>
@@ -305,7 +305,7 @@ const ClaimsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight">
               Our Claims Support Process
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
@@ -355,7 +355,7 @@ const ClaimsPage = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight">
               Claims Support FAQ
             </h2>
             <p className="text-xl text-gray-600 mb-6">
@@ -395,7 +395,7 @@ const ClaimsPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight">
               Claims Support
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mb-6">
@@ -408,7 +408,7 @@ const ClaimsPage = () => {
             
             {/* Why Our Support Works */}
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Why Our Support Works</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-8">Why Our Support Works</h3>
               <div className="space-y-6">
                 {supportSteps.map((step, index) => (
                   <div key={index} className="flex items-start space-x-4">
@@ -426,7 +426,7 @@ const ClaimsPage = () => {
 
             {/* Contact Methods */}
             <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-gray-900 mb-8">Get Support Now</h3>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-8">Get Support Now</h3>
               
               {/* Phone */}
               <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-200 hover:shadow-xl transition-shadow duration-300">
@@ -486,7 +486,7 @@ const ClaimsPage = () => {
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     
     <div className="text-center">
-      <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+      <h2 className="text-5xl lg:text-6xl font-semibold text-gray-900 mb-6 leading-tight">
         Need to File a
         <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
           Claim?
@@ -504,7 +504,7 @@ const ClaimsPage = () => {
           Report Claim: (515) 581-7187
         </a>
         
-        <a href="/file-claim" className="w-full sm:w-auto bg-[#CC9F54] hover:bg-[#B8893D] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center whitespace-nowrap">
+        <a href="/file-claim" className="w-full sm:w-auto bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center whitespace-nowrap">
           <FileText className="mr-2 w-5 h-5" />
           Trucking Claim Form
         </a>

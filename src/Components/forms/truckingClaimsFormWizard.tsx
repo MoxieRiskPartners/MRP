@@ -130,7 +130,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ steps, currentStep, completed
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
                       isCurrent
-                        ? 'bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-white shadow-lg scale-110'
+                        ? 'bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-moxie-black shadow-lg scale-110'
                         : isCompleted || isPast
                         ? 'bg-green-500 text-white'
                         : 'bg-gray-200 text-gray-500'
@@ -2276,7 +2276,7 @@ case 'truck-driver':
                     type="button"
                     onClick={handleSubmit}
                     disabled={isSubmitting || submitStatus === 'success'}
-                    className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-white rounded-xl font-bold hover:from-[#B8893D] hover:to-[#A87A32] transition-all disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
+                    className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-moxie-black rounded-xl font-bold hover:from-[#B8893D] hover:to-[#A87A32] transition-all disabled:from-gray-400 disabled:to-gray-500 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
                   >
                     {isSubmitting ? (
                       <>
@@ -2300,7 +2300,7 @@ case 'truck-driver':
                 <button
                   type="button"
                   onClick={goToNextStep}
-                  className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-white rounded-xl font-bold hover:from-[#B8893D] hover:to-[#A87A32] transition-all shadow-lg hover:shadow-xl"
+                  className="flex items-center gap-2 px-8 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-moxie-black rounded-xl font-bold hover:from-[#B8893D] hover:to-[#A87A32] transition-all shadow-lg hover:shadow-xl"
                 >
                   Next
                   <ChevronRight className="w-5 h-5" />

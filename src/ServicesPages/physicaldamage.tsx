@@ -65,6 +65,11 @@ const PhysicalDamage = () => {
  
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -253,7 +258,7 @@ const PhysicalDamage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
              <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -306,6 +311,26 @@ const PhysicalDamage = () => {
                 </div>
               );
             })}
+
+            {/* And More Card */}
+            <div
+              onClick={scrollToForm}
+              className="bg-white rounded-xl border-2 border-dashed border-[#CC9F54] overflow-hidden hover:shadow-xl hover:border-solid transition-all duration-300 cursor-pointer group"
+            >
+              <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] p-6">
+                <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center mb-3">
+                  <span className="text-[#CC9F54] text-2xl font-bold">+</span>
+                </div>
+                <h3 className="text-xl font-bold text-white">And More...</h3>
+              </div>
+              <div className="p-6 flex flex-col items-center justify-center text-center">
+                <p className="text-gray-600 mb-4">We write many more lines of physical damage coverage. Tell us what you need and we&apos;ll find the right fit.</p>
+                <span className="flex items-center text-[#CC9F54] font-semibold">
+                  Get Free Quote
+                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -386,7 +411,7 @@ const PhysicalDamage = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a 
                 href="tel:+15155817187" 
-                className="inline-flex items-center justify-center bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
+                className="inline-flex items-center justify-center bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-3 rounded-lg font-bold transition-all duration-300 transform hover:scale-105 shadow-lg"
               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Us: (515) 581-7187
@@ -505,16 +530,16 @@ const PhysicalDamage = () => {
               </div>
             </div>
 
-           <IndustryQuoteForm  // 6 lines
+           <div ref={formRef}>
+           <IndustryQuoteForm
   industry="physical-damage"
   formName="Physical Damage Coverage Quote"
   title="Get Your Free Quote"
   subtitle="Customized physical damage protection for your fleet"
   fields={physicalDamageFields}
 />
-              
-           
-            
+           </div>
+
           </div>
         </div>
       </section>

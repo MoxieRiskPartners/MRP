@@ -220,41 +220,41 @@ const renderThankYou = () => (
         </div>
         
         <div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Thank You for Reaching Out!</h2>
+          <h2 className="text-4xl font-semibold text-gray-900 mb-4">Thank You for Reaching Out!</h2>
           <p className="text-xl text-gray-600 leading-relaxed">
             We've received your message and our team will be in touch shortly to discuss your insurance needs.
           </p>
         </div>
 
         <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">What happens next?</h3>
+          <h3 className="text-2xl font-semibold text-gray-900 mb-6">What happens next?</h3>
           <div className="grid md:grid-cols-3 gap-6">
             <div className="text-center">
               <div className="w-16 h-16 bg-[#FBF5EB] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-8 h-8 text-[#CC9F54]" />
               </div>
-              <h4 className="text-lg font-bold text-gray-900 mb-2">Review</h4>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Review</h4>
               <p className="text-gray-600">Our team reviews your inquiry and prepares information</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-[#FBF5EB] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Star className="w-8 h-8 text-[#CC9F54]" />
               </div>
-              <h4 className="text-lg font-bold text-gray-900 mb-2">Personalization</h4>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Personalization</h4>
               <p className="text-gray-600">We customize solutions based on your specific needs</p>
             </div>
             <div className="text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-8 h-8 text-green-600" />
               </div>
-              <h4 className="text-lg font-bold text-gray-900 mb-2">Contact</h4>
+              <h4 className="text-lg font-semibold text-gray-900 mb-2">Contact</h4>
               <p className="text-gray-600">We reach out to discuss your options and answer questions</p>
             </div>
           </div>
         </div>
 
-        <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-8 text-white">
-          <h3 className="text-2xl font-bold mb-4">Need immediate assistance?</h3>
+        <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-8 text-moxie-black">
+          <h3 className="text-2xl font-semibold mb-4">Need immediate assistance?</h3>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a 
               href="tel:+15155817187" 
@@ -305,7 +305,7 @@ if (showThankYou) {
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
               <div className="space-y-8">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
                     Contact
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Our Team
@@ -365,7 +365,7 @@ if (showThankYou) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight text-center">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight text-center">
               Reporting a Claim?
             </h2>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto text-center mb-6">
@@ -396,7 +396,7 @@ if (showThankYou) {
                         } group-hover:scale-110`}
                       />
                     </div>
-                    <h3 className={`text-sm font-bold transition-colors ${
+                    <h3 className={`text-sm font-semibold transition-colors ${
                       selectedClaimType === claimType.id ? 'text-[#CC9F54]' : 'text-gray-800'
                     }`}>
                       {claimType.title.replace(' Claims', '')}
@@ -420,7 +420,7 @@ if (showThankYou) {
             {/* Claim Header */}
             <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-[#F0E2C8]">
               <div className="mb-4 lg:mb-0">
-                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                <h3 className="text-3xl lg:text-4xl font-semibold text-gray-900 mb-2">
                   {selectedClaim.title}
                 </h3>
               </div>
@@ -448,7 +448,7 @@ if (showThankYou) {
               </p>
               <a 
                 href="/file-claims" 
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white font-bold rounded-lg transition-all duration-300 transform hover:scale-105"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black font-bold rounded-lg transition-all duration-300 transform hover:scale-105"
               >
                 Get Claims Support
                 <ArrowRight className="ml-2 w-5 h-5" />
@@ -463,7 +463,7 @@ if (showThankYou) {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-4xl lg:text-5xl font-semibold text-gray-900 mb-4 leading-tight">
               Get Your Free Quote!
             </h2>
             <p className="text-xl text-gray-600 mb-6">
@@ -478,7 +478,7 @@ if (showThankYou) {
               <div className="flex items-center justify-center space-x-3">
                 <CheckCircle className="w-6 h-6 text-green-600" />
                 <div className="text-center">
-                  <h3 className="text-lg font-bold text-green-900">Thank You!</h3>
+                  <h3 className="text-lg font-semibold text-green-900">Thank You!</h3>
                   <p className="text-green-700">Your request has been submitted successfully. Someone will reach out to you shortly to discuss your insurance needs.</p>
                 </div>
               </div>
@@ -620,7 +620,7 @@ className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus
   type="button"
   onClick={handleFormSubmit}
   disabled={isSubmitting}
-  className="w-full bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] disabled:from-gray-400 disabled:to-gray-500 text-white py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mb-4 cursor-pointer disabled:cursor-not-allowed disabled:transform-none"
+  className="w-full bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] disabled:from-gray-400 disabled:to-gray-500 text-moxie-black py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mb-4 cursor-pointer disabled:cursor-not-allowed disabled:transform-none"
   suppressHydrationWarning={true}
 >
   {isSubmitting ? (

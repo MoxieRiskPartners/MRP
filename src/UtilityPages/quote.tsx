@@ -341,7 +341,7 @@ const QuotePage: React.FC = () => {
                   currentStep > step 
                     ? 'bg-green-500 text-white' 
                     : currentStep === step 
-                    ? 'bg-[#CC9F54] text-white'
+                    ? 'bg-[#CC9F54] text-moxie-black'
                     : 'bg-gray-300 text-gray-600'
                 }`}
               >
@@ -368,7 +368,7 @@ const QuotePage: React.FC = () => {
   const renderStep1 = () => (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Let&apos;s Get Started</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 mb-4">Let&apos;s Get Started</h2>
         <p className="text-lg text-gray-600">Tell us about your business</p>
       </div>
 
@@ -467,7 +467,7 @@ const QuotePage: React.FC = () => {
     return (
       <div className="space-y-8">
         <div className="text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Business Details</h2>
+          <h2 className="text-3xl font-semibold text-gray-900 mb-4">Business Details</h2>
           <p className="text-lg text-gray-600">Tell us about your {industryLabel.toLowerCase()}</p>
         </div>
 
@@ -756,7 +756,7 @@ const QuotePage: React.FC = () => {
   const renderStep3 = () => (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">Insurance Background</h2>
+        <h2 className="text-3xl font-semibold text-gray-900 mb-4">Insurance Background</h2>
         <p className="text-lg text-gray-600">Help us understand your insurance history</p>
       </div>
 
@@ -857,41 +857,41 @@ const QuotePage: React.FC = () => {
       </div>
       
       <div>
-        <h2 className="text-4xl font-bold text-gray-900 mb-4">Quote Request Submitted!</h2>
+        <h2 className="text-4xl font-semibold text-gray-900 mb-4">Quote Request Submitted!</h2>
         <p className="text-xl text-gray-600 leading-relaxed">
           Thanks for choosing Moxie Risk Partners. Our insurance experts will review your information and contact you within 2 business hours with your customized quote.
         </p>
       </div>
 
       <div className="bg-gray-50 rounded-2xl p-8 border border-gray-200">
-        <h3 className="text-2xl font-bold text-gray-900 mb-6">What happens next?</h3>
+        <h3 className="text-2xl font-semibold text-gray-900 mb-6">What happens next?</h3>
         <div className="grid md:grid-cols-3 gap-6">
           <div className="text-center">
             <div className="w-16 h-16 bg-[#FBF5EB] rounded-full flex items-center justify-center mx-auto mb-4">
               <Clock className="w-8 h-8 text-[#CC9F54]" />
             </div>
-            <h4 className="text-lg font-bold text-gray-900 mb-2">Review</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">Review</h4>
             <p className="text-gray-600">Our underwriters review your application</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-[#FBF5EB] rounded-full flex items-center justify-center mx-auto mb-4">
               <Star className="w-8 h-8 text-[#CC9F54]" />
             </div>
-            <h4 className="text-lg font-bold text-gray-900 mb-2">Quote Preparation</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">Quote Preparation</h4>
             <p className="text-gray-600">We prepare your customized quote options</p>
           </div>
           <div className="text-center">
             <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <Phone className="w-8 h-8 text-green-600" />
             </div>
-            <h4 className="text-lg font-bold text-gray-900 mb-2">Expert Consultation</h4>
+            <h4 className="text-lg font-semibold text-gray-900 mb-2">Expert Consultation</h4>
             <p className="text-gray-600">We call to discuss your options and answer questions</p>
           </div>
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-8 text-white">
-        <h3 className="text-2xl font-bold mb-4">Need immediate assistance?</h3>
+      <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-8 text-moxie-black">
+        <h3 className="text-2xl font-semibold mb-4">Need immediate assistance?</h3>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="tel:+15155817187"
@@ -938,7 +938,7 @@ const QuotePage: React.FC = () => {
             {/* Right Side - Content */}
             <div className="order-1 lg:order-2 space-y-8">
               <div>
-                <h1 className="text-4xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                <h1 className="text-4xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
                   Get Your Insurance
                   <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#A87A32] bg-clip-text">
                     Quote Today
@@ -969,7 +969,7 @@ const QuotePage: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a 
                   href="tel:+15155817187" 
-                  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
+                  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-xl font-bold text-lg transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl"
                 >
                   <Phone className="w-5 h-5 mr-2" />
                   Call (515) 581-7187
@@ -1015,7 +1015,7 @@ const QuotePage: React.FC = () => {
                   type="button" 
                   onClick={nextStep}
                   disabled={!isStepValid(currentStep)}
-                  className="w-full sm:w-auto bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:shadow-none"
+                  className="w-full sm:w-auto bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] disabled:from-gray-400 disabled:to-gray-500 text-moxie-black px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:shadow-none"
                 >
                   Continue
                   <ArrowRight className="w-5 h-5 ml-2" />
@@ -1025,7 +1025,7 @@ const QuotePage: React.FC = () => {
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting || !isStepValid(currentStep)}
-                  className="w-full sm:w-auto bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] disabled:from-gray-400 disabled:to-gray-500 text-white px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:shadow-none"
+                  className="w-full sm:w-auto bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] disabled:from-gray-400 disabled:to-gray-500 text-moxie-black px-8 py-3 rounded-xl font-bold transition-all duration-300 flex items-center justify-center shadow-lg hover:shadow-xl disabled:shadow-none"
                 >
                   {isSubmitting ? (
                     <>

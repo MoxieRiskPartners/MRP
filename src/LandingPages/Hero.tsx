@@ -296,10 +296,11 @@ Source: Homepage Hero Form`
 >
               <source src="/hero5.mp4" type="video/mp4" />
               {/* Desktop fallback image */}
-              <Image 
-                src="/images/hero.webp" 
-                alt="Moxie Risk Partners Hero Background" 
+              <Image
+                src="/images/hero.webp"
+                alt="Moxie Risk Partners Hero Background"
                 fill
+                sizes="100vw"
                 className="object-cover"
                 priority
               />
@@ -307,13 +308,14 @@ Source: Homepage Hero Form`
           </div>
           
           {/* Mobile: Static image only */}
-          <div className="md:hidden">
-            <Image 
-              src="/images/hero.webp" 
-              alt="Moxie Risk Partners Hero Background" 
+          <div className="md:hidden relative w-full h-full">
+            <Image
+              src="/images/hero.webp"
+              alt="Moxie Risk Partners Hero Background"
               fill
+              sizes="100vw"
               className="object-cover"
-              style={{ 
+              style={{
                 filter: 'brightness(0.4)'
               }}
               priority
@@ -335,9 +337,9 @@ Source: Homepage Hero Form`
                 <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight" style={{ color: '#ffffffff', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}>
                   Commercial insurance that moves as fast as you do.
                 </h1>
-                {/* #ffaa85 */}
+       
                 {/* Company Name Second (Smaller, Orange) */}
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-bold" style={{ color: '#CC9F54', textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)' }}>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-semibold" style={{ color: '#CC9F54', textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)' }}>
                   Moxie Risk Partners
                 </h2>
                 
@@ -348,20 +350,18 @@ Source: Homepage Hero Form`
                 
                 {/* Call to Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <button 
-                    onClick={handleGetQuote}
-                    className="bg-[#CC9F54] hover:bg-[#B8893D] text-white px-8 py-4 rounded-md text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                    suppressHydrationWarning
+                  <a
+                    href="/quote-form"
+                    className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-8 py-4 rounded-md text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
                   >
                     Get Quote Now
-                  </button>
-                  <button 
-                    onClick={handleCallExpert}
-                    className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-md text-lg font-medium transition-colors duration-200"
-                    suppressHydrationWarning
+                  </a>
+                  <a
+                    href="tel:+15155817187"
+                    className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-md text-lg font-medium transition-colors duration-200 text-center"
                   >
                     Call Expert
-                  </button>
+                  </a>
                 </div>
                 
                 {/* Trust Bar - Updated to 48 States */}
@@ -390,7 +390,7 @@ Source: Homepage Hero Form`
                   boxShadow: '0 25px 50px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(204, 159, 84, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.08)'
                 }}>
                   <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>Get Your Quote</h3>
+                    <h3 className="text-2xl font-semibold text-white mb-2" style={{ textShadow: '0 2px 4px rgba(0, 0, 0, 0.3)' }}>Get Your Quote</h3>
                     <p className="text-white/80">Quick & easy commercial insurance quote</p>
                   </div>
 
@@ -555,7 +555,7 @@ Source: Homepage Hero Form`
                     <button 
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full bg-[#CC9F54] hover:bg-[#B8893D] disabled:bg-gray-400 disabled:cursor-not-allowed text-white py-4 rounded-lg text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none"
+                      className="w-full bg-[#CC9F54] hover:bg-[#B8893D] disabled:bg-gray-400 disabled:cursor-not-allowed text-moxie-black py-4 rounded-lg text-lg font-bold transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 disabled:transform-none"
                       suppressHydrationWarning
                     >
                       {isSubmitting ? (

@@ -3,7 +3,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #231F20; /* Moxie Black (was #171717) */
 }
 
 @theme inline {
@@ -12,6 +12,45 @@
   --font-sans: 'Montserrat', var(--font-geist-sans);
   --font-serif: 'Libre Baskerville', serif;
   --font-mono: var(--font-geist-mono);
+}
+
+/* ------------------------------------------------------------------
+   Moxie brand colors
+   New classes: text-moxie-black, bg-moxie-gold, border-moxie-gold, etc.
+   ------------------------------------------------------------------ */
+@theme {
+  --color-moxie-black: #231F20;
+  --color-moxie-charcoal: #292927;
+  --color-moxie-gold: #CC9F54;
+  --color-moxie-cream: #F7F4EE;
+
+  /* Gold scale built around Moxie Gold (#CC9F54 = gold-500).
+     Use gold-900 for small gold text on white (passes contrast). */
+  --color-gold-50:  #FBF5EB;
+  --color-gold-100: #F0E2C8;
+  --color-gold-200: #E5CFA5;
+  --color-gold-300: #D9BC82;
+  --color-gold-400: #D4B06B;
+  --color-gold-500: #CC9F54;
+  --color-gold-600: #B8893D;
+  --color-gold-700: #A87A32;
+  --color-gold-800: #9A7030;
+  --color-gold-900: #8A652B;
+
+  /* Warm gray scale replaces Tailwind's cool blue-gray.
+     Every existing text-gray-*, bg-gray-*, border-gray-* class
+     on the site picks these up automatically, with no class changes. */
+  --color-gray-50: #FAFAF9;
+  --color-gray-100: #F5F5F4;
+  --color-gray-200: #E7E5E4;
+  --color-gray-300: #D6D3D1;
+  --color-gray-400: #A8A29E;
+  --color-gray-500: #78716C;
+  --color-gray-600: #57534E;
+  --color-gray-700: #44403C;
+  --color-gray-800: #292927; /* Charcoal */
+  --color-gray-900: #231F20; /* Moxie Black */
+  --color-gray-950: #0C0A09;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -39,6 +78,7 @@ h1, h2, h3, h4, h5, h6 {
 .font-sans {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
 }
+
 select {
   -webkit-appearance: none;
   -moz-appearance: none;

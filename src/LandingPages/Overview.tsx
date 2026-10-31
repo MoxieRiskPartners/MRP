@@ -105,7 +105,7 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
   <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
     {/* Badge */}
     <div className="absolute top-4 left-4 z-10">
-      <span className="bg-[#CC9F54] text-white px-3 py-1 rounded-full text-sm font-semibold">
+      <span className="bg-[#CC9F54] text-moxie-black px-3 py-1 rounded-full text-sm font-semibold">
         {industry.badge}
       </span>
     </div>
@@ -116,6 +116,7 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
         src={industry.image}
         alt={`${industry.title} background`}
         fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         className="object-cover transition-transform duration-300 group-hover:scale-105"
         priority={index < 2}
       />
@@ -124,7 +125,7 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
 
     {/* Content */}
     <div className="p-6">
-      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#B8893D] transition-colors">
+      <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#B8893D] transition-colors">
         {industry.title}
       </h3>
       
@@ -165,7 +166,7 @@ const CargoTypeCard = React.memo(({ cargo, index }: { cargo: CargoType; index: n
 
     {/* Content */}
     <div className="p-4">
-      <h3 className="text-lg font-bold text-gray-900 mb-3 text-center group-hover:text-[#B8893D] transition-colors">
+      <h3 className="text-lg font-semibold text-gray-900 mb-3 text-center group-hover:text-[#B8893D] transition-colors">
         {cargo.title}
       </h3>
 
@@ -202,7 +203,7 @@ const Overview: React.FC = () => {
         <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
           {/* Left Column - Story */}
           <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-4xl font-semibold text-gray-900 leading-tight">
               Your Trusted Commercial Insurance Partner
             </h2>
             
@@ -248,10 +249,9 @@ const Overview: React.FC = () => {
             {/* Mission Statement */}
             <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
               <blockquote className="text-gray-800 text-lg leading-relaxed italic">
-                &quot;To provide specialized commercial insurance solutions that protect the businesses, 
-                organizations, and entities that build America. We combine deep industry knowledge 
-                with personalized service to deliver the coverage, compliance, and peace of mind 
-                our clients need to focus on what they do best.&quot;
+                &quot;Driven by discipline and rooted in family, we partner with the businesses that
+                move, build, make, and serve their communities, helping them understand their
+                risk, stay in control of it, and move forward with confidence.&quot;
               </blockquote>
               {/* Mission Attribution */}
               <div className="mt-6 flex items-center">
@@ -265,7 +265,7 @@ const Overview: React.FC = () => {
         {/* Industries Section */}
         <div className="space-y-12">
           <div className="space-y-6">
-            <h2 className="text-4xl font-bold text-gray-900 leading-tight">
+            <h2 className="text-4xl font-semibold text-gray-900 leading-tight">
               Comprehensive Coverage Across Critical Industries
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">

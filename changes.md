@@ -102,6 +102,73 @@ Beta user: don't list specific "up to"/limit amounts on the coverage boxes.
 - Minor residual "immediate" in claims-page prose (lines ~203, ~339) left as acceptable/honest.
 - The "+ And More" interactive tab idea for the construction coverage selector was NOT implemented (only the intro text was updated).
 
+## 10. Mission statement updated (`src/LandingPages/Overview.tsx`)
+- Replaced the old mission statement ("To provide specialized commercial insurance solutions that protect the businesses, organizations, and entities that build America…") with: **"Driven by discipline and rooted in family, we partner with the businesses that move, build, make, and serve their communities, helping them understand their risk, stay in control of it, and move forward with confidence."**
+
+## 11. "And More" card added to coverage/service grids
+Client request: coverage tabs should list "and more" at the end of the coverage boxes.
+- **`src/ServicesPages/coverage.tsx`** (`/coverage-options`) — "And More" card added at end of coverage grid; clicks scroll to quote form. Also removed the redundant "Don't See the Coverage You Need?" CTA section (now handled by the card).
+- **`src/IndustriesPages/truckingTransportation.tsx`** (`/trucking-transportation`) — "And More" card added to coverage selector grid.
+- **`src/IndustriesPages/construction.tsx`** (`/construction-coverage`) — "And More" card added to coverage selector grid.
+- **`src/IndustriesPages/manufacturing.tsx`** (`/manufacturing-coverage`) — "And More" card added to coverage selector grid.
+- **`src/IndustriesPages/publicE.tsx`** (`/public-entity`) — "And More" card added to services selector grid.
+- **`src/IndustriesPages/nonProfit.tsx`** (`/non-profit`) — "And More" card added to services selector grid.
+
+**Still not added:** Owner Operator, Commercial Auto, Physical Damage, Motor Truck Cargo service pages.
+
+## 12. Trucking page redesigned to match manufacturing card layout
+- **`src/IndustriesPages/truckingTransportation.tsx`** — Replaced large image-based coverage cards with small icon-button cards + expandable details panel (matching manufacturing/construction pattern). Added `CoverageData` interface with descriptions, commonApplications, risksCovered, whoNeedsIt, specialFeatures. Each coverage's details panel includes a "Learn More" link to its dedicated page.
+
+## 13. Fluid responsive styling applied across all industry pages
+Converted all industry pages from old static Tailwind (`max-w-7xl`, `px-4 sm:px-6 lg:px-8`, fixed `text-xl`/`text-4xl`) to fluid responsive (`responsive-container`, `max-w-[min(90rem,95vw)]`, `clamp()` typography/spacing, `auto-fit` grids). Pages updated:
+- **`src/IndustriesPages/truckingTransportation.tsx`** — Hero, coverage section, Why Choose Us, CTA footer
+- **`src/IndustriesPages/construction.tsx`** — Hero, coverage section, details panel, industries served, FAQ, CTA footer
+- **`src/IndustriesPages/publicE.tsx`** — Hero, services section, Why Choose Us, entities served, FAQ, CTA footer
+- **`src/IndustriesPages/nonProfit.tsx`** — Hero, services section, Why Choose Us, organizations served, FAQ, CTA footer
+
+## 14. Section headers centered across all industry pages
+Changed section headers from left-aligned to center-aligned (`text-center`, `mx-auto` on paragraphs) to match consistent design:
+- **`src/IndustriesPages/manufacturing.tsx`** — Coverage, Risk Management, Industries Served
+- **`src/IndustriesPages/construction.tsx`** — Coverage, Industries Served
+- **`src/IndustriesPages/publicE.tsx`** — Specialized Services, Entities Served
+- **`src/IndustriesPages/nonProfit.tsx`** — Organizations Served
+
+## 15. Font styling: headings changed to Montserrat SemiBold (600)
+Client request: use Montserrat SemiBold for display and headings, Montserrat Regular for body/captions with Arial as fallback.
+- Body/captions were already Montserrat Regular with Arial fallback via `globals.css` (no change needed).
+- Changed all heading elements (h1–h4) from `font-bold` (700) to `font-semibold` (600) on the following pages:
+  - **Landing page:** `src/LandingPages/Hero.tsx`, `src/LandingPages/Overview.tsx`, `src/LandingPages/serviceAreas.tsx`, `src/Components/callToAction.tsx`
+  - **Industry pages:** `truckingTransportation.tsx`, `construction.tsx`, `manufacturing.tsx`, `publicE.tsx`, `nonProfit.tsx`
+  - **Utility pages:** `claims.tsx`, `contact.tsx`, `quote.tsx`
+  - **Service pages:** `coverage.tsx`
+- Buttons, stat numbers, and non-heading bold text left as `font-bold`.
+
+## 16. Header logo updated (`src/Components/Header.tsx`)
+- Logo `src` changed from `/images/logo.png` → `/sample_logo_2.png`
+
+## 17. Footer updates (`src/Components/footer.tsx`)
+- Logo `src` changed from `/images/logoWhite.webp` → `/sample_3.png`
+- Removed "Moxie Risk Partners" heading and "Insurance that moves as fast as you do." tagline — logo only now.
+- Footer logo size matched to header: `h-14 sm:h-16`.
+
+## 18. Next.js Image warnings fixed
+- **`src/LandingPages/Hero.tsx`** — Added `sizes="100vw"` to both hero `fill` Images. Added `relative w-full h-full` to mobile image parent div to fix invalid position warning.
+- **`src/LandingPages/Overview.tsx`** — Added `sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"` to industry card `fill` Images.
+
+## 19. "And More" card added to remaining service pages
+Completes the "and more" task across all pages that list coverages.
+- **`src/ServicesPages/ownerOperator.tsx`** (`/owner-operator`) — "And More" card added to coverage grid (dark header style match). Added `formRef`/`scrollToForm`.
+- **`src/ServicesPages/commAuto.tsx`** (`/commercial-auto-liability`) — "And More" card added to coverage components grid. Added `formRef`/`scrollToForm`.
+- **`src/ServicesPages/physicaldamage.tsx`** (`/physical-damage`) — "And More" card added to coverage types grid (dark header style match). Added `formRef`/`scrollToForm`.
+- **`src/ServicesPages/motorTruckCargo.tsx`** (`/motor-truck-cargo`) — "And More" card added to cargo type selector grid. Added `formRef`/`scrollToForm`.
+- **`src/ServicesPages/workersComp.tsx`** (`/workers-compensation`) — "And More" card added to industry type selector grid. Added `formRef`/`scrollToForm`.
+- **`src/ServicesPages/captives.tsx`** — No change needed (lists benefits, not coverage lines).
+
+## 20. Removed "Online Portal / File Online Claim" from workers' comp (`src/ServicesPages/workersComp.tsx`)
+- Removed the "Online Portal" card with "File Online Claim" button and "Secure online claim filing" text — Moxie doesn't have an online claims filing portal.
+
+---
+
 ## Pre-existing (not from this session)
 - `package-lock.json` — was already modified before the session.
 - `src/IndustriesPages/truckingTransportation.tsx:127` "Risk Management support" in a feature list predates this session (file had uncommitted changes at start).

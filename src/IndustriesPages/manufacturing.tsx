@@ -60,6 +60,11 @@ const ManufacturingPage = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -276,7 +281,7 @@ const ManufacturingPage = () => {
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
               <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 leading-tight mb-[clamp(1rem,2.5vw,1.5rem)]">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 leading-tight mb-[clamp(1rem,2.5vw,1.5rem)]">
                     Manufacturing
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Insurance Solutions
@@ -307,7 +312,7 @@ const ManufacturingPage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
       <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -326,19 +331,18 @@ const ManufacturingPage = () => {
       <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          {/* Section Header - Left Aligned */}
-          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Choose Your Manufacturing Coverage
             </h2>
-            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto mb-[clamp(1rem,2.5vw,1.5rem)]">
               From product liability to equipment breakdown, we provide comprehensive insurance
               solutions tailored to your manufacturing operations. These are some of our most common coverages, and we write many more.
             </p>
           </div>
 
           {/* Coverage Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-[clamp(2rem,4vw,3rem)]">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-[clamp(2rem,4vw,3rem)]">
             {coverageTypes.map((coverage) => {
               const IconComponent = coverage.icon;
               return (
@@ -354,19 +358,19 @@ const ManufacturingPage = () => {
                 >
                   <div className="text-center">
                     <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                      <IconComponent 
+                      <IconComponent
                         className={`w-12 h-12 transition-all duration-300 ${
                           selectedType === coverage.typeCode ? 'text-[#CC9F54]' : 'text-gray-600'
                         } group-hover:scale-110`}
                       />
                     </div>
-                    <h3 className={`text-sm font-bold transition-colors ${
+                    <h3 className={`text-sm font-semibold transition-colors ${
                       selectedType === coverage.typeCode ? 'text-[#CC9F54]' : 'text-gray-800'
                     }`}>
                       {coverage.type}
                     </h3>
                   </div>
-                  
+
                   {/* Selected Indicator */}
                   {selectedType === coverage.typeCode && (
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#CC9F54] rounded-full flex items-center justify-center">
@@ -376,6 +380,23 @@ const ManufacturingPage = () => {
                 </button>
               );
             })}
+
+            {/* And More Card */}
+            <button
+              onClick={scrollToForm}
+              className="group relative p-6 rounded-2xl border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-[#CC9F54]">
+                  And More...
+                </h3>
+              </div>
+            </button>
           </div>
 
           {/* Coverage Details Panel */}
@@ -384,7 +405,7 @@ const ManufacturingPage = () => {
             {/* Coverage Header */}
             <div className="flex flex-col lg:flex-row justify-between items-start mb-[clamp(1.5rem,3vw,2rem)] pb-6 border-b-2 border-[#F0E2C8]">
               <div className="mb-4 lg:mb-0">
-                <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-bold text-gray-900 mb-2">
+                <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-semibold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
               </div>
@@ -400,7 +421,7 @@ const ManufacturingPage = () => {
               
               {/* Common Applications */}
               <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
-                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Common Applications
                 </h4>
                 <div className="space-y-2">
@@ -415,7 +436,7 @@ const ManufacturingPage = () => {
 
               {/* Risks Covered */}
               <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
-                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Risks Covered
                 </h4>
                 <div className="space-y-2">
@@ -430,7 +451,7 @@ const ManufacturingPage = () => {
 
               {/* Who Needs It */}
               <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
-                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Who Needs This Coverage
                 </h4>
                 <div className="space-y-2">
@@ -445,7 +466,7 @@ const ManufacturingPage = () => {
 
               {/* Special Features */}
               <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
-                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Special Features
                 </h4>
                 <div className="space-y-2">
@@ -466,13 +487,13 @@ const ManufacturingPage = () => {
       <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Risk Management Services
             </h2>
-            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
-              Strategic business advisory services that differentiate us from traditional insurance agents. 
-              We're your comprehensive risk management partner, not just your insurance provider.
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto mb-[clamp(1rem,2.5vw,1.5rem)]">
+              Strategic business advisory services that differentiate us from traditional insurance agents.
+              We&apos;re your comprehensive risk management partner, not just your insurance provider.
             </p>
           </div>
 
@@ -485,7 +506,7 @@ const ManufacturingPage = () => {
                     <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-xl flex items-center justify-center mb-4">
                       <IconComponent className="w-8 h-8 text-white" />
                     </div>
-                    <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-bold text-gray-900 mb-3">
+                    <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-semibold text-gray-900 mb-3">
                       {service.title}
                     </h3>
                   </div>
@@ -503,11 +524,11 @@ const ManufacturingPage = () => {
       <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
-          <div className="mb-[clamp(2.5rem,6vw,4rem)]">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Industries Served
             </h2>
-            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mb-[clamp(1rem,2.5vw,1.5rem)]">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto mb-[clamp(1rem,2.5vw,1.5rem)]">
               Specialized insurance solutions for every manufacturing sector and production type
             </p>
           </div>
@@ -515,7 +536,7 @@ const ManufacturingPage = () => {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {industryCategories.map((category) => (
               <div key={category.title} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-bold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
+                <h3 className="text-[clamp(1.1rem,1.8vw,1.25rem)] font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
                   {category.title}
                 </h3>
                 <ul className="space-y-2">
@@ -537,7 +558,7 @@ const ManufacturingPage = () => {
         <div className="max-w-[min(56rem,90vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
           <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Manufacturing Insurance FAQs
             </h2>
             <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 mb-[clamp(1rem,2.5vw,1.5rem)]">
@@ -581,7 +602,7 @@ const ManufacturingPage = () => {
             {/* Left Side - CTA Content */}
             <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 mb-[clamp(1rem,2.5vw,1.5rem)] leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 mb-[clamp(1rem,2.5vw,1.5rem)] leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                     Manufacturing Business?
@@ -627,8 +648,8 @@ const ManufacturingPage = () => {
            
 
             {/* Right Side - Quote Form */}
-<div>
-  <IndustryQuoteForm 
+<div ref={formRef}>
+  <IndustryQuoteForm
     industry="manufacturing"
     formName="Manufacturing Industry Quote"
     title="Get Your Free Quote"

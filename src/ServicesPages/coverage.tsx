@@ -476,7 +476,7 @@ useEffect(() => {
         'Uninsured motorist protection',
         'Fleet discounts available',
         'Flexible deductibles',
-        'Umbrella policies up to $10M available'
+        'Umbrella policies available'
       ],
       whoNeedsIt: ['All commercial vehicle operations', 'Trucking companies', 'Fleet operators', 'Construction companies', 'Transportation businesses', 'Equipment transporters', 'Service contractors', 'Material suppliers', 'Delivery services']
     },
@@ -534,7 +534,7 @@ useEffect(() => {
       title: 'Occupational Accident (Occ/Acc)',
       description: 'Medical and disability coverage for owner operators and independent contractors in lieu of workers compensation',
       detailedOverview: 'Occupational Accident insurance provides medical expense coverage, disability benefits, and accidental death protection for owner operators and independent contractors who are not eligible for traditional workers compensation coverage. Essential protection for individual drivers.',
-      coverageAmount: 'Up to $1M coverage',
+      coverageAmount: 'Customizable coverage limits',
       keyFeatures: [
         'Medical expense coverage',
         'Disability benefits',
@@ -594,7 +594,7 @@ useEffect(() => {
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
               <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 leading-tight mb-6">
                    Insurance
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Coverage Solutions
@@ -623,7 +623,7 @@ useEffect(() => {
                 <div className="flex flex-col sm:flex-row gap-4">
                                            <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
    suppressHydrationWarning
 >
   Get Your Quote
@@ -644,7 +644,7 @@ useEffect(() => {
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           
           <div className="mb-16">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4 leading-tight">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Our Insurance <span className="text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">Coverage Options</span>
             </h2>
             <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-3xl">
@@ -655,11 +655,11 @@ useEffect(() => {
           {/* Coverage Grid - Cards */}
           <div className="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] gap-6">
             {coverageTypes.map((coverage) => (
-              <div 
+              <div
                 key={coverage.id}
                 className="bg-white rounded-xl border border-gray-200 hover:border-[#CC9F54] hover:shadow-lg transition-all duration-300 p-6 flex flex-col"
               >
-                <h3 className="text-xl font-bold text-gray-900 mb-3">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">
                   {coverage.title}
                 </h3>
                 <p className="text-gray-600 text-sm mb-4 flex-grow">
@@ -677,6 +677,26 @@ useEffect(() => {
                 </button>
               </div>
             ))}
+
+            {/* And More Card */}
+            <div
+              onClick={scrollToForm}
+              className="bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] rounded-xl border-2 border-dashed border-[#CC9F54] hover:border-solid hover:shadow-lg transition-all duration-300 p-6 flex flex-col items-center justify-center text-center cursor-pointer group"
+            >
+              <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mb-4">
+                <span className="text-white text-2xl font-bold">+</span>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-3">
+                And More...
+              </h3>
+              <p className="text-gray-600 text-sm mb-4 flex-grow">
+                We write many more lines of coverage beyond what&apos;s listed here. Tell us what you need and we&apos;ll find the right fit.
+              </p>
+              <span className="mt-auto flex items-center text-[#CC9F54] hover:text-[#B8893D] font-semibold text-sm transition-colors">
+                Get Free Quote
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -704,7 +724,7 @@ useEffect(() => {
 
             {/* Modal Header */}
             <div className="p-8 border-b border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-3 pr-10">
+              <h2 className="text-3xl font-semibold text-gray-900 mb-3 pr-10">
                 {selectedCoverage.title}
               </h2>
               <p className="text-gray-600">
@@ -717,7 +737,7 @@ useEffect(() => {
               
               {/* Overview */}
               <div>
-                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Overview</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 mb-3">Overview</h3>
                 <p className="text-gray-700 leading-relaxed">
                   {selectedCoverage.detailedOverview}
                 </p>
@@ -725,7 +745,7 @@ useEffect(() => {
 
               {/* Key Features */}
               <div>
-                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Key Features</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 mb-3">Key Features</h3>
                 <ul className="space-y-2">
                   {selectedCoverage.keyFeatures.map((feature, idx) => (
                     <li key={idx} className="flex items-start">
@@ -738,7 +758,7 @@ useEffect(() => {
 
               {/* Who Needs This */}
               <div>
-                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 mb-3">Who Needs This Coverage</h3>
+                <h3 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 mb-3">Who Needs This Coverage</h3>
                 <div className="flex flex-wrap gap-2">
                   {selectedCoverage.whoNeedsIt.map((item, idx) => (
                     <span 
@@ -764,7 +784,7 @@ useEffect(() => {
                 </a>
                 <button 
                   onClick={scrollToForm}
-                  className="flex-1 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white py-4 px-6 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center group shadow-lg"
+                  className="flex-1 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black py-4 px-6 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 flex items-center justify-center group shadow-lg"
                 >
                   Get a Quote
                   <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
@@ -775,43 +795,12 @@ useEffect(() => {
         </div>
       )}
 
-      {/* Mobile-optimized CTA Section */}
-      <section className="py-[clamp(3rem,8vw,5rem)] bg-gradient-to-br from-gray-50 to-white">
-        <div className="responsive-container max-w-[min(64rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
-          <div className="text-center animate-fade-in-up delay-400">
-            <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-[clamp(1.5rem,4vw,2rem)] text-white shadow-2xl">
-             <h3 className="text-[clamp(1.25rem,2.5vw,2rem)] font-bold mb-[clamp(0.75rem,2vw,1rem)]">
-  Don't See the Coverage You Need?
-</h3>
-<p className="text-[clamp(1rem,1.5vw,1.25rem)] mb-[clamp(1rem,3vw,1.5rem)] text-[#F0E2C8] px-[clamp(0.5rem,1vw,0.5rem)]">
-  The coverages above are just a starting point. We write many more lines for businesses,
-  organizations, and public entities. Tell us what you need and our team will find the right fit.
-</p>
-              <div className="flex flex-col gap-[clamp(0.75rem,2vw,1rem)] sm:flex-row justify-center">
-                <a 
-                  href="tel:+15155817187"
-                  className="bg-white text-[#CC9F54] hover:bg-gray-100 px-[clamp(1.5rem,4vw,2rem)] py-[clamp(0.75rem,2vw,0.875rem)] rounded-lg font-bold transition-colors text-[clamp(0.875rem,1.2vw,1rem)] shadow-md hover:shadow-lg"
-                >
-                  Call (515) 581-7187
-                </a>
-                <button 
-                  onClick={scrollToForm}
-                  className="border-2 border-white text-white hover:bg-white hover:text-[#CC9F54] px-[clamp(1.5rem,4vw,2rem)] py-[clamp(0.75rem,2vw,0.875rem)] rounded-lg font-bold transition-colors text-[clamp(0.875rem,1.2vw,1rem)]"
-                  suppressHydrationWarning
-                >
-                  Get Free Quote
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Why Choose Us Section */}
       <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
           <div className="text-center mb-16">
-            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 mb-4">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4">
               Why Choose
               <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                 Moxie Risk Partners?
@@ -824,7 +813,7 @@ useEffect(() => {
               <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mx-auto mb-6">
                 <Shield className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Expert Guidance</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-semibold text-gray-900 mb-4">Expert Guidance</h3>
               <p className="text-gray-600">
                 Licensed insurance professionals with decades of combined experience across all industries
               </p>
@@ -834,7 +823,7 @@ useEffect(() => {
               <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mx-auto mb-6">
                 <CheckCircle className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Competitive Rates</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-semibold text-gray-900 mb-4">Competitive Rates</h3>
               <p className="text-gray-600">
                 Access to multiple A-rated carriers ensures you get the best coverage at the most competitive prices
               </p>
@@ -844,7 +833,7 @@ useEffect(() => {
               <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mx-auto mb-6">
                 <Phone className="w-8 h-8 text-white" />
               </div>
-              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-4">Dedicated Support</h3>
+              <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-semibold text-gray-900 mb-4">Dedicated Support</h3>
               <p className="text-gray-600">
                 Dedicated claims support and a service team ready to help when you need us
               </p>
@@ -863,7 +852,7 @@ useEffect(() => {
             {/* Left Side - CTA Content */}
             <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-bold text-gray-900 mb-6 leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 mb-6 leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                     Business?
@@ -909,7 +898,7 @@ useEffect(() => {
     <div className="w-16 h-16 bg-gradient-to-br from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mx-auto mb-4">
       <Shield className="w-8 h-8 text-white" />
     </div>
-    <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-bold text-gray-900 mb-2">Get Your Free Quote</h3>
+    <h3 className="text-[clamp(1.25rem,2vw,1.5rem)] font-semibold text-gray-900 mb-2">Get Your Free Quote</h3>
     <p className="text-gray-600">Fast, competitive insurance quotes</p>
   </div>
 
@@ -1052,7 +1041,7 @@ useEffect(() => {
     <button
       onClick={handleFormSubmit}
       disabled={isSubmitting}
-      className="w-full bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+      className="w-full bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] min-h-[3rem] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group mt-6 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
       suppressHydrationWarning
     >
       {isSubmitting ? (

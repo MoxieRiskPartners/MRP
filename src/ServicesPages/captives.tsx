@@ -216,7 +216,7 @@ const CaptivesPage = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
            <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -339,7 +339,7 @@ const CaptivesPage = () => {
             })}
           </div>
 
-          <div className="mt-16 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] p-12 rounded-2xl text-white">
+          <div className="mt-16 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] p-12 rounded-2xl text-moxie-black">
             <div className="max-w-4xl mx-auto text-center">
               <h3 className="text-3xl font-bold mb-6">
                 Financial Impact: Real Numbers

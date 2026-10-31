@@ -71,6 +71,11 @@ const OwnerOperator = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -236,7 +241,7 @@ const OwnerOperator = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
               <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -268,8 +273,8 @@ const OwnerOperator = () => {
             {coverageOptions.map((coverage) => {
               const IconComponent = coverage.icon;
               return (
-                <div 
-                  key={coverage.title} 
+                <div
+                  key={coverage.title}
                   className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow duration-300"
                 >
                   <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-6">
@@ -277,7 +282,7 @@ const OwnerOperator = () => {
                       <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
                         <IconComponent className="w-6 h-6 text-[#CC9F54]" />
                       </div>
-                   
+
                     </div>
                     <h3 className="text-xl font-bold text-white">{coverage.title}</h3>
                   </div>
@@ -295,6 +300,28 @@ const OwnerOperator = () => {
                 </div>
               );
             })}
+
+            {/* And More Card */}
+            <div
+              onClick={scrollToForm}
+              className="bg-white rounded-xl border-2 border-dashed border-[#CC9F54] overflow-hidden hover:shadow-lg hover:border-solid transition-all duration-300 cursor-pointer group"
+            >
+              <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] p-6">
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center">
+                    <span className="text-[#CC9F54] text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white">And More...</h3>
+              </div>
+              <div className="p-6 flex flex-col items-center justify-center text-center">
+                <p className="text-gray-600 mb-4">We write many more lines of coverage for owner operators. Tell us what you need and we&apos;ll find the right fit.</p>
+                <span className="flex items-center text-[#CC9F54] font-semibold transition-colors">
+                  Get Free Quote
+                  <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -456,13 +483,15 @@ const OwnerOperator = () => {
           
            
 
-            <IndustryQuoteForm  // 6 lines
+            <div ref={formRef}>
+            <IndustryQuoteForm
   industry="owner-operator"
   formName="Owner Operator Insurance Quote"
   title="Get Your Free Quote"
   subtitle="Fast, competitive owner operator insurance quotes"
   fields={ownerOperatorFields}
 />
+            </div>
           </div>
         </div>
       </section>

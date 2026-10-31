@@ -91,6 +91,11 @@ const MotorTruckCargo = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -298,17 +303,17 @@ const MotorTruckCargo = () => {
     {
       title: "Debris Removal",
       description: "Coverage for cleanup and removal of damaged cargo and debris after an incident.",
-      limit: "Up to $10,000"
+      limit: "Included"
     },
     {
       title: "Earned Freight Charges",
       description: "Protection against loss of freight charges for undelivered loads due to covered incidents.",
-      limit: "Up to $10,000"
+      limit: "Included"
     },
     {
       title: "Pollution Cleanup",
       description: "Environmental cleanup costs for cargo-related pollution or hazardous material spills.",
-      limit: "Up to $10,000"
+      limit: "Included"
     },
     {
       title: "Sue and Labor",
@@ -318,7 +323,7 @@ const MotorTruckCargo = () => {
     {
       title: "Reloading Expenses",
       description: "Costs to transfer undamaged cargo to another vehicle after an incident.",
-      limit: "Up to $5,000"
+      limit: "Included"
     },
     {
       title: "General Average",
@@ -366,7 +371,7 @@ const MotorTruckCargo = () => {
                   </h1>
                   
                   <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-                    Comprehensive freight protection from loading dock to delivery. Protect the cargo you haul with broad form coverage up to $250,000.
+                    Comprehensive freight protection from loading dock to delivery. Protect the cargo you haul with broad form coverage tailored to your operation.
                   </p>
                 </div>
 
@@ -386,7 +391,7 @@ const MotorTruckCargo = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
              <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -454,7 +459,7 @@ const MotorTruckCargo = () => {
           </div>
 
           {/* Cargo Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-12">
             {coverageDataTypes.map((coverage) => (
               <button
                 key={coverage.typeCode}
@@ -479,7 +484,7 @@ const MotorTruckCargo = () => {
                     {coverage.type}
                   </h3>
                 </div>
-                
+
                 {/* Selected Indicator */}
                 {selectedType === coverage.typeCode && (
                   <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#CC9F54] rounded-full flex items-center justify-center">
@@ -488,6 +493,23 @@ const MotorTruckCargo = () => {
                 )}
               </button>
             ))}
+
+            {/* And More Card */}
+            <button
+              onClick={scrollToForm}
+              className="group relative p-6 rounded-2xl border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-bold text-[#CC9F54]">
+                  And More...
+                </h3>
+              </div>
+            </button>
           </div>
 
           {/* Coverage Details Panel */}
@@ -603,7 +625,7 @@ const MotorTruckCargo = () => {
                   </h3>
                   <span className={`px-3 py-1 rounded-full text-xs font-bold ${
                     coverage.isIncluded 
-                      ? 'bg-[#CC9F54] text-white' 
+                      ? 'bg-[#CC9F54] text-moxie-black' 
                       : 'bg-gray-600 text-white'
                   }`}>
                     {coverage.isIncluded ? 'Included' : 'Optional'}
@@ -690,7 +712,7 @@ const MotorTruckCargo = () => {
                 <p className="text-gray-600 text-sm mb-4 leading-relaxed">
                   {detail.description}
                 </p>
-                <div className="inline-block bg-[#CC9F54] text-white px-4 py-2 rounded-full font-bold text-sm">
+                <div className="inline-block bg-[#CC9F54] text-moxie-black px-4 py-2 rounded-full font-bold text-sm">
                   {detail.limit}
                 </div>
               </div>
@@ -786,7 +808,7 @@ const MotorTruckCargo = () => {
            
              
        
-            <div>
+            <div ref={formRef}>
   <IndustryQuoteForm 
     industry="motor-truck-cargo"
     formName="Motor Truck Cargo Quote"

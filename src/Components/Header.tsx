@@ -95,17 +95,16 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
-            <button
-              onClick={handleLogoClick}
+            <a
+              href="/"
               aria-label="Go to homepage"
-              suppressHydrationWarning={true}
             >
-              <img 
-                src="/images/logo.png" 
-                alt="Company Logo" 
+              <img
+                src="/sample_logo_2.png"
+                alt="Moxie Risk Partners"
                 className="h-14 w-auto sm:h-16"
               />
-            </button>
+            </a>
           </div>
 
           {/* Desktop Navigation - CENTERED */}
@@ -178,7 +177,7 @@ const Header = () => {
           <div className="hidden md:flex">
             <Link 
               href="/quote-form"
-              className="bg-[#CC9F54] hover:bg-[#B8893D] text-white px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-sm whitespace-nowrap"
+              className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-6 py-2 rounded-md text-sm font-medium transition-colors duration-200 shadow-sm whitespace-nowrap"
             >
               Get a Quote
             </Link>
@@ -264,7 +263,7 @@ const Header = () => {
               <div className="pt-4 border-t border-gray-200 mt-4">
                 <Link 
                   href="/quote-form"
-                  className="block w-full bg-[#CC9F54] hover:bg-[#B8893D] text-white px-4 py-3 rounded-md text-base font-medium transition-colors duration-200 shadow-sm text-center"
+                  className="block w-full bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-4 py-3 rounded-md text-base font-medium transition-colors duration-200 shadow-sm text-center"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   Get a Quote

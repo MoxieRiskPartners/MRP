@@ -217,7 +217,7 @@ const ServiceAreas: React.FC = () => {
         
         {/* Header - Mobile optimized */}
         <div className={`text-center max-w-4xl mx-auto mb-12 sm:mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-4 sm:mb-6 leading-tight">
             Find the Coverage You Need
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 px-2">
@@ -250,7 +250,7 @@ const ServiceAreas: React.FC = () => {
               <button
                 onClick={handleZipSearch}
                 disabled={isLoading || zipCode.length !== 5}
-                className="w-full sm:w-auto px-6 py-4 sm:py-3 bg-[#CC9F54] hover:bg-[#B8893D] disabled:bg-gray-400 text-white font-bold rounded-lg transition-colors text-lg"
+                className="w-full sm:w-auto px-6 py-4 sm:py-3 bg-[#CC9F54] hover:bg-[#B8893D] disabled:bg-gray-400 text-moxie-black font-bold rounded-lg transition-colors text-lg"
                 suppressHydrationWarning
               >
                 {isLoading ? (
@@ -268,14 +268,14 @@ const ServiceAreas: React.FC = () => {
     {foundState ? (
       <div className="text-center">
         <div className="text-green-600 text-2xl mb-2">✓</div>
-        <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
+        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
           Great news! We serve {foundState.name}
         </h3>
         <p className="text-sm sm:text-base text-gray-600 mb-4">
           Full commercial insurance coverage available in the {foundState.region} region
         </p>
         <div className="flex flex-col gap-3 justify-center">
-          <Link href="/quote-form" className="bg-[#CC9F54] hover:bg-[#B8893D] text-white px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
+          <Link href="/quote-form" className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
             Get Quote Now
           </Link>
           <a href="tel:+15155817187" className="border-2 border-[#CC9F54] text-[#B8893D] hover:bg-[#FBF5EB] px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
@@ -287,7 +287,7 @@ const ServiceAreas: React.FC = () => {
       <div className="text-center">
         <div className="text-amber-600 text-2xl mb-2">⚠</div>
         <p className="text-sm sm:text-base text-gray-700 mb-4">{error}</p>
-        <a href="tel:+15155817187" className="bg-[#CC9F54] hover:bg-[#B8893D] text-white px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
+        <a href="tel:+15155817187" className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
           Contact Us Anyway
         </a>
       </div>
@@ -301,7 +301,7 @@ const ServiceAreas: React.FC = () => {
         <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
           <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-8 border-t-4 border-[#CC9F54]">
             <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-3 sm:mb-4">
+              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">
                 Commercial Insurance Available Nationwide
               </h3>
               <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
@@ -333,7 +333,7 @@ const ServiceAreas: React.FC = () => {
                     onClick={() => setSelectedRegion('all')}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                       selectedRegion === 'all'
-                        ? 'bg-[#CC9F54] text-white'
+                        ? 'bg-[#CC9F54] text-moxie-black'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                     suppressHydrationWarning
@@ -346,7 +346,7 @@ const ServiceAreas: React.FC = () => {
                       onClick={() => setSelectedRegion(region)}
                       className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                         selectedRegion === region
-                          ? 'bg-[#CC9F54] text-white'
+                          ? 'bg-[#CC9F54] text-moxie-black'
                           : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                       }`}
                       suppressHydrationWarning
@@ -384,8 +384,8 @@ const ServiceAreas: React.FC = () => {
 
        {/* Mobile-optimized CTA Section */}
         <div className={`text-center mt-12 sm:mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-400`}>
-          <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-6 sm:p-8 text-white">
-            <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+          <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-6 sm:p-8 text-moxie-black">
+            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
               Don't see your state? Let's talk anyway.
             </h3>
             <p className="text-base sm:text-lg mb-4 sm:mb-6 text-[#F0E2C8] px-2">
@@ -434,7 +434,7 @@ const ServiceAreas: React.FC = () => {
                 />
                 {/* State Badge Overlay */}
                 <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
-                  <div className="bg-[#CC9F54] text-white px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
+                  <div className="bg-[#CC9F54] text-moxie-black px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
                     <span className="font-bold text-sm sm:text-lg">{selectedState.code}</span>
                   </div>
                 </div>
@@ -454,7 +454,7 @@ const ServiceAreas: React.FC = () => {
                     {selectedState.region} Region
                   </div>
                   
-                  <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 sm:mb-3">
+                  <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
                     Get Started in {selectedState.name}
                   </h3>
                   
@@ -504,7 +504,7 @@ const ServiceAreas: React.FC = () => {
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/quote-form" className="flex-1 bg-[#CC9F54] hover:bg-[#B8893D] text-white py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center shadow-lg hover:shadow-xl text-sm sm:text-base">
+              <Link href="/quote-form" className="flex-1 bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center shadow-lg hover:shadow-xl text-sm sm:text-base">
   <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
   </svg>

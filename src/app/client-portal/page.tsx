@@ -10,7 +10,7 @@ const ClientPortal = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-white py-16">
+      <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-moxie-black py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-4xl font-bold mb-4">Client Portal</h1>
@@ -56,7 +56,7 @@ const ClientPortal = () => {
               href={portalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center bg-[#CC9F54] hover:bg-[#B8893D] text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg"
+              className="inline-flex items-center bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-8 py-4 rounded-lg text-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg"
             >
               Access Client Portal
               <ExternalLink className="ml-2 h-5 w-5" />

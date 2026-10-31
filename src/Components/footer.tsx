@@ -125,17 +125,13 @@ const Footer: React.FC = () => {
           {/* Company Info Section */}
           <div className="lg:col-span-4 space-y-6">
             {/* Logo and Company Name */}
-            <div className="flex items-center space-x-4">
-              <img 
-                src="/images/logoWhite.webp" 
-                alt="Moxie Risk Partners Logo" 
-                className="h-16 w-auto"
+            <div className="flex items-center">
+              <img
+                src="/sample_3.png"
+                alt="Moxie Risk Partners Logo"
+                className="h-14 w-auto sm:h-16"
                 loading="lazy"
               />
-              <div>
-                <h3 className="text-xl font-bold text-white">Moxie Risk Partners</h3>
-                <p className="text-[#D9BC82] text-sm font-medium">Insurance that moves as fast as you do.</p>
-              </div>
             </div>
 
             {/* Mission Statement */}

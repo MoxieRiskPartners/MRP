@@ -63,6 +63,11 @@ const ConstructionPage = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -198,9 +203,9 @@ const ConstructionPage = () => {
     return (
       <div className="min-h-screen bg-white">
         {/* Hero Section - Side by Side Layout */}
-        <section ref={heroRef} className="bg-white py-12 lg:py-20">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
+          <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
               
               {/* Left Side - Hero Image */}
               <div className="transform transition-all duration-1000">
@@ -218,7 +223,7 @@ const ConstructionPage = () => {
               <div className="transform transition-all duration-1000 delay-300">
                 <div className="space-y-8">
                   <div>
-                    <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                    <h1 className="text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
                       Construction
                       <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                         Insurance
@@ -248,7 +253,7 @@ const ConstructionPage = () => {
                   {/* CTA Buttons */}
                   <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/quote-form">
-  <button className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group w-full">
+  <button className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group w-full">
     Get Your Quote
   </button>
 </Link>
@@ -272,17 +277,17 @@ const ConstructionPage = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      
+
       {/* Hero Section - Side by Side Layout */}
-      <section ref={heroRef} className="bg-white py-12 lg:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
+      <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
+
             {/* Left Side - Hero Image */}
             <div className={`transform transition-all duration-1000 ${isVisible ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'}`}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img 
-                  src="/images/constructhero.png" 
+                <img
+                  src="/images/constructhero.png"
                   alt="Construction workers on building site"
                   className="w-full h-[500px] lg:h-[600px] object-cover"
                 />
@@ -292,17 +297,17 @@ const ConstructionPage = () => {
 
             {/* Right Side - Content */}
             <div className={`transform transition-all duration-1000 delay-300 ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'}`}>
-              <div className="space-y-8">
+              <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
                 <div>
-                  <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+                  <h1 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 leading-tight mb-[clamp(1rem,2.5vw,1.5rem)]">
                     Construction
                     <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                       Insurance
                     </span>
                   </h1>
-                  
-                  <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-                    Protect your construction business with comprehensive coverage designed for contractors, 
+
+                  <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
+                    Protect your construction business with comprehensive coverage designed for contractors,
                     builders, and construction professionals. Expert guidance and competitive rates.
                   </p>
                 </div>
@@ -316,21 +321,21 @@ const ConstructionPage = () => {
                   ].map((feature, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
-                      <span className="text-lg font-medium text-gray-800">{feature}</span>
+                      <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-medium text-gray-800">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 {/* CTA Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
-           <Link 
-  href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
->
-  Get Your Quote
-</Link>
-                  
-                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
+                  <Link
+                    href="/quote-form"
+                    className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+                  >
+                    Get Your Quote
+                  </Link>
+
+                  <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-[clamp(0.95rem,1.2vw,1.125rem)] transition-all duration-300 flex items-center justify-center">
                     Call (515) 581-7187
                   </a>
                 </div>
@@ -341,22 +346,21 @@ const ConstructionPage = () => {
       </section>
 
       {/* Coverage Options Selector Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          {/* Section Header - Left Aligned */}
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Choose Your Construction Coverage
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto">
               Each construction trade and project type has unique risks and requirements.
               Select a coverage type below to explore tailored protection options and industry-specific endorsements. These are some of our most common coverages, and we write many more.
             </p>
           </div>
 
           {/* Coverage Type Buttons */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-12">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-4 mb-12">
             {coverageTypes.map((coverage) => {
               const IconComponent = coverage.icon;
               return (
@@ -372,19 +376,19 @@ const ConstructionPage = () => {
                 >
                   <div className="text-center">
                     <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
-                      <IconComponent 
+                      <IconComponent
                         className={`w-12 h-12 transition-all duration-300 ${
                           selectedType === coverage.typeCode ? 'text-[#CC9F54]' : 'text-gray-600'
                         } group-hover:scale-110`}
                       />
                     </div>
-                    <h3 className={`text-sm font-bold transition-colors ${
+                    <h3 className={`text-sm font-semibold transition-colors ${
                       selectedType === coverage.typeCode ? 'text-[#CC9F54]' : 'text-gray-800'
                     }`}>
                       {coverage.type}
                     </h3>
                   </div>
-                  
+
                   {/* Selected Indicator */}
                   {selectedType === coverage.typeCode && (
                     <div className="absolute -top-2 -right-2 w-6 h-6 bg-[#CC9F54] rounded-full flex items-center justify-center">
@@ -394,31 +398,48 @@ const ConstructionPage = () => {
                 </button>
               );
             })}
+
+            {/* And More Card */}
+            <button
+              onClick={scrollToForm}
+              className="group relative p-6 rounded-2xl border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
+              <div className="text-center">
+                <div className="mb-4 mx-auto w-16 h-16 flex items-center justify-center">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">+</span>
+                  </div>
+                </div>
+                <h3 className="text-sm font-semibold text-[#CC9F54]">
+                  And More...
+                </h3>
+              </div>
+            </button>
           </div>
 
           {/* Coverage Details Panel */}
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 p-8 lg:p-12">
             
             {/* Coverage Header */}
-            <div className="flex flex-col lg:flex-row justify-between items-start mb-8 pb-6 border-b-2 border-[#F0E2C8]">
+            <div className="flex flex-col lg:flex-row justify-between items-start mb-[clamp(1.5rem,3vw,2rem)] pb-6 border-b-2 border-[#F0E2C8]">
               <div className="mb-4 lg:mb-0">
-                <h3 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">
+                <h3 className="text-[clamp(1.75rem,3vw,2.25rem)] lg:text-4xl font-semibold text-gray-900 mb-2">
                   {selectedCoverage.title}
                 </h3>
               </div>
             </div>
 
             {/* Coverage Description */}
-            <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-4xl">
+            <p className="text-[clamp(0.95rem,1.2vw,1.125rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)] max-w-[min(56rem,90vw)]">
               {selectedCoverage.description}
             </p>
 
             {/* Coverage Details Grid */}
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-              
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(200px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)] mb-[clamp(1.5rem,3vw,2rem)]">
+
               {/* Common Projects */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Common Projects
                 </h4>
                 <div className="space-y-2">
@@ -432,8 +453,8 @@ const ConstructionPage = () => {
               </div>
 
               {/* Risks Covered */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Risks Covered
                 </h4>
                 <div className="space-y-2">
@@ -447,8 +468,8 @@ const ConstructionPage = () => {
               </div>
 
               {/* Who Needs It */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Who Needs This Coverage
                 </h4>
                 <div className="space-y-2">
@@ -462,8 +483,8 @@ const ConstructionPage = () => {
               </div>
 
               {/* Special Features */}
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
+              <div className="space-y-[clamp(0.75rem,2vw,1rem)]">
+                <h4 className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pb-2 border-b-2 border-[#E5CFA5]">
                   Special Features
                 </h4>
                 <div className="space-y-2">
@@ -481,22 +502,22 @@ const ConstructionPage = () => {
       </section>
 
       {/* Industries Served Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-white">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Construction Trades We Serve
             </h2>
-            <p className="text-xl text-gray-600 max-w-4xl mb-6">
-              Specialized insurance solutions for every construction specialty. Don’t see your trade? We work with contractors of all types. Contact us to discuss your operation.
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 max-w-[min(56rem,90vw)] mx-auto">
+              Specialized insurance solutions for every construction specialty. Don&apos;t see your trade? We work with contractors of all types. Contact us to discuss your operation.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-[clamp(1.5rem,3vw,2rem)]">
             {tradeCategories.map((category) => (
               <div key={category.title} className="bg-gray-50 rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-shadow duration-300">
-                <h3 className="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
+                <h3 className="text-[clamp(1.1rem,1.5vw,1.25rem)] font-semibold text-gray-900 mb-4 pb-2 border-b-2 border-[#E5CFA5]">
                   {category.title}
                 </h3>
                 <ul className="space-y-2">
@@ -514,14 +535,14 @@ const ConstructionPage = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight">
+      <section className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
+        <div className="responsive-container max-w-[min(56rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="text-center mb-[clamp(2.5rem,6vw,4rem)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-semibold text-gray-900 mb-4 leading-tight">
               Construction Insurance FAQs
             </h2>
-            <p className="text-xl text-gray-600 mb-6">
+            <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600">
               Common questions about construction insurance coverage and requirements
             </p>
           </div>
@@ -535,7 +556,7 @@ const ConstructionPage = () => {
                   aria-expanded={faq.isOpen}
                   suppressHydrationWarning={true}
                 >
-                  <span className="text-lg font-semibold text-gray-900 pr-4">{faq.question}</span>
+                  <span className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-semibold text-gray-900 pr-4">{faq.question}</span>
                   <div className={`w-6 h-6 flex-shrink-0 transform transition-transform duration-200 ${faq.isOpen ? 'rotate-180' : ''}`}>
                     <svg className="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -554,36 +575,36 @@ const ConstructionPage = () => {
       </section>
 
       {/* Enhanced CTA Footer with Quote Form */}
-      <section className="relative py-20 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            
+      <section className="relative py-[clamp(3rem,8vw,5rem)] bg-white overflow-hidden">
+        <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
+
             {/* Left Side - CTA Content */}
-            <div className="space-y-8">
+            <div className="space-y-[clamp(1.5rem,3vw,2rem)]">
               <div>
-                <h2 className="text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+                <h2 className="text-[clamp(2.5rem,5vw,4rem)] font-semibold text-gray-900 mb-[clamp(1rem,2.5vw,1.5rem)] leading-tight">
                   Ready to Protect Your
                   <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
                     Construction Business?
                   </span>
                 </h2>
-                
-                <p className="text-xl text-gray-600 leading-relaxed mb-8">
+
+                <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed mb-[clamp(1.5rem,3vw,2rem)]">
                   Join the construction professionals who trust Moxie Risk Partners. Get your quote today and experience specialized construction insurance expertise.
                 </p>
               </div>
 
-        {/* Contact Information Grid */}
-              <div className="grid md:grid-cols-1 gap-6">
-            
+              {/* Contact Information Grid */}
+              <div className="grid grid-cols-1 gap-[clamp(1rem,2.5vw,1.5rem)]">
+
                 {/* Phone */}
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
                   <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>
-                  <a href="tel:+15155817187" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
+                  <a href="tel:+15155817187" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors">
                     (515) 581-7187
                   </a>
                 </div>
@@ -594,28 +615,26 @@ const ConstructionPage = () => {
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Email Us</h4>
-                  <a href="mailto:quotes@moxieriskpartners.com" className="text-lg font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
+                  <a href="mailto:quotes@moxieriskpartners.com" className="text-[clamp(0.95rem,1.2vw,1.125rem)] font-bold text-gray-900 hover:text-[#CC9F54] transition-colors break-all">
                     quotes@moxieriskpartners.com
                   </a>
                 </div>
-
-            
               </div>
             </div>
 
-       {/* Quote Form - NEW COMPONENT */}
-<IndustryQuoteForm 
-  industry="construction"
-  formName="Construction Industry Quote"
-  title="Get Your Free Quote"
-  subtitle="Fast, competitive construction insurance quotes"
-  fields={constructionFields}
-/>
-          
+            {/* Right Side - Quote Form */}
+            <div ref={formRef}>
+              <IndustryQuoteForm
+                industry="construction"
+                formName="Construction Industry Quote"
+                title="Get Your Free Quote"
+                subtitle="Fast, competitive construction insurance quotes"
+                fields={constructionFields}
+              />
+            </div>
+
           </div>
-          
         </div>
-        
       </section>
 
     </div>

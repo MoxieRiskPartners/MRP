@@ -78,6 +78,11 @@ const CommAutoLiability = () => {
 
 
   const heroRef = useRef(null);
+  const formRef = useRef<HTMLDivElement>(null);
+
+  const scrollToForm = () => {
+    formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -269,7 +274,7 @@ const CommAutoLiability = () => {
                 <div className="flex flex-col sm:flex-row gap-4">
             <Link 
   href="/quote-form"
-  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
+  className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group"
 >
   Get Your Quote
 </Link>
@@ -318,7 +323,7 @@ const CommAutoLiability = () => {
 
     <a 
       href="tel:+15155817187"
-      className="inline-flex items-center bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
+      className="inline-flex items-center bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#B8893D] hover:to-[#A87A32] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"
     >
       Schedule Your Policy Review
       <ArrowRight className="ml-2 w-5 h-5" />
@@ -394,7 +399,7 @@ const CommAutoLiability = () => {
                     {coverage.title}
                   </h3>
                   <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                    coverage.isCore ? 'bg-[#CC9F54] text-white' : 'bg-gray-600 text-white'
+                    coverage.isCore ? 'bg-[#CC9F54] text-moxie-black' : 'bg-gray-600 text-white'
                   }`}>
                     {coverage.isCore ? 'Required' : 'Optional'}
                   </span>
@@ -412,6 +417,24 @@ const CommAutoLiability = () => {
                 </ul>
               </div>
             ))}
+
+            {/* And More Card */}
+            <div
+              onClick={scrollToForm}
+              className="rounded-xl p-8 border-2 border-dashed border-[#CC9F54] bg-gradient-to-br from-[#FBF5EB] to-[#F5EBDA] hover:border-solid hover:shadow-lg transition-all duration-300 cursor-pointer group flex flex-col items-center justify-center text-center"
+            >
+              <div className="w-16 h-16 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-full flex items-center justify-center mb-4">
+                <span className="text-white text-3xl font-bold">+</span>
+              </div>
+              <h3 className="text-2xl font-semibold text-gray-900 mb-4">And More...</h3>
+              <p className="text-gray-600 mb-6">
+                We write many more lines of commercial auto coverage. Tell us what you need and we&apos;ll find the right fit.
+              </p>
+              <span className="flex items-center text-[#CC9F54] font-semibold">
+                Get Free Quote
+                <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </span>
+            </div>
           </div>
         </div>
       </section>
@@ -546,8 +569,8 @@ const CommAutoLiability = () => {
             {/* Right Side - Quote Form */}
             
       {/* Right Side - Quote Form */}
-<div>
-  <IndustryQuoteForm 
+<div ref={formRef}>
+  <IndustryQuoteForm
     industry="commercial-auto"
     formName="Commercial Auto Liability Quote"
     title="Get Your Free Quote"

@@ -139,7 +139,6 @@ const insuranceAgencySchema = {
       "contactType": "Sales",
       "availableLanguage": ["English"],
       "areaServed": "US",
-      "contactOption": "TollFree",
       "hoursAvailable": {
         "@type": "OpeningHoursSpecification",
         "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
@@ -153,17 +152,9 @@ const insuranceAgencySchema = {
       "email": "claims@moxieriskpartners.com",
       "contactType": "Customer Service",
       "availableLanguage": ["English"],
-      "areaServed": "US",
-      "contactOption": "TollFree"
+      "areaServed": "US"
     }
   ],
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "287",
-    "bestRating": "5",
-    "worstRating": "1"
-  },
   "sameAs": []
 };
 

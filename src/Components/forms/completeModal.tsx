@@ -98,7 +98,7 @@ const CompleteModal: React.FC<CompleteModalProps> = ({
             <button
               type="button"
               onClick={onStartNew}
-              className="flex-1 py-2.5 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-white rounded-lg font-medium hover:from-[#B8893D] hover:to-[#A87A32] transition-all"
+              className="flex-1 py-2.5 bg-gradient-to-r from-[#CC9F54] to-[#B8893D] text-moxie-black rounded-lg font-medium hover:from-[#B8893D] hover:to-[#A87A32] transition-all"
             >
               New Claim
             </button>

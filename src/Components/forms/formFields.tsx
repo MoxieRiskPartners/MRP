@@ -442,7 +442,7 @@ export const WitnessEntry: React.FC<WitnessEntryProps> = ({
   <div className="bg-gray-50 border-2 border-gray-100 rounded-xl p-4 sm:p-5 mb-4 hover:border-[#E5CFA5] transition-colors">
     <div className="flex justify-between items-center mb-4">
       <div className="flex items-center gap-2">
-        <div className="w-8 h-8 bg-[#CC9F54] rounded-full flex items-center justify-center text-white font-bold text-sm">
+        <div className="w-8 h-8 bg-[#CC9F54] rounded-full flex items-center justify-center text-moxie-black font-bold text-sm">
           {index + 1}
         </div>
         <h4 className="font-semibold text-gray-900">Witness #{index + 1}</h4>
