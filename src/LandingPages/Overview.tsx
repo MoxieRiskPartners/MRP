@@ -218,11 +218,14 @@ const Overview: React.FC = () => {
               personalized service and expert guidance to protect what matters most to your business.
             </p>
 
-            {/* Value Props */}
+          </div>
+
+          {/* Right Column - Value Props */}
+          <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
               {[
                 'Industry Expertise',
-                'Radical Transparency', 
+                'Radical Transparency',
                 'A-Rated Carriers',
                 'Fast Claims Response'
               ].map((item, index) => (
@@ -236,30 +239,31 @@ const Overview: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column - Mission Section */}
-          <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
-            {/* Mission Badge */}
+          {/* Mission Section (hidden for now) */}
+          {/* <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
             <div className="inline-flex items-center px-4 py-2 bg-[#FBF5EB] border border-[#E5CFA5] rounded-full">
               <svg className="w-5 h-5 text-[#CC9F54] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
               </svg>
               <span className="text-[#B8893D] font-medium text-sm">Our Mission</span>
             </div>
-
-            {/* Mission Statement */}
             <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
-              <blockquote className="text-gray-800 text-lg leading-relaxed italic">
-                &quot;Driven by discipline and rooted in family, we partner with the businesses that
-                move, build, make, and serve their communities, helping them understand their
-                risk, stay in control of it, and move forward with confidence.&quot;
-              </blockquote>
-              {/* Mission Attribution */}
+              <p className="text-gray-800 text-lg leading-relaxed">
+                At Moxie Risk Partners, we help businesses understand their risk and stay in
+                control of it. We take the time to explain your coverage, learn how your operation
+                actually runs, and revisit your program as your business changes. Our roots are
+                in transportation, and we bring that depth to every industry we serve.
+              </p>
+              <p className="text-gray-800 text-lg leading-relaxed mt-4">
+                We stay alert, communicate clearly, and follow through. Guided by our "One In,
+                All In" culture, our whole team shares responsibility for your experience.
+              </p>
               <div className="mt-6 flex items-center">
                 <div className="w-12 h-0.5 bg-gradient-to-r from-[#CC9F54] to-[#D4B06B] mr-4"></div>
                 <span className="text-[#B8893D] font-semibold">Moxie Risk Partners</span>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
 
         {/* Industries Section */}

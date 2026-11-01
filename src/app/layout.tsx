@@ -127,7 +127,7 @@ const insuranceAgencySchema = {
     "Fleet Insurance",
     "Risk Management Support"
   ],
-  "slogan": "Commercial insurance that moves as fast as you do",
+  "slogan": "Specialized commercial insurance and risk management solutions",
   "foundingDate": "2020",
   "address": {
     "@type": "PostalAddress",

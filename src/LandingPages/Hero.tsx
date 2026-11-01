@@ -333,20 +333,20 @@ Source: Homepage Hero Form`
               
               {/* Left Side: Hero Content */}
               <div className="space-y-8">
-                {/* Flipped: Tagline First (Bigger) */}
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight" style={{ color: '#ffffffff', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}>
-                  Commercial insurance that moves as fast as you do.
+                {/* Gold Label */}
+                <p className="text-lg sm:text-xl md:text-2xl font-semibold tracking-wide" style={{ color: '#CC9F54', textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)' }}>
+                  Commercial Insurance &amp; Risk Management Solutions
+                </p>
+
+                {/* Large Display Text */}
+                <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight" style={{ color: '#ffffff', textShadow: '2px 2px 8px rgba(0, 0, 0, 0.8)' }}>
+                  Driven by discipline and rooted in family, we partner with the businesses that move, build, make, and serve their communities.
                 </h1>
-       
-                {/* Company Name Second (Smaller, Orange) */}
-                <h2 className="text-2xl sm:text-3xl md:text-4xl font-serif font-semibold" style={{ color: '#CC9F54', textShadow: '1px 1px 4px rgba(0, 0, 0, 0.7)' }}>
-                  Moxie Risk Partners
-                </h2>
-                
-                {/* Updated Description */}
-<p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)' }}>
-  Specialized commercial insurance and risk management solutions.
-</p>
+
+                {/* Supporting Line */}
+                <p className="text-lg md:text-xl text-white leading-relaxed max-w-2xl" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.8)' }}>
+                  Coverage built for trucking, construction, manufacturing, nonprofits, and public entities.
+                </p>
                 
                 {/* Call to Action Buttons */}
                 <div className="flex flex-col sm:flex-row gap-4">
