@@ -287,14 +287,28 @@ return (
         {/* Hero background */}
         <div className="absolute inset-0 bg-black" />
 
-        {/* Transparent hero graphic over the black (35% transparent = 65% opacity) */}
+        {/* Desktop: Video background */}
+        <div className="hidden md:block absolute inset-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+            style={{ filter: 'brightness(0.4)' }}
+          >
+            <source src="/hero5.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        {/* Mobile: Static image fallback */}
         <img
           src="/images/herosample_1.png"
           alt=""
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20"
+          className="md:hidden pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20"
         />
-        
+
         {/* Subtle gold atmosphere */}
         <div
           className="absolute inset-0 pointer-events-none"
@@ -330,7 +344,8 @@ return (
                   }}
                 />
 
-                <p
+                {/* Small gold label: now the H1 for Google */}
+                <h1
                   className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em]"
                   style={{
                     color: '#D9B66E',
@@ -338,13 +353,13 @@ return (
                   }}
                 >
                   Commercial Insurance &amp; Risk Management
-                </p>
+                </h1>
               </div>
 
-              {/* Main headline */}
+              {/* Big headline: same look, now a <p> */}
               <div className="space-y-5">
 
-                <h1
+                <p
                   className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.04] tracking-tight"
                   style={{
                     color: '#F8F6F1',
@@ -356,7 +371,7 @@ return (
                   <span style={{ color: '#D9AE60' }}>
                     We stay one step ahead.
                   </span>
-                </h1>
+                </p>
 
               </div>
 
@@ -410,26 +425,29 @@ return (
 
             {/* RIGHT SIDE: supporting copy */}
             <div className="flex flex-col justify-center gap-8 lg:pl-6">
-              <p
-                className="text-lg md:text-xl leading-relaxed"
-                style={{
-                  color: 'rgba(255,255,255,0.90)',
-                  textShadow: '1px 1px 4px rgba(0,0,0,0.5)'
-                }}
-              >
-                Coverage built for trucking, construction, manufacturing,
-                nonprofits, and public entities.
-              </p>
-
-              <div
-                className="border-l-2 pl-5 py-1"
-                style={{ borderColor: '#CC9F54' }}
-              >
-                <p className="text-white/85 text-base md:text-lg leading-relaxed">
-                  Driven by discipline and rooted in family, we bring a
-                  personal, proactive approach to protecting the businesses
-                  that move, build, make, and serve our communities.
+              <div className="rounded-xl bg-black/50 backdrop-blur-sm p-6 md:p-8 space-y-6">
+                <p
+                  className="text-lg md:text-xl leading-relaxed text-white font-medium"
+                  style={{
+                    textShadow: '1px 1px 6px rgba(0,0,0,0.8)'
+                  }}
+                >
+                  Coverage built for trucking, construction, manufacturing,
+                  nonprofits, and public entities.
                 </p>
+
+                <div
+                  className="border-l-2 pl-5 py-1"
+                  style={{ borderColor: '#CC9F54' }}
+                >
+                  <p className="text-white/90 text-base md:text-lg leading-relaxed"
+                    style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}
+                  >
+                    Driven by discipline and rooted in family, we bring a
+                    personal, proactive approach to protecting the businesses
+                    that move, build, make, and serve our communities.
+                  </p>
+                </div>
               </div>
             </div>
 

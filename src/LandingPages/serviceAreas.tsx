@@ -377,23 +377,19 @@ const ServiceAreas: React.FC = () => {
         </div>
 
         {/* Bottom CTA */}
-        <div className={`mt-12 sm:mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-400`}>
-          <div className="relative overflow-hidden rounded-2xl border border-[#CC9F54]/30 bg-moxie-cream p-7 text-center shadow-2xl sm:p-12">
-            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full border border-[#CC9F54]/10" />
-            <div className="pointer-events-none absolute -right-10 -top-14 h-44 w-44 rounded-full border border-[#CC9F54]/10" />
+        <div className={`mt-12 sm:mt-16 text-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-400`}>
 
-            <div className="relative z-10">
               <div className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#CC9F54]">
-                Let's Start a Conversation
+                Let&apos;s Start a Conversation
               </div>
 
-              <h3 className="mb-4 text-2xl font-semibold leading-tight text-[#231F20] sm:text-3xl">
+              <h3 className="mb-4 text-2xl font-semibold leading-tight text-white sm:text-3xl">
                 Your Business Deserves
                 <span className="block text-[#CC9F54]">More Than a Policy.</span>
               </h3>
 
-              <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base">
-                Don't see your state listed? Reach out anyway. Let's talk about
+              <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-gray-400 sm:text-base">
+                Don&apos;t see your state listed? Reach out anyway. Let&apos;s talk about
                 your operation, understand your risks, and explore what options
                 may be available for your business.
               </p>
@@ -401,7 +397,7 @@ const ServiceAreas: React.FC = () => {
               <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
                 <a
                   href="tel:+15155817187"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-7 py-3.5 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D] hover:shadow-lg hover:shadow-[#CC9F54]/10"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-7 py-3.5 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D] hover:shadow-lg"
                 >
                   <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -411,7 +407,7 @@ const ServiceAreas: React.FC = () => {
 
                 <a
                   href="/contact-us"
-                  className="inline-flex items-center justify-center rounded-lg border border-[#231F20]/25 px-7 py-3.5 text-sm font-semibold text-[#231F20] transition-all hover:border-[#CC9F54] hover:bg-[#CC9F54]/10 hover:text-[#A87A32]"
+                  className="inline-flex items-center justify-center rounded-lg border border-white/25 px-7 py-3.5 text-sm font-semibold text-white transition-all hover:border-[#CC9F54] hover:text-[#CC9F54]"
                 >
                   Contact Us
                   <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -419,9 +415,8 @@ const ServiceAreas: React.FC = () => {
                   </svg>
                 </a>
               </div>
-            </div>
-          </div>
         </div>
+
       </div>
 
       {/* State Modal */}

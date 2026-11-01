@@ -305,69 +305,35 @@ const Overview: React.FC = () => {
             {/* Right: Brand Pillars */}
             <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
 
-              <div className="relative bg-[#171717] rounded-2xl p-8 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+              <div className="space-y-8">
 
-                {/* Decorative background elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 rounded-full border border-[#CC9F54]/10 translate-x-1/2 -translate-y-1/2"></div>
-                <div className="absolute top-0 right-0 w-48 h-48 rounded-full border border-[#CC9F54]/10 translate-x-1/2 -translate-y-1/2"></div>
-
-                <div className="relative z-10">
-
-                  <div className="mb-9">
-                    <p className="text-[#CC9F54] text-xs font-semibold uppercase tracking-[0.25em] mb-3">
-                      What We Stand For
-                    </p>
-                    <h3 className="text-2xl sm:text-3xl text-white font-semibold">
-                      Built on purpose.
-                      <span className="block text-[#CC9F54]">Driven by principle.</span>
-                    </h3>
+                {brandPillars.map((pillar) => (
+                  <div key={pillar.number} className="flex gap-4">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <svg className="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                    <div>
+                      <h4 className="text-gray-900 font-semibold text-lg mb-1">
+                        {pillar.title}
+                      </h4>
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        {pillar.description}
+                      </p>
+                    </div>
                   </div>
+                ))}
 
-                  <div className="space-y-0">
-                    {brandPillars.map((pillar, index) => (
-                      <div
-                        key={pillar.number}
-                        className={`flex gap-5 py-6 ${
-                          index !== brandPillars.length - 1
-                            ? 'border-b border-white/10'
-                            : ''
-                        }`}
-                      >
-
-                        <div className="flex-shrink-0">
-                          <div className="w-12 h-12 rounded-lg border border-[#CC9F54]/30 flex items-center justify-center text-[#CC9F54]">
-                            {pillar.icon}
-                          </div>
-                        </div>
-
-                        <div className="flex-1">
-                          <div className="flex items-center gap-3 mb-2">
-                            <span className="text-[#CC9F54] text-xs font-semibold tracking-widest">
-                              {pillar.number}
-                            </span>
-                            <h4 className="text-white font-semibold text-lg">
-                              {pillar.title}
-                            </h4>
-                          </div>
-                          <p className="text-gray-400 text-sm leading-relaxed">
-                            {pillar.description}
-                          </p>
-                        </div>
-
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="mt-8 pt-7 border-t border-white/10">
-                    <p className="text-white/90 text-sm leading-relaxed italic">
-                      "One In, All In."
-                    </p>
-                    <p className="text-[#CC9F54] text-xs uppercase tracking-[0.2em] mt-2 font-semibold">
-                      The Moxie Commitment
-                    </p>
-                  </div>
-
+                <div className="pt-6 border-t border-gray-200">
+                  <p className="text-gray-900 font-semibold text-lg">
+                    &quot;One In, All In.&quot;
+                  </p>
+                  <p className="text-[#B8893D] text-sm mt-1">
+                    The Moxie Commitment
+                  </p>
                 </div>
+
               </div>
             </div>
 
