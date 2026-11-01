@@ -280,9 +280,9 @@ Source: Homepage Hero Form`
 return (
   <>
     {/* Background Video/Image */}
-    <section id="hero-section" className="relative min-h-screen overflow-hidden">
+    <section id="hero-section" className="relative min-h-[100svh] overflow-hidden">
 
-      <div className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden">
+      <div className="absolute inset-0 z-0">
 
         {/* Hero background */}
         <div className="absolute inset-0 bg-black" />
@@ -305,26 +305,26 @@ return (
       </div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex items-center">
+      <div className="relative z-10 min-h-[100svh] flex items-center">
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
 
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
 
             {/* LEFT SIDE: MOXIE BRAND EXPERIENCE */}
-            <div className="space-y-8 lg:pr-4">
+            <div className="space-y-5 sm:space-y-8 lg:pr-4">
 
               {/* Brand logo */}
               <img
                 src="/sample_4.png"
                 alt="Moxie Risk Partners"
-                className="h-20 w-auto sm:h-24"
+                className="h-14 w-auto sm:h-20 md:h-24"
               />
 
               {/* Brand eyebrow */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <span
-                  className="h-px w-12 flex-shrink-0"
+                  className="h-px w-8 sm:w-12 flex-shrink-0"
                   style={{
                     background: 'linear-gradient(90deg, #CC9F54, rgba(204,159,84,0))'
                   }}
@@ -332,7 +332,7 @@ return (
 
                 {/* Small gold label: now the H1 for Google */}
                 <h1
-                  className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em]"
+                  className="text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em]"
                   style={{
                     color: '#D9B66E',
                     textShadow: '1px 1px 4px rgba(0,0,0,0.7)'
@@ -343,10 +343,9 @@ return (
               </div>
 
               {/* Big headline: same look, now a <p> */}
-              <div className="space-y-5">
-
+              <div>
                 <p
-                  className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.04] tracking-tight"
+                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.08] tracking-tight"
                   style={{
                     color: '#F8F6F1',
                     textShadow: '0 3px 24px rgba(0,0,0,0.5)'
@@ -358,20 +357,19 @@ return (
                     We stay one step ahead.
                   </span>
                 </p>
-
               </div>
 
               {/* Call to Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4 pt-1 sm:pt-2">
 
                 <a
                   href="/quote-form"
-                  className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-3 bg-[#CC9F54] hover:bg-[#DDB66F] text-[#171717] px-8 py-4 rounded-md text-base font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-3 bg-[#CC9F54] hover:bg-[#DDB66F] text-[#171717] px-6 sm:px-8 py-3.5 sm:py-4 rounded-md text-sm sm:text-base font-bold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 text-center"
                 >
-                  Let's Talk About Your Risk
+                  Let&apos;s Talk About Your Risk
 
                   <svg
-                    className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1"
+                    className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -387,10 +385,10 @@ return (
 
                 <a
                   href="tel:+15155817187"
-                  className="inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-3 border border-white/50 text-white hover:border-[#CC9F54] hover:text-[#D9B66E] px-8 py-4 rounded-md text-base font-semibold transition-all duration-300 text-center"
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 border border-white/50 text-white hover:border-[#CC9F54] hover:text-[#D9B66E] px-6 sm:px-8 py-3.5 sm:py-4 rounded-md text-sm sm:text-base font-semibold transition-all duration-300 text-center"
                 >
                   <svg
-                    className="w-5 h-5"
+                    className="w-4 h-4 sm:w-5 sm:h-5"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -410,10 +408,10 @@ return (
             </div>
 
             {/* RIGHT SIDE: supporting copy */}
-            <div className="flex flex-col justify-center gap-8 lg:pl-6">
-              <div className="rounded-xl bg-black/50 backdrop-blur-sm p-6 md:p-8 space-y-6">
+            <div className="flex flex-col justify-center gap-6 sm:gap-8 lg:pl-6">
+              <div className="rounded-xl bg-black/50 backdrop-blur-sm p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                 <p
-                  className="text-lg md:text-xl leading-relaxed text-white font-medium"
+                  className="text-base sm:text-lg md:text-xl leading-relaxed text-white font-medium"
                   style={{
                     textShadow: '1px 1px 6px rgba(0,0,0,0.8)'
                   }}
@@ -423,10 +421,10 @@ return (
                 </p>
 
                 <div
-                  className="border-l-2 pl-5 py-1"
+                  className="border-l-2 pl-4 sm:pl-5 py-1"
                   style={{ borderColor: '#CC9F54' }}
                 >
-                  <p className="text-white/90 text-base md:text-lg leading-relaxed"
+                  <p className="text-white/90 text-sm sm:text-base md:text-lg leading-relaxed"
                     style={{ textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}
                   >
                     Driven by discipline and rooted in family, we bring a

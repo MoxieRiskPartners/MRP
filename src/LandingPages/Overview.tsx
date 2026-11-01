@@ -381,7 +381,7 @@ const Overview: React.FC = () => {
                   className="group relative block"
                 >
                   {/* Image — full width on mobile, half on sm+ */}
-                  <div className={`relative overflow-hidden rounded-xl w-full sm:w-[55%] md:w-1/2 aspect-[16/10] sm:aspect-[4/3] ${isRight ? 'sm:ml-auto' : ''}`}>
+                  <div className={`relative overflow-hidden rounded-xl w-full sm:w-[50%] md:w-[45%] aspect-[16/10] sm:aspect-[4/3] ${isRight ? 'sm:ml-auto' : ''}`}>
                     <Image
                       src={industry.image}
                       alt={industry.title}
