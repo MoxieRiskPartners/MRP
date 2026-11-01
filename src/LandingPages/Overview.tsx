@@ -370,15 +370,50 @@ const Overview: React.FC = () => {
 
           </div>
 
-          {/* Industries Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {INDUSTRIES_DATA.map((industry, index) => (
-              <IndustryCard
-                key={industry.id}
-                industry={industry}
-                index={index}
-              />
-            ))}
+          {/* Industries Stacked */}
+          <div className="space-y-6 sm:space-y-10">
+            {INDUSTRIES_DATA.map((industry, index) => {
+              const isReversed = index % 2 === 1;
+              return (
+                <a
+                  key={industry.id}
+                  href={industry.href}
+                  className={`group relative block md:flex md:items-stretch ${isReversed ? 'md:flex-row-reverse' : ''}`}
+                >
+                  {/* Image */}
+                  <div className="relative overflow-hidden rounded-t-xl md:rounded-xl w-full md:w-[58%] flex-shrink-0 aspect-[4/3] sm:aspect-[16/10]">
+                    <Image
+                      src={industry.image}
+                      alt={industry.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 58vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      priority={index < 2}
+                    />
+                  </div>
+
+                  {/* White info card */}
+                  <div
+                    className={`bg-white rounded-b-xl md:rounded-xl p-5 sm:p-6 shadow-lg group-hover:shadow-xl transition-shadow relative z-10 flex flex-col justify-center md:w-[46%] ${
+                      isReversed ? 'md:mr-[-3rem]' : 'md:ml-[-3rem]'
+                    }`}
+                  >
+                    <h3 className="text-gray-900 font-semibold text-base sm:text-lg leading-tight mb-2">
+                      {industry.title}
+                    </h3>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                      {industry.description}
+                    </p>
+                    <span className="inline-flex items-center text-[#CC9F54] text-sm font-semibold group-hover:text-[#B8893D] transition-colors">
+                      Learn More
+                      <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </span>
+                  </div>
+                </a>
+              );
+            })}
           </div>
 
         </div>
