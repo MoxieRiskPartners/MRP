@@ -366,7 +366,7 @@ const ServiceAreas: React.FC = () => {
 
         {/* US Map — highlights the state found by the ZIP lookup.
             Breaks ~3in past the container on each side for a larger, fluid map. */}
-        <div className={`mb-16 -mx-[4in] ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
+        <div className={`mb-16 mx-0 sm:-mx-8 md:-mx-16 lg:-mx-24 xl:-mx-32 overflow-hidden ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
           <USMap
             highlightCode={foundState?.code ?? null}
             onStateSelect={(code) => {

@@ -370,43 +370,44 @@ const Overview: React.FC = () => {
 
           </div>
 
-          {/* Industries Stacked */}
-          <div className="space-y-6 sm:space-y-10">
+          {/* Industries Stacked — image left/right, card floating opposite */}
+          <div className="space-y-6 sm:space-y-10 lg:space-y-12">
             {INDUSTRIES_DATA.map((industry, index) => {
-              const isReversed = index % 2 === 1;
+              const isRight = index % 2 === 1;
               return (
                 <a
                   key={industry.id}
                   href={industry.href}
-                  className={`group relative block md:flex md:items-stretch ${isReversed ? 'md:flex-row-reverse' : ''}`}
+                  className="group relative block overflow-hidden"
                 >
-                  {/* Image */}
-                  <div className="relative overflow-hidden rounded-t-xl md:rounded-xl w-full md:w-[58%] flex-shrink-0 aspect-[4/3] sm:aspect-[16/10]">
+                  {/* Image — full width on mobile, half on sm+ */}
+                  <div className={`relative overflow-hidden rounded-xl w-full sm:w-[55%] md:w-1/2 aspect-[16/10] sm:aspect-[4/3] ${isRight ? 'sm:ml-auto' : ''}`}>
                     <Image
                       src={industry.image}
                       alt={industry.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, 58vw"
+                      sizes="(max-width: 640px) 100vw, 50vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                       priority={index < 2}
                     />
                   </div>
 
-                  {/* White info card */}
-                  <div
-                    className={`bg-white rounded-b-xl md:rounded-xl p-5 sm:p-6 shadow-lg group-hover:shadow-xl transition-shadow relative z-10 flex flex-col justify-center md:w-[46%] ${
-                      isReversed ? 'md:mr-[-3rem]' : 'md:ml-[-3rem]'
-                    }`}
-                  >
-                    <h3 className="text-gray-900 font-semibold text-base sm:text-lg leading-tight mb-2">
+                  {/* White card — below image on mobile, floating overlay on sm+ */}
+                  <div className={`
+                    bg-white p-4 sm:p-5 md:p-6 shadow-lg group-hover:shadow-xl transition-shadow z-10
+                    relative -mt-4 mx-3
+                    sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:mt-0 sm:mx-0 sm:w-[48%] md:w-[45%]
+                    ${isRight ? 'sm:left-[5%]' : 'sm:right-[5%]'}
+                  `}>
+                    <h3 className="text-gray-900 font-semibold text-sm sm:text-base leading-tight mb-1.5 sm:mb-2">
                       {industry.title}
                     </h3>
-                    <p className="text-gray-500 text-sm leading-relaxed mb-3">
+                    <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3">
                       {industry.description}
                     </p>
-                    <span className="inline-flex items-center text-[#CC9F54] text-sm font-semibold group-hover:text-[#B8893D] transition-colors">
+                    <span className="inline-flex items-center text-[#CC9F54] text-xs sm:text-sm font-semibold group-hover:text-[#B8893D] transition-colors">
                       Learn More
-                      <svg className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>

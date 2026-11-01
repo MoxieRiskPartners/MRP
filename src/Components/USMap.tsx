@@ -133,7 +133,7 @@ export default function USMap({ highlightCode, onStateSelect }: USMapProps = {})
 
   return (
     <div className="w-full">
-      <div className="h-[680px] w-full sm:h-[840px]">
+      <div className="h-[320px] w-full sm:h-[480px] md:h-[600px] lg:h-[740px] xl:h-[840px]">
         <Canvas
           camera={{ position: [0, 0, 1.4], fov: 45 }}
           gl={{ antialias: true }}
