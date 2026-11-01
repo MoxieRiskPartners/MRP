@@ -1,6 +1,8 @@
 "use client";
+
 import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
+import USMap from '@/Components/USMap';
 
 interface State {
   code: string;
@@ -60,25 +62,15 @@ const SUPPORTED_STATES: State[] = [
   { code: 'WY', name: 'Wyoming', region: 'West' }
 ];
 
-// Group states by region
-const REGIONS = {
-  'Northeast': SUPPORTED_STATES.filter(s => s.region === 'Northeast'),
-  'Southeast': SUPPORTED_STATES.filter(s => s.region === 'Southeast'),
-  'Midwest': SUPPORTED_STATES.filter(s => s.region === 'Midwest'),
-  'West': SUPPORTED_STATES.filter(s => s.region === 'West'),
-  'Southwest': SUPPORTED_STATES.filter(s => s.region === 'Southwest')
-};
-
 const ServiceAreas: React.FC = () => {
   const [zipCode, setZipCode] = useState('');
   const [foundState, setFoundState] = useState<State | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [searchPerformed, setSearchPerformed] = useState(false);
-  const [selectedRegion, setSelectedRegion] = useState<string>('all');
   const [isVisible, setIsVisible] = useState(false);
   const [isMounted, setIsMounted] = useState(false);
-  
+
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedState, setSelectedState] = useState<State | null>(null);
@@ -92,64 +84,63 @@ const ServiceAreas: React.FC = () => {
   // Array of popup images
   const popupImages = [
     '/images/popup.png',
-    '/images/popup2.png', 
+    '/images/popup2.png',
     '/images/popup3.png'
   ];
 
-  // Simple zip code to state lookup (simplified - in production you'd use a real API)
+  // Simple ZIP code to state lookup
   const zipToState = (zip: string): State | null => {
     const zipNum = parseInt(zip);
-    
-    // Simplified zip code ranges (this would be more comprehensive in production)
+
     const zipRanges: { [key: string]: [number, number][] } = {
-      'AL': [[35000, 36999]],
-      'AZ': [[85000, 86999]],
-      'AR': [[71600, 72999]],
-      'CA': [[90000, 96199]], 
-      'CO': [[80000, 81999]],
-      'CT': [[6000, 6999]],
-      'DE': [[19700, 19999]],
-      'FL': [[32000, 34999]],
-      'GA': [[30000, 31999], [39800, 39999]],
-      'ID': [[83200, 83999]],
-      'IL': [[60000, 62999]],
-      'IN': [[46000, 47999]],
-      'IA': [[50000, 52999]],
-      'KS': [[66000, 67999]],
-      'KY': [[40000, 42999]],
-      'LA': [[70000, 71599]],
-      'ME': [[3900, 4999]],
-      'MD': [[20600, 21999]],
-      'MA': [[1000, 2799]],
-      'MI': [[48000, 49999]],
-      'MN': [[55000, 56799]],
-      'MS': [[38600, 39799]],
-      'MO': [[63000, 65999]],
-      'MT': [[59000, 59999]],
-      'NE': [[68000, 69999]],
-      'NV': [[89000, 89999]],
-      'NH': [[3000, 3899]],
-      'NJ': [[7000, 8999]],
-      'NM': [[87000, 88999]],
-      'NY': [[10000, 14999]],
-      'NC': [[27000, 28999]],
-      'ND': [[58000, 58999]],
-      'OH': [[43000, 45999]],
-      'OK': [[73000, 74999]],
-      'OR': [[97000, 97999]],
-      'PA': [[15000, 19699]],
-      'RI': [[2800, 2999]],
-      'SC': [[29000, 29999]],
-      'SD': [[57000, 57999]],
-      'TN': [[37000, 38599]],
-      'TX': [[75000, 79999], [73301, 73399], [77000, 77999]],
-      'UT': [[84000, 84999]],
-      'VT': [[5000, 5999]],
-      'VA': [[20100, 20199], [22000, 24699]],
-      'WA': [[98000, 99499]],
-      'WV': [[24700, 26999]],
-      'WI': [[53000, 54999]],
-      'WY': [[82000, 83199]]
+      AL: [[35000, 36999]],
+      AZ: [[85000, 86999]],
+      AR: [[71600, 72999]],
+      CA: [[90000, 96199]],
+      CO: [[80000, 81999]],
+      CT: [[6000, 6999]],
+      DE: [[19700, 19999]],
+      FL: [[32000, 34999]],
+      GA: [[30000, 31999], [39800, 39999]],
+      ID: [[83200, 83999]],
+      IL: [[60000, 62999]],
+      IN: [[46000, 47999]],
+      IA: [[50000, 52999]],
+      KS: [[66000, 67999]],
+      KY: [[40000, 42999]],
+      LA: [[70000, 71599]],
+      ME: [[3900, 4999]],
+      MD: [[20600, 21999]],
+      MA: [[1000, 2799]],
+      MI: [[48000, 49999]],
+      MN: [[55000, 56799]],
+      MS: [[38600, 39799]],
+      MO: [[63000, 65999]],
+      MT: [[59000, 59999]],
+      NE: [[68000, 69999]],
+      NV: [[89000, 89999]],
+      NH: [[3000, 3899]],
+      NJ: [[7000, 8999]],
+      NM: [[87000, 88999]],
+      NY: [[10000, 14999]],
+      NC: [[27000, 28999]],
+      ND: [[58000, 58999]],
+      OH: [[43000, 45999]],
+      OK: [[73000, 74999]],
+      OR: [[97000, 97999]],
+      PA: [[15000, 19699]],
+      RI: [[2800, 2999]],
+      SC: [[29000, 29999]],
+      SD: [[57000, 57999]],
+      TN: [[37000, 38599]],
+      TX: [[75000, 79999], [73301, 73399], [77000, 77999]],
+      UT: [[84000, 84999]],
+      VT: [[5000, 5999]],
+      VA: [[20100, 20199], [22000, 24699]],
+      WA: [[98000, 99499]],
+      WV: [[24700, 26999]],
+      WI: [[53000, 54999]],
+      WY: [[82000, 83199]]
     };
 
     for (const [stateCode, ranges] of Object.entries(zipRanges)) {
@@ -159,7 +150,7 @@ const ServiceAreas: React.FC = () => {
         }
       }
     }
-    
+
     return null;
   };
 
@@ -173,7 +164,7 @@ const ServiceAreas: React.FC = () => {
     setError('');
     setSearchPerformed(true);
 
-    // Simulate API delay
+    // Preserve existing simulated lookup delay
     await new Promise(resolve => setTimeout(resolve, 800));
 
     const state = zipToState(zipCode);
@@ -183,7 +174,7 @@ const ServiceAreas: React.FC = () => {
       setError('');
     } else {
       setFoundState(null);
-  setError("Sorry, we don't currently provide coverage in this area. Contact us to discuss options.");
+      setError("Sorry, we don't currently provide coverage in this area. Contact us to discuss options.");
     }
 
     setIsLoading(false);
@@ -198,7 +189,6 @@ const ServiceAreas: React.FC = () => {
   const handleStateClick = (state: State) => {
     setSelectedState(state);
     setIsModalOpen(true);
-    // Cycle through images (0, 1, 2, then back to 0)
     setImageIndex(prev => (prev + 1) % 3);
   };
 
@@ -207,327 +197,368 @@ const ServiceAreas: React.FC = () => {
     setSelectedState(null);
   };
 
-  const filteredStates = selectedRegion === 'all' 
-    ? SUPPORTED_STATES 
-    : SUPPORTED_STATES.filter(state => state.region === selectedRegion);
-
   return (
-    <section className="py-12 sm:py-20 bg-gradient-to-br from-gray-50 via-white to-[#FBF5EB]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Header - Mobile optimized */}
-        <div className={`text-center max-w-4xl mx-auto mb-12 sm:mb-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-gray-900 mb-4 sm:mb-6 leading-tight">
-            Find the Coverage You Need
+    <section className="relative overflow-hidden bg-moxie-ink py-16 sm:py-24">
+      {/* Ambient background details */}
+      <div className="pointer-events-none absolute inset-0 opacity-30">
+        <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#CC9F54]/10 blur-3xl" />
+        <div className="absolute bottom-0 -left-40 h-96 w-96 rounded-full bg-[#CC9F54]/10 blur-3xl" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        {/* Header and ZIP search */}
+        <div className={`mx-auto mb-16 max-w-4xl text-center ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+          <div className="mb-5 inline-flex items-center gap-3">
+            <span className="h-px w-8 bg-[#CC9F54]" />
+            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#CC9F54]">
+              Moxie Risk Partners
+            </span>
+            <span className="h-px w-8 bg-[#CC9F54]" />
+          </div>
+
+          <h2 className="mb-6 text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+            Coverage That Goes
+            <span className="block text-[#CC9F54]">Where Business Takes You.</span>
           </h2>
-          <p className="text-lg sm:text-xl text-gray-600 mb-6 sm:mb-8 px-2">
-            Enter your zip code to discover available commercial insurance options in your area
+
+          <p className="mx-auto mb-10 max-w-2xl text-base leading-relaxed text-gray-400 sm:text-lg">
+            Your business doesn't operate within boundaries. Neither should your
+            risk management strategy. Explore the areas we serve and connect with
+            a team that puts your interests first.
           </p>
-          
-          {/* Mobile-friendly Zip Code Search */}
-          <div className="max-w-md mx-auto px-2">
-            <div className="flex flex-col sm:flex-row gap-3">
-              <div className="flex-1">
+
+          {/* ZIP Search Panel */}
+          <div className="mx-auto max-w-2xl rounded-2xl border border-[#231F20]/10 bg-moxie-cream p-5 shadow-2xl sm:p-8">
+            <div className="mb-5 text-left">
+              <p className="mb-1 text-sm font-semibold uppercase tracking-[0.16em] text-[#CC9F54]">
+                Check your location
+              </p>
+              <p className="text-sm text-gray-600">
+                Enter your ZIP code to explore service availability.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <div className="relative flex-1">
+                <div className="pointer-events-none absolute inset-y-0 left-4 flex items-center text-[#CC9F54]">
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M12 21s7-4.5 7-11a7 7 0 10-14 0c0 6.5 7 11 7 11z" />
+                    <circle cx="12" cy="10" r="2.5" strokeWidth={1.7} />
+                  </svg>
+                </div>
+
                 <input
                   type="text"
-                  placeholder="Enter your zip code"
+                  inputMode="numeric"
+                  autoComplete="postal-code"
+                  placeholder="Enter 5-digit ZIP code"
                   value={zipCode}
                   onChange={(e) => {
                     const value = e.target.value.replace(/\D/g, '').slice(0, 5);
                     setZipCode(value);
                     setError('');
+
                     if (value === '') {
                       setSearchPerformed(false);
                       setFoundState(null);
                     }
                   }}
-                  onKeyPress={handleKeyPress}
-                  className="w-full px-4 py-4 sm:py-3 border-2 border-gray-300 rounded-lg focus:border-[#CC9F54] focus:ring-2 focus:ring-[#CC9F54]/20 outline-none transition-all text-lg text-gray-900 placeholder-gray-500"
+                  onKeyDown={handleKeyPress}
+                  className="w-full rounded-lg border border-white/15 bg-moxie-ink py-4 pl-12 pr-4 text-base text-white outline-none transition-all placeholder:text-gray-500 focus:border-[#CC9F54] focus:ring-2 focus:ring-[#CC9F54]/20"
                   maxLength={5}
                   suppressHydrationWarning
                 />
               </div>
+
               <button
                 onClick={handleZipSearch}
                 disabled={isLoading || zipCode.length !== 5}
-                className="w-full sm:w-auto px-6 py-4 sm:py-3 bg-[#CC9F54] hover:bg-[#B8893D] disabled:bg-gray-400 text-moxie-black font-bold rounded-lg transition-colors text-lg"
+                className="flex min-h-[54px] items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#171717] transition-all duration-300 hover:bg-[#DDBB7D] hover:shadow-lg hover:shadow-[#CC9F54]/10 disabled:cursor-not-allowed disabled:bg-gray-600 disabled:text-gray-300"
                 suppressHydrationWarning
               >
                 {isLoading ? (
-                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin mx-auto"></div>
+                  <>
+                    <span className="h-5 w-5 animate-spin rounded-full border-2 border-[#171717] border-t-transparent" />
+                    <span>Checking</span>
+                  </>
                 ) : (
-                  'Search'
+                  <>
+                    Check Area
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7 7 7-7 7" />
+                    </svg>
+                  </>
                 )}
               </button>
             </div>
-            
-            {/* Mobile-optimized Results */}
-      {/* Mobile-optimized Results */}
-{searchPerformed && (
-  <div className="mt-6 p-4 sm:p-6 bg-white rounded-xl shadow-lg border-l-4 border-[#CC9F54]">
-    {foundState ? (
-      <div className="text-center">
-        <div className="text-green-600 text-2xl mb-2">✓</div>
-        <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">
-          Great news! We serve {foundState.name}
-        </h3>
-        <p className="text-sm sm:text-base text-gray-600 mb-4">
-          Full commercial insurance coverage available in the {foundState.region} region
-        </p>
-        <div className="flex flex-col gap-3 justify-center">
-          <Link href="/quote-form" className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
-            Get Quote Now
-          </Link>
-          <a href="tel:+15155817187" className="border-2 border-[#CC9F54] text-[#B8893D] hover:bg-[#FBF5EB] px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
-            Contact Local Rep
-          </a>
-        </div>
-      </div>
-    ) : error && (
-      <div className="text-center">
-        <div className="text-amber-600 text-2xl mb-2">⚠</div>
-        <p className="text-sm sm:text-base text-gray-700 mb-4">{error}</p>
-        <a href="tel:+15155817187" className="bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black px-6 py-3 rounded-lg font-semibold transition-colors text-sm sm:text-base">
-          Contact Us Anyway
-        </a>
-      </div>
-    )}
-  </div>
-)}
+
+            {/* Search Results */}
+            {searchPerformed && (
+              <div className="mt-6 overflow-hidden rounded-xl border border-white/10 bg-moxie-ink p-5 text-left sm:p-6">
+                {foundState ? (
+                  <div>
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#CC9F54]/30 bg-[#CC9F54]/10 text-[#CC9F54]">
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-widest text-[#CC9F54]">
+                          Location found
+                        </p>
+                        <h3 className="text-lg font-semibold text-white">
+                          {foundState.name}
+                        </h3>
+                      </div>
+                    </div>
+
+                    <p className="mb-5 text-sm leading-relaxed text-gray-400">
+                      Your ZIP code falls within our listed {foundState.region} service area.
+                      Contact our team to discuss your business and confirm coverage options.
+                    </p>
+
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      <Link
+                        href="/quote-form"
+                        className="flex flex-1 items-center justify-center rounded-lg bg-[#CC9F54] px-5 py-3 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D]"
+                      >
+                        Request a Quote
+                      </Link>
+                      <a
+                        href="tel:+15155817187"
+                        className="flex flex-1 items-center justify-center rounded-lg border border-[#CC9F54]/50 px-5 py-3 text-sm font-semibold text-[#CC9F54] transition-all hover:bg-[#CC9F54]/10"
+                      >
+                        Call Our Team
+                      </a>
+                    </div>
+                  </div>
+                ) : error && (
+                  <div className="text-center sm:text-left">
+                    <div className="mb-3 flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border border-[#CC9F54]/30 bg-[#CC9F54]/10 text-[#CC9F54]">
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 9v4m0 4h.01M10.3 3.86l-8.1 14.02A2 2 0 003.93 21h16.14a2 2 0 001.73-3.12L13.7 3.86a2 2 0 00-3.46 0z" />
+                        </svg>
+                      </div>
+                      <p className="font-semibold text-white">Let's talk about your location.</p>
+                    </div>
+
+                    <p className="mb-5 text-sm leading-relaxed text-gray-400">{error}</p>
+
+                    <a
+                      href="tel:+15155817187"
+                      className="inline-flex items-center justify-center rounded-lg bg-[#CC9F54] px-6 py-3 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D]"
+                    >
+                      Contact Our Team
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <p className="mt-4 text-xs text-gray-600">
+              ZIP lookup is a preliminary service-area guide. Coverage is subject to confirmation.
+            </p>
           </div>
         </div>
 
-        {/* States Grid Section - Mobile optimized */}
-        <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
-          <div className="bg-white rounded-2xl shadow-xl p-4 sm:p-8 border-t-4 border-[#CC9F54]">
-            <div className="text-center mb-6 sm:mb-8">
-              <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 mb-3 sm:mb-4">
-                Commercial Insurance Available Nationwide
+        {/* US Map — highlights the state found by the ZIP lookup.
+            Breaks ~3in past the container on each side for a larger, fluid map. */}
+        <div className={`mb-16 -mx-[4in] ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
+          <USMap
+            highlightCode={foundState?.code ?? null}
+            onStateSelect={(code) => {
+              const st = SUPPORTED_STATES.find((s) => s.code === code);
+              if (st) handleStateClick(st);
+            }}
+          />
+        </div>
+
+        {/* Bottom CTA */}
+        <div className={`mt-12 sm:mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-400`}>
+          <div className="relative overflow-hidden rounded-2xl border border-[#CC9F54]/30 bg-moxie-cream p-7 text-center shadow-2xl sm:p-12">
+            <div className="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full border border-[#CC9F54]/10" />
+            <div className="pointer-events-none absolute -right-10 -top-14 h-44 w-44 rounded-full border border-[#CC9F54]/10" />
+
+            <div className="relative z-10">
+              <div className="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-[#CC9F54]">
+                Let's Start a Conversation
+              </div>
+
+              <h3 className="mb-4 text-2xl font-semibold leading-tight text-[#231F20] sm:text-3xl">
+                Your Business Deserves
+                <span className="block text-[#CC9F54]">More Than a Policy.</span>
               </h3>
-              <p className="text-sm sm:text-base text-gray-600 mb-4 sm:mb-6 px-2">
-                We proudly serve businesses across {SUPPORTED_STATES.length} states with specialized regional expertise
+
+              <p className="mx-auto mb-8 max-w-2xl text-sm leading-relaxed text-gray-600 sm:text-base">
+                Don't see your state listed? Reach out anyway. Let's talk about
+                your operation, understand your risks, and explore what options
+                may be available for your business.
               </p>
-              
-              {/* Mobile-friendly Region Filter */}
-              <div className="mb-6 sm:mb-8">
-                {/* Mobile: Dropdown select */}
-                <div className="sm:hidden">
-                  <select
-                    value={selectedRegion}
-                    onChange={(e) => setSelectedRegion(e.target.value)}
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-[#CC9F54] focus:ring-2 focus:ring-[#CC9F54]/20 outline-none transition-all text-gray-900 bg-white"
-                    suppressHydrationWarning
-                  >
-                    <option value="all">All States ({SUPPORTED_STATES.length})</option>
-                    {Object.entries(REGIONS).map(([region, states]) => (
-                      <option key={region} value={region}>
-                        {region} ({states.length})
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                
-                {/* Desktop: Button tabs (unchanged) */}
-                <div className="hidden sm:flex flex-wrap justify-center gap-2">
-                  <button
-                    onClick={() => setSelectedRegion('all')}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                      selectedRegion === 'all'
-                        ? 'bg-[#CC9F54] text-moxie-black'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                    }`}
-                    suppressHydrationWarning
-                  >
-                    All States ({SUPPORTED_STATES.length})
-                  </button>
-                  {Object.entries(REGIONS).map(([region, states]) => (
-                    <button
-                      key={region}
-                      onClick={() => setSelectedRegion(region)}
-                      className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                        selectedRegion === region
-                          ? 'bg-[#CC9F54] text-moxie-black'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                      }`}
-                      suppressHydrationWarning
-                    >
-                      {region} ({states.length})
-                    </button>
-                  ))}
-                </div>
+
+              <div className="flex flex-col justify-center gap-3 sm:flex-row sm:gap-4">
+                <a
+                  href="tel:+15155817187"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-7 py-3.5 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D] hover:shadow-lg hover:shadow-[#CC9F54]/10"
+                >
+                  <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  Call (515) 581-7187
+                </a>
+
+                <a
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#231F20]/25 px-7 py-3.5 text-sm font-semibold text-[#231F20] transition-all hover:border-[#CC9F54] hover:bg-[#CC9F54]/10 hover:text-[#A87A32]"
+                >
+                  Contact Us
+                  <svg className="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h14m-7-7 7 7-7 7" />
+                  </svg>
+                </a>
               </div>
             </div>
-
-            {/* Mobile-optimized States Grid */}
-            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-2 sm:gap-3">
-              {filteredStates.map((state, index) => (
-                <div
-                  key={state.code}
-                  onClick={() => handleStateClick(state)}
-                  className="group bg-gray-50 hover:bg-[#FBF5EB] border hover:border-[#E5CFA5] rounded-lg p-2 sm:p-3 text-center transition-all duration-200 cursor-pointer transform hover:-translate-y-1 hover:shadow-md"
-                  style={{ animationDelay: `${index * 20}ms` }}
-                >
-                  <div className="text-sm sm:text-lg font-bold text-gray-900 group-hover:text-[#B8893D] transition-colors">
-                    {state.code}
-                  </div>
-                  <div className="text-xs text-gray-600 group-hover:text-[#CC9F54] transition-colors mt-1 leading-tight">
-                    {state.name}
-                  </div>
-                  <div className="text-xs text-gray-400 group-hover:text-[#D4B06B] transition-colors hidden sm:block">
-                    {state.region}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-       {/* Mobile-optimized CTA Section */}
-        <div className={`text-center mt-12 sm:mt-16 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-400`}>
-          <div className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] rounded-2xl p-6 sm:p-8 text-moxie-black">
-            <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">
-              Don't see your state? Let's talk anyway.
-            </h3>
-            <p className="text-base sm:text-lg mb-4 sm:mb-6 text-[#F0E2C8] px-2">
-              Our coverage is expanding rapidly. Contact us to discuss your commercial insurance needs.
-            </p>
-            <div className="flex flex-col gap-3 sm:flex-row sm:gap-4 justify-center">
-              <a 
-                 href="tel:+15155817187"
-                className="bg-white text-[#B8893D] hover:bg-gray-100 px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base"
-              >
-                Call (515) 581-7187
-              </a>
-            <a 
-  href="/contact-us"
-  className="border-2 border-white text-white hover:bg-white hover:text-[#B8893D] px-6 sm:px-8 py-3 rounded-lg font-bold transition-colors text-sm sm:text-base"
->
-  Contact Us Today
-</a>
-            </div>
           </div>
         </div>
       </div>
 
-      {/* Responsive Modal - Works for both Mobile and Desktop */}
+      {/* State Modal */}
       {isModalOpen && selectedState && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 z-50 flex items-center justify-center p-2 sm:p-4">
-          <div className="bg-white rounded-2xl max-w-4xl w-full mx-2 sm:mx-4 overflow-hidden shadow-2xl transform transition-all animate-modal-appear max-h-[90vh] overflow-y-auto">
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-3 backdrop-blur-sm sm:p-6"
+          onClick={closeModal}
+        >
+          <div
+            className="relative mx-auto max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-white/10 bg-moxie-panel shadow-2xl animate-modal-appear"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Close Button */}
             <button
               onClick={closeModal}
-              className="absolute top-2 right-2 sm:top-4 sm:right-4 z-10 bg-white bg-opacity-90 hover:bg-opacity-100 rounded-full p-2 transition-all shadow-lg"
+              aria-label="Close modal"
+              className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-moxie-ink/90 text-white shadow-lg transition-all hover:border-[#CC9F54] hover:text-[#CC9F54] sm:right-5 sm:top-5"
             >
-              <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            {/* Responsive Layout: Vertical on mobile, Horizontal on desktop */}
             <div className="flex flex-col md:flex-row">
               {/* Image Section */}
-              <div className="h-48 sm:h-64 md:w-2/5 md:h-auto relative">
-                <img 
+              <div className="relative h-52 overflow-hidden sm:h-72 md:min-h-[570px] md:w-2/5">
+                <img
                   src={popupImages[imageIndex]}
                   alt={`Commercial insurance in ${selectedState.name}`}
-                  className="w-full h-full object-cover"
+                  className="h-full w-full object-cover"
                 />
-                {/* State Badge Overlay */}
-                <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
-                  <div className="bg-[#CC9F54] text-moxie-black px-3 py-1 sm:px-4 sm:py-2 rounded-full shadow-lg">
-                    <span className="font-bold text-sm sm:text-lg">{selectedState.code}</span>
-                  </div>
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+
+                <div className="absolute bottom-5 left-5">
+                  <span className="mb-2 inline-block rounded-full border border-[#CC9F54]/50 bg-moxie-ink/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#CC9F54] backdrop-blur-sm">
+                    {selectedState.region} Region
+                  </span>
+                  <p className="text-3xl font-semibold text-white">
+                    {selectedState.code}
+                  </p>
+                  <p className="text-sm text-gray-200">{selectedState.name}</p>
                 </div>
-                {/* Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
               </div>
 
               {/* Content Section */}
-              <div className="p-4 sm:p-6 md:w-3/5 md:p-10 flex flex-col justify-center">
-                {/* Header */}
-                <div className="mb-4 sm:mb-6">
-                  <div className="inline-flex items-center px-2 py-1 sm:px-3 sm:py-1 bg-[#F0E2C8] text-[#9A7030] rounded-full text-xs sm:text-sm font-medium mb-2 sm:mb-3">
-                    <svg className="w-3 h-3 sm:w-4 sm:h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    {selectedState.region} Region
+              <div className="flex flex-col justify-center p-6 sm:p-8 md:w-3/5 md:p-10">
+                <div className="mb-6">
+                  <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#CC9F54]">
+                    Moxie Risk Partners
                   </div>
-                  
-                  <h3 className="text-2xl sm:text-3xl font-semibold text-gray-900 mb-2 sm:mb-3">
-                    Get Started in {selectedState.name}
+
+                  <h3 className="mb-4 text-2xl font-semibold leading-tight text-white sm:text-3xl">
+                    Let's Talk Business in {selectedState.name}.
                   </h3>
-                  
-                  <p className="text-sm sm:text-lg text-gray-600 leading-relaxed">
-                    Professional commercial insurance coverage with specialized expertise for businesses in {selectedState.name}.
+
+                  <p className="text-sm leading-relaxed text-gray-400 sm:text-base">
+                    Professional commercial insurance guidance for businesses
+                    operating in {selectedState.name}. Let's understand your
+                    operation, identify your exposures, and explore coverage
+                    options that make sense for your business.
                   </p>
                 </div>
 
                 {/* Benefits */}
-                <div className="space-y-2 sm:space-y-3 mb-6 sm:mb-8">
-                  <div className="flex items-start">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5 mr-2 sm:mr-3 flex-shrink-0">
-                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                <div className="mb-8 space-y-4">
+                  {[
+                    {
+                      title: 'Coverage Built Around Your Business',
+                      description: 'Commercial insurance solutions tailored to your operation and industry.'
+                    },
+                    {
+                      title: 'Industry-Focused Guidance',
+                      description: `Thoughtful insight into the risks and opportunities businesses face in the ${selectedState.region} region.`
+                    },
+                    {
+                      title: 'A Team in Your Corner',
+                      description: 'Direct communication and support when you need answers.'
+                    }
+                  ].map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-[#CC9F54]/30 bg-[#CC9F54]/10">
+                        <svg className="h-3.5 w-3.5 text-[#CC9F54]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+
+                      <div>
+                        <p className="text-sm font-semibold text-white sm:text-base">
+                          {benefit.title}
+                        </p>
+                        <p className="mt-1 text-xs leading-relaxed text-gray-400 sm:text-sm">
+                          {benefit.description}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">Comprehensive Coverage</span>
-                      <p className="text-gray-600 text-xs sm:text-sm">Full commercial insurance solutions tailored to your industry</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5 mr-2 sm:mr-3 flex-shrink-0">
-                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">Local {selectedState.region} Expertise</span>
-                      <p className="text-gray-600 text-xs sm:text-sm">Regional specialists who understand your market</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <div className="w-4 h-4 sm:w-5 sm:h-5 bg-green-100 rounded-full flex items-center justify-center mt-0.5 mr-2 sm:mr-3 flex-shrink-0">
-                      <svg className="w-2 h-2 sm:w-3 sm:h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                    <div>
-                      <span className="font-semibold text-gray-800 text-sm sm:text-base">Quote Assistance</span>
-                      <p className="text-gray-600 text-xs sm:text-sm">Help with quotes and policy questions</p>
-                    </div>
-                  </div>
+                  ))}
                 </div>
 
-                {/* CTA Buttons */}
-                <div className="flex flex-col sm:flex-row gap-3">
-              <Link href="/quote-form" className="flex-1 bg-[#CC9F54] hover:bg-[#B8893D] text-moxie-black py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center shadow-lg hover:shadow-xl text-sm sm:text-base">
-  <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-  </svg>
-  Get Quote Now
-</Link>
-            <a href="tel:+15155817187" className="flex-1 border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white py-3 px-4 sm:px-6 rounded-lg font-bold transition-colors flex items-center justify-center text-sm sm:text-base">
-  <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-  </svg>
-  Call Expert
-</a>
+                {/* Modal CTA */}
+                <div className="flex flex-col gap-3 sm:flex-row">
+                  <Link
+                    href="/quote-form"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-5 py-3.5 text-sm font-bold text-[#171717] shadow-lg transition-all hover:bg-[#DDBB7D]"
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Request a Quote
+                  </Link>
+
+                  <a
+                    href="tel:+15155817187"
+                    className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 px-5 py-3.5 text-sm font-semibold text-white transition-all hover:border-[#CC9F54] hover:bg-[#CC9F54]/10 hover:text-[#CC9F54]"
+                  >
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    Call Our Team
+                  </a>
                 </div>
+
+                <p className="mt-5 text-center text-[11px] leading-relaxed text-gray-500 sm:text-left">
+                  Coverage availability, eligibility, and terms are subject to review and confirmation.
+                </p>
               </div>
             </div>
           </div>
         </div>
       )}
 
+      {/* Animations */}
       <style jsx>{`
         @keyframes fade-in-up {
           from {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(24px);
           }
           to {
             opacity: 1;
@@ -536,7 +567,7 @@ const ServiceAreas: React.FC = () => {
         }
 
         .animate-fade-in-up {
-          animation: fade-in-up 0.6s ease-out forwards;
+          animation: fade-in-up 0.7s ease-out forwards;
         }
 
         .delay-200 {
@@ -547,10 +578,28 @@ const ServiceAreas: React.FC = () => {
           animation-delay: 0.4s;
         }
 
+        @keyframes modal-appear {
+          from {
+            opacity: 0;
+            transform: translateY(12px) scale(0.98);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        .animate-modal-appear {
+          animation: modal-appear 0.25s ease-out forwards;
+        }
+
         @media (prefers-reduced-motion: reduce) {
-          * {
+          *,
+          *::before,
+          *::after {
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
           }
         }
       `}</style>

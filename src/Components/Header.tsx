@@ -100,7 +100,7 @@ const Header = () => {
               aria-label="Go to homepage"
             >
               <img
-                src="/sample_logo_2.png"
+                src="/ear_logo.png"
                 alt="Moxie Risk Partners"
                 className="h-14 w-auto sm:h-16"
               />

@@ -24,6 +24,11 @@
   --color-moxie-gold: #CC9F54;
   --color-moxie-cream: #F7F4EE;
 
+  /* Dark UI surfaces (used by the Service Areas section and 3D map).
+     moxie-ink = section backdrop / inset fields; moxie-panel = raised cards. */
+  --color-moxie-ink: #111315;
+  --color-moxie-panel: #1B1E20;
+
   /* Gold scale built around Moxie Gold (#CC9F54 = gold-500).
      Use gold-900 for small gold text on white (passes contrast). */
   --color-gold-50:  #FBF5EB;

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -69,7 +70,7 @@ const INDUSTRIES_DATA: Industry[] = [
   },
   {
     id: 'construction',
-    title: "Construction & Contracting", 
+    title: "Construction & Contracting",
     description: "Specialized protection for contractors, builders, and construction professionals with general liability, workers' comp, and project-specific coverage.",
     image: "/images/construct.png",
     href: "/construction-insurance",
@@ -102,10 +103,11 @@ const INDUSTRIES_DATA: Industry[] = [
 ];
 
 const IndustryCard = React.memo(({ industry, index }: { industry: Industry; index: number }) => (
-  <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
+  <div className="group relative bg-white rounded-xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1">
+
     {/* Badge */}
     <div className="absolute top-4 left-4 z-10">
-      <span className="bg-[#CC9F54] text-moxie-black px-3 py-1 rounded-full text-sm font-semibold">
+      <span className="bg-[#CC9F54] text-[#171717] px-3 py-1 rounded-full text-xs font-semibold tracking-wide">
         {industry.badge}
       </span>
     </div>
@@ -117,10 +119,10 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
         alt={`${industry.title} background`}
         fill
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        className="object-cover transition-transform duration-300 group-hover:scale-105"
+        className="object-cover transition-transform duration-700 group-hover:scale-105"
         priority={index < 2}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/15 to-transparent"></div>
     </div>
 
     {/* Content */}
@@ -128,15 +130,15 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
       <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#B8893D] transition-colors">
         {industry.title}
       </h3>
-      
-      <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed">
+
+      <p className="text-gray-600 mb-5 line-clamp-3 leading-relaxed">
         {industry.description}
       </p>
 
       {/* CTA */}
-      <a 
+      <a
         href={industry.href}
-        className="flex items-center justify-center w-full bg-gray-900 hover:bg-[#B8893D] text-white py-3 rounded-lg font-semibold transition-all duration-200 group-hover:bg-[#B8893D]"
+        className="flex items-center justify-center w-full bg-[#191919] hover:bg-[#B8893D] text-white py-3 rounded-md font-semibold transition-all duration-300"
       >
         Learn More
         <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,8 +152,8 @@ const IndustryCard = React.memo(({ industry, index }: { industry: Industry; inde
 IndustryCard.displayName = 'IndustryCard';
 
 const CargoTypeCard = React.memo(({ cargo, index }: { cargo: CargoType; index: number }) => (
-  <div className="group relative bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 border-gray-100 hover:border-[#CC9F54]">
-    
+  <div className="group relative bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-gray-200 hover:border-[#CC9F54]">
+
     {/* Cargo Image */}
     <div className="relative h-32 flex items-center justify-center bg-gray-50 p-4">
       <Image
@@ -171,9 +173,9 @@ const CargoTypeCard = React.memo(({ cargo, index }: { cargo: CargoType; index: n
       </h3>
 
       {/* CTA */}
-      <a 
+      <a
         href={cargo.href}
-        className="flex items-center justify-center w-full bg-gray-900 hover:bg-[#B8893D] text-white py-2 rounded-lg font-semibold text-sm transition-all duration-200 group-hover:bg-[#B8893D]"
+        className="flex items-center justify-center w-full bg-gray-900 hover:bg-[#B8893D] text-white py-2 rounded-lg font-semibold text-sm transition-all duration-200"
       >
         Learn More
         <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -196,97 +198,224 @@ const Overview: React.FC = () => {
     return () => cancelAnimationFrame(timer);
   }, []);
 
+  const brandPillars = [
+    {
+      number: '01',
+      title: 'Always Alert',
+      description: 'We look beyond the immediate need, identifying potential exposures before they become problems.',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.5 12s3.5-7 9.5-7 9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7Z" />
+          <circle cx="12" cy="12" r="3" strokeWidth={1.5} />
+        </svg>
+      )
+    },
+    {
+      number: '02',
+      title: 'Intelligent Guidance',
+      description: 'We bring industry knowledge and thoughtful strategy to every risk management decision.',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 18h6m-5 4h4m-5-8a7 7 0 1 1 6 0c-.9.7-1 1.3-1 2h-4c0-.7-.1-1.3-1-2Z" />
+        </svg>
+      )
+    },
+    {
+      number: '03',
+      title: 'You Stay in Control',
+      description: 'Your business. Your decisions. We give you the clarity and confidence to lead your risk program.',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 15V3m0 0L7 8m5-5 5 5M5 14v5a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-5" />
+        </svg>
+      )
+    },
+    {
+      number: '04',
+      title: 'All In, Together',
+      description: 'Rooted in family and built on loyalty, our entire team stands behind the clients we serve.',
+      icon: (
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2m16 0v-2a4 4 0 0 0-3-3.87M14 3.13a4 4 0 0 1 0 7.75M10 7a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+        </svg>
+      )
+    }
+  ];
+
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* About Section */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start mb-20">
-          {/* Left Column - Story */}
-          <div className={`space-y-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
-            <h2 className="text-4xl font-semibold text-gray-900 leading-tight">
-              Your Trusted Commercial Insurance Partner
-            </h2>
-            
-            <p className="text-lg text-gray-600 leading-relaxed">
-              With over 45 years of combined experience, Moxie Risk Partners brings trusted insurance
-              solutions to commercial businesses nationwide. Our team of industry specialists understands 
-              the unique challenges facing trucking companies, contractors, manufacturers, and nonprofits.
-            </p>
+    <section className="relative overflow-hidden bg-white">
 
-            <p className="text-lg text-gray-600 leading-relaxed">
-              Our team of dedicated specialists works exclusively with commercial accounts, providing 
-              personalized service and expert guidance to protect what matters most to your business.
-            </p>
+      {/* ABOUT / BRAND STORY */}
+      <div className="relative py-24 lg:py-32">
 
-          </div>
+        {/* Subtle brand accent */}
+        <div className="absolute top-0 left-0 w-1/3 h-1 bg-gradient-to-r from-[#CC9F54] to-transparent"></div>
 
-          {/* Right Column - Value Props */}
-          <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-6">
-              {[
-                'Industry Expertise',
-                'Radical Transparency',
-                'A-Rated Carriers',
-                'Fast Claims Response'
-              ].map((item, index) => (
-                <div key={index} className="flex items-center">
-                  <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                  <span className="font-medium text-gray-800">{item}</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+
+            {/* Left: Brand Story */}
+            <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`}>
+
+              <div className="flex items-center gap-4">
+                <span className="w-10 h-px bg-[#CC9F54]"></span>
+                <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#B8893D]">
+                  The Moxie Difference
+                </span>
+              </div>
+
+              <div>
+                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-semibold text-[#171717] leading-[1.12] tracking-tight">
+                  Protection is more than a policy.
+                  <span className="block text-[#B8893D] mt-2">
+                    It's a commitment.
+                  </span>
+                </h2>
+              </div>
+
+              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                With over 45 years of combined experience, Moxie Risk Partners
+                brings specialized commercial insurance and thoughtful risk
+                management to businesses nationwide. We take the time to
+                understand how your business operates, where its risks lie,
+                and what it takes to protect its future.
+              </p>
+
+              <p className="text-lg text-gray-600 leading-relaxed max-w-xl">
+                We believe the best protection starts with awareness,
+                intelligence, and trust. Not a one-size-fits-all policy.
+                Not another account number. A real partnership built around
+                your business and your goals.
+              </p>
+
+              {/* Boutique positioning */}
+              <div className="pt-5 border-t border-gray-200">
+                <p className="text-sm uppercase tracking-[0.2em] text-[#B8893D] font-semibold mb-3">
+                  A Different Kind of Partnership
+                </p>
+                <p className="text-gray-800 text-xl font-medium leading-relaxed">
+                  Personal attention. Specialized expertise. A team that's
+                  always in your corner.
+                </p>
+              </div>
+
+            </div>
+
+            {/* Right: Brand Pillars */}
+            <div className={`${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
+
+              <div className="relative bg-[#171717] rounded-2xl p-8 sm:p-10 lg:p-12 overflow-hidden shadow-2xl">
+
+                {/* Decorative background elements */}
+                <div className="absolute top-0 right-0 w-64 h-64 rounded-full border border-[#CC9F54]/10 translate-x-1/2 -translate-y-1/2"></div>
+                <div className="absolute top-0 right-0 w-48 h-48 rounded-full border border-[#CC9F54]/10 translate-x-1/2 -translate-y-1/2"></div>
+
+                <div className="relative z-10">
+
+                  <div className="mb-9">
+                    <p className="text-[#CC9F54] text-xs font-semibold uppercase tracking-[0.25em] mb-3">
+                      What We Stand For
+                    </p>
+                    <h3 className="text-2xl sm:text-3xl text-white font-semibold">
+                      Built on purpose.
+                      <span className="block text-[#CC9F54]">Driven by principle.</span>
+                    </h3>
+                  </div>
+
+                  <div className="space-y-0">
+                    {brandPillars.map((pillar, index) => (
+                      <div
+                        key={pillar.number}
+                        className={`flex gap-5 py-6 ${
+                          index !== brandPillars.length - 1
+                            ? 'border-b border-white/10'
+                            : ''
+                        }`}
+                      >
+
+                        <div className="flex-shrink-0">
+                          <div className="w-12 h-12 rounded-lg border border-[#CC9F54]/30 flex items-center justify-center text-[#CC9F54]">
+                            {pillar.icon}
+                          </div>
+                        </div>
+
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-[#CC9F54] text-xs font-semibold tracking-widest">
+                              {pillar.number}
+                            </span>
+                            <h4 className="text-white font-semibold text-lg">
+                              {pillar.title}
+                            </h4>
+                          </div>
+                          <p className="text-gray-400 text-sm leading-relaxed">
+                            {pillar.description}
+                          </p>
+                        </div>
+
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mt-8 pt-7 border-t border-white/10">
+                    <p className="text-white/90 text-sm leading-relaxed italic">
+                      "One In, All In."
+                    </p>
+                    <p className="text-[#CC9F54] text-xs uppercase tracking-[0.2em] mt-2 font-semibold">
+                      The Moxie Commitment
+                    </p>
+                  </div>
+
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Mission Section (hidden for now) */}
-          {/* <div className={`space-y-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'} delay-200`}>
-            <div className="inline-flex items-center px-4 py-2 bg-[#FBF5EB] border border-[#E5CFA5] rounded-full">
-              <svg className="w-5 h-5 text-[#CC9F54] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-              </svg>
-              <span className="text-[#B8893D] font-medium text-sm">Our Mission</span>
-            </div>
-            <div className="bg-gray-50 border border-gray-200 rounded-2xl p-8 shadow-sm">
-              <p className="text-gray-800 text-lg leading-relaxed">
-                At Moxie Risk Partners, we help businesses understand their risk and stay in
-                control of it. We take the time to explain your coverage, learn how your operation
-                actually runs, and revisit your program as your business changes. Our roots are
-                in transportation, and we bring that depth to every industry we serve.
-              </p>
-              <p className="text-gray-800 text-lg leading-relaxed mt-4">
-                We stay alert, communicate clearly, and follow through. Guided by our "One In,
-                All In" culture, our whole team shares responsibility for your experience.
-              </p>
-              <div className="mt-6 flex items-center">
-                <div className="w-12 h-0.5 bg-gradient-to-r from-[#CC9F54] to-[#D4B06B] mr-4"></div>
-                <span className="text-[#B8893D] font-semibold">Moxie Risk Partners</span>
               </div>
             </div>
-          </div> */}
-        </div>
 
-        {/* Industries Section */}
-        <div className="space-y-12">
-          <div className="space-y-6">
-            <h2 className="text-4xl font-semibold text-gray-900 leading-tight">
-              Comprehensive Coverage Across Critical Industries
+          </div>
+        </div>
+      </div>
+
+      {/* INDUSTRIES SECTION */}
+      <div className="py-24 bg-[#F7F6F3] border-t border-gray-200/70">
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+          <div className="mb-14 max-w-3xl space-y-5">
+
+            <div className="flex items-center gap-4">
+              <span className="w-10 h-px bg-[#CC9F54]"></span>
+              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-[#B8893D]">
+                Specialized Expertise
+              </span>
+            </div>
+
+            <h2 className="text-4xl sm:text-5xl font-semibold text-[#171717] leading-tight">
+              We understand the industries
+              <span className="block text-[#B8893D]">
+                that move the world.
+              </span>
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
-              Deep expertise across trucking, construction, manufacturing, nonprofit, and public entities 
-              with industry-specific coverage, regulatory compliance support, and dedicated specialists.
+
+            <p className="text-lg text-gray-600 leading-relaxed">
+              Deep expertise across trucking, construction, manufacturing,
+              nonprofit, and public entities with industry-specific coverage,
+              regulatory compliance support, and dedicated specialists.
             </p>
+
           </div>
 
           {/* Industries Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {INDUSTRIES_DATA.map((industry, index) => (
-              <IndustryCard key={industry.id} industry={industry} index={index} />
+              <IndustryCard
+                key={industry.id}
+                industry={industry}
+                index={index}
+              />
             ))}
           </div>
+
         </div>
-
-
       </div>
 
       <style jsx>{`
@@ -316,6 +445,7 @@ const Overview: React.FC = () => {
           overflow: hidden;
         }
       `}</style>
+
     </section>
   );
 };
