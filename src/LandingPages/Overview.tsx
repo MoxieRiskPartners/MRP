@@ -370,51 +370,15 @@ const Overview: React.FC = () => {
 
           </div>
 
-          {/* Industries Stacked — image left/right, card floating opposite */}
-          <div className="space-y-6 sm:space-y-10 lg:space-y-12">
-            {INDUSTRIES_DATA.map((industry, index) => {
-              const isRight = index % 2 === 1;
-              return (
-                <a
-                  key={industry.id}
-                  href={industry.href}
-                  className="group relative block"
-                >
-                  {/* Image — full width on mobile, half on sm+ */}
-                  <div className={`relative overflow-hidden rounded-xl w-full sm:w-[50%] md:w-[45%] aspect-[16/10] sm:aspect-[4/3] ${isRight ? 'sm:ml-auto' : ''}`}>
-                    <Image
-                      src={industry.image}
-                      alt={industry.title}
-                      fill
-                      sizes="(max-width: 640px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      priority={index < 2}
-                    />
-                  </div>
-
-                  {/* White card — below image on mobile, floating overlay on sm+ */}
-                  <div className={`
-                    bg-white p-4 sm:p-5 md:p-6 shadow-lg group-hover:shadow-xl transition-shadow z-10
-                    relative -mt-4 mx-3
-                    sm:absolute sm:top-1/2 sm:-translate-y-1/2 sm:mt-0 sm:mx-0 sm:w-[48%] md:w-[45%]
-                    ${isRight ? 'sm:left-[5%]' : 'sm:right-[5%]'}
-                  `}>
-                    <h3 className="text-gray-900 font-semibold text-sm sm:text-base leading-tight mb-1.5 sm:mb-2">
-                      {industry.title}
-                    </h3>
-                    <p className="text-gray-500 text-xs sm:text-sm leading-relaxed mb-2 sm:mb-3">
-                      {industry.description}
-                    </p>
-                    <span className="inline-flex items-center text-[#CC9F54] text-xs sm:text-sm font-semibold group-hover:text-[#B8893D] transition-colors">
-                      Learn More
-                      <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-1 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-              );
-            })}
+          {/* Industries Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {INDUSTRIES_DATA.map((industry, index) => (
+              <IndustryCard
+                key={industry.id}
+                industry={industry}
+                index={index}
+              />
+            ))}
           </div>
 
         </div>

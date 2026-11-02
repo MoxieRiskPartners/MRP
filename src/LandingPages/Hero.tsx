@@ -287,13 +287,17 @@ return (
         {/* Hero background */}
         <div className="absolute inset-0 bg-black" />
 
-        {/* Hero background image */}
-        <img
-          src="/images/herosample_1.png"
-          alt=""
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20"
-        />
+        {/* Video background — all devices */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ filter: 'brightness(0.4)' }}
+        >
+          <source src="/hero5.mp4" type="video/mp4" />
+        </video>
 
         {/* Subtle gold atmosphere */}
         <div
