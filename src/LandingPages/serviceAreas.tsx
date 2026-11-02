@@ -198,7 +198,7 @@ const ServiceAreas: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-moxie-ink py-16 sm:py-24">
+    <section className="relative overflow-hidden bg-[#231F20] py-16 sm:py-24">
       {/* Ambient background details */}
       <div className="pointer-events-none absolute inset-0 opacity-30">
         <div className="absolute -top-40 -right-40 h-96 w-96 rounded-full bg-[#CC9F54]/10 blur-3xl" />
@@ -426,14 +426,14 @@ const ServiceAreas: React.FC = () => {
           onClick={closeModal}
         >
           <div
-            className="relative mx-auto max-h-[85vh] sm:max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-[#1a1a1a] shadow-2xl animate-modal-appear"
+            className="relative mx-auto max-h-[85vh] sm:max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-[#F7F4EE] shadow-2xl animate-modal-appear"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
               aria-label="Close modal"
-              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-all hover:text-white"
+              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full text-[#292927] transition-all hover:text-[#231F20]"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -441,16 +441,16 @@ const ServiceAreas: React.FC = () => {
             </button>
 
             {/* Top: Logo + State */}
-            <div className="border-b border-white/10 px-5 py-6 sm:px-8 sm:py-8 text-center">
+            <div className="border-b border-[#231F20]/10 px-5 py-6 sm:px-8 sm:py-8 text-center">
               <img
-                src="/sample_4.png"
+                src="/sample_logo_2.png"
                 alt="Moxie Risk Partners"
                 className="mx-auto mb-4 sm:mb-5 h-12 w-auto sm:h-20"
               />
               <div className="flex items-center justify-center gap-3">
-                <span className="text-4xl sm:text-5xl font-semibold text-white">{selectedState.code}</span>
+                <span className="text-4xl sm:text-5xl font-semibold text-[#231F20]">{selectedState.code}</span>
                 <div className="text-left">
-                  <p className="text-sm font-medium text-white">{selectedState.name}</p>
+                  <p className="text-sm font-medium text-[#231F20]">{selectedState.name}</p>
                   <p className="text-xs text-[#CC9F54]">{selectedState.region} Region</p>
                 </div>
               </div>
@@ -459,11 +459,11 @@ const ServiceAreas: React.FC = () => {
             {/* Content */}
             <div className="px-5 py-5 sm:px-8 sm:py-8">
 
-              <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-semibold text-white">
+              <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-semibold text-[#231F20]">
                 Let&apos;s Talk Business in {selectedState.name}.
               </h3>
 
-              <p className="mb-5 sm:mb-6 text-xs sm:text-sm leading-relaxed text-gray-400">
+              <p className="mb-5 sm:mb-6 text-xs sm:text-sm leading-relaxed text-[#292927]">
                 Professional commercial insurance guidance for businesses
                 operating in {selectedState.name}. Let&apos;s understand your
                 operation, identify your exposures, and explore coverage
@@ -481,7 +481,7 @@ const ServiceAreas: React.FC = () => {
                     <svg className="h-4 w-4 flex-shrink-0 text-[#CC9F54]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <p className="text-xs sm:text-sm text-gray-300">{item}</p>
+                    <p className="text-xs sm:text-sm text-[#292927]">{item}</p>
                   </div>
                 ))}
               </div>
@@ -490,14 +490,14 @@ const ServiceAreas: React.FC = () => {
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link
                   href="/quote-form"
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-5 py-3 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D]"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-5 py-3 text-sm font-bold text-[#231F20] transition-all hover:bg-[#DDBB7D]"
                 >
                   Request a Quote
                 </Link>
 
                 <a
                   href="tel:+15155817187"
-                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-semibold text-white transition-all hover:border-[#CC9F54] hover:text-[#CC9F54]"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-[#231F20]/20 px-5 py-3 text-sm font-semibold text-[#231F20] transition-all hover:border-[#CC9F54] hover:text-[#CC9F54]"
                 >
                   (515) 581-7187
                 </a>
