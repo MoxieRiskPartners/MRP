@@ -102,7 +102,7 @@ const Header = () => {
               <img
                 src="/ear_logo.png"
                 alt="Moxie Risk Partners"
-                className="h-14 w-auto sm:h-16"
+                className="h-10 w-auto sm:h-12"
               />
             </a>
           </div>
