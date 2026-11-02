@@ -315,7 +315,7 @@ return (
 
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
 
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
+          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center lg:items-end">
 
             {/* LEFT SIDE: MOXIE BRAND EXPERIENCE */}
             <div className="space-y-5 sm:space-y-8 lg:pr-4">
