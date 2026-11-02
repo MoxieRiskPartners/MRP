@@ -293,6 +293,8 @@ return (
           loop
           muted
           playsInline
+          preload="auto"
+          poster="/images/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.4)' }}
         >
