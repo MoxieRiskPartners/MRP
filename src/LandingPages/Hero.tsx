@@ -324,7 +324,7 @@ return (
               <img
                 src="/sample_4.png"
                 alt="Moxie Risk Partners"
-                className="h-14 w-auto sm:h-20 md:h-24"
+                className="h-16 w-auto sm:h-24 md:h-28"
               />
 
               {/* Brand eyebrow */}
@@ -338,7 +338,7 @@ return (
 
                 {/* Small gold label: now the H1 for Google */}
                 <h1
-                  className="text-[10px] sm:text-xs md:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em]"
+                  className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em]"
                   style={{
                     color: '#D9B66E',
                     textShadow: '1px 1px 4px rgba(0,0,0,0.7)'
