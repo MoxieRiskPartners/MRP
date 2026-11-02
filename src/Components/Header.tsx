@@ -57,6 +57,16 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => { document.body.style.overflow = ''; };
+  }, [isMobileMenuOpen]);
+
   // Handle logo click to scroll to hero section
   const handleLogoClick = () => {
     if (window.location.pathname === '/') {
@@ -200,7 +210,7 @@ const Header = () => {
 
         {/* Mobile Navigation Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200">
+          <div className="md:hidden border-t border-gray-200 max-h-[calc(100svh-5rem)] overflow-y-auto overscroll-contain">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white">
               {/* Mobile Industries Dropdown */}
               <div>
