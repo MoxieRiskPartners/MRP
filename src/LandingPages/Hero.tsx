@@ -338,7 +338,7 @@ return (
 
                 {/* Small gold label: now the H1 for Google */}
                 <h1
-                  className="text-xs sm:text-sm md:text-base font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em]"
+                  className="text-[clamp(0.55rem,1.8vw,1rem)] font-semibold uppercase tracking-[0.2em] sm:tracking-[0.24em] whitespace-nowrap"
                   style={{
                     color: '#D9B66E',
                     textShadow: '1px 1px 4px rgba(0,0,0,0.7)'
