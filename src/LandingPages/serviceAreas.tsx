@@ -422,127 +422,90 @@ const ServiceAreas: React.FC = () => {
       {/* State Modal */}
       {isModalOpen && selectedState && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-3 backdrop-blur-sm sm:p-6"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/80 backdrop-blur-sm sm:p-6"
           onClick={closeModal}
         >
           <div
-            className="relative mx-auto max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-2xl border border-white/10 bg-moxie-panel shadow-2xl animate-modal-appear"
+            className="relative mx-auto max-h-[85vh] sm:max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-t-2xl sm:rounded-2xl bg-[#1a1a1a] shadow-2xl animate-modal-appear"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={closeModal}
               aria-label="Close modal"
-              className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-moxie-ink/90 text-white shadow-lg transition-all hover:border-[#CC9F54] hover:text-[#CC9F54] sm:right-5 sm:top-5"
+              className="absolute right-3 top-3 z-20 flex h-9 w-9 items-center justify-center rounded-full text-gray-400 transition-all hover:text-white"
             >
               <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               </svg>
             </button>
 
-            <div className="flex flex-col md:flex-row">
-              {/* Image Section */}
-              <div className="relative h-52 overflow-hidden sm:h-72 md:min-h-[570px] md:w-2/5">
-                <img
-                  src={popupImages[imageIndex]}
-                  alt={`Commercial insurance in ${selectedState.name}`}
-                  className="h-full w-full object-cover"
-                />
-
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-
-                <div className="absolute bottom-5 left-5">
-                  <span className="mb-2 inline-block rounded-full border border-[#CC9F54]/50 bg-moxie-ink/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#CC9F54] backdrop-blur-sm">
-                    {selectedState.region} Region
-                  </span>
-                  <p className="text-3xl font-semibold text-white">
-                    {selectedState.code}
-                  </p>
-                  <p className="text-sm text-gray-200">{selectedState.name}</p>
+            {/* Top: Logo + State */}
+            <div className="border-b border-white/10 px-5 py-6 sm:px-8 sm:py-8 text-center">
+              <img
+                src="/sample_4.png"
+                alt="Moxie Risk Partners"
+                className="mx-auto mb-4 sm:mb-5 h-12 w-auto sm:h-20"
+              />
+              <div className="flex items-center justify-center gap-3">
+                <span className="text-4xl sm:text-5xl font-semibold text-white">{selectedState.code}</span>
+                <div className="text-left">
+                  <p className="text-sm font-medium text-white">{selectedState.name}</p>
+                  <p className="text-xs text-[#CC9F54]">{selectedState.region} Region</p>
                 </div>
               </div>
+            </div>
 
-              {/* Content Section */}
-              <div className="flex flex-col justify-center p-6 sm:p-8 md:w-3/5 md:p-10">
-                <div className="mb-6">
-                  <div className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[#CC9F54]">
-                    Moxie Risk Partners
+            {/* Content */}
+            <div className="px-5 py-5 sm:px-8 sm:py-8">
+
+              <h3 className="mb-2 sm:mb-3 text-lg sm:text-xl md:text-2xl font-semibold text-white">
+                Let&apos;s Talk Business in {selectedState.name}.
+              </h3>
+
+              <p className="mb-5 sm:mb-6 text-xs sm:text-sm leading-relaxed text-gray-400">
+                Professional commercial insurance guidance for businesses
+                operating in {selectedState.name}. Let&apos;s understand your
+                operation, identify your exposures, and explore coverage
+                options that make sense for your business.
+              </p>
+
+              {/* Benefits — compact */}
+              <div className="mb-5 sm:mb-6 space-y-2.5 sm:space-y-3">
+                {[
+                  'Coverage built around your business',
+                  `Industry-focused guidance for the ${selectedState.region} region`,
+                  'A team in your corner'
+                ].map((item, index) => (
+                  <div key={index} className="flex items-center gap-2.5">
+                    <svg className="h-4 w-4 flex-shrink-0 text-[#CC9F54]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <p className="text-xs sm:text-sm text-gray-300">{item}</p>
                   </div>
-
-                  <h3 className="mb-4 text-2xl font-semibold leading-tight text-white sm:text-3xl">
-                    Let's Talk Business in {selectedState.name}.
-                  </h3>
-
-                  <p className="text-sm leading-relaxed text-gray-400 sm:text-base">
-                    Professional commercial insurance guidance for businesses
-                    operating in {selectedState.name}. Let's understand your
-                    operation, identify your exposures, and explore coverage
-                    options that make sense for your business.
-                  </p>
-                </div>
-
-                {/* Benefits */}
-                <div className="mb-8 space-y-4">
-                  {[
-                    {
-                      title: 'Coverage Built Around Your Business',
-                      description: 'Commercial insurance solutions tailored to your operation and industry.'
-                    },
-                    {
-                      title: 'Industry-Focused Guidance',
-                      description: `Thoughtful insight into the risks and opportunities businesses face in the ${selectedState.region} region.`
-                    },
-                    {
-                      title: 'A Team in Your Corner',
-                      description: 'Direct communication and support when you need answers.'
-                    }
-                  ].map((benefit, index) => (
-                    <div key={index} className="flex items-start gap-3">
-                      <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-[#CC9F54]/30 bg-[#CC9F54]/10">
-                        <svg className="h-3.5 w-3.5 text-[#CC9F54]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-
-                      <div>
-                        <p className="text-sm font-semibold text-white sm:text-base">
-                          {benefit.title}
-                        </p>
-                        <p className="mt-1 text-xs leading-relaxed text-gray-400 sm:text-sm">
-                          {benefit.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Modal CTA */}
-                <div className="flex flex-col gap-3 sm:flex-row">
-                  <Link
-                    href="/quote-form"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-5 py-3.5 text-sm font-bold text-[#171717] shadow-lg transition-all hover:bg-[#DDBB7D]"
-                  >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                    </svg>
-                    Request a Quote
-                  </Link>
-
-                  <a
-                    href="tel:+15155817187"
-                    className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 px-5 py-3.5 text-sm font-semibold text-white transition-all hover:border-[#CC9F54] hover:bg-[#CC9F54]/10 hover:text-[#CC9F54]"
-                  >
-                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    Call Our Team
-                  </a>
-                </div>
-
-                <p className="mt-5 text-center text-[11px] leading-relaxed text-gray-500 sm:text-left">
-                  Coverage availability, eligibility, and terms are subject to review and confirmation.
-                </p>
+                ))}
               </div>
+
+              {/* CTAs */}
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <Link
+                  href="/quote-form"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-[#CC9F54] px-5 py-3 text-sm font-bold text-[#171717] transition-all hover:bg-[#DDBB7D]"
+                >
+                  Request a Quote
+                </Link>
+
+                <a
+                  href="tel:+15155817187"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/20 px-5 py-3 text-sm font-semibold text-white transition-all hover:border-[#CC9F54] hover:text-[#CC9F54]"
+                >
+                  (515) 581-7187
+                </a>
+              </div>
+
+              <p className="mt-4 text-center text-[11px] text-gray-500">
+                Coverage availability and terms subject to review.
+              </p>
             </div>
           </div>
         </div>
