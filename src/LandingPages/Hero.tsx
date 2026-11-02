@@ -315,7 +315,7 @@ return (
 
         <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20" style={{ maxWidth: 'min(80rem, 90vw)' }}>
 
-          <div className="flex flex-col md:grid md:grid-cols-[1fr_1fr] gap-8 md:gap-[clamp(2rem,4vw,4rem)] items-center">
+          <div className="flex flex-col xl:grid xl:grid-cols-[1fr_1fr] gap-8 xl:gap-[clamp(2rem,4vw,4rem)] items-center">
 
             {/* LEFT SIDE: MOXIE BRAND EXPERIENCE */}
             <div className="space-y-5 sm:space-y-8">
