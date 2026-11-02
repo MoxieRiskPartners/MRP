@@ -315,10 +315,10 @@ return (
 
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
 
-          <div className="flex flex-col lg:grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-16 items-center">
+          <div className="flex flex-col xl:grid xl:grid-cols-2 gap-8 sm:gap-10 xl:gap-16 items-center">
 
             {/* LEFT SIDE: MOXIE BRAND EXPERIENCE */}
-            <div className="space-y-5 sm:space-y-8 lg:pr-4">
+            <div className="space-y-5 sm:space-y-8 xl:pr-4">
 
               {/* Brand logo */}
               <img
@@ -330,7 +330,7 @@ return (
               {/* Brand eyebrow */}
               <div className="flex items-center gap-3 sm:gap-4">
                 <span
-                  className="h-px w-8 sm:w-12 flex-shrink-0"
+                  className="h-px w-3 sm:w-5 flex-shrink-0"
                   style={{
                     background: 'linear-gradient(90deg, #CC9F54, rgba(204,159,84,0))'
                   }}
@@ -351,7 +351,7 @@ return (
               {/* Big headline: same look, now a <p> */}
               <div>
                 <p
-                  className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-[1.08] tracking-tight"
+                  className="text-[clamp(1.75rem,5vw,4.5rem)] font-semibold leading-[1.08] tracking-tight"
                   style={{
                     color: '#F8F6F1',
                     textShadow: '0 3px 24px rgba(0,0,0,0.5)'
@@ -414,7 +414,7 @@ return (
             </div>
 
             {/* RIGHT SIDE: supporting copy */}
-            <div className="flex flex-col justify-center gap-6 sm:gap-8 lg:pl-6">
+            <div className="flex flex-col justify-center gap-6 sm:gap-8 xl:pl-6">
               <div className="rounded-xl bg-black/50 backdrop-blur-sm p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                 <p
                   className="text-base sm:text-lg md:text-xl leading-relaxed text-white font-medium"
