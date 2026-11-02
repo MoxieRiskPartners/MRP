@@ -315,10 +315,10 @@ return (
 
         <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
 
-          <div className="flex flex-col xl:grid xl:grid-cols-2 gap-8 sm:gap-10 xl:gap-16 items-center">
+          <div className="flex flex-col min-[1400px]:grid min-[1400px]:grid-cols-2 gap-8 sm:gap-10 min-[1400px]:gap-16 items-center">
 
             {/* LEFT SIDE: MOXIE BRAND EXPERIENCE */}
-            <div className="space-y-5 sm:space-y-8 xl:pr-4">
+            <div className="space-y-5 sm:space-y-8 min-[1400px]:pr-4">
 
               {/* Brand logo */}
               <img
@@ -414,7 +414,7 @@ return (
             </div>
 
             {/* RIGHT SIDE: supporting copy */}
-            <div className="flex flex-col justify-center gap-6 sm:gap-8 xl:pl-6">
+            <div className="flex flex-col justify-center gap-6 sm:gap-8 min-[1400px]:pl-6">
               <div className="rounded-xl bg-black/50 backdrop-blur-sm p-4 sm:p-6 md:p-8 space-y-4 sm:space-y-6">
                 <p
                   className="text-base sm:text-lg md:text-xl leading-relaxed text-white font-medium"
