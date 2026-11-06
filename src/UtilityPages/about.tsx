@@ -122,9 +122,9 @@ const AboutPage = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img 
-            src="/images/about.png" 
+            src="/images/about_us_hero.png" 
             alt="About Moxie Risk Partners - Professional insurance team"
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover object-[center_30%]"
           />
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
