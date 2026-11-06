@@ -338,7 +338,7 @@ if (showThankYou) {
                     href="tel:+15155817187"
                     className="flex items-center space-x-3 p-4 bg-gray-100 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors duration-200 group"
                   >
-                    <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 bg-[#CC9F54] rounded-lg flex items-center justify-center flex-shrink-0">
                       <Phone className="w-6 h-6 text-white" />
                     </div>
                     <div>

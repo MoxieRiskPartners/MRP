@@ -378,7 +378,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/hero6.mp4" as="video" type="video/mp4" />
-        <link rel="preload" href="/images/hero-poster.jpg" as="image" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

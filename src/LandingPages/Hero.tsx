@@ -21,7 +21,45 @@ const Hero = () => {
   const [triggerConfetti, setTriggerConfetti] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
   const router = useRouter();
+
+  // Force video play on all devices — iOS/Android can block autoplay
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+
+    const forcePlay = () => {
+      video.play().catch(() => {
+        // Retry on user interaction if autoplay blocked
+        const handleInteraction = () => {
+          video.play();
+          document.removeEventListener('touchstart', handleInteraction);
+          document.removeEventListener('click', handleInteraction);
+        };
+        document.addEventListener('touchstart', handleInteraction, { once: true });
+        document.addEventListener('click', handleInteraction, { once: true });
+      });
+    };
+
+    if (video.readyState >= 3) {
+      forcePlay();
+    } else {
+      video.addEventListener('canplay', forcePlay, { once: true });
+    }
+
+    // Re-trigger on page visibility change (tab switch, back navigation)
+    const handleVisibility = () => {
+      if (!document.hidden && video.paused) {
+        video.play().catch(() => {});
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibility);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibility);
+    };
+  }, []);
   
   const [formData, setFormData] = useState<FormData>({
     firstName: '',
@@ -287,14 +325,14 @@ return (
         {/* Hero background */}
         <div className="absolute inset-0 bg-black" />
 
-        {/* Video background — all devices */}
+        {/* Video background — all devices, no fallback */}
         <video
+          ref={heroVideoRef}
           autoPlay
           loop
           muted
           playsInline
           preload="auto"
-          poster="/images/hero-poster.jpg"
           className="absolute inset-0 w-full h-full object-cover"
           style={{ filter: 'brightness(0.78)' }}
         >

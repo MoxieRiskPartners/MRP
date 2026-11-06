@@ -457,7 +457,7 @@ const NonProfitPage = () => {
 
                 {/* Phone */}
                 <div className="text-center p-6 bg-gray-100 rounded-xl border border-gray-200">
-                  <div className="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-3">
+                  <div className="w-12 h-12 bg-[#CC9F54] rounded-lg flex items-center justify-center mx-auto mb-3">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
                   <h4 className="text-sm font-semibold text-gray-900 mb-1">Call Us Now</h4>

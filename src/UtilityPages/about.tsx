@@ -63,7 +63,12 @@ const AboutPage = () => {
       number: "05",
       title: "Long-Term Relationships",
       description: "We're not here for quick transactions. We invest in lasting partnerships, growing alongside your business and adapting as your needs evolve.",
-     
+
+    },
+    {
+      number: "06",
+      title: "Control & Confidence",
+      description: "We empower our clients with the knowledge, tools, and proactive support they need to take control of their risk management program and move forward with confidence.",
     }
   ];
 
@@ -132,15 +137,14 @@ const AboutPage = () => {
             </h1>
             
             <p className="text-[clamp(1rem,1.5vw,1.5rem)] text-white/90 leading-relaxed mb-[clamp(2rem,4vw,3rem)] max-w-[min(64rem,90vw)] mx-auto">
-              We're a dedicated team of insurance professionals who believe in moving fast, 
-              speaking plainly, and delivering results that matter to your business.
+              We're a hands-on team of insurance professionals that treats your risk like our own. We stay alert so you stay in control.
             </p>
 
             {/* Hero Stats */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-[clamp(2rem,4vw,4rem)]">
               <div className="text-center">
                 <div className="text-[clamp(2rem,4vw,3rem)] font-bold text-transparent bg-gradient-to-r from-[#D4B06B] to-[#CC9F54] bg-clip-text mb-2">
-                  26+
+                  45+
                 </div>
                 <div className="text-white/90 font-semibold text-[clamp(0.875rem,1.2vw,1rem)]">Years Experience</div>
               </div>
@@ -214,27 +218,19 @@ const AboutPage = () => {
       {/* Mission & Vision Section */}
       <section id="mission" className="py-[clamp(3rem,8vw,5rem)] bg-gray-50">
         <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
-          <div className="grid lg:grid-cols-2 gap-[clamp(2rem,5vw,5rem)]">
-            
-            {/* Mission */}
-            <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
-              <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight">
-                Our Mission
-              </h2>
-              <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed">
-                To provide fast, reliable, and transparent insurance solutions that move as fast as our clients do. 
-                We believe insurance should protect your business, not complicate it.
+          <div className="max-w-[min(64rem,90vw)]">
+            <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight mb-[clamp(1rem,2vw,1.5rem)]">
+              Our Mission
+            </h2>
+            <p className="text-[clamp(1.25rem,2vw,1.5rem)] text-[#CC9F54] leading-relaxed font-medium mb-[clamp(1.5rem,3vw,2rem)]">
+              Driven by discipline and rooted in family, we partner with the businesses that move, build, make, and serve their communities — helping them understand their risk, stay in control of it, and move forward with confidence.
+            </p>
+            <div className="space-y-4 text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed">
+              <p>
+                At Moxie Risk Partners, we help businesses understand their risk and stay in control of it. We take the time to explain your coverage, learn how your operation actually runs, and revisit your program as your business changes. Our roots are in transportation, and we bring that depth to every industry we serve.
               </p>
-            </div>
-            
-            {/* Vision */}
-            <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
-              <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold text-gray-900 leading-tight">
-                Our Vision
-              </h2>
-              <p className="text-[clamp(1rem,1.5vw,1.25rem)] text-gray-600 leading-relaxed">
-                To be the most trusted and efficient commercial insurance agency in the Nation. 
-                We're building the future of business insurance, one relationship at a time.
+              <p>
+                We stay alert, communicate clearly, and follow through. Guided by our &ldquo;One In, All In&rdquo; culture, our whole team shares responsibility for your experience.
               </p>
             </div>
           </div>
