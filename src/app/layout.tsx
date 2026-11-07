@@ -22,11 +22,7 @@ const SITE_DESCRIPTION =
   "Commercial insurance for trucking, construction, manufacturing, nonprofits, and public entities. Fast quotes on auto liability, cargo, and workers' comp.";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(
-    process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : 'https://moxieriskpartners.com'
-  ),
+  metadataBase: new URL('https://moxieriskpartners.com'),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
   keywords: "commercial insurance, trucking insurance, workers compensation, cargo insurance, construction insurance, manufacturing insurance, nonprofit insurance, public entity insurance, commercial auto liability, Risk Management Support, owner operator insurance, fleet insurance, motor truck cargo, physical damage insurance, business insurance quotes, liability insurance, commercial vehicle insurance",

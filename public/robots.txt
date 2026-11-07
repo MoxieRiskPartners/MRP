@@ -199,7 +199,6 @@ Disallow: /
 # ===========================================
 
 Sitemap: https://moxieriskpartners.com/sitemap.xml
-Sitemap: https://moxieriskpartners.com/sitemap-index.xml
 
 # ===========================================
 # CRAWL RATE SETTINGS

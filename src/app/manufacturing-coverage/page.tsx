@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "Manufacturing Insurance | Product Liability & Equipment Coverage",
   description: "Specialized manufacturing insurance including product liability, general liability, workers compensation, equipment breakdown, and commercial property coverage. Protect your manufacturing operations nationwide.",
   alternates: {
-    canonical: 'https://moxieriskpartners.com/manufacturing-insurance',
+    canonical: 'https://moxieriskpartners.com/manufacturing-coverage',
   },
   openGraph: {
     title: "Manufacturing Insurance | Product Liability & Equipment Coverage",
     description: "Specialized manufacturing insurance including product liability, general liability, workers compensation, equipment breakdown, and commercial property coverage.",
-    url: "https://moxieriskpartners.com/manufacturing-insurance",
+    url: "https://moxieriskpartners.com/manufacturing-coverage",
     siteName: "Moxie Risk Partners",
     images: [
       {

@@ -3,8 +3,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import { CheckCircle, ArrowRight, Shield, Clock, Users, Star, Phone, Mail, MapPin, Hammer, HardHat, Truck, Building } from 'lucide-react';
-import SuccessModal from '@/Components/successModal';
+import { CheckCircle, Shield, Users, Star, Phone, Mail, Hammer, HardHat, Truck, Building } from 'lucide-react';
 import IndustryQuoteForm from '@/Components/IndustryQuoteForm';
 import { constructionFields } from '@/config/industryFormConfigs';
 import Link from 'next/link'; 
@@ -31,7 +30,6 @@ interface FAQItem {
 const ConstructionPage = () => {
   const [selectedType, setSelectedType] = useState('general-liability');
   const [isVisible, setIsVisible] = useState(false);
-  const [mounted, setMounted] = useState(false);
   const [faqItems, setFaqItems] = useState<FAQItem[]>([
     {
       question: "What construction insurance do I need?",
@@ -70,8 +68,6 @@ const ConstructionPage = () => {
   };
 
   useEffect(() => {
-    setMounted(true);
-    
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
       { threshold: 0.1 }
@@ -197,83 +193,6 @@ const ConstructionPage = () => {
   const handleTypeSelection = (typeCode: string) => {
     setSelectedType(typeCode);
   };
-
-  // Don't render form until mounted to avoid hydration issues
-  if (!mounted) {
-    return (
-      <div className="min-h-screen bg-white">
-        {/* Hero Section - Side by Side Layout */}
-        <section ref={heroRef} className="bg-white py-12 lg:py-[clamp(3rem,8vw,5rem)]">
-          <div className="responsive-container max-w-[min(90rem,95vw)] mx-auto px-[clamp(1rem,3vw,2rem)]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-[clamp(2rem,4vw,3rem)] items-center">
-              
-              {/* Left Side - Hero Image */}
-              <div className="transform transition-all duration-1000">
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <img 
-                    src="/images/constructhero.png" 
-                    alt="Construction workers on building site"
-                    className="w-full h-[500px] lg:h-[600px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-                </div>
-              </div>
-
-              {/* Right Side - Content */}
-              <div className="transform transition-all duration-1000 delay-300">
-                <div className="space-y-8">
-                  <div>
-                    <h1 className="text-5xl lg:text-6xl font-semibold text-gray-900 leading-tight mb-6">
-                      Construction
-                      <span className="block text-transparent bg-gradient-to-r from-[#CC9F54] to-[#B8893D] bg-clip-text">
-                        Insurance
-                      </span>
-                    </h1>
-                    
-                    <p className="text-xl text-gray-600 leading-relaxed mb-8 max-w-lg">
-                      Protect your construction business with comprehensive coverage designed for contractors, 
-                      builders, and construction professionals. Expert guidance and competitive rates.
-                    </p>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-4">
-                    {[
-                      'All Construction Trades',
-                      'Competitive Rates',
-                      'Expert Support'
-                    ].map((feature, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <CheckCircle className="w-6 h-6 text-[#CC9F54] flex-shrink-0" />
-                        <span className="text-lg font-medium text-gray-800">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* CTA Buttons */}
-                  <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/quote-form">
-  <button className="bg-gradient-to-r from-[#CC9F54] to-[#B8893D] hover:from-[#A87A32] hover:to-[#9A7030] text-moxie-black px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center justify-center group w-full">
-    Get Your Quote
-  </button>
-</Link>
-                    
-                    <a href="tel:+15155817187" className="border-2 border-gray-800 text-gray-800 hover:bg-gray-800 hover:text-white px-8 py-4 rounded-lg font-bold text-lg transition-all duration-300 flex items-center justify-center">
-                      Call (515) 581-7187
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <div className="flex items-center justify-center py-20">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-[#CC9F54]"></div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-white">
