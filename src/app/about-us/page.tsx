@@ -4,14 +4,14 @@ import AboutPage from "@/UtilityPages/about";
 import Footer from "@/Components/footer";
 
 export const metadata: Metadata = {
-  title: "About Moxie Risk Partners | 26+ Years Insurance Experience",
-  description: "Meet the Moxie Risk Partners team. Over 26 years of commercial insurance expertise serving trucking, construction, manufacturing, nonprofits, and public entities nationwide.",
+  title: "About Moxie Risk Partners | 45+ Years Insurance Experience",
+  description: "Meet the Moxie Risk Partners team. Over 45 years of combined commercial insurance expertise serving trucking, construction, manufacturing, nonprofits, and public entities nationwide.",
   alternates: {
     canonical: 'https://moxieriskpartners.com/about-us',
   },
   openGraph: {
-    title: "About Moxie Risk Partners | 26+ Years Insurance Experience",
-    description: "Meet the Moxie Risk Partners team. Over 26 years of commercial insurance expertise serving trucking, construction, manufacturing, nonprofits, and public entities nationwide.",
+    title: "About Moxie Risk Partners | 45+ Years Insurance Experience",
+    description: "Meet the Moxie Risk Partners team. Over 45 years of combined commercial insurance expertise serving trucking, construction, manufacturing, nonprofits, and public entities nationwide.",
     url: "https://moxieriskpartners.com/about-us",
     siteName: "Moxie Risk Partners",
     images: [
