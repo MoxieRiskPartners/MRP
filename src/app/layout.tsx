@@ -56,11 +56,11 @@ export const metadata: Metadata = {
     locale: "en_US",
     images: [
       {
-        url: "/images/og-image.png",
+        url: "/Moxie_Horizontal_TwoColor.jpg",
         width: 1200,
         height: 630,
         alt: "Moxie Risk Partners - Commercial Insurance Solutions",
-        type: "image/png",
+        type: "image/jpeg",
       }
     ],
   },
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: ["/images/twitter-image.png"],
+    images: ["/Moxie_Horizontal_TwoColor.jpg"],
   },
   // Add once Google Search Console is set up:
   // verification: { google: "PASTE-REAL-CODE-HERE" },
@@ -97,11 +97,11 @@ const insuranceAgencySchema = {
   "url": "https://moxieriskpartners.com",
   "logo": {
     "@type": "ImageObject",
-    "url": "https://moxieriskpartners.com/images/logo.png",
+    "url": "https://moxieriskpartners.com/Moxie_Horizontal_TwoColor.jpg",
     "width": 600,
     "height": 200
   },
-  "image": "https://moxieriskpartners.com/images/og-image.png",
+  "image": "https://moxieriskpartners.com/Moxie_Horizontal_TwoColor.jpg",
   "description": "Specialized commercial insurance agency providing trucking insurance, workers compensation, cargo insurance, construction insurance, and risk management solutions nationwide.",
   "telephone": "+1-515-581-7187",
   "email": "quotes@moxieriskpartners.com",

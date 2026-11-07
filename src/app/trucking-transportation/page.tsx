@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: "Moxie Risk Partners",
     images: [
       {
-        url: "https://moxieriskpartners.com/images/og-image.png",
+        url: "https://moxieriskpartners.com/Moxie_Horizontal_TwoColor.jpg",
         width: 1200,
         height: 630,
         alt: "Trucking Insurance for Owner-Operators and Fleets",
