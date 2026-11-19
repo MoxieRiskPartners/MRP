@@ -68,7 +68,7 @@ const Footer: React.FC = () => {
         { href: '/about-us', label: 'About Us', ariaLabel: 'Learn about Moxie Risk Partners' },
         { href: '/about-us#mission', label: 'Our Mission', ariaLabel: 'Our company mission and values' },
         { href: '/about-us#team', label: 'Our Team', ariaLabel: 'Meet our insurance experts' },
-        // { href: '/careers', label: 'Careers', ariaLabel: 'Career opportunities' },
+        { href: '/careers', label: 'Careers', ariaLabel: 'Career opportunities' },
         // { href: '/news', label: 'News & Updates', ariaLabel: 'Company news and industry updates' },
       ]
     }
