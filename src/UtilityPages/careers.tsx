@@ -1,163 +1,50 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Briefcase, MapPin, ChevronDown, ChevronUp, Users, Target, TrendingUp, Mail } from 'lucide-react';
+import React from 'react';
+import { Briefcase, MapPin, ArrowUpRight, Mail, Users, Target, TrendingUp } from 'lucide-react';
 
-interface JobPosting {
-  id: string;
-  title: string;
-  type: string;
-  location: string;
-  summary: string;
-  sections: { heading: string; items: string[] }[];
-}
+const LINKEDIN_JOBS_URL = "https://www.linkedin.com/company/moxie-risk-partners/jobs/";
 
-const jobPostings: JobPosting[] = [
+const openRoles = [
   {
-    id: "producer",
     title: "Producer, Commercial Trucking",
     type: "Full-Time",
     location: "Des Moines, IA / Hybrid",
     summary: "Build your pipeline, lead with our proven sales process, and champion clients alongside a team that has your back every step of the way.",
-    sections: [
-      {
-        heading: "What You'll Do",
-        items: [
-          "Build your pipeline through calls, emails, LinkedIn, referrals, and industry events — whatever it takes to get in front of the right fleets",
-          "Lead with the Moxie sales process, built on earning trust before we ever talk price",
-          "Champion your clients by working hand in hand with teammates to deliver for every client you bring on",
-          "Meet with clients at their offices when a relationship calls for a handshake",
-        ],
-      },
-      {
-        heading: "What You Bring",
-        items: [
-          "A track record of success in sales, in any industry",
-          "Confidence on the phone and comfort reaching out to new prospects",
-          "The self-motivation to manage your own time and pipeline",
-          "A coachable mindset and a desire to keep growing",
-          "A team-first attitude: you lead by lifting others up",
-          "Willingness to travel when the business calls for it",
-          "A Property & Casualty license is a plus; if you don't have one yet, you'll get it within 90 days of hire",
-        ],
-      },
-      {
-        heading: "What You Get",
-        items: [
-          "Real earning potential: six-figure-plus income that grows with your book",
-          "A proven process: the Moxie sales process and the playbooks behind it",
-          "A team that's all in: marketing, service, and account management working your deals with you",
-          "Coaching that makes you better: regular pipeline reviews and direct feedback from people who've done it",
-        ],
-      },
-    ],
   },
   {
-    id: "account-manager",
     title: "Account Manager",
     type: "Full-Time",
     location: "Des Moines, IA / Hybrid",
-    summary: "Serve as the primary advisor and relationship manager for commercial and transportation clients, managing renewals, analyzing coverage, and ensuring proactive support throughout the policy lifecycle.",
-    sections: [
-      {
-        heading: "Primary Responsibilities",
-        items: [
-          "Serve as the primary day-to-day contact for assigned clients, building strong relationships through proactive communication",
-          "Conduct mid-year, renewal, and stewardship reviews — identify coverage gaps and recommend solutions",
-          "Build renewal strategy and timelines, prepare complete renewal files, and submit accounts to carriers and program markets",
-          "Review carrier quotations, policy forms, endorsements, and pricing; prepare proposals and coverage comparisons",
-          "Identify opportunities to round out accounts through additional coverages and risk management services",
-          "Partner closely with Producers, Marketing, and Client Service Representatives",
-        ],
-      },
-      {
-        heading: "Qualifications",
-        items: [
-          "Active Property & Casualty License or ability to obtain",
-          "Commercial transportation insurance experience",
-          "Strong understanding of commercial insurance coverages and policy structures",
-          "Excellent communication and relationship-building skills",
-          "Strong analytical and problem-solving abilities",
-          "Proficiency with Microsoft 365 and agency management systems",
-        ],
-      },
-      {
-        heading: "Preferred",
-        items: [
-          "Experience marketing and negotiating commercial accounts",
-          "Experience with trucking, fleet, and DOT-related risks",
-          "Experience conducting client reviews and coverage analysis",
-        ],
-      },
-    ],
+    summary: "Serve as the primary advisor and relationship manager for commercial and transportation clients, managing renewals, analyzing coverage, and delivering proactive support.",
   },
   {
-    id: "csr",
     title: "Client Service Representative (CSR)",
     type: "Full-Time",
     location: "Des Moines, IA / Hybrid",
-    summary: "Support the daily servicing and operational needs of our transportation clients and internal teams, including certificate issuance, policy administration, monthly reporting, and marketing support.",
-    sections: [
-      {
-        heading: "Primary Responsibilities",
-        items: [
-          "Create and maintain Certificate of Insurance (COI) master templates and process certificate requests",
-          "Monitor and manage the agency's shared Service Inbox",
-          "Process policy change requests and review driver approvals based on underwriting guidelines",
-          "Check in policies/endorsements and prepare them for Account Manager review and delivery",
-          "Prepare and distribute client monthly reports and track reporting deadlines",
-          "Support Marketing with IFTA mileage maps, supplemental applications, MVRs, carrier loss runs, and submission documentation",
-        ],
-      },
-      {
-        heading: "Qualifications",
-        items: [
-          "Customer service experience required",
-          "Strong attention to detail and comfort working from checklists and documented procedures",
-          "Excellent organizational skills and the ability to manage multiple priorities and deadlines",
-          "Clear written communication and professional email habits",
-          "Proficiency with Outlook and Microsoft 365",
-          "Strong follow-up skills and a commitment to seeing tasks through completion",
-          "A team-first attitude that reflects our \"One In, All In\" culture",
-        ],
-      },
-      {
-        heading: "Preferred",
-        items: [
-          "Commercial insurance or transportation industry experience",
-          "Experience with agency management systems and carrier portals",
-          "Experience handling certificates, policy processing, billing, reporting, and administrative coordination",
-        ],
-      },
-    ],
+    summary: "Support the daily servicing and operational needs of our transportation clients and internal teams, including certificates, policy administration, and monthly reporting.",
+  },
+];
+
+const culturePoints = [
+  {
+    icon: Users,
+    title: "One In, All In",
+    description: "Every client is a shared commitment, and every win belongs to all of us. Our leadership leads from the front — on the calls, in the meetings, working right alongside you.",
+  },
+  {
+    icon: Target,
+    title: "Real Coaching",
+    description: "We give honest feedback because we're invested in your success. Regular pipeline reviews and direct guidance from people who've been there.",
+  },
+  {
+    icon: TrendingUp,
+    title: "Growth That Compounds",
+    description: "Build a book, a reputation, and an income you're proud of. Your effort makes a real difference here.",
   },
 ];
 
 const CareersPage = () => {
-  const [expandedJob, setExpandedJob] = useState<string | null>(null);
-
-  const toggleJob = (id: string) => {
-    setExpandedJob(expandedJob === id ? null : id);
-  };
-
-  const culturePoints = [
-    {
-      icon: Users,
-      title: "One In, All In",
-      description: "Every client is a shared commitment, and every win belongs to all of us. Our leadership leads from the front — on the calls, in the meetings, working right alongside you.",
-    },
-    {
-      icon: Target,
-      title: "Real Coaching",
-      description: "We give honest feedback because we're invested in your success. Regular pipeline reviews and direct guidance from people who've been there.",
-    },
-    {
-      icon: TrendingUp,
-      title: "Growth That Compounds",
-      description: "Build a book, a reputation, and an income you're proud of. Your effort makes a real difference here.",
-    },
-  ];
-
   return (
     <div className="bg-[#F7F4EE] min-h-screen">
       {/* Hero */}
@@ -221,84 +108,54 @@ const CareersPage = () => {
               Open Positions
             </h2>
             <p className="text-lg text-[#231F20]/70">
-              Find your place on a team that&apos;s all in.
+              Find your place on a team that&apos;s all in. Click any role to view the full posting and apply on LinkedIn.
             </p>
           </div>
 
           <div className="max-w-4xl mx-auto space-y-6">
-            {jobPostings.map((job) => {
-              const isExpanded = expandedJob === job.id;
-              return (
-                <div
-                  key={job.id}
-                  className="border border-[#231F20]/10 rounded-xl overflow-hidden hover:border-[#D4B06B]/50 transition-colors"
-                >
-                  <button
-                    onClick={() => toggleJob(job.id)}
-                    className="w-full text-left p-6 md:p-8 flex items-start justify-between gap-4"
-                    aria-expanded={isExpanded}
-                    aria-controls={`job-${job.id}`}
-                  >
-                    <div className="flex-1">
-                      <h3 className="text-xl md:text-2xl font-bold text-[#231F20] mb-2">
-                        {job.title}
-                      </h3>
-                      <div className="flex flex-wrap gap-3 mb-3">
-                        <span className="inline-flex items-center gap-1.5 text-sm text-[#231F20]/60">
-                          <Briefcase className="w-4 h-4" />
-                          {job.type}
-                        </span>
-                        <span className="inline-flex items-center gap-1.5 text-sm text-[#231F20]/60">
-                          <MapPin className="w-4 h-4" />
-                          {job.location}
-                        </span>
-                      </div>
-                      <p className="text-[#231F20]/70">{job.summary}</p>
+            {openRoles.map((role) => (
+              <a
+                key={role.title}
+                href={LINKEDIN_JOBS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block border border-[#231F20]/10 rounded-xl p-6 md:p-8 hover:border-[#D4B06B]/50 hover:shadow-md transition-all group"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h3 className="text-xl md:text-2xl font-bold text-[#231F20] mb-2 group-hover:text-[#CC9F54] transition-colors">
+                      {role.title}
+                    </h3>
+                    <div className="flex flex-wrap gap-3 mb-3">
+                      <span className="inline-flex items-center gap-1.5 text-sm text-[#231F20]/60">
+                        <Briefcase className="w-4 h-4" />
+                        {role.type}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 text-sm text-[#231F20]/60">
+                        <MapPin className="w-4 h-4" />
+                        {role.location}
+                      </span>
                     </div>
-                    <div className="flex-shrink-0 mt-1">
-                      {isExpanded ? (
-                        <ChevronUp className="w-6 h-6 text-[#D4B06B]" />
-                      ) : (
-                        <ChevronDown className="w-6 h-6 text-[#231F20]/40" />
-                      )}
-                    </div>
-                  </button>
-
-                  {isExpanded && (
-                    <div id={`job-${job.id}`} className="px-6 md:px-8 pb-8 border-t border-[#231F20]/5">
-                      {job.sections.map((section) => (
-                        <div key={section.heading} className="mt-6">
-                          <h4 className="text-lg font-semibold text-[#231F20] mb-3">
-                            {section.heading}
-                          </h4>
-                          <ul className="space-y-2">
-                            {section.items.map((item, i) => (
-                              <li key={i} className="flex items-start gap-3 text-[#231F20]/70">
-                                <span className="w-1.5 h-1.5 bg-[#D4B06B] rounded-full mt-2 flex-shrink-0" />
-                                {item}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      ))}
-                      <div className="mt-8">
-                        <a
-                          href="mailto:info@moxieriskpartners.com?subject=Application: {{title}}"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            window.location.href = `mailto:info@moxieriskpartners.com?subject=Application: ${job.title}`;
-                          }}
-                          className="inline-flex items-center gap-2 px-6 py-3 bg-[#D4B06B] text-[#231F20] font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
-                        >
-                          <Mail className="w-5 h-5" />
-                          Apply Now
-                        </a>
-                      </div>
-                    </div>
-                  )}
+                    <p className="text-[#231F20]/70">{role.summary}</p>
+                  </div>
+                  <div className="flex-shrink-0 mt-1">
+                    <ArrowUpRight className="w-6 h-6 text-[#231F20]/30 group-hover:text-[#D4B06B] transition-colors" />
+                  </div>
                 </div>
-              );
-            })}
+              </a>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <a
+              href={LINKEDIN_JOBS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-8 py-4 bg-[#D4B06B] text-[#231F20] font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
+            >
+              View All Openings on LinkedIn
+              <ArrowUpRight className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </section>
@@ -313,13 +170,24 @@ const CareersPage = () => {
             If you want a career where your effort makes a real difference, and a team that has
             your back every step of the way, we&apos;d love to talk.
           </p>
-          <a
-            href="mailto:info@moxieriskpartners.com?subject=Career Inquiry"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-[#D4B06B] text-[#231F20] font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
-          >
-            <Mail className="w-5 h-5" />
-            Get in Touch
-          </a>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href={LINKEDIN_JOBS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#D4B06B] text-[#231F20] font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
+            >
+              Apply on LinkedIn
+              <ArrowUpRight className="w-5 h-5" />
+            </a>
+            <a
+              href="mailto:info@moxieriskpartners.com?subject=Career Inquiry"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#F7F4EE]/30 text-[#F7F4EE] font-semibold rounded-lg hover:border-[#D4B06B] hover:text-[#D4B06B] transition-colors"
+            >
+              <Mail className="w-5 h-5" />
+              Email Your Resume
+            </a>
+          </div>
         </div>
       </section>
     </div>
