@@ -261,16 +261,11 @@ const CareersPage = () => {
                       </div>
                     ))}
                     <div className="mt-6 p-5 bg-[#F7F4EE] rounded-lg">
-                      <p className="text-sm text-[#231F20]/70 mb-3">
-                        To apply, email your resume and cover letter to:
+                      <p className="text-sm text-[#231F20]/70">
+                        <span className="font-semibold text-[#231F20]">To apply:</span> Send your resume and a cover letter to{' '}
+                        <span className="font-semibold text-[#231F20]">info@moxieriskpartners.com</span> with
+                        the subject line &ldquo;Application: {role.title}&rdquo;.
                       </p>
-                      <a
-                        href={`mailto:info@moxieriskpartners.com?subject=Application: ${role.title}&body=Hi Moxie Risk Partners,%0D%0A%0D%0AI am writing to apply for the ${role.title} position. Please find my resume and cover letter attached.%0D%0A%0D%0AThank you for your consideration.`}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D4B06B] text-[#231F20] text-sm font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
-                      >
-                        <Mail className="w-4 h-4" />
-                        Apply — {role.title}
-                      </a>
                     </div>
                   </div>
                 )}
