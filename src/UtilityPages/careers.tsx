@@ -184,7 +184,7 @@ const CareersPage = () => {
         <h1 className="text-3xl md:text-4xl font-bold text-[#231F20] mb-3">
           Careers at Moxie
         </h1>
-        <p className="text-[#231F20]/60 mb-12">
+        <p className="text-[#231F20]/60 mb-4">
           Join a team that&apos;s all in. View our open roles below or on{' '}
           <a
             href={LINKEDIN_JOBS_URL}
@@ -193,6 +193,15 @@ const CareersPage = () => {
             className="text-[#D4B06B] hover:text-[#CC9F54] underline underline-offset-2"
           >
             LinkedIn
+          </a>.
+        </p>
+        <p className="text-[#231F20]/60 mb-12">
+          To apply, send your resume and a cover letter to{' '}
+          <a
+            href="mailto:info@moxieriskpartners.com?subject=Career Inquiry&body=Hi Moxie Risk Partners,%0D%0A%0D%0APlease find my resume and cover letter attached.%0D%0A%0D%0AThank you for your consideration."
+            className="text-[#D4B06B] hover:text-[#CC9F54] underline underline-offset-2"
+          >
+            info@moxieriskpartners.com
           </a>.
         </p>
 
