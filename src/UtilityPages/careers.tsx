@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Briefcase, MapPin, ArrowUpRight, ChevronDown, ChevronUp } from 'lucide-react';
+import { Briefcase, MapPin, ArrowUpRight, ChevronDown, ChevronUp, Mail } from 'lucide-react';
 
 const LINKEDIN_JOBS_URL = "https://www.linkedin.com/company/moxie-risk-partners/jobs/";
 
@@ -251,15 +251,16 @@ const CareersPage = () => {
                         </ul>
                       </div>
                     ))}
-                    <div className="mt-6">
+                    <div className="mt-6 p-5 bg-[#F7F4EE] rounded-lg">
+                      <p className="text-sm text-[#231F20]/70 mb-3">
+                        To apply, email your resume and cover letter to:
+                      </p>
                       <a
-                        href={LINKEDIN_JOBS_URL}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                        href={`mailto:info@moxieriskpartners.com?subject=Application: ${role.title}&body=Hi Moxie Risk Partners,%0D%0A%0D%0AI am writing to apply for the ${role.title} position. Please find my resume and cover letter attached.%0D%0A%0D%0AThank you for your consideration.`}
                         className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D4B06B] text-[#231F20] text-sm font-semibold rounded-lg hover:bg-[#CC9F54] transition-colors"
                       >
-                        Apply on LinkedIn
-                        <ArrowUpRight className="w-4 h-4" />
+                        <Mail className="w-4 h-4" />
+                        Apply — {role.title}
                       </a>
                     </div>
                   </div>
@@ -269,25 +270,23 @@ const CareersPage = () => {
           })}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-[#231F20]/10">
+        <div className="mt-12 pt-8 border-t border-[#231F20]/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <a
             href={LINKEDIN_JOBS_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-[#D4B06B] hover:text-[#CC9F54] font-semibold transition-colors"
           >
-            View All Openings on LinkedIn
+            See More Openings on LinkedIn
             <ArrowUpRight className="w-4 h-4" />
           </a>
-          <p className="text-[#231F20]/40 text-sm mt-2">
-            Or send your resume to{' '}
-            <a
-              href="mailto:info@moxieriskpartners.com?subject=Career Inquiry"
-              className="underline underline-offset-2 hover:text-[#231F20]/60"
-            >
-              info@moxieriskpartners.com
-            </a>
-          </p>
+          <a
+            href="mailto:info@moxieriskpartners.com?subject=Career Inquiry&body=Hi Moxie Risk Partners,%0D%0A%0D%0APlease find my resume and cover letter attached.%0D%0A%0D%0AThank you for your consideration."
+            className="inline-flex items-center gap-2 text-sm text-[#231F20]/50 hover:text-[#231F20]/70 transition-colors"
+          >
+            <Mail className="w-4 h-4" />
+            info@moxieriskpartners.com
+          </a>
         </div>
       </div>
     </section>
